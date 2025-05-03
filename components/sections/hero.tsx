@@ -33,7 +33,7 @@ export function Hero() {
           >
             <span className="block">Hello</span>
             <span className="block text-muted-foreground text-3xl md:text-4xl lg:text-5xl mt-2">
-              I'm a Designer & Developer
+              I'm a Mern stack developer
             </span>
           </motion.h1>
           
@@ -44,12 +44,12 @@ export function Hero() {
             className="flex flex-wrap gap-x-8 gap-y-4 text-xl mb-8"
           >
             <div>
-              <span className="text-4xl font-bold">+200</span>
-              <p className="text-muted-foreground">Projects completed</p>
+              <span className="text-4xl font-bold">+6</span>
+              <p className="text-muted-foreground">Technologies I'm learning</p>
             </div>
             <div>
-              <span className="text-4xl font-bold">+50</span>
-              <p className="text-muted-foreground">Happy clients</p>
+              <span className="text-4xl font-bold">+5</span>
+              <p className="text-muted-foreground">Project in Progress</p>
             </div>
           </motion.div>
           
@@ -78,7 +78,7 @@ export function Hero() {
           className="relative h-[600px] rounded-2xl overflow-hidden shadow-2xl hidden lg:block"
         >
           <Image 
-            src="https://lllyasviel-luminabrush.hf.space/file=/tmp/gradio/75d9fbd2216fc3cc5d14fa881e93e1aca8cea7d91d66675968c77ab0cfc0ff18/image.png" 
+            src="/image.png" 
             alt="Aman Kumar" 
             fill
             className="object-cover object-center"
