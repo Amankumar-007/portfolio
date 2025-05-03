@@ -10,27 +10,27 @@ const skills = [
   "UI/UX Design", "Web Development", "Branding", 
   "Mobile App Design", "Product Design", "Illustration"
 ];
-
 const experiences = [
   {
-    period: "2020 - Present",
-    role: "Senior UX Designer",
-    company: "Design Studio Co.",
-    description: "Leading design initiatives for major clients and managing a team of junior designers.",
+    period: "2023 - Present",
+    role: "Frontend Developer (MERN Stack)",
+    company: "Freelancer / Personal Projects",
+    description: "Building web applications using React, Node.js, Express, MongoDB, and integrating frontend with backend systems. Continuously learning and improving skills in full-stack development.",
   },
   {
-    period: "2018 - 2020",
-    role: "UI Designer",
-    company: "Creative Agency Inc.",
-    description: "Created user interfaces for web and mobile applications, collaborating closely with development teams.",
+    period: "2022 - 2023",
+    role: "Junior Developer",
+    company: "Freelance Web Developer",
+    description: "Developed and maintained responsive websites for small businesses, improving their digital presence. Focused on frontend technologies like HTML, CSS, JavaScript, and React.",
   },
   {
-    period: "2016 - 2018",
-    role: "Graphic Designer",
-    company: "Media Group Ltd.",
-    description: "Designed marketing materials, brand identities, and social media assets for various clients.",
+    period: "2021 - 2022",
+    role: "Intern Developer",
+    company: "Self-learning and Open Source Projects",
+    description: "Worked on personal projects, contributed to open-source, and participated in coding challenges to enhance development skills. Gained hands-on experience in web development and backend technologies.",
   }
 ];
+
 
 export default function AboutPage() {
   return (
@@ -46,17 +46,18 @@ export default function AboutPage() {
               About Me
             </h1>
             <p className="text-xl text-muted-foreground mb-8">
-              I'm Aman Kumar, a designer with a passion for creating beautiful, functional digital experiences.
-            </p>
-            
-            <div className="space-y-6">
-              <p className="text-lg">
-                With over 6 years of experience in UI/UX design and web development, I've worked with clients ranging from startups to large corporations, helping them build products that users love.
-              </p>
-              <p className="text-lg">
-                My approach combines aesthetic sensibility with a deep understanding of user behavior, resulting in designs that are not only visually appealing but also intuitive and effective.
-              </p>
-            </div>
+  I'm Aman Kumar, a passionate developer focused on creating seamless and dynamic web applications.
+</p>
+
+<div className="space-y-6">
+  <p className="text-lg">
+    With hands-on experience in full-stack development, I specialize in building responsive and efficient web applications using the MERN stack. I continuously enhance my skills through personal projects, learning, and contributing to open-source.
+  </p>
+  <p className="text-lg">
+    My approach is user-centric, combining the power of modern web technologies with a focus on clean, maintainable code. Whether it's frontend or backend, I aim to create applications that provide a smooth user experience and are easy to scale.
+  </p>
+</div>
+
             
             <div className="mt-10">
               <h3 className="text-xl font-semibold mb-3">Skills & Expertise</h3>

@@ -36,15 +36,9 @@ const contactInfo = [
   {
     icon: <Phone className="h-6 w-6" />,
     title: "Phone",
-    details: "+1 (555) 123-4567",
+    details: "+91-7906753589",
     link: "tel:+15551234567",
-  },
-  {
-    icon: <MapPin className="h-6 w-6" />,
-    title: "Office",
-    details: "123 Design Street, Creative City, 10001",
-    link: "#",
-  },
+  }
 ];
 
 export default function ContactPage() {

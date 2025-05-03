@@ -5,36 +5,37 @@ import { Palette, Code, LineChart, Layout, Monitor, Sparkles } from "lucide-reac
 
 const services = [
   {
-    icon: <Palette className="h-10 w-10" />,
-    title: "UI/UX Design",
-    description: "Creating intuitive, engaging user interfaces and experiences that delight users and achieve business goals."
-  },
-  {
     icon: <Code className="h-10 w-10" />,
-    title: "Web Development",
-    description: "Building responsive, performant websites and web applications using modern frameworks and best practices."
-  },
-  {
-    icon: <LineChart className="h-10 w-10" />,
-    title: "Branding & Identity",
-    description: "Developing cohesive brand identities that communicate the essence of your business and connect with your audience."
+    title: "MERN Stack Development",
+    description: "Building full-stack web applications using MongoDB, Express.js, React, and Node.js with responsive UI and secure backend."
   },
   {
     icon: <Layout className="h-10 w-10" />,
-    title: "Mobile App Design",
-    description: "Designing user-friendly mobile interfaces that provide exceptional experiences across iOS and Android platforms."
+    title: "Frontend with React",
+    description: "Creating modern, interactive user interfaces using React, Redux Toolkit, Tailwind CSS, and component libraries."
   },
   {
     icon: <Monitor className="h-10 w-10" />,
-    title: "Web App Interfaces",
-    description: "Creating complex web application interfaces that balance functionality with usability and aesthetic appeal."
+    title: "Backend with Node.js",
+    description: "Designing and developing RESTful APIs with Express.js and MongoDB, focusing on performance and scalability."
   },
   {
     icon: <Sparkles className="h-10 w-10" />,
-    title: "Interactive Prototyping",
-    description: "Building interactive prototypes that simulate real-world usage and gather valuable feedback before development."
+    title: "Admin & Role-Based Dashboards",
+    description: "Developing admin panels and role-based dashboards with real-time features like user control, content management, and messaging."
+  },
+  {
+    icon: <LineChart className="h-10 w-10" />,
+    title: "Real Projects Development",
+    description: "Creating real-world apps like e-commerce, LMS, and real estate platforms with complete frontend-backend integration."
+  },
+  {
+    icon: <Palette className="h-10 w-10" />,
+    title: "Clean UI & Tailwind Design",
+    description: "Building responsive, fast-loading designs using Tailwind CSS with focus on usability, speed, and mobile-friendliness."
   }
 ];
+
 
 export function Services() {
   return (

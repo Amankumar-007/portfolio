@@ -11,70 +11,70 @@ import { Search } from "lucide-react";
 import { PageTransition } from "@/components/page-transition";
 
 const categories = [
-  "All", "Design", "Development", "Branding", "UI/UX", "Career"
+  "All", "Tech", "Design", "Marketing", "UI/UX", "Career Growth"
 ];
 
 const blogPosts = [
   {
     id: "post-1",
-    title: "Designing for Accessibility: A Comprehensive Guide",
-    excerpt: "Learn how to create designs that are accessible to everyone, including people with disabilities.",
-    date: "May 15, 2023",
-    category: "Design",
-    image: "https://images.pexels.com/photos/196644/pexels-photo-196644.jpeg",
-    readTime: "8 min read"
-  },
-  {
-    id: "post-2",
-    title: "The Future of UI Design: Trends to Watch in 2023",
-    excerpt: "Explore the emerging UI design trends that are shaping the future of digital products.",
-    date: "April 22, 2023",
-    category: "UI/UX",
-    image: "https://images.pexels.com/photos/326501/pexels-photo-326501.jpeg",
-    readTime: "6 min read"
-  },
-  {
-    id: "post-3",
-    title: "Building a Design System: From Scratch to Implementation",
-    excerpt: "A step-by-step guide to creating and implementing a design system for your organization.",
-    date: "March 10, 2023",
-    category: "Development",
-    image: "https://images.pexels.com/photos/207580/pexels-photo-207580.jpeg",
-    readTime: "10 min read"
-  },
-  {
-    id: "post-4",
-    title: "The Psychology of Color in Branding",
-    excerpt: "Understanding how colors influence perception and how to leverage them in brand design.",
-    date: "February 15, 2023",
-    category: "Branding",
-    image: "https://images.pexels.com/photos/1209843/pexels-photo-1209843.jpeg",
+    title: "Mastering Web Accessibility: Best Practices and Tools",
+    excerpt: "Understand how to design and build websites that are accessible to everyone, regardless of ability.",
+    date: "May 20, 2023",
+    category: "Tech",
+    image: "https://images.pexels.com/photos/2896705/pexels-photo-2896705.jpeg",
     readTime: "7 min read"
   },
   {
-    id: "post-5",
-    title: "Responsive Web Design: Best Practices for 2023",
-    excerpt: "Learn the latest techniques and best practices for creating responsive websites.",
-    date: "January 28, 2023",
-    category: "Development",
-    image: "https://images.pexels.com/photos/1181244/pexels-photo-1181244.jpeg",
+    id: "post-2",
+    title: "Navigating the Future of Web Design in 2023",
+    excerpt: "A look into the most promising web design trends that will define digital experiences in the upcoming years.",
+    date: "April 15, 2023",
+    category: "Design",
+    image: "https://images.pexels.com/photos/3727455/pexels-photo-3727455.jpeg",
+    readTime: "5 min read"
+  },
+  {
+    id: "post-3",
+    title: "Building a Solid Foundation for Your Web Projects",
+    excerpt: "Essential steps for laying a strong foundation for your next web development project.",
+    date: "March 25, 2023",
+    category: "Tech",
+    image: "https://images.pexels.com/photos/1181266/pexels-photo-1181266.jpeg",
     readTime: "9 min read"
   },
   {
+    id: "post-4",
+    title: "Understanding the Role of Psychology in Branding",
+    excerpt: "Explore how psychological principles can help create effective brand identities and connect with consumers.",
+    date: "February 10, 2023",
+    category: "Marketing",
+    image: "https://images.pexels.com/photos/1544008/pexels-photo-1544008.jpeg",
+    readTime: "8 min read"
+  },
+  {
+    id: "post-5",
+    title: "The Essentials of Building Responsive Web Interfaces",
+    excerpt: "Tips and techniques for creating responsive websites that deliver great user experiences across devices.",
+    date: "January 10, 2023",
+    category: "Tech",
+    image: "https://images.pexels.com/photos/2289494/pexels-photo-2289494.jpeg",
+    readTime: "6 min read"
+  },
+  {
     id: "post-6",
-    title: "From Designer to Design Leader: Growing Your Career",
-    excerpt: "Tips and strategies for designers looking to advance into leadership roles.",
-    date: "December 12, 2022",
-    category: "Career",
-    image: "https://images.pexels.com/photos/3182756/pexels-photo-3182756.jpeg",
-    readTime: "11 min read"
+    title: "How to Transition from Designer to Design Leader",
+    excerpt: "Strategies for designers who aspire to grow into leadership positions within the design industry.",
+    date: "December 1, 2022",
+    category: "Career Growth",
+    image: "https://images.pexels.com/photos/774909/pexels-photo-774909.jpeg",
+    readTime: "10 min read"
   }
 ];
 
 export default function BlogPage() {
   const [activeCategory, setActiveCategory] = useState("All");
   const [searchQuery, setSearchQuery] = useState("");
-  
+
   const filteredPosts = blogPosts
     .filter(post => 
       activeCategory === "All" || post.category === activeCategory
@@ -86,18 +86,18 @@ export default function BlogPage() {
 
   return (
     <PageTransition>
-      <div className="container max-w-6xl py-20 px-4 md:px-6">
+      <div className="container max-w-7xl py-20 px-4 md:px-6">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
           className="mb-8"
         >
-          <h1 className="text-5xl md:text-6xl lg:text-7xl font-playfair font-bold mb-4">
+          <h1 className="text-5xl md:text-6xl lg:text-7xl font-serif font-bold mb-4 text-gray-900">
             Blog & Insights
           </h1>
-          <p className="text-xl text-muted-foreground max-w-3xl">
-            Thoughts, ideas, and insights on design, development, and creative process.
+          <p className="text-lg text-gray-600 max-w-3xl">
+            Explore articles on tech, design, marketing, and career growth. Stay updated with the latest industry trends.
           </p>
         </motion.div>
         
@@ -125,9 +125,9 @@ export default function BlogPage() {
             initial={{ opacity: 0, y: 10 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.4, delay: 0.3 }}
-            className="relative w-full md:w-[300px]"
+            className="relative w-full md:w-[320px]"
           >
-            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+            <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-5 w-5 text-gray-500" />
             <Input
               placeholder="Search articles..."
               className="pl-10"
@@ -165,7 +165,7 @@ export default function BlogPage() {
                     </div>
                   </div>
                   <div className="space-y-2">
-                    <div className="flex items-center text-sm text-muted-foreground">
+                    <div className="flex items-center text-sm text-gray-500">
                       <span>{post.date}</span>
                       <span className="mx-2">•</span>
                       <span>{post.readTime}</span>
@@ -173,14 +173,14 @@ export default function BlogPage() {
                     <h2 className="text-xl font-semibold group-hover:text-primary transition-colors">
                       {post.title}
                     </h2>
-                    <p className="text-muted-foreground line-clamp-2">{post.excerpt}</p>
+                    <p className="text-gray-600 line-clamp-2">{post.excerpt}</p>
                   </div>
                 </Link>
               </motion.article>
             ))
           ) : (
             <div className="col-span-full py-12 text-center">
-              <p className="text-xl text-muted-foreground">No articles found matching your criteria.</p>
+              <p className="text-xl text-gray-500">No articles found matching your criteria.</p>
               <Button 
                 variant="link" 
                 onClick={() => {
