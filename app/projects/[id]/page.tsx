@@ -1,14 +1,4 @@
-"use client";
-
-import { useState, useEffect } from "react";
-import { useParams } from "next/navigation";
-import { motion } from "framer-motion";
-import Image from "next/image";
-import { ArrowLeft, ExternalLink } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import Link from "next/link";
-import { PageTransition } from "@/components/page-transition";
-
+import { ProjectClient } from "./ProjectClient";
 // Sample project data (in a real app, you'd fetch this from an API or database)
 const projects = [
   {
@@ -121,138 +111,19 @@ const projects = [
   }
 ];
 
-export function generateStaticParams() {
+export async function generateStaticParams() {
   return projects.map((project) => ({
     id: project.id,
   }));
 }
 
-export default function ProjectDetailPage() {
-  const params = useParams();
-  const [project, setProject] = useState<any>(null);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    // In a real app, you would fetch the project data based on the ID
-    const foundProject = projects.find(p => p.id === params.id);
-    setProject(foundProject);
-    setLoading(false);
-  }, [params.id]);
-
-  if (loading) {
-    return <div className="container py-20 px-4">Loading...</div>;
-  }
+export default async function ProjectDetailPage({ params }: { params: { id: string } }) {
+  // Find the project server-side
+  const project = projects.find((p) => p.id === params.id);
 
   if (!project) {
     return <div className="container py-20 px-4">Project not found</div>;
   }
 
-  return (
-    <PageTransition>
-      <div className="container max-w-5xl py-12 px-4 md:px-6">
-        <Link href="/projects">
-          <Button variant="ghost" className="mb-8 group">
-            <ArrowLeft className="mr-2 h-4 w-4 transition-transform group-hover:-translate-x-1" />
-            Back to Projects
-          </Button>
-        </Link>
-        
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-        >
-          <h1 className="text-4xl md:text-5xl lg:text-6xl font-playfair font-bold mb-4">
-            {project.title}
-          </h1>
-          <div className="flex flex-wrap gap-4 items-center mb-8">
-            <span className="text-muted-foreground">{project.year}</span>
-            <span className="text-muted-foreground">•</span>
-            <span className="font-medium">{project.category}</span>
-            <span className="text-muted-foreground">•</span>
-            <span className="text-muted-foreground">Client: {project.client}</span>
-          </div>
-        </motion.div>
-        
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          className="relative h-[60vh] rounded-xl overflow-hidden mb-16"
-        >
-          <Image 
-            src={project.image} 
-            alt={project.title}
-            fill
-            className="object-cover"
-          />
-        </motion.div>
-        
-        <div className="grid md:grid-cols-[1fr_2fr] gap-12 mb-16">
-          <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.5, delay: 0.3 }}
-          >
-            <div className="mb-8">
-              <h3 className="text-lg font-semibold mb-2">Client</h3>
-              <p>{project.client}</p>
-            </div>
-            <div className="mb-8">
-              <h3 className="text-lg font-semibold mb-2">Role</h3>
-              <p>{project.role}</p>
-            </div>
-            <div>
-              <h3 className="text-lg font-semibold mb-2">Year</h3>
-              <p>{project.year}</p>
-            </div>
-          </motion.div>
-          
-          <motion.div
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.5, delay: 0.4 }}
-          >
-            <h2 className="text-2xl font-semibold mb-4">Overview</h2>
-            <p className="text-lg mb-8">{project.description}</p>
-            
-            <h2 className="text-2xl font-semibold mb-4">Challenge</h2>
-            <p className="mb-8">{project.challenge}</p>
-            
-            <h2 className="text-2xl font-semibold mb-4">Solution</h2>
-            <p className="mb-8">{project.solution}</p>
-            
-            <h2 className="text-2xl font-semibold mb-4">Results</h2>
-            <p>{project.results}</p>
-          </motion.div>
-        </div>
-        
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.5 }}
-        >
-          <h2 className="text-3xl font-semibold mb-8">Gallery</h2>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {project.gallery.map((image: string, index: number) => (
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.6 + index * 0.1 }}
-                className="relative h-[300px] rounded-lg overflow-hidden"
-              >
-                <Image 
-                  src={image} 
-                  alt={`${project.title} - Image ${index + 1}`}
-                  fill
-                  className="object-cover"
-                />
-              </motion.div>
-            ))}
-          </div>
-        </motion.div>
-      </div>
-    </PageTransition>
-  );
+  return <ProjectClient project={project} />;
 }

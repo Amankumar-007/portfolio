@@ -1,65 +1,47 @@
 "use client";
 
-import { useEffect, useState } from 'react';
-import { motion } from 'framer-motion';
+import { useEffect, useRef, memo } from "react";
+import { motion, useMotionValue, useSpring } from "framer-motion";
 
-export function AnimatedCursor() {
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-  const [cursorVariant, setCursorVariant] = useState("default");
+function AnimatedCursorComponent() {
+  const cursorRef = useRef<HTMLDivElement>(null);
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+
+  const springConfig = { damping: 25, stiffness: 700 };
+  const cursorX = useSpring(mouseX, springConfig);
+  const cursorY = useSpring(mouseY, springConfig);
 
   useEffect(() => {
-    const mouseMove = (e: MouseEvent) => {
-      setMousePosition({
-        x: e.clientX,
-        y: e.clientY
-      });
+    const updateMousePosition = (e: MouseEvent) => {
+      mouseX.set(e.clientX - 16);
+      mouseY.set(e.clientY - 16);
     };
 
-    window.addEventListener("mousemove", mouseMove);
-
-    return () => {
-      window.removeEventListener("mousemove", mouseMove);
-    };
-  }, []);
-
-  const variants = {
-    default: {
-      x: mousePosition.x - 16,
-      y: mousePosition.y - 16,
-      scale: 1
-    },
-    text: {
-      x: mousePosition.x - 16,
-      y: mousePosition.y - 16,
-      scale: 1.5
+    if (typeof window !== "undefined") {
+      window.addEventListener("mousemove", updateMousePosition, { passive: true });
     }
-  };
-
-  useEffect(() => {
-    const textElements = document.querySelectorAll("p, h1, h2, h3, a, button");
-    
-    const mouseEnter = () => setCursorVariant("text");
-    const mouseLeave = () => setCursorVariant("default");
-
-    textElements.forEach(element => {
-      element.addEventListener("mouseenter", mouseEnter);
-      element.addEventListener("mouseleave", mouseLeave);
-    });
 
     return () => {
-      textElements.forEach(element => {
-        element.removeEventListener("mouseenter", mouseEnter);
-        element.removeEventListener("mouseleave", mouseLeave);
-      });
+      if (typeof window !== "undefined") {
+        window.removeEventListener("mousemove", updateMousePosition);
+      }
     };
-  }, []);
+  }, [mouseX, mouseY]);
 
   return (
     <motion.div
-      className="fixed top-0 left-0 w-8 h-8 bg-primary/20 rounded-full pointer-events-none z-50 backdrop-blur-sm hidden md:block"
-      variants={variants}
-      animate={cursorVariant}
-      transition={{ type: "spring", stiffness: 500, damping: 28 }}
+      ref={cursorRef}
+      className="pointer-events-none fixed left-0 top-0 z-[999] hidden h-8 w-8 rounded-full border-2 border-primary mix-blend-difference lg:block"
+      style={{
+        x: cursorX,
+        y: cursorY,
+      }}
+      initial={{ opacity: 0, scale: 0.8 }}
+      animate={{ opacity: 1, scale: 1 }}
+      transition={{ duration: 0.2 }}
     />
   );
 }
+
+export const AnimatedCursor = memo(AnimatedCursorComponent);

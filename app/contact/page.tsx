@@ -69,10 +69,10 @@ export default function ContactPage() {
           className="mb-12"
         >
           <h1 className="text-5xl md:text-6xl lg:text-7xl font-playfair font-bold mb-4">
-            Let's Connect
+            Let&apos;s Connect
           </h1>
           <p className="text-xl text-muted-foreground max-w-3xl">
-            Have a project in mind or just want to say hello? I'd love to hear from you.
+            Have a project in mind or just want to say hello? I&apos;d love to hear from you.
           </p>
         </motion.div>
         

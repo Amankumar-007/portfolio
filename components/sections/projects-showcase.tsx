@@ -8,42 +8,48 @@ import { ProjectCard } from "@/components/project-card";
 import { ArrowRight } from "lucide-react";
 
 const categories = [
-  "All", "UI/UX Design", "Web Development", "Branding"
+  "All", "Full Stack", "Web Development", "Mobile App"
 ];
 
 const featuredProjects = [
   {
     id: "project-1",
-    title: "E-commerce Website Redesign",
-    description: "Complete redesign of an e-commerce platform focused on improving user experience and conversion rates.",
-    category: "UI/UX Design",
+    title: "E-commerce Platform",
+    description: "Full-stack e-commerce platform with features like real-time inventory, payment processing, and admin dashboard.",
+    category: "Full Stack",
     image: "https://images.pexels.com/photos/5082579/pexels-photo-5082579.jpeg",
-    year: "2023"
+    year: "2023",
+    tags: ["Next.js", "MongoDB", "Stripe", "Redux"]
   },
   {
     id: "project-2",
-    title: "Financial App Design",
-    description: "Designed a modern finance tracking application with focus on data visualization and user engagement.",
-    category: "UI/UX Design",
+    title: "Property Finder",
+    description: "Real estate platform with advanced search filters, virtual tours, and agent dashboard.",
+    category: "Web Development",
     image: "https://images.pexels.com/photos/6693655/pexels-photo-6693655.jpeg",
-    year: "2023"
+    year: "2023",
+    tags: ["React", "Node.js", "MapBox", "AWS"]
   },
   {
     id: "project-3",
-    title: "Restaurant Branding",
-    description: "Complete brand identity for a high-end restaurant, including logo, menu design, and website.",
-    category: "Branding",
+    title: "Learning Management",
+    description: "Comprehensive LMS with video courses, quizzes, and progress tracking for students and instructors.",
+    category: "Full Stack",
     image: "https://images.pexels.com/photos/5082580/pexels-photo-5082580.jpeg",
-    year: "2022"
+    year: "2022",
+    tags: ["MERN Stack", "WebRTC", "Socket.io"]
   }
 ];
 
 export function ProjectsShowcase() {
   const [activeCategory, setActiveCategory] = useState("All");
-  
-  const filteredProjects = activeCategory === "All"
-    ? featuredProjects
-    : featuredProjects.filter(project => project.category === activeCategory);
+
+  const filteredProjects =
+    activeCategory === "All"
+      ? featuredProjects
+      : featuredProjects.filter(
+          (project) => project.category === activeCategory
+        );
 
   return (
     <section className="py-24 px-4">

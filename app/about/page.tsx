@@ -46,17 +46,17 @@ export default function AboutPage() {
               About Me
             </h1>
             <p className="text-xl text-muted-foreground mb-8">
-  I'm Aman Kumar, a passionate developer focused on creating seamless and dynamic web applications.
-</p>
+              I&apos;m Aman Kumar, a passionate developer focused on creating seamless and dynamic web applications.
+            </p>
 
-<div className="space-y-6">
-  <p className="text-lg">
-    With hands-on experience in full-stack development, I specialize in building responsive and efficient web applications using the MERN stack. I continuously enhance my skills through personal projects, learning, and contributing to open-source.
-  </p>
-  <p className="text-lg">
-    My approach is user-centric, combining the power of modern web technologies with a focus on clean, maintainable code. Whether it's frontend or backend, I aim to create applications that provide a smooth user experience and are easy to scale.
-  </p>
-</div>
+            <div className="space-y-6">
+              <p className="text-lg">
+                With hands-on experience in full-stack development, I specialize in building responsive and efficient web applications using the MERN stack. I continuously enhance my skills through personal projects, learning, and contributing to open-source.
+              </p>
+              <p className="text-lg">
+                My approach is user-centric, combining the power of modern web technologies with a focus on clean, maintainable code. Whether it&apos;s frontend or backend, I aim to create applications that provide a smooth user experience and are easy to scale.
+              </p>
+            </div>
 
             
             <div className="mt-10">

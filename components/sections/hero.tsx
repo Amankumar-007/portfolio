@@ -1,10 +1,36 @@
 "use client";
 
+import { memo } from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { ArrowRight, ArrowDown } from "lucide-react";
+
+const fadeInUp = {
+  initial: { opacity: 0, y: 20 },
+  animate: { opacity: 1, y: 0 },
+};
+
+const HeroImage = memo(function HeroImage() {
+  return (
+    <motion.div
+      initial={{ opacity: 0, scale: 0.9 }}
+      animate={{ opacity: 1, scale: 1 }}
+      transition={{ duration: 0.8, delay: 0.3 }}
+      className="relative h-[600px] rounded-2xl overflow-hidden shadow-2xl hidden lg:block"
+    >
+      <Image 
+        src="/image.png" 
+        alt="Aman Kumar" 
+        fill
+        sizes="(max-width: 768px) 100vw, 50vw"
+        priority
+        className="object-cover object-center"
+      />
+    </motion.div>
+  );
+});
 
 export function Hero() {
   return (
@@ -15,8 +41,7 @@ export function Hero() {
       
       <div className="container grid lg:grid-cols-2 gap-12 items-center">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
+          {...fadeInUp}
           transition={{ duration: 0.8 }}
           className="max-w-xl"
         >
@@ -33,7 +58,7 @@ export function Hero() {
           >
             <span className="block">Hello</span>
             <span className="block text-muted-foreground text-3xl md:text-4xl lg:text-5xl mt-2">
-              I'm a Mern stack developer
+              I&apos;m a Mern stack developer
             </span>
           </motion.h1>
           
@@ -45,7 +70,7 @@ export function Hero() {
           >
             <div>
               <span className="text-4xl font-bold">+6</span>
-              <p className="text-muted-foreground">Technologies I'm learning</p>
+              <p className="text-muted-foreground">Technologies I&apos;m learning</p>
             </div>
             <div>
               <span className="text-4xl font-bold">+5</span>
@@ -71,19 +96,7 @@ export function Hero() {
           </motion.div>
         </motion.div>
         
-        <motion.div
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.8, delay: 0.3 }}
-          className="relative h-[600px] rounded-2xl overflow-hidden shadow-2xl hidden lg:block"
-        >
-          <Image 
-            src="/image.png" 
-            alt="Aman Kumar" 
-            fill
-            className="object-cover object-center"
-          />
-        </motion.div>
+        <HeroImage />
       </div>
       
       <motion.div

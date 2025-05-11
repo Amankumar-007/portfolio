@@ -1,24 +1,31 @@
-import './globals.css';
-import type { Metadata } from 'next';
-import { Inter, Playfair_Display } from 'next/font/google';
-import { ThemeProvider } from '@/components/theme-provider';
-import { MainNav } from '@/components/main-nav';
-import { AnimatedCursor } from '@/components/animated-cursor';
-import { cn } from '@/lib/utils';
+import "./globals.css";
+import type { Metadata } from "next";
+import { Playfair_Display } from "next/font/google";
+import { ThemeProvider } from "@/components/theme-provider";
+import { PageTransition } from "@/components/page-transition";
+import { MainNav } from "@/components/main-nav";
 
-const inter = Inter({ 
-  subsets: ['latin'],
-  variable: '--font-inter',
-});
-
-const playfair = Playfair_Display({ 
-  subsets: ['latin'],
-  variable: '--font-playfair',
+const playfair = Playfair_Display({
+  subsets: ["latin"],
+  variable: "--font-playfair",
+  display: "swap",
 });
 
 export const metadata: Metadata = {
-  title: 'Aman Kumar | Portfolio',
-  description: 'Personal portfolio of Aman Kumar - Designer & Developer',
+  title: {
+    default: "Aman Kumar | MERN Stack Developer",
+    template: "%s | Aman Kumar",
+  },
+  description: "MERN Stack Developer specialized in building modern web applications",
+  metadataBase: new URL("https://your-website.com"),
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    url: "https://your-website.com",
+    title: "Aman Kumar | MERN Stack Developer",
+    description: "MERN Stack Developer specialized in building modern web applications",
+    siteName: "Aman Kumar Portfolio",
+  },
 };
 
 export default function RootLayout({
@@ -28,22 +35,16 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={cn(
-        inter.variable, 
-        playfair.variable,
-        "min-h-screen bg-background font-sans antialiased"
-      )}>
+      <head />
+      <body className={playfair.variable}>
         <ThemeProvider
           attribute="class"
-          defaultTheme="light"
+          defaultTheme="system"
           enableSystem
           disableTransitionOnChange
         >
-          <AnimatedCursor />
           <MainNav />
-          <main>
-            {children}
-          </main>
+          <PageTransition>{children}</PageTransition>
         </ThemeProvider>
       </body>
     </html>

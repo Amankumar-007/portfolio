@@ -1,109 +1,111 @@
 "use client";
 
-import { motion } from "framer-motion";
-import Image from "next/image";
+import { memo } from "react";
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
+import Image from "next/image";
+import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
+import { Card } from "@/components/ui/card";
+import { ArrowRight } from "lucide-react";
 
-const featuredPosts = [
-  {
-    id: "post-1",
-    title: "Designing for Accessibility: A Comprehensive Guide",
-    excerpt: "Learn how to create designs that are accessible to everyone, including people with disabilities.",
-    date: "May 15, 2023",
-    category: "Design",
-    image: "https://images.pexels.com/photos/196644/pexels-photo-196644.jpeg",
-    readTime: "8 min read"
-  },
-  {
-    id: "post-2",
-    title: "The Future of UI Design: Trends to Watch in 2023",
-    excerpt: "Explore the emerging UI design trends that are shaping the future of digital products.",
-    date: "April 22, 2023",
-    category: "UI/UX",
-    image: "https://images.pexels.com/photos/326501/pexels-photo-326501.jpeg",
-    readTime: "6 min read"
-  }
-];
+const BlogCard = memo(function BlogCard({
+  title,
+  description,
+  image,
+  date,
+  slug,
+}: {
+  title: string;
+  description: string;
+  image: string;
+  date: string;
+  slug: string;
+}) {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.5 }}
+    >
+      <Link href={`/blog/${slug}`}>
+        <Card className="group overflow-hidden">
+          <div className="relative h-48 overflow-hidden">
+            <Image
+              src={image}
+              alt={title}
+              fill
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+              className="object-cover transition-transform duration-300 group-hover:scale-105"
+              loading="lazy"
+            />
+          </div>
+          <div className="p-6">
+            <time className="text-sm text-muted-foreground">{date}</time>
+            <h3 className="mt-2 text-xl font-semibold leading-tight tracking-tight">
+              {title}
+            </h3>
+            <p className="mt-2 line-clamp-2 text-muted-foreground">
+              {description}
+            </p>
+          </div>
+        </Card>
+      </Link>
+    </motion.div>
+  );
+});
 
-export function BlogPreview() {
+function BlogPreviewComponent() {
+  const posts = [
+    {
+      title: "Building a Modern Web Application",
+      description: "Learn how to build a modern web application using Next.js 13 and TypeScript",
+      image: "https://images.pexels.com/photos/11035471/pexels-photo-11035471.jpeg",
+      date: "2023-12-01",
+      slug: "building-modern-web-application"
+    },
+    {
+      title: "Mastering React Server Components",
+      description: "A deep dive into React Server Components and how they improve performance",
+      image: "https://images.pexels.com/photos/11035380/pexels-photo-11035380.jpeg",
+      date: "2023-11-15",
+      slug: "mastering-react-server-components"
+    },
+    {
+      title: "The Future of Web Development",
+      description: "Exploring upcoming trends and technologies in web development",
+      image: "https://images.pexels.com/photos/11035482/pexels-photo-11035482.jpeg",
+      date: "2023-11-01",
+      slug: "future-of-web-development"
+    }
+  ];
+
   return (
     <section className="py-24 px-4">
-      <div className="container max-w-6xl">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="max-w-3xl mb-12"
-        >
-          <div className="flex items-center space-x-4 mb-4">
-            <div className="w-12 h-0.5 bg-primary"></div>
-            <span className="text-sm font-medium uppercase tracking-wider">Blog & Insights</span>
+      <div className="container">
+        <div className="flex items-center justify-between mb-12">
+          <div>
+            <h2 className="text-3xl font-playfair font-bold">Latest Posts</h2>
+            <p className="mt-2 text-muted-foreground">
+              Thoughts, insights, and perspectives on web development
+            </p>
           </div>
-          <h2 className="text-3xl md:text-4xl font-playfair font-bold mb-6">
-            Latest Articles
-          </h2>
-          <p className="text-lg text-muted-foreground">
-            Thoughts, ideas, and insights on design, development, and the creative process. 
-          </p>
-        </motion.div>
-        
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
-          {featuredPosts.map((post, index) => (
-            <motion.article
-              key={post.id}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: 0.2 + index * 0.1 }}
-              className="group"
-            >
-              <Link href={`/blog/${post.id}`}>
-                <div className="relative h-[250px] rounded-xl overflow-hidden mb-4">
-                  <Image
-                    src={post.image}
-                    alt={post.title}
-                    fill
-                    className="object-cover transition-transform duration-500 group-hover:scale-105"
-                  />
-                  <div className="absolute top-3 left-3">
-                    <Badge className="bg-white text-black hover:bg-white/90">{post.category}</Badge>
-                  </div>
-                </div>
-                <div className="space-y-2">
-                  <div className="flex items-center text-sm text-muted-foreground">
-                    <span>{post.date}</span>
-                    <span className="mx-2">•</span>
-                    <span>{post.readTime}</span>
-                  </div>
-                  <h3 className="text-xl font-semibold group-hover:text-primary transition-colors">
-                    {post.title}
-                  </h3>
-                  <p className="text-muted-foreground line-clamp-2">{post.excerpt}</p>
-                </div>
-              </Link>
-            </motion.article>
-          ))}
-        </div>
-        
-        <motion.div
-          initial={{ opacity: 0, y: 10 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.4, delay: 0.4 }}
-          className="flex justify-center"
-        >
-          <Button asChild size="lg" variant="outline" className="group">
+          <Button asChild variant="outline" className="group">
             <Link href="/blog">
-              View All Articles
+              View All Posts
               <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
             </Link>
           </Button>
-        </motion.div>
+        </div>
+
+        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+          {posts.map((post) => (
+            <BlogCard key={post.slug} {...post} />
+          ))}
+        </div>
       </div>
     </section>
   );
 }
+
+export const BlogPreview = memo(BlogPreviewComponent);

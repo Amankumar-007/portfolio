@@ -45,10 +45,10 @@ export function Contact() {
             <div className="w-12 h-0.5 bg-primary"></div>
           </div>
           <h2 className="text-3xl md:text-4xl font-playfair font-bold mb-6">
-            Let's Work Together
+            Let&apos;s Work Together
           </h2>
           <p className="text-lg text-muted-foreground">
-            Have a project in mind or just want to say hello? I'd love to hear from you.
+            Have a project in mind or just want to say hello? I&apos;d love to hear from you.
           </p>
         </motion.div>
         
