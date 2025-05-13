@@ -4,6 +4,8 @@ import { Playfair_Display } from "next/font/google";
 import { ThemeProvider } from "@/components/theme-provider";
 import { PageTransition } from "@/components/page-transition";
 import { MainNav } from "@/components/main-nav";
+import { Suspense } from "react";
+import Loading from "./loading";
 
 const playfair = Playfair_Display({
   subsets: ["latin"],
@@ -44,7 +46,9 @@ export default function RootLayout({
           disableTransitionOnChange
         >
           <MainNav />
-          <PageTransition>{children}</PageTransition>
+          <Suspense fallback={<Loading />}>
+            <PageTransition>{children}</PageTransition>
+          </Suspense>
         </ThemeProvider>
       </body>
     </html>

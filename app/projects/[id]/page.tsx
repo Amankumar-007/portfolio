@@ -1,4 +1,7 @@
 import { ProjectClient } from "./ProjectClient";
+import { Suspense } from "react";
+import Loading from "./loading";
+
 // Sample project data (in a real app, you'd fetch this from an API or database)
 const projects = [
   {
@@ -125,5 +128,9 @@ export default async function ProjectDetailPage({ params }: { params: { id: stri
     return <div className="container py-20 px-4">Project not found</div>;
   }
 
-  return <ProjectClient project={project} />;
+  return (
+    <Suspense fallback={<Loading />}>
+      <ProjectClient project={project} />
+    </Suspense>
+  );
 }
