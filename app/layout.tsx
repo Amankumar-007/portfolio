@@ -6,6 +6,7 @@ import { PageTransition } from "@/components/page-transition";
 import { MainNav } from "@/components/main-nav";
 import { Suspense } from "react";
 import Loading from "./loading";
+import { Chat } from "@/components/ui/chat";
 
 const playfair = Playfair_Display({
   subsets: ["latin"],
@@ -49,6 +50,7 @@ export default function RootLayout({
           <Suspense fallback={<Loading />}>
             <PageTransition>{children}</PageTransition>
           </Suspense>
+          <Chat />
         </ThemeProvider>
       </body>
     </html>
