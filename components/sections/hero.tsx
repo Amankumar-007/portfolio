@@ -129,7 +129,7 @@ export function Hero() {
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.5 }}
               >
-                I&apos;m a Mern stack developer
+                I&apos;m a Application developer
               </motion.span>
             </motion.h1>
           </motion.div>

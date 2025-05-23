@@ -18,7 +18,7 @@ const projects = [
     title: "E-commerce Website",
     description: "A complete e-commerce platform with product listings, user authentication, and payment integration.",
     category: "Web Development",
-    image: "https://images.pexels.com/photos/5082579/pexels-photo-5082579.jpeg",
+    image: "/ss-1.png",
     year: "2023"
   },
   {
@@ -26,7 +26,7 @@ const projects = [
     title: "Real Estate Platform",
     description: "A platform for listing, buying, and selling properties with a user-friendly interface and search filters.",
     category: "Web Development",
-    image: "https://images.pexels.com/photos/5076531/pexels-photo-5076531.jpeg",
+    image: "/ss-3.png",
     year: "2023"
   },
   {
@@ -34,7 +34,7 @@ const projects = [
     title: "Learning Management System (LMS)",
     description: "An LMS with role-based access, courses, exams, and certifications for students, trainers, and admins.",
     category: "Full Stack",
-    image: "https://images.pexels.com/photos/5082580/pexels-photo-5082580.jpeg",
+    image: "/ss-5.png",
     year: "2023"
   },
   {
@@ -42,7 +42,7 @@ const projects = [
     title: "Uber Clone",
     description: "A clone of Uber for ride-sharing with features like real-time tracking, booking, and payment gateway.",
     category: "Mobile App",
-    image: "https://images.pexels.com/photos/6956503/pexels-photo-6956503.jpeg",
+    image: "/ss-6.png",
     year: "2022"
   }
 ];
