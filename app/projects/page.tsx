@@ -34,7 +34,7 @@ const projects = [
     title: "Learning Management System (LMS)",
     description: "An LMS with role-based access, courses, exams, and certifications for students, trainers, and admins.",
     category: "Full Stack",
-    image: "/ss-5.png",
+    image: "/lms/Screenshot 2025-05-27 131624.png",
     year: "2023"
   },
   {

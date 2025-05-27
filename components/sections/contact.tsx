@@ -11,19 +11,19 @@ const contactInfo = [
   {
     icon: <Mail className="h-6 w-6" />,
     title: "Email",
-    details: "hello@amankumar.design",
-    link: "mailto:hello@amankumar.design",
+    details: "amanr3388@gmail.com",
+    link: "mailto:amanr3388@gmail.com",
   },
   {
     icon: <Phone className="h-6 w-6" />,
     title: "Phone",
-    details: "+1 (555) 123-4567",
-    link: "tel:+15551234567",
+    details: "+91-7906753589",
+    link: "tel:+91-7906753589",
   },
   {
     icon: <MapPin className="h-6 w-6" />,
-    title: "Office",
-    details: "123 Design Street, Creative City, 10001",
+    title: "Home",
+    details: "Agra Uttar Pradesh, India",
     link: "#",
   },
 ];

@@ -17,16 +17,17 @@ const featuredProjects = [
     title: "E-commerce Platform",
     description: "Full-stack e-commerce platform with features like real-time inventory, payment processing, and admin dashboard.",
     category: "Full Stack",
-    image: "https://images.pexels.com/photos/5082579/pexels-photo-5082579.jpeg",
+    image:"/ss-1.png",
     year: "2023",
     tags: ["Next.js", "MongoDB", "Stripe", "Redux"]
   },
+  
   {
     id: "project-2",
-    title: "Property Finder",
+    title: "Real Estate Platform",
     description: "Real estate platform with advanced search filters, virtual tours, and agent dashboard.",
     category: "Web Development",
-    image: "https://images.pexels.com/photos/6693655/pexels-photo-6693655.jpeg",
+    image: "/ss-3.png",
     year: "2023",
     tags: ["React", "Node.js", "MapBox", "AWS"]
   },
@@ -35,7 +36,7 @@ const featuredProjects = [
     title: "Learning Management",
     description: "Comprehensive LMS with video courses, quizzes, and progress tracking for students and instructors.",
     category: "Full Stack",
-    image: "https://images.pexels.com/photos/5082580/pexels-photo-5082580.jpeg",
+    image: "/lms/Screenshot 2025-05-27 131624.png",
     year: "2022",
     tags: ["MERN Stack", "WebRTC", "Socket.io"]
   }

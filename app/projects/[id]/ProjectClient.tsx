@@ -1,11 +1,12 @@
 "use client";
 
-import { memo, useCallback } from "react";
+import { memo, useCallback, useState } from "react";
 import Image from "next/image";
-import { ArrowLeft } from "lucide-react";
+import { ArrowLeft, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
+import { Dialog, DialogContent } from "@/components/ui/dialog";
 
 interface ProjectClientProps {
   project: {
@@ -28,6 +29,8 @@ interface ProjectClientProps {
 }
 
 function ProjectClientComponent({ project }: ProjectClientProps) {
+  const [selectedImage, setSelectedImage] = useState<string | null>(null);
+
   const handleDemoClick = useCallback(() => {
     if (project.demoUrl) {
       window.open(project.demoUrl, "_blank", "noopener,noreferrer");
@@ -142,21 +145,55 @@ function ProjectClientComponent({ project }: ProjectClientProps) {
           className="mt-12"
         >
           <h2 className="text-2xl font-semibold mb-4">Gallery</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-            {project.gallery.map((image, index) => (
-              <div key={index} className="relative h-[200px] rounded-lg overflow-hidden">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">            {project.gallery.map((image, index) => (
+              <motion.div
+                key={index}
+                whileHover={{ scale: 1.02 }}
+                className="relative h-[200px] rounded-lg overflow-hidden cursor-pointer"
+                onClick={() => setSelectedImage(image)}
+              >
                 <Image
                   src={image}
                   alt={`${project.title} gallery image ${index + 1}`}
                   fill
                   sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                  className="object-cover"
+                  className="object-cover transition-transform duration-300"
                 />
-              </div>
+              </motion.div>
             ))}
           </div>
         </motion.div>
       )}
+
+      {/* Full Screen Image Dialog */}
+      <Dialog open={!!selectedImage} onOpenChange={() => setSelectedImage(null)}>
+        <DialogContent className="max-w-[95vw] max-h-[95vh] p-0 bg-transparent border-none">
+          <Button
+            variant="outline"
+            size="icon"
+            className="absolute right-4 top-4 z-50 rounded-full bg-background/80 backdrop-blur-sm"
+            onClick={() => setSelectedImage(null)}
+          >
+            <X className="h-4 w-4" />
+          </Button>
+          {selectedImage && (
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0.95 }}
+              className="relative w-full h-[90vh] rounded-lg overflow-hidden"
+            >
+              <Image
+                src={selectedImage}
+                alt="Full screen view"
+                fill
+                priority
+                className="object-contain"
+              />
+            </motion.div>
+          )}
+        </DialogContent>
+      </Dialog>
     </motion.div>
   );
 }

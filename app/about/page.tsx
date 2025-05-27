@@ -78,7 +78,7 @@ export default function AboutPage() {
             className="relative h-[500px] rounded-2xl overflow-hidden"
           >
             <Image 
-              src="https://images.pexels.com/photos/4195342/pexels-photo-4195342.jpeg" 
+              src="/about-image.png" 
               alt="Aman Kumar" 
               fill
               className="object-cover"
