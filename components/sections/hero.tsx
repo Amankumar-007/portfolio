@@ -1,6 +1,6 @@
 "use client";
 
-import { memo } from "react";
+import { memo, useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
@@ -66,49 +66,61 @@ const HeroImage = memo(function HeroImage() {
 });
 
 export function Hero() {
+  const [hideGithub, setHideGithub] = useState(false);
+
+  useEffect(() => {
+    function handleChatOpen(e: CustomEvent) {
+      setHideGithub(e.detail === true);
+    }
+    window.addEventListener("chatbox-toggle", handleChatOpen as EventListener);
+    return () => window.removeEventListener("chatbox-toggle", handleChatOpen as EventListener);
+  }, []);
+
   return (
     <section className="relative min-h-[calc(100vh-4rem)] flex items-center justify-center py-7 px-4 overflow-hidden">
       {/* Floating GitHub Icon */}
-      <motion.div
-        initial={{ opacity: 0, scale: 0.5 }}
-        animate={{ 
-          opacity: 1, 
-          scale: 1,
-          y: [0, -10, 0]
-        }}
-        transition={{ 
-          duration: 1,
-          y: {
-            duration: 2,
-            repeat: Infinity,
-            repeatType: "reverse",
-            ease: "easeInOut"
-          }
-        }}
-        className="fixed top-24 right-8 z-50 md:right-12 lg:right-16"
-      >
-        <Link 
-          href="https://github.com/Amankumar-007" 
-          target="_blank" 
-          rel="noopener noreferrer"
-          className="group flex items-center gap-2 px-4 py-2 bg-primary text-primary-foreground rounded-full shadow-xl hover:shadow-primary/50 transition-all duration-300 hover:-translate-y-1 border-2 border-primary"
-        >
-          <Github className="w-6 h-6" />
-          <span className="hidden md:block font-medium">Follow on GitHub</span>
-          <motion.div
-            className="absolute inset-0 rounded-full bg-primary/20"
-            animate={{
-              scale: [1, 1.2, 1],
-              opacity: [0.5, 0, 0.5]
-            }}
-            transition={{
+      {!hideGithub && (
+        <motion.div
+          initial={{ opacity: 0, scale: 0.5 }}
+          animate={{ 
+            opacity: 1, 
+            scale: 1,
+            y: [0, -10, 0]
+          }}
+          transition={{ 
+            duration: 1,
+            y: {
               duration: 2,
               repeat: Infinity,
+              repeatType: "reverse",
               ease: "easeInOut"
-            }}
-          />
-        </Link>
-      </motion.div>
+            }
+          }}
+          className="fixed top-24 right-8 z-50 md:right-12 lg:right-16"
+        >
+          <Link 
+            href="https://github.com/Amankumar-007" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="group flex items-center gap-2 px-4 py-2 bg-primary text-primary-foreground rounded-full shadow-xl hover:shadow-primary/50 transition-all duration-300 hover:-translate-y-1 border-2 border-primary"
+          >
+            <Github className="w-6 h-6" />
+            <span className="hidden md:block font-medium">Follow on GitHub</span>
+            <motion.div
+              className="absolute inset-0 rounded-full bg-primary/20"
+              animate={{
+                scale: [1, 1.2, 1],
+                opacity: [0.5, 0, 0.5]
+              }}
+              transition={{
+                duration: 2,
+                repeat: Infinity,
+                ease: "easeInOut"
+              }}
+            />
+          </Link>
+        </motion.div>
+      )}
 
       <motion.div 
         initial={{ opacity: 0 }}

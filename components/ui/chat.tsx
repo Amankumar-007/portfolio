@@ -31,6 +31,11 @@ export function Chat() {
     scrollToBottom();
   }, [messages]);
 
+  useEffect(() => {
+    // Notify other components when chatbox is opened/closed
+    window.dispatchEvent(new CustomEvent("chatbox-toggle", { detail: isOpen }));
+  }, [isOpen]);
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (!input.trim() || isLoading) return;
