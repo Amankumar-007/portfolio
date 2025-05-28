@@ -9,7 +9,7 @@ const projects = [
     title: "E-commerce Website Redesign",
     description: "Complete redesign of an e-commerce platform focused on improving user experience and conversion rates.",
     category: "UI/UX Design",
-    image: "https://images.pexels.com/photos/5082579/pexels-photo-5082579.jpeg",
+    image: "/e-commerce/Screenshot 2025-05-28 125131.png",
     demoUrl: "https://ecommerce-demo.amanr.dev",
     githubUrl: "https://github.com/amanr/ecommerce-redesign",
     year: "2023",
@@ -19,9 +19,14 @@ const projects = [
     solution: "I conducted extensive user research to identify pain points and opportunities. The redesign focused on creating a responsive, intuitive interface with streamlined navigation and checkout process. I also implemented personalized product recommendations and simplified product filtering.",
     results: "The redesign resulted in a 40% increase in mobile conversions, 25% reduction in cart abandonment, and 30% increase in average time spent on the site.",
     gallery: [
-      "https://images.pexels.com/photos/5076515/pexels-photo-5076515.jpeg",
-      "https://images.pexels.com/photos/5076521/pexels-photo-5076521.jpeg",
-      "https://images.pexels.com/photos/5082579/pexels-photo-5082579.jpeg"
+      "/e-commerce/Screenshot 2025-05-28 125131.png",
+      "/e-commerce/Screenshot 2025-05-28 125139.png",
+      "/e-commerce/Screenshot 2025-05-28 125147.png",
+      "/e-commerce/Screenshot 2025-05-28 125155.png",
+      "/e-commerce/Screenshot 2025-05-28 125205.png",
+      "/e-commerce/Screenshot 2025-05-28 125217.png",
+      "/e-commerce/Screenshot 2025-05-28 125227.png",
+      "/e-commerce/Screenshot 2025-05-28 125247.png"
     ]
   },
   {
