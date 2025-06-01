@@ -63,30 +63,37 @@ export default function RoadmapPage() {
         </div>
         
         {/* Floating tech icons */}
-        {["⚛️", "🚀", "📱", "🌐", "📊", "🔧", "🗄️"].map((icon, i) => (
-          <motion.div
-            key={i}
-            className="absolute text-4xl opacity-30"
-            initial={{ 
-              x: Math.random() * 100 - 50 + i * 100, 
-              y: Math.random() * 100 - 50 + i * 50,
-              opacity: 0 
-            }}
-            animate={{ 
-              x: [null, Math.random() * 20 - 10 + i * 100, null],
-              y: [null, Math.random() * 20 - 10 + i * 50, null],
-              opacity: 0.3
-            }}
-            transition={{ 
-              duration: 5 + i, 
-              repeat: Infinity, 
-              repeatType: "reverse",
-              delay: i * 0.2
-            }}
-          >
-            {icon}
-          </motion.div>
-        ))}
+        {["⚛️", "🚀", "📱", "🌐", "📊", "🔧", "🗄️"].map((icon, i) => {
+          // Set initial and target positions for animation
+          const baseX = Math.random() * 100 - 50 + i * 100;
+          const baseY = Math.random() * 100 - 50 + i * 50;
+          const deltaX = Math.random() * 20 - 10;
+          const deltaY = Math.random() * 20 - 10;
+          return (
+            <motion.div
+              key={i}
+              className="absolute text-4xl opacity-30"
+              initial={{
+                x: baseX,
+                y: baseY,
+                opacity: 0
+              }}
+              animate={{
+                x: [baseX, baseX + deltaX, baseX],
+                y: [baseY, baseY + deltaY, baseY],
+                opacity: 0.3
+              }}
+              transition={{
+                duration: 5 + i,
+                repeat: Infinity,
+                repeatType: "reverse",
+                delay: i * 0.2
+              }}
+            >
+              {icon}
+            </motion.div>
+          );
+        })}
       </div>
       
       <div ref={contentRef} className="container max-w-7xl py-20 px-4 md:px-6">
@@ -102,7 +109,7 @@ export default function RoadmapPage() {
           </h2>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
             My journey through web development has been a continuous process of learning and growth.
-            Here's how it all unfolded.
+            Here&apos;s how it all unfolded.
           </p>
         </motion.div>
         
@@ -197,7 +204,7 @@ export default function RoadmapPage() {
               transition={{ duration: 0.5, delay: 0.2 }}
               className="text-xl md:text-2xl font-medium italic mb-6"
             >
-              "The beautiful thing about learning is that nobody can take it away from you."
+              &quot;The beautiful thing about learning is that nobody can take it away from you.&quot;
             </motion.blockquote>
             <motion.div
               initial={{ opacity: 0 }}
