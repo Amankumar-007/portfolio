@@ -67,6 +67,8 @@ const HeroImage = memo(function HeroImage() {
 
 export function Hero() {
   const [hideGithub, setHideGithub] = useState(false);
+  const [showResume, setShowResume] = useState(false);
+  const [isFlipped, setIsFlipped] = useState(false);
 
   useEffect(() => {
     function handleChatOpen(e: CustomEvent) {
@@ -241,6 +243,18 @@ export function Hero() {
                 <Link href="/contact">Contact Me</Link>
               </Button>
             </motion.div>
+            <motion.div variants={fadeInItem}>
+              <Button
+                size="lg"
+                variant="secondary"
+                onClick={() => {
+                  setShowResume(true);
+                  setTimeout(() => setIsFlipped(true), 200); // Delay flip for effect
+                }}
+              >
+                Show Resume
+              </Button>
+            </motion.div>
           </motion.div>
         </div>
         
@@ -289,6 +303,72 @@ export function Hero() {
         transition={{ delay: 0.7, duration: 1 }}
         className="absolute -right-20 -bottom-20 w-80 h-80 rounded-full bg-primary/10 blur-xl"
       />
+
+      {showResume && (
+        <motion.div
+          className="fixed inset-0 z-[100] flex items-center justify-center bg-black/80"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          onClick={() => {
+            setIsFlipped(false);
+            setTimeout(() => setShowResume(false), 600); // Wait for flip back
+          }}
+        >
+          <motion.div
+            className="relative w-full h-full flex items-center justify-center"
+            initial={{ scale: 0.98 }}
+            animate={{ scale: 1 }}
+            exit={{ scale: 0.98 }}
+            transition={{ type: "spring", stiffness: 180, damping: 18 }}
+            onClick={e => e.stopPropagation()}
+          >
+            {/* Flip Card */}
+            <motion.div
+              className="w-[95vw] h-[90vh] [perspective:2000px] relative"
+              animate={{ rotateY: isFlipped ? 180 : 0 }}
+              transition={{ duration: 0.8, ease: [0.23, 1, 0.32, 1] }}
+              style={{ transformStyle: "preserve-3d" }}
+            >
+              {/* Front Side */}
+              <div className="absolute inset-0 bg-white/90 dark:bg-zinc-900/90 rounded-2xl shadow-2xl flex flex-col items-center justify-center backface-hidden transition-all duration-300">
+                <span className="text-3xl font-bold text-primary mb-6">Ready to view my Resume?</span>
+                <Button
+                  size="lg"
+                  className="px-8 py-3 text-lg"
+                  onClick={() => setIsFlipped(true)}
+                >
+                  Flip to Resume
+                </Button>
+              </div>
+              {/* Back Side (Resume) */}
+              <div
+                className="absolute inset-0 bg-white dark:bg-zinc-900 rounded-2xl shadow-2xl flex flex-col items-center justify-center [transform:rotateY(180deg)] backface-hidden transition-all duration-300"
+              >
+                <div className="absolute top-6 right-8 z-10">
+                  <Button
+                    variant="outline"
+                    size="lg"
+                    className="text-base"
+                    onClick={() => {
+                      setIsFlipped(false);
+                      setTimeout(() => setShowResume(false), 600);
+                    }}
+                  >
+                    Close
+                  </Button>
+                </div>
+                <iframe
+                  src="/Aman_Kumar_Resume4.pdf"
+                  title="Aman Kumar Resume"
+                  className="w-[90vw] h-[80vh] rounded-xl border shadow-lg bg-white"
+                  style={{ minHeight: "500px" }}
+                />
+              </div>
+            </motion.div>
+          </motion.div>
+        </motion.div>
+      )}
     </section>
   );
 }

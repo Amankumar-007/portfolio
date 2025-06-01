@@ -5,7 +5,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { ModeToggle } from "@/components/mode-toggle";
 import { Button } from "@/components/ui/button";
-import { Menu, X } from "lucide-react";
+import { Menu, X, Clock } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
 const routes = [
@@ -13,6 +13,7 @@ const routes = [
   { href: "/about", label: "About" },
   { href: "/projects", label: "Projects" },
   { href: "/skills", label: "Skills" },
+  { href: "/roadmap", label: "Journey" },
   { href: "/contact", label: "Contact" },
 ] as const;
 

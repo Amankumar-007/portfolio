@@ -30,14 +30,14 @@ const contactInfo = [
   {
     icon: <Mail className="h-6 w-6" />,
     title: "Email",
-    details: "hello@amankumar.design",
-    link: "mailto:hello@amankumar.design",
+    details: "amanr3388@gmail.com",
+    link: "mailto:amanr3388@gmail.com",
   },
   {
     icon: <Phone className="h-6 w-6" />,
     title: "Phone",
     details: "+91-7906753589",
-    link: "tel:+15551234567",
+    link: "tel:+91-7906753589",
   }
 ];
 
