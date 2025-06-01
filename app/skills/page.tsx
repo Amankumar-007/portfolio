@@ -4,7 +4,7 @@ import { useState } from "react";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
-import { Search } from "lucide-react";
+import { Search, X } from "lucide-react"; // For close icon
 import { Input } from "@/components/ui/input";
 import { PageTransition } from "@/components/page-transition";
 
@@ -113,6 +113,7 @@ const technologies = [
 export default function SkillsPage() {
   const [activeCategory, setActiveCategory] = useState<typeof categories[number]>("All");
   const [searchQuery, setSearchQuery] = useState("");
+  const [selectedTech, setSelectedTech] = useState<typeof technologies[0] | null>(null);
 
   const filteredTechnologies = technologies
     .filter(tech => 
@@ -189,7 +190,8 @@ export default function SkillsPage() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.4 + index * 0.1 }}
-                className="group relative overflow-hidden rounded-lg border p-6 hover:border-primary transition-colors"
+                className="group relative overflow-hidden rounded-lg border p-6 hover:border-primary transition-colors cursor-pointer"
+                onClick={() => setSelectedTech(tech)}
               >
                 <div className="flex items-start justify-between mb-4">
                   <div>
@@ -234,6 +236,58 @@ export default function SkillsPage() {
           )}
         </motion.div>
       </div>
+
+      {/* Modal */}
+      {selectedTech && (
+        <motion.div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/50"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          onClick={() => setSelectedTech(null)}
+        >
+          <motion.div
+            className="bg-white dark:bg-zinc-900 rounded-xl shadow-xl max-w-md w-full p-8 relative"
+            initial={{ scale: 0.9, opacity: 0, y: 40 }}
+            animate={{ scale: 1, opacity: 1, y: 0 }}
+            exit={{ scale: 0.9, opacity: 0, y: 40 }}
+            transition={{ type: "spring", stiffness: 300, damping: 25 }}
+            onClick={e => e.stopPropagation()}
+          >
+            <button
+              className="absolute top-4 right-4 text-zinc-500 hover:text-zinc-900 dark:hover:text-white"
+              onClick={() => setSelectedTech(null)}
+              aria-label="Close"
+            >
+              <X className="w-5 h-5" />
+            </button>
+            <div className="flex items-center gap-4 mb-4">
+              <span className="text-4xl">{selectedTech.icon}</span>
+              <div>
+                <h2 className="text-2xl font-bold">{selectedTech.name}</h2>
+                <Badge variant="outline">{selectedTech.category}</Badge>
+              </div>
+            </div>
+            <p className="mb-4 text-muted-foreground">{selectedTech.description}</p>
+            <div className="mb-2">
+              <Badge variant="secondary">{selectedTech.experience}</Badge>
+              <span className="ml-2 text-sm text-muted-foreground">
+                Projects: {selectedTech.projects}
+              </span>
+            </div>
+            <div>
+              <h4 className="font-semibold mb-2">Key Details:</h4>
+              <div className="flex flex-wrap gap-2">
+                {selectedTech.details.map((detail, i) => (
+                  <Badge key={i} variant="secondary" className="text-xs">
+                    {detail}
+                  </Badge>
+                ))}
+              </div>
+            </div>
+          </motion.div>
+        </motion.div>
+      )}
     </PageTransition>
   );
 }

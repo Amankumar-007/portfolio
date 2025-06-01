@@ -7,24 +7,29 @@ import { Separator } from "@/components/ui/separator";
 import { PageTransition } from "@/components/page-transition";
 
 const skills = [
-  "UI/UX Design", "Web Development", "Branding", 
-  "Mobile App Design", "Product Design", "Illustration"
+  "Frontend Development", "Backend Development", "MERN Stack", 
+"REST API Integration", "Responsive Web Design", "UI/UX Implementation"
+, "JavaScript", "React", "Node.js",
+  "Express.js", "MongoDB", "HTML", "CSS", "Git & Version Control"
+, "Agile Methodologies", "Problem Solving", "Team Collaboration"
+, "Continuous Learning", "Open Source Contribution"
+, "Web Application Development", "Cross-Browser Compatibility"
 ];
 const experiences = [
   {
-    period: "2023 - Present",
-    role: "Frontend Developer (MERN Stack)",
+    period: "2024 - Present",
+    role: "Application Developer (MERN Stack)",
     company: "Freelancer / Personal Projects",
     description: "Building web applications using React, Node.js, Express, MongoDB, and integrating frontend with backend systems. Continuously learning and improving skills in full-stack development.",
   },
   {
-    period: "2022 - 2023",
+    period: "2023 - 2024",
     role: "Junior Developer",
     company: "Freelance Web Developer",
     description: "Developed and maintained responsive websites for small businesses, improving their digital presence. Focused on frontend technologies like HTML, CSS, JavaScript, and React.",
   },
   {
-    period: "2021 - 2022",
+    period: "2022 - 2023",
     role: "Intern Developer",
     company: "Self-learning and Open Source Projects",
     description: "Worked on personal projects, contributed to open-source, and participated in coding challenges to enhance development skills. Gained hands-on experience in web development and backend technologies.",

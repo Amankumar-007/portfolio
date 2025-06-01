@@ -47,11 +47,11 @@ const projects = [
 	},
 	{
 		id: "project-4",
-		title: "Uber Clone",
+		title: "Employee Management System",
 		description:
 			"A clone of Uber for ride-sharing with features like real-time tracking, booking, and payment gateway.",
 		category: "Mobile App",
-		image: "/ss-6.png",
+		image: "/emp/Screenshot 2025-05-29 122724.png",
 		year: "2022",
 	},
 ];
