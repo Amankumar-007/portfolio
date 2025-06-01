@@ -17,7 +17,7 @@ const AboutImage = memo(function AboutImage() {
       className="relative h-[500px] rounded-2xl overflow-hidden"
     >
       <Image
-        src="/about-image.png"
+        src="/about.PNG"
         alt="Aman Kumar working"
         fill
         sizes="(max-width: 768px) 100vw, 50vw"
