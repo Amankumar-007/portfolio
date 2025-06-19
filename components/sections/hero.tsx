@@ -39,7 +39,7 @@ const HeroImage = memo(function HeroImage() {
         ease: "easeOut" // Changed to standard easing
       }}
       whileHover={{ scale: 1.02 }}
-      className="relative h-[600px] rounded-2xl overflow-hidden shadow-2xl hidden lg:block"
+      className="relative h-[600px] rounded-2xl overflow-hidden hidden lg:block"
     >
       <motion.div
         initial={{ opacity: 0 }}
@@ -47,10 +47,10 @@ const HeroImage = memo(function HeroImage() {
         transition={{ delay: 1 }}
       >
         <Image 
-          src="/image.png" 
+          src="/web.png" 
           alt="Aman Kumar" 
           fill
-          sizes="(max-width: 768px) 100vw, 50vw"
+          sizes="(max-width: 730px) 100vw, 50vw"
           priority
           className="object-cover object-center"
         />
