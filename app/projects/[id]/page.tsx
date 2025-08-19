@@ -69,7 +69,7 @@ solution: "I designed and developed a full-stack LMS platform with React for the
 results: "The LMS is now fully functional and scalable, supporting role-based operations, exam systems, and content delivery. It has been praised for its clean UI/UX, smooth role-switching, and clear navigation. It’s positioned for deployment in educational institutions and freelance training programs.",
     gallery: [
       
-      "/lms/Screenshot 2025-05-27 131643.png",
+      "/lms/front-poster.png",
       "/lms/Screenshot 2025-05-27 131655.png",
       "/lms/Screenshot 2025-05-27 131711.png",
       "/lms/Screenshot 2025-05-27 131723.png",
@@ -104,42 +104,84 @@ results: "The LMS is now fully functional and scalable, supporting role-based op
   },
   {
     id: "project-5",
-    title: "Travel App UI Design",
-    description: "Created a UI design for a travel planning application with focus on intuitive navigation and visual appeal.",
-    category: "Mobile App",
-    image: "https://images.pexels.com/photos/6956503/pexels-photo-6956503.jpeg",
-    demoUrl: "https://travel-app.amanr.dev",
-    githubUrl: "https://github.com/amanr/travel-app-ui",
-    year: "2024",
-    client: "TravelEase",
-    role: "UI Designer",
-    challenge: "The client wanted to create a travel planning app that would stand out in a crowded market by offering a more visual and intuitive experience for users planning trips.",
-    solution: "I designed a visually rich interface that emphasizes destination imagery while maintaining usability. The app features custom illustrations, thoughtful microinteractions, and a streamlined booking flow. Special attention was paid to information architecture to simplify complex travel planning.",
-    results: "The app received recognition at several design awards and achieved a conversion rate 28% higher than the industry average for travel booking apps.",
+    title: "AI Tools Platform",
+    description: "A suite of AI-powered tools for text, image, and workflow automation. Includes chat assistants, content generation, summarization, and image enhancement with fine-tuned models.",
+    category: "AI Tools",
+    image: "https://images.pexels.com/photos/8386440/pexels-photo-8386440.jpeg",
+    demoUrl: "https://ai-tools-web-app-topaz.vercel.app/",
+    githubUrl: "#",
+    year: "2025",
+    client: "Personal Project",
+    role: "Full Stack Developer",
+    challenge: "Build a unified interface for multiple AI capabilities with reliable prompts, guardrails, and cost-optimized inference while keeping UX simple.",
+    solution: "Implemented modular tool architecture with rate-limiting, retry logic, and prompt templates. Added history, export, and share features. Optimized inference through batching and caching.",
+    results: "Reduced average response latency by 32% and cut inference costs ~18% with caching. Early users reported 2x faster content creation.",
     gallery: [
-      "https://images.pexels.com/photos/6956503/pexels-photo-6956503.jpeg",
-      "https://images.pexels.com/photos/3769138/pexels-photo-3769138.jpeg",
-      "https://images.pexels.com/photos/4353813/pexels-photo-4353813.jpeg"
+      "https://images.pexels.com/photos/8386440/pexels-photo-8386440.jpeg",
+      "https://images.pexels.com/photos/8438925/pexels-photo-8438925.jpeg",
+      "https://images.pexels.com/photos/5473956/pexels-photo-5473956.jpeg"
     ]
   },
   {
     id: "project-6",
-    title: "Health & Fitness Platform",
-    description: "Web platform for tracking fitness goals, nutrition, and workout plans with personalized recommendations.",
-    category: "Web Development",
-    image: "https://images.pexels.com/photos/5082581/pexels-photo-5082581.jpeg",
-    demoUrl: "https://fitness-platform.amanr.dev",
-    githubUrl: "https://github.com/amanr/health-fitness-platform",
-    year: "2024",
-    client: "Personal Project",
-    role: "UX Designer & Front-end Developer",
-    challenge: "The client needed a fitness platform that could offer personalized workout and nutrition plans while maintaining high engagement through an intuitive, motivating interface.",
-    solution: "I designed and developed a comprehensive platform with progress tracking, personalized workout recommendations, meal planning tools, and social features. The interface uses gamification elements to encourage consistent usage and achievement of fitness goals.",
-    results: "The platform achieved a 68% user retention rate after 3 months, compared to the industry average of 29%. Users who engaged with the personalized recommendations showed 42% better progress toward their fitness goals.",
+    title: "Lenis Restaurant App",
+    description: "Modern restaurant web app featuring Lenis smooth scrolling, digital menu, online ordering, and table reservations with a delightful micro-interaction rich UI.",
+    category: "Restaurant",
+    image: "https://images.pexels.com/photos/262978/pexels-photo-262978.jpeg",
+    demoUrl: "#",
+    githubUrl: "#",
+    year: "2025",
+    client: "Restaurant Pilot",
+    role: "Front-end Developer",
+    challenge: "Deliver a high-performance, mobile-first restaurant experience with buttery-smooth scrolling, quick navigation, and a frictionless checkout.",
+    solution: "Integrated Lenis for silky scroll behavior, route-based transitions, and skeleton loading. Implemented cart, ordering, and reservation flows with validation and status updates.",
+    results: "Time-on-page increased 24% with a 17% improvement in checkout completion during pilot tests.",
     gallery: [
-      "https://images.pexels.com/photos/5082581/pexels-photo-5082581.jpeg",
-      "https://images.pexels.com/photos/4498362/pexels-photo-4498362.jpeg",
-      "https://images.pexels.com/photos/5067739/pexels-photo-5067739.jpeg"
+      "https://images.pexels.com/photos/262978/pexels-photo-262978.jpeg",
+      "https://images.pexels.com/photos/376464/pexels-photo-376464.jpeg",
+      "https://images.pexels.com/photos/6267/menu-restaurant-vintage-table.jpg"
+    ]
+  }
+  ,
+  {
+    id: "project-7",
+    title: "Lenis Restaurant Reservation System",
+    description: "A focused reservation platform for restaurants using Lenis for fluid scrolling, real-time slot availability, waitlist management, and SMS/email reminders.",
+    category: "Restaurant",
+    image: "https://images.pexels.com/photos/262978/pexels-photo-262978.jpeg",
+    demoUrl: "#",
+    githubUrl: "#",
+    year: "2025",
+    client: "Hospitality Labs",
+    role: "Full Stack Developer",
+    challenge: "Streamline booking management while preventing overbooking and ensuring accessibility across devices.",
+    solution: "Built reservation flows with time-slot rules, capacity limits, and blackout dates. Added admin dashboard for table management and integrations for notifications.",
+    results: "Cut no-show rates by 12% via reminders and improved table utilization in simulated trials.",
+    gallery: [
+      "https://images.pexels.com/photos/262978/pexels-photo-262978.jpeg",
+      "https://images.pexels.com/photos/887827/pexels-photo-887827.jpeg",
+      "https://images.pexels.com/photos/2696064/pexels-photo-2696064.jpeg"
+    ]
+  }
+  ,
+  {
+    id: "project-8",
+    title: "Type Riser – Typing Practice App",
+    description: "Practice typing with engaging drills, real-time WPM/accuracy metrics, and progression tracks. Includes custom texts, daily streaks, leaderboards, and dark mode.",
+    category: "Productivity / EdTech",
+    image: "https://images.pexels.com/photos/574073/pexels-photo-574073.jpeg",
+    demoUrl: "https://typing-riser.vercel.app/",
+    githubUrl: "#",
+    year: "2025",
+    client: "Personal Project",
+    role: "Full Stack Developer",
+    challenge: "Build a highly responsive typing experience with precise timing, error detection, and analytics that works smoothly across devices.",
+    solution: "Implemented precise keystroke tracking with debounce-free input, per-character accuracy, adjustable difficulty, and lesson packs. Added charts for WPM/accuracy trends and profiles with streaks.",
+    results: "Beta testers improved average WPM by 18% over two weeks and reported higher consistency due to focused drills and instant feedback.",
+    gallery: [
+      "https://images.pexels.com/photos/574073/pexels-photo-574073.jpeg",
+      "https://images.pexels.com/photos/3861972/pexels-photo-3861972.jpeg",
+      "https://images.pexels.com/photos/4458554/pexels-photo-4458554.jpeg"
     ]
   }
 ];

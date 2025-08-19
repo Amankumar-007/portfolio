@@ -15,46 +15,87 @@ const categories = [
 	"Web Development",
 	"Mobile App",
 	"Full Stack",
+	"AI Tools",
+	"Restaurant",
+	"SaaS",
 ];
 
 const projects = [
 	{
-		id: "project-1",
-		title: "E-commerce Website",
+		id: "project-5",
+		title: "AI Tools Platform",
 		description:
-			"A complete e-commerce platform with product listings, user authentication, and payment integration.",
-		category: "Web Development",
-		image: "/ss-1.png",
+			"Explore an innovative AI platform featuring a suite of intelligent tools designed to automate tasks, enhance productivity, and drive smarter decision-making.",
+		category: "AI Tools",
+		image: "/ai-tools/ai-tools.png",
+		year: "2025",
+	},
+	{
+		id: "project-3",
+		title: "Learning Management System (LMS)",
+		description:
+			"A comprehensive LMS that supports interactive learning, role-based access, detailed assessments, and certifications to empower educators and learners.",
+		category: "Full Stack",
+		image: "/lms/Screenshot 2025-05-27 131624.png",
 		year: "2023",
 	},
 	{
 		id: "project-2",
 		title: "Real Estate Platform",
 		description:
-			"A platform for listing, buying, and selling properties with a user-friendly interface and search filters.",
+			"A feature-rich real estate platform offering seamless property browsing, advanced search filters, and secure transactions for buyers and sellers.",
 		category: "Web Development",
 		image: "/ss-3.png",
 		year: "2023",
 	},
 	{
-		id: "project-3",
-		title: "Learning Management System (LMS)",
+		id: "project-6",
+		title: "Lenis Restaurant App",
 		description:
-			"An LMS with role-based access, courses, exams, and certifications for students, trainers, and admins.",
-		category: "Full Stack",
-		image: "/lms/Screenshot 2025-05-27 131624.png",
+			"A sleek restaurant application with Lenis smooth scrolling, online ordering, and reservation management for an enhanced dining experience.",
+		category: "Restaurant",
+		image: "/restro-1/restro-1.png",
+		year: "2025",
+	},
+	{
+		id: "project-1",
+		title: "E-commerce Website",
+		description:
+			"A robust e-commerce platform featuring product catalogs, secure user authentication, and integrated payment gateways for smooth transactions.",
+		category: "Web Development",
+		image: "/ss-1.png",
 		year: "2023",
 	},
 	{
 		id: "project-4",
 		title: "Employee Management System",
 		description:
-			"A clone of Uber for ride-sharing with features like real-time tracking, booking, and payment gateway.",
+			"An Uber-like ride-sharing app with real-time tracking, booking capabilities, and seamless payment integration.",
 		category: "Mobile App",
 		image: "/emp/Screenshot 2025-05-29 122724.png",
 		year: "2022",
 	},
+	{
+		id: "project-7",
+		title: "Lenis Restaurant Reservation System",
+		description:
+			"A user-friendly reservation system for restaurants, leveraging Lenis for smooth UI transitions and efficient booking management.",
+		category: "Restaurant",
+		image: "/restro-2/restro-2.png",
+		year: "2025",
+	},
+	{
+		id: "project-8",
+		title: "Type-riser",
+		description:
+			"Multi-tenant platform with subscription billing and analytics.",
+		category: "SaaS",
+		image: "/type-riser/type-riser.png",
+		year: "2025",
+	},
 ];
+
+const currentProject = projects.find((p) => p.id === "project-8") || projects.find((p) => p.id === "project-3");
 
 export default function ProjectsPage() {
 	const [activeCategory, setActiveCategory] = useState("All");
@@ -65,9 +106,6 @@ export default function ProjectsPage() {
 		activeCategory === "All"
 			? projects
 			: projects.filter((project) => project.category === activeCategory);
-
-	// Example: Assume project-3 is currently being worked on
-	const currentProject = projects.find((p) => p.id === "project-3");
 
 	return (
 		<PageTransition>
@@ -137,6 +175,9 @@ export default function ProjectsPage() {
 						</p>
 						<p className="text-sm text-gray-500">
 							Estimated completion: Q3 2025
+						</p>
+						<p className="text-sm text-gray-500 mt-2 font-semibold">
+							SaaS Project: Multi-tenant platform with subscription billing and analytics.
 						</p>
 					</DialogContent>
 				</Dialog>

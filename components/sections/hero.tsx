@@ -359,7 +359,7 @@ export function Hero() {
                   </Button>
                 </div>
                 <iframe
-                  src="/Aman_Kumar_Resume4.pdf"
+                  src="/Aman_Kumar_Resume2.pdf"
                   title="Aman Kumar Resume"
                   className="w-[90vw] h-[80vh] rounded-xl border shadow-lg bg-white"
                   style={{ minHeight: "500px" }}
@@ -372,3 +372,5 @@ export function Hero() {
     </section>
   );
 }
+
+export default Hero;
