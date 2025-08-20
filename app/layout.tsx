@@ -1,7 +1,7 @@
 import "./globals.css";
 import type { Metadata } from "next";
 import { Playfair_Display } from "next/font/google";
-import { ThemeProvider } from "@/components/theme-provider";
+import { ThemeProvider } from "@/components/ui/theme-provider";
 import { PageTransition } from "@/components/page-transition";
 import { MainNav } from "@/components/main-nav";
 import { Suspense } from "react";
@@ -40,18 +40,17 @@ export default function RootLayout({
     <html lang="en" suppressHydrationWarning>
       <head />
       <body className={playfair.variable}>
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="system"
-          enableSystem
-          disableTransitionOnChange
-        >
+      <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+          >
           <MainNav />
           <Suspense fallback={<Loading />}>
             <PageTransition>{children}</PageTransition>
           </Suspense>
           <Chat />
-        </ThemeProvider>
+          </ThemeProvider>
       </body>
     </html>
   );

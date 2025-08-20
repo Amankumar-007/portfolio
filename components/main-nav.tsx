@@ -3,10 +3,10 @@
 import { memo, useCallback, useState, useEffect } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { ModeToggle } from "@/components/mode-toggle";
 import { Button } from "@/components/ui/button";
 import { Menu, X, Clock } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import ThemeToggleButton from "./ui/theme-toggle-button";
 
 const routes = [
 	{ href: "/", label: "Home" },
@@ -103,7 +103,8 @@ function MainNavComponent() {
 					</div>
 
 					<div className="flex items-center gap-2">
-						<ModeToggle />
+					<ThemeToggleButton />
+
 						{/* Mobile Menu Button */}
 						<Button
 							variant="ghost"
