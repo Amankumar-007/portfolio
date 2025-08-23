@@ -1,18 +1,171 @@
-export const Loader = () => {
+"use client"
+import React from 'react';
+import styled from 'styled-components';
+
+const Loader = () => {
   return (
-    <div className="relative">
-      <div className="relative bg-[#473c3c] h-[130px] w-[130px] rounded-full mx-auto my-[30px]">
-        <div className="absolute top-[30px] left-[40px] w-[50px] h-[70px] animate-hourglassRotate [transform-style:preserve-3d] [perspective:1000px]">
-          <div className="[transform-style:preserve-3d] hourglassCurves before:content-[''] before:block before:absolute before:top-[32px] before:w-[6px] before:h-[6px] before:rounded-full before:bg-[#333] before:left-[15px] before:animate-hideCurves after:content-[''] after:block after:absolute after:top-[32px] after:w-[6px] after:h-[6px] after:rounded-full after:bg-[#333] after:left-[29px] after:animate-hideCurves" />
-          <div className="hourglassCapTop top-0" />
-          <div className="absolute top-[-16px] left-[3px] rounded-full w-[44px] h-[44px] bg-[#999999] [transform:rotateX(90deg)]" />
-          <div className="absolute left-[24px] w-[3px] bg-white before:content-[''] before:block before:absolute before:animate-sandStream1" />
-          <div className="absolute top-[36px] left-[19px] border-l-[6px] border-l-transparent border-r-[6px] border-r-transparent border-b-[6px] border-b-white animate-sandStream2" />
-          <div className="hourglassCapBottom bottom-0" />
-          <div className="[perspective:100px] absolute top-[32px] left-[20px] w-[10px] h-[6px] bg-[#999999] opacity-50 before:content-[''] before:block before:absolute before:bg-[#999999] before:left-[-17px] before:w-[44px] before:h-[28px] before:top-[-27px] before:rounded-b-[25px] after:content-[''] after:block after:absolute after:bg-[#999999] after:left-[-17px] after:w-[44px] after:h-[28px] after:bottom-[-27px] after:rounded-t-[25px]" />
-          <div className="before:content-[''] before:block before:absolute before:left-[6px] before:bg-white before:[perspective:500px] before:top-[8px] before:w-[39px] before:rounded-[3px_3px_30px_30px] before:animate-sandFillup after:content-[''] after:block after:absolute after:left-[6px] after:bg-white after:[perspective:500px] after:rounded-[30px_30px_3px_3px] after:animate-sandDeplete" />
+    <StyledWrapper>
+      <div className="loader">
+        <div className="circle">
+          <div className="dot" />
+          <div className="outline" />
+        </div>
+        <div className="circle">
+          <div className="dot" />
+          <div className="outline" />
+        </div>
+        <div className="circle">
+          <div className="dot" />
+          <div className="outline" />
+        </div>
+        <div className="circle">
+          <div className="dot" />
+          <div className="outline" />
         </div>
       </div>
-    </div>
+    </StyledWrapper>
   );
 }
+
+const StyledWrapper = styled.div`
+  .loader {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    --color: hsl(0, 0%, 87%);
+    --animation: 2s ease-in-out infinite;
+  }
+
+  .loader .circle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    width: 20px;
+    height: 20px;
+    border: solid 2px var(--color);
+    border-radius: 50%;
+    margin: 0 10px;
+    background-color: transparent;
+    animation: circle-keys var(--animation);
+  }
+
+  .loader .circle .dot {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background-color: var(--color);
+    animation: dot-keys var(--animation);
+  }
+
+  .loader .circle .outline {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    animation: outline-keys var(--animation);
+  }
+
+  .circle:nth-child(2) {
+    animation-delay: 0.3s;
+  }
+
+  .circle:nth-child(3) {
+    animation-delay: 0.6s;
+  }
+
+  .circle:nth-child(4) {
+    animation-delay: 0.9s;
+  }
+
+  .circle:nth-child(5) {
+    animation-delay: 1.2s;
+  }
+
+  .circle:nth-child(2) .dot {
+    animation-delay: 0.3s;
+  }
+
+  .circle:nth-child(3) .dot {
+    animation-delay: 0.6s;
+  }
+
+  .circle:nth-child(4) .dot {
+    animation-delay: 0.9s;
+  }
+
+  .circle:nth-child(5) .dot {
+    animation-delay: 1.2s;
+  }
+
+  .circle:nth-child(1) .outline {
+    animation-delay: 0.9s;
+  }
+
+  .circle:nth-child(2) .outline {
+    animation-delay: 1.2s;
+  }
+
+  .circle:nth-child(3) .outline {
+    animation-delay: 1.5s;
+  }
+
+  .circle:nth-child(4) .outline {
+    animation-delay: 1.8s;
+  }
+
+  .circle:nth-child(5) .outline {
+    animation-delay: 2.1s;
+  }
+
+  @keyframes circle-keys {
+    0% {
+      transform: scale(1);
+      opacity: 1;
+    }
+
+    50% {
+      transform: scale(1.5);
+      opacity: 0.5;
+    }
+
+    100% {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+
+  @keyframes dot-keys {
+    0% {
+      transform: scale(1);
+    }
+
+    50% {
+      transform: scale(0);
+    }
+
+    100% {
+      transform: scale(1);
+    }
+  }
+
+  @keyframes outline-keys {
+    0% {
+      transform: scale(0);
+      outline: solid 20px var(--color);
+      outline-offset: 0;
+      opacity: 1;
+    }
+
+    100% {
+      transform: scale(1);
+      outline: solid 0 transparent;
+      outline-offset: 20px;
+      opacity: 0;
+    }
+  }`;
+
+export default Loader;
