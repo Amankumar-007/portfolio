@@ -72,6 +72,28 @@
   }
 }
 
+html {
+  scroll-behavior: auto;
+}
+
+[data-scroll-container] {
+  overflow: hidden;
+  position: relative;
+}
+
+[data-scroll-section] {
+  position: relative;
+  overflow: hidden;
+}
+
+.has-scroll-smooth {
+  overflow: hidden;
+}
+
+.has-scroll-smooth body {
+  overflow: hidden;
+}
+
 @layer base {
   * {
     @apply border-border;

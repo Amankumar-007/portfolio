@@ -1,9 +1,8 @@
 "use client";
 
-import { memo } from "react";
+import { memo, useRef, useState } from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { ArrowRight } from "lucide-react";
 
@@ -51,6 +50,40 @@ const SkillCard = memo(function SkillCard({
   );
 });
 
+// Magnetic Button with Touch Support fallbacks
+const MagneticButton = ({ children }: { children: React.ReactNode }) => {
+  const ref = useRef<HTMLButtonElement>(null);
+  const [position, setPosition] = useState({ x: 0, y: 0 });
+
+  const handleMouse = (e: React.MouseEvent<HTMLButtonElement>) => {
+    if (!ref.current) return;
+    const { clientX, clientY } = e;
+    const { height, width, left, top } = ref.current.getBoundingClientRect();
+    const middleX = clientX - (left + width / 2);
+    const middleY = clientY - (top + height / 2);
+    setPosition({ x: middleX * 0.25, y: middleY * 0.25 });
+  };
+
+  const reset = () => {
+    setPosition({ x: 0, y: 0 });
+  };
+
+  const { x, y } = position;
+  return (
+    <motion.button
+      ref={ref}
+      onMouseMove={handleMouse}
+      onMouseLeave={reset}
+      animate={{ x, y }}
+      transition={{ type: "spring", stiffness: 150, damping: 15, mass: 0.1 }}
+      className="group relative w-full md:w-auto px-8 py-4 bg-neutral-900 rounded-full overflow-hidden shadow-xl"
+    >
+      <div className="absolute inset-0 bg-orange-500 translate-y-[101%] group-hover:translate-y-0 transition-transform duration-300 ease-in-out" />
+      <div className="flex justify-center relative z-10">{children}</div>
+    </motion.button>
+  );
+};
+
 export function SkillsPreview() {
   const featuredSkills = [
     {
@@ -92,12 +125,12 @@ export function SkillsPreview() {
               Key technologies and tools I use to bring ideas to life
             </p>
           </div>
-          <Button asChild variant="outline" className="group">
-            <Link href="/skills">
+          <MagneticButton>
+            <Link href="/skills" className="flex items-center gap-2 text-white font-bold tracking-wide text-sm md:text-base">
               View All Skills
-              <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+              <ArrowRight size={18} />
             </Link>
-          </Button>
+          </MagneticButton>
         </motion.div>
 
         <motion.div 

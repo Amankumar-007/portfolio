@@ -5,121 +5,204 @@ import Image from "next/image";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import { PageTransition } from "@/components/page-transition";
+import { useEffect, useState, useRef } from 'react';
+import { Terminal, Code2, Cpu, Globe } from "lucide-react";
 
-const skills = [
-  "Frontend Development", "Backend Development", "MERN Stack", 
-"REST API Integration", "Responsive Web Design", "UI/UX Implementation"
-, "JavaScript", "React", "Node.js",
-  "Express.js", "MongoDB", "HTML", "CSS", "Git & Version Control"
-, "Agile Methodologies", "Problem Solving", "Team Collaboration"
-, "Continuous Learning", "Open Source Contribution"
-, "Web Application Development", "Cross-Browser Compatibility"
-];
-const experiences = [
+// Categorized Skills for better organization
+const skillCategories = [
   {
-    period: "2024 - Present",
-    role: "Application Developer (MERN Stack)",
-    company: "Freelancer / Personal Projects",
-    description: "Building web applications using React, Node.js, Express, MongoDB, and integrating frontend with backend systems. Continuously learning and improving skills in full-stack development.",
+    name: "Core Tech",
+    icon: <Code2 size={14} />,
+    items: ["React", "Next.js", "Node.js", "TypeScript", "JavaScript", "MongoDB", "Express.js"],
+    color: "bg-orange-100/50"
   },
   {
-    period: "2023 - 2024",
-    role: "Junior Developer",
-    company: "Freelance Web Developer",
-    description: "Developed and maintained responsive websites for small businesses, improving their digital presence. Focused on frontend technologies like HTML, CSS, JavaScript, and React.",
+    name: "Frontend & UI",
+    icon: <Globe size={14} />,
+    items: ["Tailwind CSS", "Responsive Design", "UI/UX Implementation", "CSS3", "HTML5", "Animations"],
+    color: "bg-white"
   },
   {
-    period: "2022 - 2023",
-    role: "Intern Developer",
-    company: "Self-learning and Open Source Projects",
-    description: "Worked on personal projects, contributed to open-source, and participated in coding challenges to enhance development skills. Gained hands-on experience in web development and backend technologies.",
+    name: "Workflow",
+    icon: <Cpu size={14} />,
+    items: ["Git & GitHub", "Agile", "REST APIs", "Problem Solving", "Open Source"],
+    color: "bg-orange-50/50"
   }
 ];
 
+const experiences = [
+
+  {
+
+    period: "2024 - Present",
+
+    role: "Application Developer (MERN Stack)",
+
+    company: "Freelancer / Personal Projects",
+
+    description: "Building web applications using React, Node.js, Express, MongoDB, and integrating frontend with backend systems. Continuously learning and improving skills in full-stack development.",
+
+  },
+
+  {
+
+    period: "2023 - 2024",
+
+    role: "Junior Developer",
+
+    company: "Freelance Web Developer",
+
+    description: "Developed and maintained responsive websites for small businesses, improving their digital presence. Focused on frontend technologies like HTML, CSS, JavaScript, and React.",
+
+  },
+
+  {
+
+    period: "2022 - 2023",
+
+    role: "Intern Developer",
+
+    company: "Self-learning and Open Source Projects",
+
+    description: "Worked on personal projects, contributed to open-source, and participated in coding challenges to enhance development skills. Gained hands-on experience in web development and backend technologies.",
+
+  }
+
+];
 
 export default function AboutPage() {
+  const [isLoading, setIsLoading] = useState(true);
+  const containerRef = useRef(null);
+
+  useEffect(() => {
+    (async () => {
+      try {
+        const LocomotiveScroll = (await import('locomotive-scroll')).default;
+        const locomotiveScroll = new LocomotiveScroll({
+          el: containerRef.current as unknown as HTMLElement,
+          smooth: true,
+          multiplier: 1,
+          lerp: 0.1,
+        });
+
+        setTimeout(() => {
+          setIsLoading(false);
+          document.body.style.cursor = 'default';
+          window.scrollTo(0, 0);
+        }, 2000);
+
+        return () => {
+          if (locomotiveScroll) locomotiveScroll.destroy();
+        };
+      } catch (error) {
+        console.error('Error loading LocomotiveScroll:', error);
+        setIsLoading(false);
+      }
+    })();
+  }, []);
+
   return (
-    <PageTransition>
-      <div className="container max-w-5xl py-20 px-4 md:px-6">
-        <div className="grid gap-10 lg:grid-cols-2">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-          >
-            <h1 className="text-5xl md:text-6xl lg:text-7xl font-playfair font-bold mb-4">
-              About Me
-            </h1>
-            <p className="text-xl text-muted-foreground mb-8">
-              I&apos;m Aman Kumar, a passionate developer focused on creating seamless and dynamic web applications.
-            </p>
+    <div 
+      ref={containerRef} 
+      data-scroll-container 
+      className="relative min-h-screen bg-[#fffcf9] text-[#1a1a1a] selection:bg-orange-500 selection:text-white"
+    >
+      {/* --- ROUGH GRAIN OVERLAY --- */}
+      <svg className="fixed inset-0 w-full h-full pointer-events-none z-[100] opacity-[0.25] contrast-150 mix-blend-multiply">
+        <filter id="roughNoise">
+          <feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="4" stitchTiles="stitch" />
+          <feColorMatrix type="saturate" values="0" />
+        </filter>
+        <rect width="100%" height="100%" filter="url(#roughNoise)" />
+      </svg>
 
-            <div className="space-y-6">
-              <p className="text-lg">
-                With hands-on experience in full-stack development, I specialize in building responsive and efficient web applications using the MERN stack. I continuously enhance my skills through personal projects, learning, and contributing to open-source.
+      <PageTransition>
+        <div className="relative z-10 container max-w-6xl mt-20 py-20 px-4 md:px-6">
+          
+          {/* INTRO SECTION */}
+          <div className="grid gap-16 lg:grid-cols-2 mb-25">
+            <div data-scroll data-scroll-speed="1">
+              <h1 className="text-6xl md:text-8xl font-black tracking-tighter uppercase mb-6 leading-[0.85]">
+                Aman <br /> <span className="text-orange-500 italic font-serif lowercase pr-4">Kumar.</span>
+              </h1>
+              <p className="text-xl text-slate-500 mb-8 font-medium max-w-md">
+                Full-stack developer building robust MERN applications with a focus on performance and raw aesthetics.
               </p>
-              <p className="text-lg">
-                My approach is user-centric, combining the power of modern web technologies with a focus on clean, maintainable code. Whether it&apos;s frontend or backend, I aim to create applications that provide a smooth user experience and are easy to scale.
-              </p>
-            </div>
-
-            
-            <div className="mt-10">
-              <h3 className="text-xl font-semibold mb-3">Skills & Expertise</h3>
-              <div className="flex flex-wrap gap-2 mb-8">
-                {skills.map((skill, index) => (
-                  <Badge key={index} variant="outline" className="text-sm py-1 px-3">
-                    {skill}
-                  </Badge>
-                ))}
+              
+              {/* SPECIAL SKILLS BENTO GRID */}
+              <div className="mt-12 space-y-4">
+                <h3 className="text-xs font-mono uppercase tracking-[0.3em] text-slate-400 font-bold mb-6">Technical Arsenal</h3>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  {skillCategories.map((cat, i) => (
+                    <div 
+                      key={i} 
+                      className={`${cat.color} border border-black/10 p-5 rounded-2xl shadow-sm hover:shadow-md transition-shadow`}
+                    >
+                      <div className="flex items-center gap-2 mb-4 text-orange-600 font-mono text-[10px] font-bold uppercase tracking-widest">
+                        {cat.icon} {cat.name}
+                      </div>
+                      <div className="flex flex-wrap gap-1.5">
+                        {cat.items.map((skill, si) => (
+                          <span key={si} className="text-[11px] font-bold px-2 py-0.5 bg-black/5 rounded-md border border-black/5">
+                            {skill}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  ))}
+                  <div className="bg-black text-white p-5 rounded-2xl flex flex-col justify-between border border-black">
+                     <Terminal size={20} className="text-orange-500" />
+                     <p className="text-[11px] font-mono opacity-70 mt-4">System.ready(); <br /> {/* Always learning new stacks */}</p>
+                  </div>
+                </div>
               </div>
             </div>
-          </motion.div>
           
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            className="relative h-[500px] rounded-2xl overflow-hidden"
-          >
-            <Image 
-              src="/image.png" 
-              alt="Aman Kumar" 
-              fill
-              className="object-cover"
-            />
-          </motion.div>
-        </div>
-        
-        <Separator className="my-16" />
-        
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.3 }}
-        >
-          <h2 className="text-3xl md:text-4xl font-playfair font-bold mb-10">Work Experience</h2>
-          
-          <div className="space-y-12">
-            {experiences.map((exp, index) => (
-              <motion.div 
-                key={index}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.4 + index * 0.1 }}
-                className="grid md:grid-cols-[200px_1fr] gap-4"
-              >
-                <div className="text-muted-foreground">{exp.period}</div>
-                <div>
-                  <h3 className="text-xl font-semibold">{exp.role}</h3>
-                  <p className="text-primary mb-2">{exp.company}</p>
-                  <p className="text-muted-foreground">{exp.description}</p>
-                </div>
-              </motion.div>
-            ))}
+            <div 
+              data-scroll 
+              data-scroll-speed="2"
+              className="relative h-[600px] rounded-[3rem] overflow-hidden border-2 border-black shadow-[25px_25px_0px_0px_rgba(251,146,60,0.15)]"
+            >
+              <Image 
+                src="/image.png" 
+                alt="Aman Kumar" 
+                fill
+                className="object-cover grayscale hover:grayscale-0 transition-all duration-1000"
+              />
+            </div>
           </div>
-        </motion.div>
-      </div>
-    </PageTransition>
+        
+          <Separator className="my-20 bg-black/10" />
+        
+          {/* WORK EXPERIENCE */}
+          <div data-scroll data-scroll-speed="1">
+            <h2 className="text-4xl md:text-6xl font-black tracking-tighter uppercase mb-16">
+              Experience <span className="text-orange-600">Log</span>
+            </h2>
+            
+            <div className="space-y-16">
+              {experiences.map((exp, index) => (
+                <div 
+                  key={index}
+                  className="grid md:grid-cols-[250px_1fr] gap-8 group"
+                >
+                  <div className="font-mono text-sm flex flex-col gap-2">
+                    <span className="text-orange-500 font-black tracking-[0.2em] uppercase">0{index + 1}</span>
+                    <span className="text-slate-400">[{exp.period}]</span>
+                  </div>
+                  <div className="border-l-2 border-black/10 pl-10 group-hover:border-orange-500 transition-all">
+                    <h3 className="text-3xl font-black tracking-tight uppercase group-hover:text-orange-600 transition-colors">
+                      {exp.role}
+                    </h3>
+                    <p className="text-slate-400 font-mono text-sm mb-4 uppercase">{exp.company}</p>
+                    <p className="text-slate-600 text-lg leading-relaxed max-w-3xl">{exp.description}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </PageTransition>
+    </div>
   );
 }

@@ -1,9 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { motion } from "framer-motion";
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
 import { ProjectCard } from "@/components/project-card";
 import { ArrowRight } from "lucide-react";
 
@@ -42,6 +41,43 @@ const featuredProjects = [
   }
 ];
 
+// Magnetic Button with Touch Support fallbacks
+const MagneticButton = ({ children, size = "default", onClick }: { children: React.ReactNode; size?: "default" | "sm"; onClick?: () => void }) => {
+  const ref = useRef<HTMLButtonElement>(null);
+  const [position, setPosition] = useState({ x: 0, y: 0 });
+
+  const handleMouse = (e: React.MouseEvent<HTMLButtonElement>) => {
+    if (!ref.current) return;
+    const { clientX, clientY } = e;
+    const { height, width, left, top } = ref.current.getBoundingClientRect();
+    const middleX = clientX - (left + width / 2);
+    const middleY = clientY - (top + height / 2);
+    setPosition({ x: middleX * 0.25, y: middleY * 0.25 });
+  };
+
+  const reset = () => {
+    setPosition({ x: 0, y: 0 });
+  };
+
+  const { x, y } = position;
+  const sizeClasses = size === "sm" ? "px-4 py-2 text-sm" : "w-full md:w-auto px-8 py-4";
+  
+  return (
+    <motion.button
+      ref={ref}
+      onMouseMove={handleMouse}
+      onMouseLeave={reset}
+      animate={{ x, y }}
+      transition={{ type: "spring", stiffness: 150, damping: 15, mass: 0.1 }}
+      onClick={onClick}
+      className={`group relative ${sizeClasses} bg-neutral-900 rounded-full overflow-hidden shadow-xl`}
+    >
+      <div className="absolute inset-0 bg-orange-500 translate-y-[101%] group-hover:translate-y-0 transition-transform duration-300 ease-in-out" />
+      <div className="flex justify-center items-center relative z-10">{children}</div>
+    </motion.button>
+  );
+};
+
 export function ProjectsShowcase() {
   const [activeCategory, setActiveCategory] = useState("All");
 
@@ -79,15 +115,11 @@ export function ProjectsShowcase() {
             className="flex flex-wrap gap-2"
           >
             {categories.map((category, index) => (
-              <Button
-                key={index}
-                variant={activeCategory === category ? "default" : "outline"}
-                onClick={() => setActiveCategory(category)}
-                size="sm"
-                className="transition-all duration-300"
-              >
-                {category}
-              </Button>
+              <MagneticButton key={index} size="sm" onClick={() => setActiveCategory(category)}>
+                <span className="text-white font-bold tracking-wide text-sm">
+                  {category}
+                </span>
+              </MagneticButton>
             ))}
           </motion.div>
         </div>
@@ -115,12 +147,12 @@ export function ProjectsShowcase() {
           transition={{ duration: 0.4, delay: 0.4 }}
           className="flex justify-center"
         >
-          <Button asChild size="lg" variant="outline" className="group">
-            <Link href="/projects">
+          <MagneticButton>
+            <Link href="/projects" className="flex items-center gap-2 text-white font-bold tracking-wide text-sm md:text-base">
               View All Projects
-              <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover:translate-x-1" />
+              <ArrowRight size={18} />
             </Link>
-          </Button>
+          </MagneticButton>
         </motion.div>
       </div>
     </section>

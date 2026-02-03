@@ -1,12 +1,14 @@
 "use client";
 
-import { memo, useCallback, useState } from "react";
+import { memo, useCallback, useState, useRef, useEffect } from "react";
 import Image from "next/image";
-import { ArrowLeft, X } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
-import { Dialog, DialogContent } from "@/components/ui/dialog";
+import { ArrowLeft, ExternalLink, Github, X, Calendar, User, Briefcase, Terminal, Target, Rocket } from "lucide-react";
+import { motion, AnimatePresence, useScroll, useTransform } from "framer-motion";
+
+// UI Components
+import { Button } from "@/components/ui/button";
+import { Badge } from "@/components/ui/badge";
 
 interface ProjectClientProps {
   project: {
@@ -30,172 +32,245 @@ interface ProjectClientProps {
 
 function ProjectClientComponent({ project }: ProjectClientProps) {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
-
-  const handleDemoClick = useCallback(() => {
-    if (project.demoUrl) {
-      window.open(project.demoUrl, "_blank", "noopener,noreferrer");
-    }
-  }, [project.demoUrl]);
-
-  const handleGithubClick = useCallback(() => {
-    if (project.githubUrl) {
-      window.open(project.githubUrl, "_blank", "noopener,noreferrer");
-    }
-  }, [project.githubUrl]);
+  const [isMounted, setIsMounted] = useState(false);
+  const containerRef = useRef<HTMLDivElement>(null);
+  
+  // Always call hooks at the top level
+  const scrollY = useScroll();
+  const y1 = useTransform(scrollY.scrollY, [0, 500], [0, 200]);
+  const opacity = useTransform(scrollY.scrollY, [0, 400], [1, 0]);
+  
+  // Handle client-side mounting
+  useEffect(() => {
+    setIsMounted(true);
+    
+    // Force scroll to top
+    window.scrollTo(0, 0);
+    
+    // Remove any scroll locks that might be applied
+    document.body.style.overflow = '';
+    document.body.style.position = '';
+    document.body.style.top = '';
+    document.body.style.left = '';
+    document.body.style.width = '';
+    document.documentElement.style.overflow = '';
+    document.documentElement.style.position = '';
+    
+    // Ensure scrolling is enabled
+    document.body.classList.remove('overflow-hidden');
+    document.documentElement.classList.remove('overflow-hidden');
+    
+    // Add scroll event listener to ensure scroll works
+    const enableScroll = () => {
+      document.body.style.overflow = 'visible';
+      document.documentElement.style.overflow = 'visible';
+    };
+    
+    enableScroll();
+    
+    // Double-check after a short delay
+    const timeoutId = setTimeout(enableScroll, 100);
+    
+    return () => {
+      clearTimeout(timeoutId);
+    };
+  }, []);
 
   return (
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-      className="container max-w-6xl py-12"
-    >
-      <Button asChild variant="ghost" className="mb-8 group">
-        <Link href="/projects">
-          <ArrowLeft className="mr-2 h-4 w-4 transition-transform group-hover:-translate-x-1" />
-          Back to Projects
-        </Link>
-      </Button>
-
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.2 }}
-        className="grid gap-8 lg:grid-cols-2"
-      >
-        <div className="relative h-[400px] rounded-lg overflow-hidden">
-          <Image
-            src={project.image}
-            alt={project.title}
-            fill
-            sizes="(max-width: 768px) 100vw, 50vw"
-            priority
-            className="object-cover"
-          />
-        </div>
-
-        <div>
-          <h1 className="text-4xl font-playfair font-bold mb-4">{project.title}</h1>
-          <p className="text-lg text-muted-foreground mb-4">{project.description}</p>
-
-          {/* Project Metadata */}
-          <div className="mb-6">
-            <p className="text-sm text-muted-foreground">
-              <strong>Category:</strong> {project.category}
-            </p>
-            <p className="text-sm text-muted-foreground">
-              <strong>Year:</strong> {project.year}
-            </p>
-            <p className="text-sm text-muted-foreground">
-              <strong>Client:</strong> {project.client}
-            </p>
-            <p className="text-sm text-muted-foreground">
-              <strong>Role:</strong> {project.role}
-            </p>
+    <div ref={containerRef} className="min-h-screen bg-[#fffcf9] dark:bg-neutral-950 relative isolate selection:bg-orange-200">
+      
+      {/* 1. CINEMATIC HERO SECTION - FIXED FOR WHITE BACKGROUNDS */}
+      <section className="relative h-[65vh] md:h-[85vh] w-full overflow-hidden border-b-2 border-black">
+        {isMounted ? (
+          <motion.div style={{ y: y1 }} className="absolute inset-0">
+            <Image
+              src={project.image}
+              alt={project.title}
+              fill
+              priority
+              className="object-cover scale-105"
+              quality={100}
+            />
+            
+            {/* LAYERED SCRIM: This ensures text visibility on white/bright images */}
+            <div className="absolute inset-0 bg-black/30 z-[5]" /> {/* Global dim */}
+            <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent z-[6]" /> {/* Bottom-up shadow */}
+            <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-transparent h-1/3 z-[6]" /> {/* Top-down shadow for Nav */}
+          </motion.div>
+        ) : (
+          <div className="absolute inset-0">
+            <Image
+              src={project.image}
+              alt={project.title}
+              fill
+              priority
+              className="object-cover scale-105"
+              quality={100}
+            />
+            
+            {/* LAYERED SCRIM: This ensures text visibility on white/bright images */}
+            <div className="absolute inset-0 bg-black/30 z-[5]" /> {/* Global dim */}
+            <div className="absolute inset-0 bg-gradient-to-t from-black via-black/20 to-transparent z-[6]" /> {/* Bottom-up shadow */}
+            <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-transparent to-transparent h-1/3 z-[6]" /> {/* Top-down shadow for Nav */}
           </div>
+        )}
 
-          {/* Challenge */}
-          <h2 className="text-2xl font-semibold mb-2">Challenge</h2>
-          <p className="text-lg mb-6">{project.challenge}</p>
-
-          {/* Solution */}
-          <h2 className="text-2xl font-semibold mb-2">Solution</h2>
-          <p className="text-lg mb-6">{project.solution}</p>
-
-          {/* Results */}
-          <h2 className="text-2xl font-semibold mb-2">Results</h2>
-          <p className="text-lg mb-6">{project.results}</p>
-
-          {/* Technologies */}
-          {project.technologies && project.technologies.length > 0 && (
-            <div className="flex flex-wrap gap-2 mb-8">
-              {project.technologies.map((tech) => (
-                <span
-                  key={tech}
-                  className="px-3 py-1 bg-primary/10 text-primary rounded-full text-sm"
-                >
-                  {tech}
-                </span>
-              ))}
-            </div>
-          )}
-
-          {/* Action Buttons */}
-          <div className="flex gap-4 mb-8">
-            {project.demoUrl && (
-              <Button onClick={handleDemoClick} size="lg">
-                View Demo
-              </Button>
-            )}
-            {project.githubUrl && (
-              <Button onClick={handleGithubClick} variant="outline" size="lg">
-                View Code
-              </Button>
-            )}
-          </div>
-        </div>
-      </motion.div>
-
-      {/* Gallery */}
-      {project.gallery && project.gallery.length > 0 && (
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.4 }}
-          className="mt-12"
-        >
-          <h2 className="text-2xl font-semibold mb-4">Gallery</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">            {project.gallery.map((image, index) => (
-              <motion.div
-                key={index}
-                whileHover={{ scale: 1.02 }}
-                className="relative h-[200px] rounded-lg overflow-hidden cursor-pointer"
-                onClick={() => setSelectedImage(image)}
-              >
-                <Image
-                  src={image}
-                  alt={`${project.title} gallery image ${index + 1}`}
-                  fill
-                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                  className="object-cover transition-transform duration-300"
-                />
-              </motion.div>
-            ))}
-          </div>
-        </motion.div>
-      )}
-
-      {/* Full Screen Image Dialog */}
-      <Dialog open={!!selectedImage} onOpenChange={() => setSelectedImage(null)}>
-        <DialogContent className="max-w-[95vw] max-h-[95vh] p-0 bg-transparent border-none">
-          <Button
-            variant="outline"
-            size="icon"
-            className="absolute right-4 top-4 z-50 rounded-full bg-background/80 backdrop-blur-sm"
-            onClick={() => setSelectedImage(null)}
+        {isMounted ? (
+          <motion.div 
+            style={{ opacity }}
+            className="container relative z-20 h-full flex flex-col justify-end pb-12 md:pb-20 max-w-7xl mx-auto px-6"
           >
-            <X className="h-4 w-4" />
-          </Button>
-          {selectedImage && (
-            <motion.div
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.95 }}
-              className="relative w-full h-[90vh] rounded-lg overflow-hidden"
-            >
-              <Image
-                src={selectedImage}
-                alt="Full screen view"
-                fill
-                priority
-                className="object-contain"
-              />
-            </motion.div>
-          )}
-        </DialogContent>
-      </Dialog>
-    </motion.div>
+            {/* Back Button with Glassmorphism for visibility */}
+            <Button asChild variant="ghost" className="w-fit mb-8 text-white hover:bg-white/20 backdrop-blur-xl border border-white/30 rounded-none font-bold uppercase tracking-widest text-[10px]">
+              <Link href="/projects" className="flex items-center gap-2">
+                <ArrowLeft className="h-4 w-4" />
+                <span>Back to Library</span>
+              </Link>
+            </Button>
+            
+            {/* Category with Rough highlight */}
+            <Badge className="w-fit mb-4 bg-orange-500 text-white border-2 border-black px-4 py-1 rounded-none uppercase italic font-black tracking-tighter shadow-[4px_4px_0px_0px_black]">
+              {project.category}
+            </Badge>
+
+            {/* Title with Text Shadow for extra legibility */}
+            <h1 className="text-5xl md:text-9xl font-black text-white tracking-tighter uppercase leading-[0.85] drop-shadow-[0_4px_12px_rgba(0,0,0,0.5)]">
+              {project.title}
+            </h1>
+          </motion.div>
+        ) : (
+          <div 
+            className="container relative z-20 h-full flex flex-col justify-end pb-12 md:pb-20 max-w-7xl mx-auto px-6"
+          >
+            {/* Back Button with Glassmorphism for visibility */}
+            <Button asChild variant="ghost" className="w-fit mb-8 text-white hover:bg-white/20 backdrop-blur-xl border border-white/30 rounded-none font-bold uppercase tracking-widest text-[10px]">
+              <Link href="/projects" className="flex items-center gap-2">
+                <ArrowLeft className="h-4 w-4" />
+                <span>Back to Library</span>
+              </Link>
+            </Button>
+            
+            {/* Category with Rough highlight */}
+            <Badge className="w-fit mb-4 bg-orange-500 text-white border-2 border-black px-4 py-1 rounded-none uppercase italic font-black tracking-tighter shadow-[4px_4px_0px_0px_black]">
+              {project.category}
+            </Badge>
+
+            {/* Title with Text Shadow for extra legibility */}
+            <h1 className="text-5xl md:text-9xl font-black text-white tracking-tighter uppercase leading-[0.85] drop-shadow-[0_4px_12px_rgba(0,0,0,0.5)]">
+              {project.title}
+            </h1>
+          </div>
+        )}
+      </section>
+
+      {/* 2. BLUEPRINT SIDEBAR & NARRATIVE GRID */}
+      <main className="container relative z-30 max-w-7xl mx-auto px-6 py-12">
+        <div className="flex flex-col lg:grid lg:grid-cols-12 gap-12 lg:gap-20 items-start">
+          
+          {/* SIDEBAR (Responsive Order) */}
+          <aside className="w-full lg:col-span-4 lg:sticky lg:top-12 order-last lg:order-first space-y-8 mt-12 lg:mt-0">
+            <div className="bg-white border-2 border-black p-8 shadow-[8px_8px_0px_0px_rgba(251,146,60,1)]">
+              <h3 className="font-black uppercase tracking-widest text-sm mb-8 flex items-center gap-2 border-b-2 border-black pb-4">
+                <Terminal className="w-4 h-4 text-orange-500" /> System_Specs
+              </h3>
+              
+              <div className="space-y-6 mb-10">
+                <DetailRow label="Client" value={project.client} />
+                <DetailRow label="Timeline" value={project.year} />
+                <DetailRow label="My_Role" value={project.role} />
+              </div>
+
+              <div className="space-y-4 mb-10">
+                <p className="text-[10px] font-mono uppercase tracking-[0.3em] text-neutral-400 font-bold">Tech_Stack</p>
+                <div className="flex flex-wrap gap-2">
+                  {project.technologies?.map(tech => (
+                    <span key={tech} className="px-3 py-1 bg-neutral-100 border border-black/10 text-[10px] font-bold uppercase">
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+              </div>
+
+              <div className="flex flex-col gap-3">
+                <Button onClick={() => window.open(project.demoUrl, '_blank')} className="w-full bg-orange-500 hover:bg-black text-white font-black uppercase tracking-tighter rounded-none h-14 border-2 border-black transition-all shadow-[4px_4px_0px_0px_black] active:shadow-none active:translate-x-1 active:translate-y-1">
+                  Launch Live Demo <ExternalLink className="ml-2 h-4 w-4" />
+                </Button>
+              </div>
+            </div>
+          </aside>
+
+          {/* CONTENT NARRATIVE */}
+          <div className="w-full lg:col-span-8 space-y-24 order-first lg:order-last">
+            <section className="space-y-6">
+              <div className="flex items-center gap-4">
+                <div className="h-[2px] w-12 bg-orange-500" />
+                <h2 className="text-xs font-mono uppercase tracking-[0.4em] text-neutral-400">01 // The Problem</h2>
+              </div>
+              <h3 className="text-3xl md:text-5xl font-black uppercase tracking-tighter leading-tight">Solving the digital <span className="text-orange-500">bottleneck.</span></h3>
+              <p className="text-xl text-neutral-600 leading-relaxed font-medium">
+                {project.challenge}
+              </p>
+            </section>
+
+            {/* STRATEGY CARDS */}
+            <div className="grid md:grid-cols-2 gap-8">
+              <div className="p-10 bg-orange-50 border-2 border-orange-100">
+                <Target className="w-8 h-8 text-orange-600 mb-6" />
+                <h4 className="text-xl font-black uppercase mb-4 tracking-tighter">Strategic Solution</h4>
+                <p className="text-neutral-600 font-serif italic text-lg leading-relaxed">
+                  {project.solution}
+                </p>
+              </div>
+              <div className="p-10 bg-[#1a1a1a] text-white">
+                <Rocket className="w-8 h-8 text-orange-400 mb-6" />
+                <h4 className="text-xl font-black uppercase mb-4 tracking-tighter text-orange-400">Key Results</h4>
+                <p className="text-neutral-400 font-mono text-sm leading-relaxed">
+                  {project.results}
+                </p>
+              </div>
+            </div>
+
+            {/* ACTION BUTTONS */}
+            <section className="mt-20 space-y-8">
+              <div className="flex items-center gap-4">
+                <div className="h-[2px] w-12 bg-orange-500" />
+                <h2 className="text-xs font-mono uppercase tracking-[0.4em] text-neutral-400">02 // Take Action</h2>
+              </div>
+              
+              <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
+                <Button 
+                  onClick={() => window.open(project.demoUrl, '_blank')} 
+                  className="w-full sm:w-auto bg-orange-500 hover:bg-black text-white font-black uppercase tracking-tighter rounded-none h-16 px-12 border-2 border-black transition-all shadow-[6px_6px_0px_0px_black] hover:shadow-[8px_8px_0px_0px_black] active:shadow-none active:translate-x-1 active:translate-y-1 text-lg"
+                >
+                  <ExternalLink className="mr-3 h-5 w-5" />
+                  See Live Project
+                </Button>
+                
+                <Button 
+                  onClick={() => window.open('https://calendly.com/your-username/consultation', '_blank')} 
+                  className="w-full sm:w-auto bg-black hover:bg-orange-500 text-white font-black uppercase tracking-tighter rounded-none h-16 px-12 border-2 border-black transition-all shadow-[6px_6px_0px_0px_black] hover:shadow-[8px_8px_0px_0px_black] hover:text-white active:shadow-none active:translate-x-1 active:translate-y-1 text-lg"
+                >
+                  <Rocket className="mr-3 h-5 w-5" />
+                  Start a Project
+                </Button>
+              </div>
+              
+              <p className="text-center text-neutral-500 text-sm mt-6">
+                Ready to bring your ideas to life? Let&rsquo;s collaborate on something amazing.
+              </p>
+            </section>
+          </div>
+        </div>
+      </main>
+    </div>
   );
 }
+
+const DetailRow = ({ label, value }: { label: string, value: string }) => (
+  <div className="flex justify-between items-center border-b border-neutral-100 pb-2">
+    <span className="text-neutral-400 font-mono text-[10px] uppercase">{label}</span>
+    <span className="font-bold text-xs uppercase tracking-tight">{value}</span>
+  </div>
+);
 
 export const ProjectClient = memo(ProjectClientComponent);
