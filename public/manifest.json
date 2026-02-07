@@ -1,0 +1,35 @@
+{
+  "name": "Aman Kumar | Best MERN Stack Developer & Modern Portfolio",
+  "short_name": "Aman Kumar",
+  "description": "Expert MERN Stack Developer creating modern, high-performance web applications. Best portfolio showcasing React, Node.js, MongoDB projects.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#FDFCFB",
+  "theme_color": "#f97316",
+  "orientation": "portrait-primary",
+  "categories": ["portfolio", "developer", "web development", "technology"],
+  "lang": "en",
+  "scope": "/",
+  "icons": [
+    {
+      "src": "/tab-icon.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/tab-icon.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "/about-image.png",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "form_factor": "wide"
+    }
+  ]
+}

@@ -1,4 +1,5 @@
 import "./globals.css";
+import "./performance.css";
 import "locomotive-scroll/dist/locomotive-scroll.css";
 import type { Metadata } from "next";
 import { Playfair_Display } from "next/font/google";
@@ -48,18 +49,85 @@ const items = [
   ];
 export const metadata: Metadata = {
   title: {
-    default: "Aman Kumar | MERN Stack Developer",
-    template: "%s | Aman Kumar",
+    default: "Aman Kumar | Best MERN Stack Developer & Modern Portfolio",
+    template: "%s | Aman Kumar - Full Stack Developer",
   },
-  description: "MERN Stack Developer specialized in building modern web applications",
-  metadataBase: new URL("https://your-website.com"),
+  description: "Aman Kumar - Expert MERN Stack Developer creating modern, high-performance web applications. Best portfolio showcasing React, Node.js, MongoDB projects. Hire top freelance developer.",
+  keywords: [
+    "Aman Kumar",
+    "MERN stack developer",
+    "best portfolio",
+    "modern portfolio",
+    "React developer",
+    "Node.js developer",
+    "full stack developer",
+    "MongoDB expert",
+    "Next.js developer",
+    "TypeScript developer",
+    "web developer",
+    "freelance developer",
+    "portfolio website",
+    "best web portfolio",
+    "modern web design",
+    "full stack development",
+    "React.js",
+    "Express.js",
+    "JavaScript developer"
+  ],
+  authors: [{ name: "Aman Kumar", url: "https://github.com/Amankumar-007" }],
+  creator: "Aman Kumar",
+  publisher: "Aman Kumar",
+  metadataBase: new URL("https://amankumarr.in"),
+  alternates: {
+    canonical: "/",
+  },
+  icons: {
+    icon: [
+      { url: "/tab-icon.png", sizes: "32x32", type: "image/png" },
+      { url: "/tab-icon.png", sizes: "16x16", type: "image/png" },
+      { url: "/tab-icon.png", sizes: "192x192", type: "image/png" },
+    ],
+    apple: [
+      { url: "/tab-icon.png", sizes: "180x180", type: "image/png" },
+    ],
+  },
+  manifest: "/manifest.json",
   openGraph: {
     type: "website",
     locale: "en_US",
-    url: "https://your-website.com",
-    title: "Aman Kumar | MERN Stack Developer",
-    description: "MERN Stack Developer specialized in building modern web applications",
-    siteName: "Aman Kumar Portfolio",
+    url: "https://amankumarr.in",
+    title: "Aman Kumar | Best MERN Stack Developer & Modern Portfolio",
+    description: "Expert MERN Stack Developer creating modern, high-performance web applications. Best portfolio showcasing React, Node.js, MongoDB projects. Hire top freelance developer.",
+    siteName: "Aman Kumar Portfolio - Best Modern Portfolio",
+    images: [
+      {
+        url: "/about-image.png",
+        width: 1200,
+        height: 630,
+        alt: "Aman Kumar - MERN Stack Developer Portfolio",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Aman Kumar | Best MERN Stack Developer & Modern Portfolio",
+    description: "Expert MERN Stack Developer creating modern, high-performance web applications. Best portfolio showcasing React, Node.js, MongoDB projects.",
+    images: ["/about-image.png"],
+    creator: "@amankumarweb",
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
+  verification: {
+    google: "your-google-verification-code",
   },
 };
 
@@ -70,7 +138,24 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <head />
+      <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+        <meta name="theme-color" content="#f97316" />
+        <meta name="msapplication-TileColor" content="#f97316" />
+        <meta name="application-name" content="Aman Kumar Portfolio" />
+        <meta name="apple-mobile-web-app-title" content="Aman Kumar" />
+        <meta name="apple-mobile-web-app-capable" content="yes" />
+        <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+        <meta name="mobile-web-app-capable" content="yes" />
+        <meta name="referrer" content="origin-when-cross-origin" />
+        <meta name="format-detection" content="telephone=no" />
+        <meta name="geo.region" content="IN" />
+        <meta name="geo.placename" content="India" />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
+        <link rel="dns-prefetch" href="//github.com" />
+        <link rel="dns-prefetch" href="//linkedin.com" />
+      </head>
       <body className={playfair.variable}>
       <ThemeProvider
             attribute="class"

@@ -7,6 +7,7 @@ import { Separator } from "@/components/ui/separator";
 import { PageTransition } from "@/components/page-transition";
 import { useEffect, useState, useRef } from 'react';
 import { Terminal, Code2, Cpu, Globe } from "lucide-react";
+import Head from 'next/head';
 
 // Categorized Skills for better organization
 const skillCategories = [
@@ -73,42 +74,70 @@ const experiences = [
 export default function AboutPage() {
   const [isLoading, setIsLoading] = useState(true);
   const containerRef = useRef(null);
+  const scrollRef = useRef<any>(null);
 
   useEffect(() => {
-    (async () => {
+    let scroll: any = null;
+    
+    const initScroll = async () => {
       try {
         const LocomotiveScroll = (await import('locomotive-scroll')).default;
-        const locomotiveScroll = new LocomotiveScroll({
+        scroll = new LocomotiveScroll({
           el: containerRef.current as unknown as HTMLElement,
           smooth: true,
-          multiplier: 1,
-          lerp: 0.1,
+          multiplier: 0.9, // Optimized for responsiveness
+          lerp: 0.15, // Better smoothing
         });
+        scrollRef.current = scroll;
 
         setTimeout(() => {
           setIsLoading(false);
           document.body.style.cursor = 'default';
           window.scrollTo(0, 0);
-        }, 2000);
+        }, 1200); // Reduced from 2000ms
 
         return () => {
-          if (locomotiveScroll) locomotiveScroll.destroy();
+          if (scroll) scroll.destroy();
         };
       } catch (error) {
         console.error('Error loading LocomotiveScroll:', error);
         setIsLoading(false);
       }
-    })();
+    };
+
+    initScroll();
+
+    return () => {
+      if (scrollRef.current) {
+        scrollRef.current.destroy();
+      }
+    };
   }, []);
 
   return (
+    <>
+      <Head>
+        <title>About | Aman Kumar - MERN Stack Developer</title>
+        <meta name="description" content="Learn about Aman Kumar, expert MERN stack developer. Discover skills in React, Node.js, MongoDB, TypeScript. Professional full-stack development experience." />
+        <meta name="keywords" content="Aman Kumar about, MERN stack developer, React developer, Node.js developer, full stack developer, TypeScript expert, MongoDB developer, web developer profile" />
+        <meta property="og:title" content="About | Aman Kumar - MERN Stack Developer" />
+        <meta property="og:description" content="Learn about Aman Kumar, expert MERN stack developer. Discover skills in React, Node.js, MongoDB, TypeScript." />
+        <meta property="og:url" content="https://amankumarr.in/about" />
+        <meta property="og:image" content="https://amankumarr.in/about-image.png" />
+        <meta property="og:type" content="website" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="About | Aman Kumar - MERN Stack Developer" />
+        <meta name="twitter:description" content="Learn about Aman Kumar, expert MERN stack developer. Discover skills in React, Node.js, MongoDB." />
+        <meta name="twitter:image" content="https://amankumarr.in/about-image.png" />
+        <link rel="canonical" href="https://amankumarr.in/about" />
+      </Head>
     <div 
       ref={containerRef} 
       data-scroll-container 
       className="relative min-h-screen bg-[#fffcf9] text-[#1a1a1a] selection:bg-orange-500 selection:text-white"
     >
-      {/* --- ROUGH GRAIN OVERLAY --- */}
-      <svg className="fixed inset-0 w-full h-full pointer-events-none z-[100] opacity-[0.25] contrast-150 mix-blend-multiply">
+      {/* --- OPTIMIZED ROUGH GRAIN OVERLAY --- */}
+      <svg className="fixed inset-0 w-full h-full pointer-events-none z-[100] opacity-[0.25] contrast-150 mix-blend-multiply will-change-transform">
         <filter id="roughNoise">
           <feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="4" stitchTiles="stitch" />
           <feColorMatrix type="saturate" values="0" />
@@ -204,5 +233,6 @@ export default function AboutPage() {
         </div>
       </PageTransition>
     </div>
+    </>
   );
 }

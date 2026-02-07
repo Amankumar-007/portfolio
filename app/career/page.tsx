@@ -4,6 +4,7 @@ import { useState, useRef, useEffect } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { PageTransition } from "@/components/page-transition";
 import { Terminal, ArrowRight, Zap, Layers, Microscope, History } from "lucide-react";
+import Head from 'next/head';
 
 const JOURNEY_DATA = [
   {
@@ -31,28 +32,59 @@ const JOURNEY_DATA = [
 
 export default function LearningJourney() {
   const containerRef = useRef(null);
+  const scrollRef = useRef<any>(null);
   const { scrollYProgress } = useScroll();
   const xTranslate = useTransform(scrollYProgress, [0, 1], [0, -500]);
 
   useEffect(() => {
-    (async () => {
-      const LocomotiveScroll = (await import('locomotive-scroll')).default;
-      const scroll = new LocomotiveScroll({
-        el: containerRef.current as any,
-        smooth: true,
-        multiplier: 1,
-        lerp: 0.1,
-        smartphone: { smooth: true },
-      });
-      return () => scroll.destroy();
-    })();
+    let scroll: any = null;
+    
+    const initScroll = async () => {
+      try {
+        const LocomotiveScroll = (await import('locomotive-scroll')).default;
+        scroll = new LocomotiveScroll({
+          el: containerRef.current as any,
+          smooth: true,
+          multiplier: 0.9, // Optimized for responsiveness
+          lerp: 0.15, // Better smoothing
+        });
+        scrollRef.current = scroll;
+        return () => scroll.destroy();
+      } catch (error) {
+        console.error('Error loading LocomotiveScroll:', error);
+      }
+    };
+
+    initScroll();
+
+    return () => {
+      if (scrollRef.current) {
+        scrollRef.current.destroy();
+      }
+    };
   }, []);
 
   return (
+    <>
+      <Head>
+        <title>Career Journey | Aman Kumar - Developer Path</title>
+        <meta name="description" content="Follow Aman Kumar's career journey as a MERN stack developer. From beginner to expert full-stack developer. Learn about the path to modern web development." />
+        <meta name="keywords" content="Aman Kumar career, developer journey, MERN stack path, full stack developer career, React developer growth, web development career, programming journey" />
+        <meta property="og:title" content="Career Journey | Aman Kumar - Developer Path" />
+        <meta property="og:description" content="Follow Aman Kumar's career journey as a MERN stack developer. From beginner to expert full-stack developer." />
+        <meta property="og:url" content="https://amankumarr.in/career" />
+        <meta property="og:image" content="https://amankumarr.in/about-image.png" />
+        <meta property="og:type" content="website" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Career Journey | Aman Kumar - Developer Path" />
+        <meta name="twitter:description" content="Follow Aman Kumar's career journey as a MERN stack developer." />
+        <meta name="twitter:image" content="https://amankumarr.in/about-image.png" />
+        <link rel="canonical" href="https://amankumarr.in/career" />
+      </Head>
     <div ref={containerRef} data-scroll-container className="relative min-h-screen bg-[#fffcf9] text-[#1a1a1a] selection:bg-orange-500 overflow-x-hidden">
       
-      {/* ROUGH NOISE OVERLAY */}
-      <svg className="fixed inset-0 w-full h-full pointer-events-none z-[100] opacity-[0.22] contrast-150 mix-blend-multiply">
+      {/* OPTIMIZED ROUGH NOISE OVERLAY */}
+      <svg className="fixed inset-0 w-full h-full pointer-events-none z-[100] opacity-[0.22] contrast-150 mix-blend-multiply will-change-transform">
         <filter id="roughNoise"><feTurbulence type="fractalNoise" baseFrequency="0.9" numOctaves="4" /></filter>
         <rect width="100%" height="100%" filter="url(#roughNoise)" />
       </svg>
@@ -165,7 +197,6 @@ export default function LearningJourney() {
         </div>
       </PageTransition>
     </div>
+    </>
   );
 }
-
-

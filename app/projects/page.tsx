@@ -3,11 +3,13 @@
 import React, { useState, useEffect, useRef, useMemo, useCallback } from 'react';
 import { useCursor } from '@/components/Cursor';
 import { useRouter } from 'next/navigation';
+import Head from 'next/head';
 import FAQ from '@/components/Faq';
 import ProjectTimeline from '@/components/ProjectTimeline';
 import { VideoThumbnail } from '@/components/VideoThumbnail';
 import { getAllProjects } from '@/data/projects';
 import { ArrowUpRight, Terminal, Hash, Layers } from 'lucide-react';
+import ErrorBoundary from '@/components/ErrorBoundary';
 
 interface ProjectCardProps {
   project: any;
@@ -24,7 +26,7 @@ const ProjectCard = React.memo<ProjectCardProps>(({ project, index }) => {
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting) setIsVisible(true);
+        if (entry?.isIntersecting) setIsVisible(true);
       },
       { threshold: 0.1, rootMargin: '20px' }
     );
@@ -43,6 +45,12 @@ const ProjectCard = React.memo<ProjectCardProps>(({ project, index }) => {
     setCursorHover(false);
   }, [setCursorHover]);
 
+  // Safe fallback for missing project data
+  const projectTitle = project?.title || 'Untitled Project';
+  const projectDescription = project?.description || 'No description available';
+  const projectScreenshots = project?.screenshots || [];
+  const firstScreenshot = projectScreenshots[0]?.url || 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=600&fit=crop';
+
   return (
     <div
       ref={cardRef}
@@ -54,12 +62,12 @@ const ProjectCard = React.memo<ProjectCardProps>(({ project, index }) => {
         className="relative mb-6 overflow-hidden bg-white border-2 border-black aspect-[16/10] group cursor-pointer shadow-[6px_6px_0px_0px_rgba(0,0,0,1)] hover:shadow-[12px_12px_0px_0px_rgba(251,146,60,1)] hover:-translate-x-1 hover:-translate-y-1 transition-all duration-500"
         onMouseEnter={handleMouseEnter}
         onMouseLeave={handleMouseLeave}
-        onClick={() => router.push(`/projects/${project.id}`)}
+        onClick={() => project?.id && router.push(`/projects/${project.id}`)}
       >
         <VideoThumbnail
-          videoSrc={project.video}
-          posterSrc={project.screenshots[0]?.url || 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800&h=600&fit=crop'}
-          alt={project.title}
+          videoSrc={project?.video}
+          posterSrc={firstScreenshot}
+          alt={projectTitle}
           className="w-full h-full object-cover"
           isHovered={isHovered}
         />
@@ -73,12 +81,12 @@ const ProjectCard = React.memo<ProjectCardProps>(({ project, index }) => {
       <div className="space-y-2 px-1">
         <div className="flex justify-between items-start">
           <h3 className="text-2xl font-black uppercase tracking-tighter leading-none group-hover:text-orange-500 transition-colors">
-            {project.title}
+            {projectTitle}
           </h3>
           <Hash className="text-orange-500 w-4 h-4 opacity-40" />
         </div>
         <p className="text-sm font-medium text-gray-500 leading-snug italic font-serif max-w-[90%]">
-          {project.description}
+          {projectDescription}
         </p>
       </div>
     </div>
@@ -89,27 +97,89 @@ ProjectCard.displayName = 'ProjectCard';
 
 const ProjectsPage = () => {
   const containerRef = useRef(null);
+  const scrollRef = useRef<any>(null);
 
   useEffect(() => {
-    (async () => {
-      const LocomotiveScroll = (await import('locomotive-scroll')).default;
-      const scroll = new LocomotiveScroll({
-        el: containerRef.current as any,
-        smooth: true,
-        multiplier: 0.85,
-        lerp: 0.1,
-      });
-      return () => scroll.destroy();
-    })();
+    let scroll: any = null;
+    
+    const initScroll = async () => {
+      try {
+        const LocomotiveScroll = (await import('locomotive-scroll')).default;
+        scroll = new LocomotiveScroll({
+          el: containerRef.current as any,
+          smooth: true,
+          multiplier: 0.9, // Slightly higher for better responsiveness
+          lerp: 0.15, // Optimized for smoother feel
+        });
+        scrollRef.current = scroll;
+        return () => scroll.destroy();
+      } catch (error) {
+        console.error('Error loading LocomotiveScroll:', error);
+      }
+    };
+
+    initScroll();
+
+    return () => {
+      if (scrollRef.current) {
+        scrollRef.current.destroy();
+      }
+    };
   }, []);
 
-  const projects = useMemo(() => getAllProjects(), []);
+  const projects = useMemo(() => getAllProjects() || [], []);
 
   return (
+    <ErrorBoundary>
+      <>
+        <Head>
+        <title>Projects | Best MERN Stack Projects - Aman Kumar</title>
+        <meta name="description" content="Explore Aman Kumar's best MERN stack projects. Modern web applications built with React, Node.js, MongoDB, and Express.js. Full-stack development showcase." />
+        <meta name="keywords" content="Aman Kumar projects, MERN stack projects, React projects, Node.js applications, MongoDB projects, full stack development, web applications, modern portfolio projects" />
+        <meta property="og:title" content="Projects | Best MERN Stack Projects - Aman Kumar" />
+        <meta property="og:description" content="Explore Aman Kumar's best MERN stack projects. Modern web applications built with React, Node.js, MongoDB, and Express.js." />
+        <meta property="og:url" content="https://amankumarr.in/projects" />
+        <meta property="og:image" content="https://amankumarr.in/about-image.png" />
+        <meta property="og:type" content="website" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Projects | Best MERN Stack Projects - Aman Kumar" />
+        <meta name="twitter:description" content="Explore Aman Kumar's best MERN stack projects. Modern web applications built with React, Node.js, MongoDB." />
+        <meta name="twitter:image" content="https://amankumarr.in/about-image.png" />
+        <link rel="canonical" href="https://amankumarr.in/projects" />
+        
+        {/* Structured Data */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "CollectionPage",
+              "name": "Aman Kumar's Projects",
+              "description": "Explore Aman Kumar's best MERN stack projects. Modern web applications built with React, Node.js, MongoDB, and Express.js.",
+              "url": "https://amankumarr.in/projects",
+              "mainEntity": {
+                "@type": "ItemList",
+                "itemListElement": projects?.map((project, index) => ({
+                  "@type": "CreativeWork",
+                  "position": index + 1,
+                  "name": project?.title || 'Untitled Project',
+                  "description": project?.description || 'No description available',
+                  "url": project?.id ? `https://amankumarr.in/projects/${project.id}` : 'https://amankumarr.in/projects'
+                })) || []
+              },
+              "author": {
+                "@type": "Person",
+                "name": "Aman Kumar",
+                "url": "https://amankumarr.in"
+              }
+            })
+          }}
+        />
+      </Head>
     <div ref={containerRef} data-scroll-container className="relative min-h-screen bg-[#fffcf9] text-[#1a1a1a] selection:bg-orange-500 overflow-x-hidden">
       
-      {/* ROUGH NOISE ENGINE */}
-      <svg className="fixed inset-0 w-full h-full pointer-events-none z-[100] opacity-[0.20] contrast-150 mix-blend-multiply">
+      {/* OPTIMIZED ROUGH NOISE ENGINE */}
+      <svg className="fixed inset-0 w-full h-full pointer-events-none z-[100] opacity-[0.20] contrast-150 mix-blend-multiply will-change-transform">
         <filter id="roughNoise"><feTurbulence type="fractalNoise" baseFrequency="0.8" numOctaves="4" /></filter>
         <rect width="100%" height="100%" filter="url(#roughNoise)" />
       </svg>
@@ -132,9 +202,9 @@ const ProjectsPage = () => {
         {/* PROJECTS GRID */}
         <main className="pb-24">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-x-14 gap-y-14 md:gap-y-24">
-            {projects.map((project, index) => (
+            {projects?.map((project, index) => (
               <div 
-                key={project.id} 
+                key={project?.id || `project-${index}`} 
                 className={index % 2 === 1 ? 'md:mt-16' : ''}
                 data-scroll
                 data-scroll-speed={index % 2 === 1 ? "0.6" : "1"}
@@ -165,8 +235,10 @@ const ProjectsPage = () => {
             </div>
           </div>
         </section>
-      </div> 
-    </div> 
+      </div>
+    </div>
+    </>
+    </ErrorBoundary>
   );
 };
 
