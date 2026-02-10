@@ -155,6 +155,18 @@ export default function RootLayout({
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link rel="dns-prefetch" href="//github.com" />
         <link rel="dns-prefetch" href="//linkedin.com" />
+        {/* Google tag (gtag.js) */}
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-ELW5X4DQ5Q"></script>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', 'G-ELW5X4DQ5Q');
+            `,
+          }}
+        />
       </head>
       <body className={playfair.variable}>
       <ThemeProvider
