@@ -33,17 +33,17 @@ const Hero = () => {
 
   return (
     <div ref={ref} className="relative w-full min-h-screen bg-[#FDFCFB] text-neutral-900 overflow-hidden selection:bg-orange-200 selection:text-orange-900 flex flex-col">
-      
+
       {/* --- Background Elements --- */}
 
       {/* 1. Grain Overlay */}
-      <div className="absolute inset-0 opacity-[0.12] pointer-events-none z-40 mix-blend-multiply" 
-           style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")` }}>
+      <div className="absolute inset-0 opacity-[0.12] pointer-events-none z-40 mix-blend-multiply"
+        style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")` }}>
       </div>
 
       {/* 2. Animated Gradient Orb */}
       <div className="absolute top-[-10%] right-[-10%] md:top-1/2 md:left-1/2 md:-translate-x-1/2 md:-translate-y-1/2 z-0 pointer-events-none">
-        <motion.div 
+        <motion.div
           className="w-[80vw] h-[80vw] md:w-[60vw] md:h-[60vw] rounded-full blur-[80px] md:blur-[100px] opacity-40 will-change-transform"
           style={{
             background: 'conic-gradient(from 90deg at 50% 50%, #FFD700, #FF8C00, #FF4500, #FFD700)',
@@ -61,9 +61,9 @@ const Hero = () => {
 
       {/* --- Content Container --- */}
       <div className="relative z-10 container mx-auto px-4 md:px-6 flex-grow flex flex-col justify-center pt-20 md:pt-0">
-        
+
         {/* Top Bar / Status */}
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
@@ -81,18 +81,18 @@ const Hero = () => {
 
         {/* Main Content Area */}
         <div className="relative flex flex-col lg:flex-row lg:items-center justify-between gap-12 lg:gap-0">
-          
+
           {/* Typography Block */}
           <motion.div style={{ y: yText }} className="relative z-20 mt-10 md:mt-0">
             <h1 className="font-black leading-[0.85] tracking-tighter text-neutral-800">
-              
+
               {/* Line 1: AMAN */}
               <RevealAnim delay={0.1}>
                 <span className="block text-[18vw] lg:text-[11rem]">
                   AMAN
                 </span>
               </RevealAnim>
-              
+
               {/* Line 2: Full Stack Developer (The Aesthetic Bridge) */}
               <RevealAnim delay={0.2}>
                 <div className="flex items-center gap-2 md:gap-4 my-2 md:my-0 md:pl-2">
@@ -113,7 +113,7 @@ const Hero = () => {
           </motion.div>
 
           {/* Info Card (Stacks on mobile, floats right on desktop) */}
-          <motion.div 
+          <motion.div
             className="w-full lg:w-auto lg:absolute lg:right-0 lg:top-1/2 lg:-translate-y-1/2 max-w-md backdrop-blur-xl bg-white/30 border border-white/50 shadow-[0_8px_32px_rgba(0,0,0,0.05)] p-6 md:p-8 rounded-3xl z-30"
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
@@ -124,11 +124,11 @@ const Hero = () => {
               <MapPin size={14} />
               Noida, India
             </div>
-            
+
             <p className="text-neutral-700 text-base md:text-lg leading-relaxed font-medium">
-              Creating robust, scalable web applications with the MERN stack. Focused on clean code and interactive user experiences.
+              Creating robust, scalable web applications and SaaS solutions with modern Full Stack technologies. Focused on clean code and premium user experiences.
             </p>
-            
+
             {/* Tech Stack Pills */}
             <div className="flex flex-wrap gap-2 mt-6 mb-8">
               {['React', 'Next.js', 'Node.js', 'Tailwind'].map((tech) => (
@@ -175,8 +175,8 @@ const RevealAnim: React.FC<RevealAnimProps> = ({ children, delay = 0 }) => (
 );
 
 const SocialLink: React.FC<SocialLinkProps> = ({ icon, href }) => (
-  <a 
-    href={href} 
+  <a
+    href={href}
     className="p-2 -m-2 hover:text-orange-600 transition-colors duration-300"
   >
     {icon}
@@ -191,7 +191,7 @@ const MagneticButton: React.FC<MagneticButtonProps> = ({ children, router }) => 
   const handleMouse = (e: React.MouseEvent<HTMLButtonElement>) => {
     const { clientX, clientY } = e;
     if (!ref.current) return;
-    
+
     const { height, width, left, top } = ref.current.getBoundingClientRect();
     const middleX = clientX - (left + width / 2);
     const middleY = clientY - (top + height / 2);
@@ -217,8 +217,8 @@ const MagneticButton: React.FC<MagneticButtonProps> = ({ children, router }) => 
       transition={{ type: "spring", stiffness: 150, damping: 15, mass: 0.1 }}
       className="group relative w-full md:w-auto px-8 py-4 bg-neutral-900 rounded-full overflow-hidden shadow-xl"
     >
-        <div className="absolute inset-0 bg-orange-500 translate-y-[101%] group-hover:translate-y-0 transition-transform duration-300 ease-in-out" />
-        <div className="flex justify-center">{children}</div>
+      <div className="absolute inset-0 bg-orange-500 translate-y-[101%] group-hover:translate-y-0 transition-transform duration-300 ease-in-out" />
+      <div className="flex justify-center">{children}</div>
     </motion.button>
   );
 };

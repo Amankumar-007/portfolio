@@ -6,33 +6,33 @@ import { Palette, Code, LineChart, Layout, Monitor, Sparkles } from "lucide-reac
 const services = [
   {
     icon: <Code className="h-10 w-10" />,
-    title: "MERN Stack Development",
-    description: "Building full-stack web applications using MongoDB, Express.js, React, and Node.js with responsive UI and secure backend."
-  },
-  {
-    icon: <Layout className="h-10 w-10" />,
-    title: "Frontend with React",
-    description: "Creating modern, interactive user interfaces using React, Redux Toolkit, Tailwind CSS, and component libraries."
+    title: "Full Stack Development",
+    description: "Building end-to-end web applications using modern stacks like Next.js, React, Node.js, and MongoDB with a focus on performance."
   },
   {
     icon: <Monitor className="h-10 w-10" />,
-    title: "Backend with Node.js",
-    description: "Designing and developing RESTful APIs with Express.js and MongoDB, focusing on performance and scalability."
+    title: "SaaS Solutions",
+    description: "Developing scalable Software as a Service (SaaS) platforms with subscription models, multi-tenancy, and cloud integration."
+  },
+  {
+    icon: <Layout className="h-10 w-10" />,
+    title: "Frontend Excellence",
+    description: "Creating premium, interactive user interfaces using Framer Motion, GSAP, and Tailwind CSS for a world-class UX."
   },
   {
     icon: <Sparkles className="h-10 w-10" />,
-    title: "Admin & Role-Based Dashboards",
-    description: "Developing admin panels and role-based dashboards with real-time features like user control, content management, and messaging."
+    title: "Enterprise Dashboards",
+    description: "Developing complex admin panels and data-driven dashboards with real-time analytics and role-based access control."
   },
   {
     icon: <LineChart className="h-10 w-10" />,
-    title: "Real Projects Development",
-    description: "Creating real-world apps like e-commerce, LMS, and real estate platforms with complete frontend-backend integration."
+    title: "Custom Web Applications",
+    description: "Building tailored digital products like E-commerce, LMS, and CRM systems with seamless API integrations."
   },
   {
     icon: <Palette className="h-10 w-10" />,
-    title: "Clean UI & Tailwind Design",
-    description: "Building responsive, fast-loading designs using Tailwind CSS with focus on usability, speed, and mobile-friendliness."
+    title: "Modern UI/UX Design",
+    description: "Crafting visually stunning and responsive designs that align with current web aesthetics and brand identity."
   }
 ];
 
@@ -60,7 +60,7 @@ export function Services() {
             I provide a range of creative services to help businesses and individuals achieve their digital goals, from initial concept to final implementation.
           </p>
         </motion.div>
-        
+
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {services.map((service, index) => (
             <motion.div

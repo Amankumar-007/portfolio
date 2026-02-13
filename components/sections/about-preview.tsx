@@ -46,16 +46,15 @@ const AboutContent = memo(function AboutContent() {
         Turning real-world problems into <span className="italic text-neutral-500 font-serif">powerful solutions.</span>
       </h2>
       <p className="text-lg text-neutral-600 mb-6 leading-relaxed">
-        I&apos;m <span className="font-bold text-neutral-900">Aman Kumar</span>, a MERN Stack Developer passionate about building
-        scalable, real-world web applications. From responsive UIs to RESTful
-        APIs and role-based dashboards, I bring ideas to life through clean
+        I&apos;m <span className="font-bold text-neutral-900">Aman Kumar</span>, a Full Stack Developer passionate about building
+        scalable SaaS solutions and real-world web applications. From responsive UIs to robust
+        cloud architectures, I bring ideas to life through clean
         code and modern technologies.
       </p>
       <p className="text-lg text-neutral-600 mb-8 leading-relaxed">
-        I&apos;ve built e-commerce platforms, real estate apps, and LMS systems —
-        focusing on user experience, performance, and full-stack integration.
-        My goal is to keep learning and delivering meaningful digital solutions
-        every day.
+        I&apos;ve built SaaS platforms, e-commerce systems, and data-driven dashboards —
+        focusing on user experience, performance, and seamless integration.
+        My goal is to deliver innovative digital products that solve real business challenges.
       </p>
       <MagneticButton>
         <Link href="/about" className="flex items-center gap-2 text-white font-bold tracking-wide text-sm md:text-base">
@@ -104,18 +103,18 @@ const MagneticButton = ({ children }: { children: React.ReactNode }) => {
 export function AboutPreview() {
   return (
     <section className="relative py-24 px-4 bg-[#FDFCFB] overflow-hidden selection:bg-orange-200 selection:text-orange-900">
-      
+
       {/* --- BACKGROUND LAYERS (From Hero) --- */}
 
       {/* 1. Grain Overlay */}
-      <div 
-        className="absolute inset-0 opacity-[0.12] pointer-events-none z-0 mix-blend-multiply" 
+      <div
+        className="absolute inset-0 opacity-[0.12] pointer-events-none z-0 mix-blend-multiply"
         style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")` }}
       />
 
       {/* 2. Gradient Orb (Positioned behind the Image for depth) */}
       <div className="absolute top-1/2 left-0 -translate-y-1/2 -translate-x-1/4 z-0 pointer-events-none">
-        <motion.div 
+        <motion.div
           className="w-[500px] h-[500px] rounded-full blur-[120px] opacity-30 will-change-transform"
           style={{
             background: 'conic-gradient(from 90deg at 50% 50%, #FFD700, #FF8C00, #FF4500, #FFD700)',

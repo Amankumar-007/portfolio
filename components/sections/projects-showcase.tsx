@@ -16,11 +16,11 @@ const featuredProjects = [
     title: "E-commerce Platform",
     description: "Full-stack e-commerce platform with features like real-time inventory, payment processing, and admin dashboard.",
     category: "Full Stack",
-    image:"/ss-1.png",
+    image: "/ss-1.png",
     year: "2023",
     tags: ["Next.js", "MongoDB", "Stripe", "Redux"]
   },
-  
+
   {
     id: "project-2",
     title: "Real Estate Platform",
@@ -37,7 +37,7 @@ const featuredProjects = [
     category: "Full Stack",
     image: "/lms/Screenshot 2025-05-27 131624.png",
     year: "2022",
-    tags: ["MERN Stack", "WebRTC", "Socket.io"]
+    tags: ["Full Stack", "SaaS", "Real-time", "Cloud"]
   }
 ];
 
@@ -61,7 +61,7 @@ const MagneticButton = ({ children, size = "default", onClick }: { children: Rea
 
   const { x, y } = position;
   const sizeClasses = size === "sm" ? "px-4 py-2 text-sm" : "w-full md:w-auto px-8 py-4";
-  
+
   return (
     <motion.button
       ref={ref}
@@ -85,8 +85,8 @@ export function ProjectsShowcase() {
     activeCategory === "All"
       ? featuredProjects
       : featuredProjects.filter(
-          (project) => project.category === activeCategory
-        );
+        (project) => project.category === activeCategory
+      );
 
   return (
     <section className="py-24 px-4">
@@ -106,7 +106,7 @@ export function ProjectsShowcase() {
               Featured Projects
             </h2>
           </motion.div>
-          
+
           <motion.div
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -123,7 +123,7 @@ export function ProjectsShowcase() {
             ))}
           </motion.div>
         </div>
-        
+
         <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
@@ -139,7 +139,7 @@ export function ProjectsShowcase() {
             />
           ))}
         </motion.div>
-        
+
         <motion.div
           initial={{ opacity: 0, y: 10 }}
           whileInView={{ opacity: 1, y: 0 }}

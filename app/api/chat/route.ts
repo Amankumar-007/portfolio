@@ -10,9 +10,9 @@ const knowledge: { [key: string]: ResponseTemplate } = {
   skills: {
     patterns: ["skills", "what can you do", "capabilities", "expertise", "what do you know"],
     responses: [
-      "I'd be happy to tell you about Aman's skills! He's a MERN stack specialist with expertise in React, Node.js, MongoDB, and Express.js. He also has strong experience with modern tools like Next.js and TypeScript. What specific aspect would you like to know more about?",
-      "Aman's primary expertise lies in full-stack development using the MERN stack. He's particularly skilled in building responsive, performant web applications with React and Next.js. Would you like me to elaborate on any specific technology?",
-      "Let me share Aman's technical expertise! His core strengths include React, Node.js, MongoDB, and the entire MERN ecosystem. He's also well-versed in TypeScript and modern CSS frameworks like Tailwind. Is there a particular area you're interested in?"
+      "I'd be happy to tell you about Aman's skills! He's a Full Stack & SaaS specialist with expertise in Next.js, React, Node.js, MongoDB. He's also strong in building cloud architectures and scalable software. What specific aspect would you like to know more about?",
+      "Aman's primary expertise lies in full-stack development and SaaS solutions. He's particularly skilled in building responsive, performant web applications with modern tech stacks. Would you like me to elaborate on any specific technology?",
+      "Let me share Aman's technical expertise! His core strengths include React, Next.js, Node.js, MongoDB, and creating end-to-end SaaS products. He's also well-versed in TypeScript and Tailwind. Is there a particular area you're interested in?"
     ]
   },
   projects: {
@@ -34,9 +34,9 @@ const knowledge: { [key: string]: ResponseTemplate } = {
   experience: {
     patterns: ["experience", "background", "history", "worked", "career"],
     responses: [
-      "Aman brings solid experience in full-stack development, specializing in the MERN stack. His background includes building various web applications from scratch and working with modern development practices. What specific aspect of his experience interests you?",
-      "As a MERN stack developer, Aman has accumulated significant experience in building complex web applications. He's particularly skilled in creating responsive designs and implementing modern development practices. Would you like to know more about any specific area?",
-      "Aman's experience spans across full-stack development, with a focus on modern web technologies and best practices. He's particularly experienced with React and Node.js ecosystems. Is there a particular aspect of his background you'd like to explore?"
+      "Aman brings solid experience in full-stack development, specializing in SaaS and modern web architectures. His background includes building various applications from scratch and delivering high-performance solutions. What specific aspect of his experience interests you?",
+      "As a Full Stack developer, Aman has accumulated significant experience in building complex SaaS applications. He's particularly skilled in create-to-launch pipelines and modern development practices. Would you like to know more about any specific area?",
+      "Aman's experience spans across full-stack development, with a focus on SaaS, performance optimization, and best practices. He's particularly experienced with the Next.js and Node.js ecosystems. Is there a particular aspect of his background you'd like to explore?"
     ]
   },
   greeting: {
@@ -76,7 +76,7 @@ function generateResponse(message: string): string {
 export async function POST(req: Request) {
   try {
     const body = await req.json();
-    
+
     if (!body.messages || !Array.isArray(body.messages)) {
       return NextResponse.json(
         { error: "Messages array is required" },
