@@ -193,6 +193,7 @@ export default function RootLayout({
               <PageTransition>{children}</PageTransition>
             </Suspense>
             <Chat />
+
           </CursorProvider>
         </ThemeProvider>
       </body>

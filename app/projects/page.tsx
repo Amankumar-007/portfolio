@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, useEffect, useRef, useMemo, useCallback } from 'react';
+import React, { useState, useMemo, useCallback, useRef, useEffect } from 'react';
 import { useCursor } from '@/components/Cursor';
 import { useRouter } from 'next/navigation';
 import Head from 'next/head';
@@ -10,6 +10,7 @@ import { VideoThumbnail } from '@/components/VideoThumbnail';
 import { getAllProjects } from '@/data/projects';
 import { ArrowUpRight, Terminal, Hash, Layers } from 'lucide-react';
 import ErrorBoundary from '@/components/ErrorBoundary';
+import { useLenis } from '@/hooks/useLenis';
 
 interface ProjectCardProps {
   project: any;
@@ -95,37 +96,7 @@ const ProjectCard = React.memo<ProjectCardProps>(({ project, index }) => {
 ProjectCard.displayName = 'ProjectCard';
 
 const ProjectsPage = () => {
-  const containerRef = useRef(null);
-  const scrollRef = useRef<any>(null);
-
-  useEffect(() => {
-    let scroll: any = null;
-
-    const initScroll = async () => {
-      try {
-        const LocomotiveScroll = (await import('locomotive-scroll')).default;
-        scroll = new LocomotiveScroll({
-          el: containerRef.current as any,
-          smooth: true,
-          multiplier: 0.9, // Slightly higher for better responsiveness
-          lerp: 0.15, // Optimized for smoother feel
-        });
-        scrollRef.current = scroll;
-        return () => scroll.destroy();
-      } catch (error) {
-        console.error('Error loading LocomotiveScroll:', error);
-      }
-    };
-
-    initScroll();
-
-    return () => {
-      if (scrollRef.current) {
-        scrollRef.current.destroy();
-      }
-    };
-  }, []);
-
+  const { isLoading } = useLenis();
   const projects = useMemo(() => getAllProjects() || [], []);
 
   return (
@@ -175,7 +146,7 @@ const ProjectsPage = () => {
             }}
           />
         </Head>
-        <div ref={containerRef} data-scroll-container className="relative min-h-screen bg-[#fffcf9] text-[#1a1a1a] selection:bg-orange-500 overflow-x-hidden">
+        <div data-scroll-container className="relative min-h-screen bg-[#fffcf9] text-[#1a1a1a] selection:bg-orange-500 overflow-x-hidden">
 
           {/* OPTIMIZED ROUGH NOISE ENGINE */}
           <svg className="fixed inset-0 w-full h-full pointer-events-none z-[100] opacity-[0.20] contrast-150 mix-blend-multiply will-change-transform">

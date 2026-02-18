@@ -1,10 +1,11 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
+import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Badge } from "@/components/ui/badge";
 import { Search, X, Zap, Terminal, Cpu, Layout, Database, Settings, ArrowUpRight } from "lucide-react";
 import { PageTransition } from "@/components/page-transition";
+import { useLenis } from '@/hooks/useLenis';
 
 // --- Data ---
 const categories = [
@@ -28,68 +29,10 @@ const technologies = [
 ];
 
 export default function SkillsPage() {
+  const { isLoading } = useLenis();
   const [activeCategory, setActiveCategory] = useState("All");
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedTech, setSelectedTech] = useState<any | null>(null);
-  const containerRef = useRef(null);
-  const [isLoading, setIsLoading] = useState(true);
-
-  // Locomotive Scroll implementation
-  useEffect(() => {
-    (async () => {
-      try {
-        const LocomotiveScroll = (await import('locomotive-scroll')).default;
-        const locomotiveScroll = new LocomotiveScroll({
-          el: containerRef.current as unknown as HTMLElement,
-          smooth: true,
-          multiplier: 1,
-          lerp: 0.1,
-        });
-
-        // Hide default scrollbar
-        document.body.style.overflow = 'hidden';
-        document.documentElement.style.overflow = 'hidden';
-
-        setIsLoading(false);
-
-        setTimeout(() => {
-          locomotiveScroll.update();
-        }, 2000);
-
-        return () => {
-          if (locomotiveScroll) {
-            locomotiveScroll.destroy();
-          }
-          // Restore default scrollbar
-          document.body.style.overflow = '';
-          document.documentElement.style.overflow = '';
-        };
-      } catch (error) {
-        console.error('Error loading LocomotiveScroll:', error);
-        setIsLoading(false);
-        
-        // Fallback to regular scroll reset
-        const body = document.body;
-        const html = document.documentElement;
-        
-        body.classList.remove('has-scroll-smooth', 'case-study-page', 'scrolled', 'overflow-hidden', 'no-scroll');
-        html.classList.remove('has-scroll-smooth', 'overflow-hidden');
-        
-        body.style.overflow = '';
-        body.style.position = '';
-        body.style.height = '';
-        body.style.top = '';
-        html.style.overflow = '';
-        html.style.position = '';
-        html.style.height = '';
-        
-        body.style.overflowY = 'auto';
-        html.style.overflowY = 'auto';
-        
-        window.scrollTo(0, 0);
-      }
-    })();
-  }, []);
 
   // Filter Logic
   const filteredTechnologies = technologies
@@ -100,7 +43,7 @@ export default function SkillsPage() {
     );
 
   return (
-    <div ref={containerRef} data-scroll-container className="relative min-h-screen bg-[#fffcf9] text-[#1a1a1a] selection:bg-orange-500 selection:text-white overflow-x-hidden">
+    <div data-scroll-container className="relative min-h-screen bg-[#fffcf9] text-[#1a1a1a] selection:bg-orange-500 selection:text-white overflow-x-hidden">
       
       {/* --- ROUGH GRAIN ENGINE --- */}
       <svg className="fixed inset-0 w-full h-full pointer-events-none z-[100] opacity-[0.25] contrast-150 mix-blend-multiply">

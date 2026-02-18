@@ -1,7 +1,8 @@
 "use client";
 import { motion } from "framer-motion";
 import { ArrowUpRight, Zap, Layers, Command } from "lucide-react";
-import { memo, useState, useEffect, useRef } from "react";
+import { memo, useState } from "react";
+import { useLenis } from '@/hooks/useLenis';
 
 const ProjectCard = memo(({ project, index }: { project: typeof PROJECTS[0]; index: number }) => {
   const [isHovered, setIsHovered] = useState(false);
@@ -57,23 +58,10 @@ const PROJECTS = [
 ];
 
 export default function RoughPortfolio() {
-  const containerRef = useRef(null);
-
-  useEffect(() => {
-    (async () => {
-      const LocomotiveScroll = (await import('locomotive-scroll')).default;
-      const scroll = new LocomotiveScroll({
-        el: containerRef.current as any,
-        smooth: true,
-        multiplier: 1,
-        lerp: 0.1,
-      });
-      return () => scroll.destroy();
-    })();
-  }, []);
+  const { isLoading } = useLenis();
 
   return (
-    <div ref={containerRef} data-scroll-container className="relative min-h-screen bg-[#fffcf9] text-[#1a1a1a] overflow-hidden selection:bg-orange-500 selection:text-white">
+    <div data-scroll-container className="relative min-h-screen bg-[#fffcf9] text-[#1a1a1a] overflow-hidden selection:bg-orange-500 selection:text-white">
       
       {/* --- OPTIMIZED NOISE LAYER --- */}
       <div 

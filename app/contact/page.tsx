@@ -10,7 +10,7 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { PageTransition } from "@/components/page-transition";
-import { useEffect, useState, useRef } from 'react';
+import { useLenis } from '@/hooks/useLenis';
 
 const formSchema = z.object({
   name: z.string().min(2, { message: "Name must be at least 2 characters." }),
@@ -25,32 +25,12 @@ const contactInfo = [
 ];
 
 export default function ContactPage() {
-  const [isLoading, setIsLoading] = useState(true);
-  const containerRef = useRef(null);
+  const { isLoading } = useLenis();
   
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: { name: "", email: "", subject: "", message: "" },
   });
-
-  useEffect(() => {
-    (async () => {
-      try {
-        const LocomotiveScroll = (await import('locomotive-scroll')).default;
-        const locomotiveScroll = new LocomotiveScroll({
-          el: containerRef.current as unknown as HTMLElement,
-          smooth: true,
-          multiplier: 0.8,
-          lerp: 0.15
-        });
-        setIsLoading(false);
-        return () => locomotiveScroll?.destroy();
-      } catch (error) {
-        console.error('Error loading LocomotiveScroll:', error);
-        setIsLoading(false);
-      }
-    })();
-  }, []);
 
   function onSubmit(values: z.infer<typeof formSchema>) {
     console.log(values);
@@ -59,7 +39,7 @@ export default function ContactPage() {
   }
 
   return (
-    <div ref={containerRef} data-scroll-container className="relative min-h-screen bg-[#fffcf9] text-[#1a1a1a] overflow-hidden selection:bg-orange-500 selection:text-white font-sans">
+    <div data-scroll-container className="relative min-h-screen bg-[#fffcf9] text-[#1a1a1a] overflow-hidden selection:bg-orange-500 selection:text-white font-sans">
       
       {/* --- OPTIMIZED NOISE LAYER --- */}
       <div 

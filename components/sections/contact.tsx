@@ -49,7 +49,7 @@ const MagneticButton = ({ children, size = "default" }: { children: React.ReactN
 
   const { x, y } = position;
   const sizeClasses = size === "icon" ? "w-12 h-12 p-0" : "w-full md:w-auto px-8 py-4";
-  
+
   return (
     <motion.button
       ref={ref}

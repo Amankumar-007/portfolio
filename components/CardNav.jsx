@@ -58,7 +58,12 @@ const CardNav = ({
     if (!navEl) return null;
     gsap.set(navEl, { height: 60, overflow: 'hidden' });
     gsap.set(cardsRef.current, { y: 50, opacity: 0 });
-    const tl = gsap.timeline({ paused: true });
+    const tl = gsap.timeline({
+      paused: true,
+      onReverseComplete: () => {
+        setIsExpanded(false);
+      }
+    });
     tl.to(navEl, { height: calculateHeight, duration: 0.6, ease: 'power2.inOut' });
     tl.to(cardsRef.current, { y: 0, opacity: 1, scale: 1, duration: 0.3, ease: 'back.out(1.2)', stagger: 0.1 }, '-=0.3');
     return tl;
@@ -79,7 +84,7 @@ const CardNav = ({
       document.body.classList.remove('case-study-page');
       document.body.classList.remove('scrolled');
     }
-    
+
     return () => {
       document.body.classList.remove('case-study-page');
       document.body.classList.remove('scrolled');
@@ -108,18 +113,18 @@ const CardNav = ({
 
   useLayoutEffect(() => {
     const handleResize = () => {
-        if (!tlRef.current) return;
-        if (isExpanded) {
-            const newHeight = calculateHeight();
-            gsap.set(navRef.current, { height: newHeight });
-            tlRef.current.kill();
-            const newTl = createTimeline();
-            if(newTl) { newTl.progress(1); tlRef.current = newTl; }
-        } else {
-            tlRef.current.kill();
-            const newTl = createTimeline();
-            if(newTl) tlRef.current = newTl;
-        }
+      if (!tlRef.current) return;
+      if (isExpanded) {
+        const newHeight = calculateHeight();
+        gsap.set(navRef.current, { height: newHeight });
+        tlRef.current.kill();
+        const newTl = createTimeline();
+        if (newTl) { newTl.progress(1); tlRef.current = newTl; }
+      } else {
+        tlRef.current.kill();
+        const newTl = createTimeline();
+        if (newTl) tlRef.current = newTl;
+      }
     };
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
@@ -129,16 +134,13 @@ const CardNav = ({
   const toggleMenu = () => {
     const tl = tlRef.current;
     if (!tl) return;
-    if (!isExpanded) {
+
+    if (!isExpanded || tl.reversed()) {
       setIsHamburgerOpen(true);
       setIsExpanded(true);
-      tl.play(0);
+      tl.play();
     } else {
       setIsHamburgerOpen(false);
-      tl.eventCallback('onReverseComplete', () => {
-        setIsExpanded(false);
-        tl.clearEventCallbacks();
-      });
       tl.reverse();
     }
   };
@@ -149,10 +151,6 @@ const CardNav = ({
     router.push(path);
     setIsHamburgerOpen(false);
     if (tlRef.current) {
-      tlRef.current.eventCallback('onReverseComplete', () => {
-        setIsExpanded(false);
-        tlRef.current.clearEventCallbacks();
-      });
       tlRef.current.reverse();
     }
   };
@@ -172,15 +170,15 @@ const CardNav = ({
           </div>
 
           <div className="logo-container">
-            <span 
-              className="logo-text-aman" 
+            <span
+              className="logo-text-aman"
               onClick={() => handleNavigation("/")}
               style={{ cursor: 'pointer' }}
             >
               AMAN
             </span>
-            <span 
-              className="logo-text-kumar" 
+            <span
+              className="logo-text-kumar"
               onClick={() => handleNavigation("/")}
               style={{ cursor: 'pointer' }}
             >
@@ -203,14 +201,14 @@ const CardNav = ({
               key={`${item.label}-${idx}`}
               className="nav-card"
               ref={setCardRef(idx)}
-              style={{ 
-                background: item.bgImage 
-                  ? `linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.6)), url('${item.bgImage}')` 
-                  : item.bgGradient || item.bgColor, 
+              style={{
+                background: item.bgImage
+                  ? `linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.6)), url('${item.bgImage}')`
+                  : item.bgGradient || item.bgColor,
                 backgroundSize: 'cover',
                 backgroundPosition: 'center',
                 backgroundRepeat: 'no-repeat',
-                color: item.textColor 
+                color: item.textColor
               }}
               onClick={() => {
                 const path = item.path || `/${item.label.toLowerCase()}`;
@@ -223,16 +221,16 @@ const CardNav = ({
                 <div className="nav-card-label">{item.label}</div>
                 {/* NEW: This Big Arrow indicates the whole card is clickable */}
                 <div className="card-action-icon">
-                    <GoArrowUpRight />
+                  <GoArrowUpRight />
                 </div>
               </div>
-              
+
               <div className="nav-card-links">
                 {item.links?.map((lnk, i) => (
-                  <a 
-                    key={`${lnk.label}-${i}`} 
-                    className="nav-card-link" 
-                    href={lnk.label === "Case Studies" ? "/case-study" : lnk.href} 
+                  <a
+                    key={`${lnk.label}-${i}`}
+                    className="nav-card-link"
+                    href={lnk.label === "Case Studies" ? "/case-study" : lnk.href}
                     onClick={(e) => {
                       e.stopPropagation();
                       if (lnk.label === "Case Studies") {

@@ -1,9 +1,10 @@
 "use client";
 
-import { useState, useRef, useEffect } from "react";
+import { useState } from "react";
 import { motion } from "framer-motion";
 import { PageTransition } from "@/components/page-transition";
 import { ArrowUpRight, Terminal, Github, Globe, Cpu, Layers } from "lucide-react";
+import { useLenis } from '@/hooks/useLenis';
 
 const FEATURED_PROJECTS = [
   {
@@ -49,23 +50,10 @@ const FEATURED_PROJECTS = [
 ];
 
 export default function FeaturedGrid() {
-  const containerRef = useRef(null);
-
-  useEffect(() => {
-    (async () => {
-      const LocomotiveScroll = (await import('locomotive-scroll')).default;
-      const scroll = new LocomotiveScroll({
-        el: containerRef.current as any,
-        smooth: true,
-        multiplier: 1,
-        lerp: 0.1,
-      });
-      return () => scroll.destroy();
-    })();
-  }, []);
+  const { isLoading } = useLenis();
 
   return (
-    <div ref={containerRef} data-scroll-container className="relative min-h-screen bg-[#fffcf9] text-[#1a1a1a] selection:bg-orange-500 overflow-x-hidden">
+    <div data-scroll-container className="relative min-h-screen bg-[#fffcf9] text-[#1a1a1a] selection:bg-orange-500 overflow-x-hidden">
       
       {/* ROUGH GRAIN OVERLAY */}
       <svg className="fixed inset-0 w-full h-full pointer-events-none z-[100] opacity-[0.22] contrast-150 mix-blend-multiply">

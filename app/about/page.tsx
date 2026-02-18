@@ -5,7 +5,7 @@ import Image from "next/image";
 import { Badge } from "@/components/ui/badge";
 import { Separator } from "@/components/ui/separator";
 import { PageTransition } from "@/components/page-transition";
-import { useEffect, useState, useRef } from 'react';
+import { useLenis } from '@/hooks/useLenis';
 import { Terminal, Code2, Cpu, Globe } from "lucide-react";
 import Head from 'next/head';
 
@@ -72,47 +72,7 @@ const experiences = [
 ];
 
 export default function AboutPage() {
-  const [isLoading, setIsLoading] = useState(true);
-  const containerRef = useRef(null);
-  const scrollRef = useRef<any>(null);
-
-  useEffect(() => {
-    let scroll: any = null;
-
-    const initScroll = async () => {
-      try {
-        const LocomotiveScroll = (await import('locomotive-scroll')).default;
-        scroll = new LocomotiveScroll({
-          el: containerRef.current as unknown as HTMLElement,
-          smooth: true,
-          multiplier: 0.9, // Optimized for responsiveness
-          lerp: 0.15, // Better smoothing
-        });
-        scrollRef.current = scroll;
-
-        setTimeout(() => {
-          setIsLoading(false);
-          document.body.style.cursor = 'default';
-          window.scrollTo(0, 0);
-        }, 1200); // Reduced from 2000ms
-
-        return () => {
-          if (scroll) scroll.destroy();
-        };
-      } catch (error) {
-        console.error('Error loading LocomotiveScroll:', error);
-        setIsLoading(false);
-      }
-    };
-
-    initScroll();
-
-    return () => {
-      if (scrollRef.current) {
-        scrollRef.current.destroy();
-      }
-    };
-  }, []);
+  const { isLoading } = useLenis();
 
   return (
     <>
@@ -132,7 +92,6 @@ export default function AboutPage() {
         <link rel="canonical" href="https://amankumarr.in/about" />
       </Head>
       <div
-        ref={containerRef}
         data-scroll-container
         className="relative min-h-screen bg-[#fffcf9] text-[#1a1a1a] selection:bg-orange-500 selection:text-white"
       >

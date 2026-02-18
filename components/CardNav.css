@@ -20,7 +20,8 @@
   position: relative;
   overflow: hidden;
   will-change: height;
-  transition: box-shadow 0.3s ease, height 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  /* Removed height transition to avoid conflict with GSAP */
+  transition: box-shadow 0.3s ease;
 }
 
 .card-nav:hover {

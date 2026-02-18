@@ -1,6 +1,5 @@
 'use client';
-import { useEffect, useState, useRef, useMemo, useCallback } from 'react'
-import { motion, useScroll, useSpring } from 'framer-motion';
+import { motion } from 'framer-motion';
 import Hero from '@/components/sections/hero';
 import { ProjectsShowcase } from '@/components/sections/projects-showcase';
 import { AboutPreview } from '@/components/sections/about-preview';
@@ -8,63 +7,10 @@ import { Services } from '@/components/sections/services';
 import { SkillsPreview } from '@/components/sections/skills-preview';
 import { Contact } from '@/components/sections/contact';
 import Head from 'next/head';
+import { useLenis } from '@/hooks/useLenis';
 
 export default function Home() {
-  const [isLoading, setIsLoading] = useState(true);
-  const containerRef = useRef(null);
-  const lenisRef = useRef<any>(null);
-
-  // Optimized Lenis setup with performance improvements
-  useEffect(() => {
-    let lenis: any = null;
-
-    const initLenis = async () => {
-      try {
-        const LenisModule = await import('lenis');
-        const Lenis = LenisModule.default;
-
-        lenis = new Lenis({
-          duration: 0.6, // Reduced duration for snappier feel
-          easing: (t: number) => Math.min(1, 1.001 - Math.pow(2, -8 * t)), // Faster easing
-          lerp: 0.15, // Slightly higher for smoother but responsive feel
-          wheelMultiplier: 0.8, // Reduced for better control
-          touchMultiplier: 1.5, // Reduced for mobile performance
-          smoothWheel: true,
-        });
-
-        lenisRef.current = lenis;
-
-        // Optimized RAF callback
-        const raf = (time: number) => {
-          lenis.raf(time);
-          requestAnimationFrame(raf);
-        };
-        requestAnimationFrame(raf);
-
-        // Faster loading time
-        setTimeout(() => {
-          setIsLoading(false);
-          document.body.style.cursor = 'default';
-          window.scrollTo(0, 0);
-        }, 800); // Reduced from 1500ms
-
-        return () => {
-          if (lenis) lenis.destroy();
-        };
-      } catch (error) {
-        console.error('Error loading Lenis:', error);
-        setIsLoading(false);
-      }
-    };
-
-    initLenis();
-
-    return () => {
-      if (lenisRef.current) {
-        lenisRef.current.destroy();
-      }
-    };
-  }, []);
+  const { isLoading } = useLenis();
 
   return (
     <>
@@ -107,7 +53,6 @@ export default function Home() {
         />
       </Head>
       <main
-        ref={containerRef}
         data-scroll-container
         className="relative min-h-screen bg-[#FDFCFB] selection:bg-orange-200 selection:text-orange-900"
       >
@@ -149,6 +94,7 @@ export default function Home() {
           <Services />
           <SkillsPreview />
           <Contact />
+
         </div>
 
       </main>
