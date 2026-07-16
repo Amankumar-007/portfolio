@@ -1,0 +1,63 @@
+version: '3.8'
+
+services:
+  bot:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: puppeteer-automation:latest
+    restart: unless-stopped
+
+    # Mount config and output directories as volumes
+    volumes:
+      - ./config.json:/app/config.json:ro
+      - ./sessions:/app/sessions
+      - ./screenshots:/app/screenshots
+      - ./metrics:/app/metrics
+      - ./logs:/app/logs
+      - ./user_data:/app/user_data
+
+    # Load environment from .env file
+    env_file:
+      - .env
+
+    environment:
+      - NODE_ENV=production
+      - LOG_LEVEL=${LOG_LEVEL:-info}
+
+    # Resource limits per container
+    deploy:
+      resources:
+        limits:
+          cpus: '1.0'
+          memory: 1G
+        reservations:
+          cpus: '0.25'
+          memory: 256M
+
+    # SHM size required by Chromium for large pages
+    shm_size: '1gb'
+
+    # Security options for Chromium in Docker
+    security_opt:
+      - seccomp:unconfined
+    cap_add:
+      - SYS_ADMIN
+
+    # Logging
+    logging:
+      driver: 'json-file'
+      options:
+        max-size: '50m'
+        max-file: '5'
+
+  # Optional: Redis for distributed task queuing
+  # redis:
+  #   image: redis:7-alpine
+  #   ports:
+  #     - "6379:6379"
+  #   volumes:
+  #     - redis_data:/data
+
+# volumes:
+#   redis_data:

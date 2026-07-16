@@ -53,7 +53,6 @@ export default function Home() {
         />
       </Head>
       <main
-        data-scroll-container
         className="relative min-h-screen bg-[#FDFCFB] selection:bg-orange-200 selection:text-orange-900"
       >
 
@@ -71,16 +70,10 @@ export default function Home() {
 
           {/* 2. Optimized Gradient Orb - reduced animation complexity */}
           <motion.div
-            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[90vw] h-[90vw] md:w-[50vw] md:h-[50vw] rounded-full blur-[100px] opacity-30 will-change-transform"
+            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[90vw] h-[90vw] md:w-[50vw] md:h-[50vw] rounded-full blur-3xl opacity-20 will-change-transform"
             style={{
               background: 'conic-gradient(from 90deg at 50% 50%, #FFD700, #FF8C00, #FF4500, #FFD700)',
               transform: 'translateZ(0)' // Hardware acceleration
-            }}
-            animate={{
-              rotate: 360,
-            }}
-            transition={{
-              rotate: { duration: 30, repeat: Infinity, ease: "linear" }, // Slower for better performance
             }}
           />
         </div>

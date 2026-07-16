@@ -1,0 +1,249 @@
+Fix the "New Users" count issue in Google Analytics 4. Currently showing 93 active users but only 1 new user. Implement session isolation and first-time visitor simulation.
+
+1. CLIENT ID RANDOMIZATION (core/ga4.js)
+Create new GA4 identity for each session:
+
+javascript
+async function generateNewGA4Identity(page) {
+    // Generate random GA4 client ID (format: randomNumber.timestamp)
+    const randomId = Math.floor(Math.random() * 1000000000);
+    const timestamp = Date.now();
+    const clientId = `${randomId}.${timestamp}`;
+    
+    await page.evaluateOnNewDocument((cid) => {
+        // Override GA4 client ID before page loads
+        Object.defineProperty(document, 'cookie', {
+            get: function() {
+                return document._cookie || '';
+            },
+            set: function(value) {
+                if (value.includes('_ga=')) {
+                    // Replace with new client ID
+                    value = `_ga=GA1.1.${cid}; path=/; expires=${new Date(Date.now() + 63072000000).toUTCString()}`;
+                }
+                document._cookie = value;
+                return value;
+            }
+        });
+        
+        // Also intercept gtag config
+        window.gtag = function(command, target, config) {
+            if (command === 'config' && config) {
+                config.client_id = cid;
+                config.send_page_view = true;
+            }
+            // Store original gtag calls
+            (window.dataLayer = window.dataLayer || []).push(arguments);
+        };
+    }, clientId);
+    
+    // Set the cookie directly
+    await page.setCookie({
+        name: '_ga',
+        value: `GA1.1.${clientId}`,
+        domain: '.your-domain.com', // Change to your domain
+        path: '/',
+        expires: Date.now() + 63072000000 // 2 years
+    });
+    
+    // Additional GA4 cookies
+    await page.setCookie({
+        name: '_gid',
+        value: `GA1.1.${Math.floor(Math.random() * 1000000000)}.${Math.floor(Date.now() / 1000)}`,
+        domain: '.your-domain.com',
+        path: '/',
+        expires: Date.now() + 86400000 // 24 hours
+    });
+    
+    return clientId;
+}
+2. FIRST VISIT EVENT TRIGGER (core/ga4.js)
+javascript
+async function triggerFirstVisitEvent(page) {
+    await page.evaluate(() => {
+        // Push first_visit event to dataLayer
+        window.dataLayer = window.dataLayer || [];
+        window.dataLayer.push({
+            event: 'first_visit',
+            user_properties: {
+                new_user: true
+            }
+        });
+        
+        // Also trigger session_start
+        window.dataLayer.push({
+            event: 'session_start'
+        });
+        
+        // If gtag is available, force new user detection
+        if (typeof gtag !== 'undefined') {
+            gtag('event', 'first_visit', {
+                send_to: 'GA_MEASUREMENT_ID', // Your GA4 ID
+                new_user: true
+            });
+        }
+    });
+}
+3. COMPLETE SESSION ISOLATION (core/session.js)
+Modify session creation to ensure complete isolation:
+
+javascript
+class SessionManager {
+    constructor() {
+        this.usedClientIds = new Set();
+    }
+    
+    async createIsolatedSession(browser, options = {}) {
+        const context = await browser.createBrowserContext();
+        const page = await context.newPage();
+        
+        // Generate unique fingerprint for this session
+        const fingerprint = generateUniqueFingerprint();
+        await applyFingerprint(page, fingerprint);
+        
+        // Generate new GA4 identity
+        const clientId = await generateNewGA4Identity(page);
+        
+        // Ensure we haven't used this client ID before
+        while (this.usedClientIds.has(clientId)) {
+            clientId = await generateNewGA4Identity(page);
+        }
+        this.usedClientIds.add(clientId);
+        
+        // Clear ALL storage
+        await page.evaluateOnNewDocument(() => {
+            // Override storage APIs to return empty
+            const emptyStorage = {
+                length: 0,
+                key: () => null,
+                getItem: () => null,
+                setItem: () => {},
+                removeItem: () => {},
+                clear: () => {}
+            };
+            
+            Object.defineProperty(window, 'localStorage', {
+                get: () => emptyStorage
+            });
+            
+            Object.defineProperty(window, 'sessionStorage', {
+                get: () => emptyStorage
+            });
+        });
+        
+        // Clear cookies before navigation
+        const client = await page.target().createCDPSession();
+        await client.send('Network.clearBrowserCookies');
+        await client.send('Network.clearBrowserCache');
+        
+        return { page, context, clientId, fingerprint };
+    }
+}
+4. UNIQUE FINGERPRINT GENERATOR (utils/fingerprint.js)
+javascript
+function generateUniqueFingerprint() {
+    const viewports = [
+        { width: 1920, height: 1080 },
+        { width: 1366, height: 768 },
+        { width: 1440, height: 900 },
+        { width: 1536, height: 864 },
+        { width: 1280, height: 720 },
+        { width: 1680, height: 1050 },
+        { width: 1600, height: 900 }
+    ];
+    
+    const timezones = [
+        'America/New_York',
+        'America/Chicago',
+        'America/Denver',
+        'America/Los_Angeles',
+        'Europe/London',
+        'Europe/Paris',
+        'Europe/Berlin',
+        'Asia/Tokyo',
+        'Asia/Shanghai',
+        'Asia/Dubai',
+        'Australia/Sydney'
+    ];
+    
+    const userAgents = [
+        'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36',
+        'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36',
+        'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:127.0) Gecko/20100101 Firefox/127.0',
+        'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/17.5 Safari/605.1.15'
+    ];
+    
+    return {
+        viewport: viewports[Math.floor(Math.random() * viewports.length)],
+        timezone: timezones[Math.floor(Math.random() * timezones.length)],
+        userAgent: userAgents[Math.floor(Math.random() * userAgents.length)],
+        deviceMemory: [4, 8, 16][Math.floor(Math.random() * 3)],
+        hardwareConcurrency: [4, 8, 12, 16][Math.floor(Math.random() * 4)],
+        colorDepth: 24,
+        pixelRatio: [1, 1.25, 1.5, 2][Math.floor(Math.random() * 4)]
+    };
+}
+5. UPDATED WORKFLOW (index.js)
+javascript
+async function executeTask(url, config) {
+    const browser = await launchBrowser();
+    
+    try {
+        // Create completely isolated session
+        const { page, context, clientId } = await sessionManager.createIsolatedSession(browser);
+        
+        console.log(`Session created with Client ID: ${clientId}`);
+        
+        // Navigate to page
+        await page.goto(url, { waitUntil: 'networkidle2' });
+        
+        // Trigger first visit event immediately after load
+        await triggerFirstVisitEvent(page);
+        
+        // Continue with engagement simulation...
+        await simulateEngagement(page);
+        
+        // Close context (not just page) to ensure isolation
+        await context.close();
+        
+    } catch (error) {
+        console.error('Task failed:', error);
+    }
+}
+6. VERIFICATION
+Add verification to confirm new users are being counted:
+
+javascript
+async function verifyNewUserTracking(page) {
+    const trackingData = await page.evaluate(() => {
+        const ga4Cookie = document.cookie.match(/_ga=([^;]+)/);
+        const dataLayer = window.dataLayer || [];
+        
+        return {
+            clientId: ga4Cookie ? ga4Cookie[1] : null,
+            firstVisitEvents: dataLayer.filter(e => e.event === 'first_visit').length,
+            sessionStartEvents: dataLayer.filter(e => e.event === 'session_start').length,
+            dataLayer: dataLayer.slice(-10) // Last 10 events
+        };
+    });
+    
+    console.log('GA4 Tracking Verification:', trackingData);
+    
+    // Verify
+    if (!trackingData.firstVisitEvents) {
+        console.warn('⚠️ No first_visit event detected!');
+    }
+    
+    return trackingData;
+}
+7. IMPORTANT: DON'T REUSE SESSIONS
+Update config to disable session persistence for new user generation:
+
+json
+{
+  "sessionPersistence": false,
+  "isolateSessions": true,
+  "generateNewIdentityPerSession": true,
+  "clearCookiesBetweenSessions": true,
+  "clearStorageBetweenSessions": true
+}

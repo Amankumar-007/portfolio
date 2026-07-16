@@ -1,6 +1,5 @@
 import "./globals.css";
 import "./performance.css";
-import "locomotive-scroll/dist/locomotive-scroll.css";
 import type { Metadata } from "next";
 import { Playfair_Display } from "next/font/google";
 import Script from "next/script";
@@ -11,7 +10,7 @@ import Loading from "./loading";
 import { Chat } from "@/components/ui/chat";
 import { CursorProvider } from "@/components/Cursor";
 import { MainNav } from "@/components/main-nav";
-import CardNav from "@/components/CardNav";
+import ModernNavbar from "@/components/ModernNavbar";
 import { StructuredData } from "@/components/structured-data";
 
 const playfair = Playfair_Display({
@@ -19,39 +18,9 @@ const playfair = Playfair_Display({
   variable: "--font-playfair",
   display: "swap",
 });
-const items = [
-  {
-    label: "About",
-    bgImage: "/about.PNG",
-    textColor: "#fff",
-    links: [
-      { label: "Journey", ariaLabel: "About Journey" },
-      { label: "Careers", ariaLabel: "About Careers" }
-    ]
-  },
-  {
-    label: "Projects",
-    bgImage: "/cover@2x.jpg",
-    textColor: "#fff",
-    links: [
-      { label: "Featured", ariaLabel: "Featured Projects" },
-      { label: "Case Studies", ariaLabel: "Project Case Studies" }
-    ]
-  },
-  {
-    label: "Contact",
-    bgImage: "/cont.jpg",
-    textColor: "#fff",
-    links: [
-      { label: "Email", ariaLabel: "Email us", href: "mailto:amanr3388@gmail.com" },
-      { label: "GitHub", ariaLabel: "GitHub Profile", href: "https://github.com/Amankumar-007" },
-      { label: "LinkedIn", ariaLabel: "LinkedIn Profile", href: "https://www.linkedin.com/in/amankumarweb/" }
-    ]
-  }
-];
 export const metadata: Metadata = {
   title: {
-    default: "Aman Kumar | Best Full Stack Developer & SaaS Solutions Expert",
+    default: "Aman Kumar | Full Stack Developer & SaaS Solutions Expert",
     template: "%s | Aman Kumar - Full Stack Developer",
   },
   description: "Aman Kumar - Expert Full Stack Developer specializing in high-performance web applications and SaaS solutions. Best portfolio showcasing React, Node.js, Next.js, and modern tech stacks. Hire top freelance developer for scalable software.",
@@ -102,9 +71,9 @@ export const metadata: Metadata = {
     type: "website",
     locale: "en_US",
     url: "https://amankumarr.in",
-    title: "Aman Kumar | Best Full Stack Developer & Modern Portfolio",
-    description: "Expert Full Stack Developer creating modern, high-performance web applications and SaaS solutions. Best portfolio showcasing React, Node.js, Next.js projects.",
-    siteName: "Aman Kumar Portfolio - Best Modern Portfolio",
+    title: "Aman Kumar | Full Stack Developer & Modern Portfolio",
+    description: "Expert Full Stack Developer creating modern, high-performance web applications and SaaS solutions. portfolio showcasing React, Node.js, Next.js projects.",
+    siteName: "Aman Kumar Portfolio - Modern Portfolio",
     images: [
       {
         url: "/about-image.png",
@@ -116,7 +85,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Aman Kumar | Best Full Stack Developer & Modern Portfolio",
+    title: "Aman Kumar | Full Stack Developer & Modern Portfolio",
     description: "Expert Full Stack Developer creating modern, high-performance web applications and SaaS solutions. Best portfolio showcasing React, Node.js, Next.js projects.",
     images: ["/about-image.png"],
     creator: "@amankumarweb",
@@ -182,14 +151,8 @@ export default function RootLayout({
           enableSystem
         >
           <CursorProvider>
-            <CardNav
-              items={items}
-              baseColor="#fff"
-              menuColor="#000"
-              buttonBgColor="#111"
-              buttonTextColor="#fff"
-              ease="power3.out"
-            />          <Suspense fallback={<Loading />}>
+            <ModernNavbar />
+          <Suspense fallback={<Loading />}>
               <PageTransition>{children}</PageTransition>
             </Suspense>
             <Chat />

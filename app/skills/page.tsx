@@ -3,29 +3,99 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Badge } from "@/components/ui/badge";
-import { Search, X, Zap, Terminal, Cpu, Layout, Database, Settings, ArrowUpRight } from "lucide-react";
+import { Search, X, Zap, Terminal, Cpu, Layout, Database, Settings, ArrowUpRight, Code, GitBranch, Globe, Shield, Brain, BookOpen } from "lucide-react";
 import { PageTransition } from "@/components/page-transition";
 import { useLenis } from '@/hooks/useLenis';
 
 // --- Data ---
+const getFavicon = (domain: string) => `https://www.google.com/s2/favicons?domain=${domain}&sz=128`;
+
 const categories = [
   { name: "All", icon: <Terminal size={14}/> },
-  { name: "Frontend", icon: <Layout size={14}/> },
+  { name: "Frontend", icon: <Globe size={14}/> },
   { name: "Backend", icon: <Cpu size={14}/> },
   { name: "Database", icon: <Database size={14}/> },
-  { name: "Tools", icon: <Settings size={14}/> },
+  { name: "DevOps", icon: <Settings size={14}/> },
+  { name: "Design", icon: <Layout size={14}/> },
+  { name: "Tools", icon: <Zap size={14}/> },
+  { name: "AI Tools", icon: <Brain size={14}/> },
 ];
 
 const technologies = [
+  // --- CORE STACK ---
   { id: "tech-1", name: "React.js", category: "Frontend", description: "Building modern user interfaces with React's component-based architecture.", experience: "Advanced", icon: "📱", projects: 15, details: ["Components", "Hooks", "Context", "Redux", "Performance"] },
   { id: "tech-2", name: "Next.js", category: "Frontend", description: "Creating fast, SEO-friendly applications with server-side rendering.", experience: "Advanced", icon: "⚡", projects: 10, details: ["App Router", "Server Components", "API Routes", "ISR"] },
   { id: "tech-3", name: "Node.js", category: "Backend", description: "Developing scalable backend services and REST APIs.", experience: "Advanced", icon: "🚀", projects: 12, details: ["Express.js", "REST APIs", "Authentication", "Middleware"] },
-  { id: "tech-4", name: "MongoDB", category: "Database", description: "Building flexible and scalable database solutions.", experience: "Advanced", icon: "🗄️", projects: 8, details: ["Schemas", "Aggregation", "Indexing", "Atlas"] },
   { id: "tech-5", name: "TypeScript", category: "Frontend", description: "Writing type-safe code for better maintainability.", experience: "Intermediate", icon: "📘", projects: 7, details: ["Types", "Interfaces", "Generics", "Decorators"] },
   { id: "tech-6", name: "Tailwind CSS", category: "Frontend", description: "Creating beautiful, responsive designs with utility-first CSS.", experience: "Advanced", icon: "🎨", projects: 10, details: ["Responsive Design", "Themes", "Components", "Animations"] },
-  { id: "tech-7", name: "Git & GitHub", category: "Tools", description: "Version control and collaborative development.", experience: "Advanced", icon: "📊", projects: 20, details: ["Version Control", "Branching", "PRs", "CI/CD"] },
   { id: "tech-8", name: "Express.js", category: "Backend", description: "Building robust backend APIs and web applications.", experience: "Advanced", icon: "🔧", projects: 10, details: ["Routing", "Middleware", "Error Handling", "Auth"] },
-  { id: "tech-9", name: "Docker", category: "DevOps", description: "Containerizing applications for consistent deployment.", experience: "Intermediate", icon: "🐳", projects: 5, details: ["Containers", "Docker Compose", "Multi-stage Builds"] }
+
+  // --- DATABASES ---
+  { id: "tech-mongodb", name: "MongoDB", category: "Database", description: "Flexible NoSQL database for modern applications.", experience: "Advanced", icon: getFavicon("mongodb.com"), projects: 15, details: ["Mongoose", "Aggregation", "Indexing", "Atlas"] },
+  { id: "tech-mysql", name: "MySQL", category: "Database", description: "Relational database management system.", experience: "Advanced", icon: getFavicon("mysql.com"), projects: 12, details: ["SQL Queries", "Table Design", "Joins", "Optimization"] },
+  { id: "tech-postgresql", name: "PostgreSQL", category: "Database", description: "Advanced open-source relational database.", experience: "Intermediate", icon: getFavicon("postgresql.org"), projects: 8, details: ["Prisma", "Complex Queries", "JSONB", "Transactions"] },
+  { id: "tech-firebase", name: "Firebase", category: "Database", description: "Google's mobile and web application development platform.", experience: "Advanced", icon: getFavicon("firebase.google.com"), projects: 20, details: ["Firestore", "Authentication", "Cloud Functions", "Hosting"] },
+  { id: "tech-supabase", name: "Supabase", category: "Database", description: "The open source Firebase alternative.", experience: "Intermediate", icon: getFavicon("supabase.com"), projects: 6, details: ["PostgreSQL", "Realtime", "Auth", "Storage"] },
+
+  // --- CODE EDITORS ---
+  { id: "tech-vscode", name: "VS Code", category: "Tools", description: "Versatile code editor with a massive ecosystem.", experience: "Advanced", icon: getFavicon("code.visualstudio.com"), projects: 50, details: ["Extensions", "Debugging", "Shortcuts", "Themes"] },
+  { id: "tech-webstorm", name: "WebStorm", category: "Tools", description: "Professional IDE for JavaScript/TypeScript.", experience: "Intermediate", icon: getFavicon("jetbrains.com/webstorm"), projects: 10, details: ["Intelligent Coding", "Refactoring", "Testing"] },
+  { id: "tech-sublime", name: "Sublime Text", category: "Tools", description: "Sophisticated text editor for code, markup and prose.", experience: "Advanced", icon: getFavicon("sublimetext.com"), projects: 15, details: ["Performance", "Package Control", "Customization"] },
+  { id: "tech-intellij", name: "IntelliJ IDEA", category: "Tools", description: "Capable and ergonomic IDE for JVM development.", experience: "Intermediate", icon: getFavicon("jetbrains.com/idea"), projects: 8, details: ["Java", "Framework Support", "Productivity"] },
+
+  // --- VERSION CONTROL ---
+  { id: "tech-git", name: "Git", category: "Tools", description: "Distributed version control system.", experience: "Advanced", icon: getFavicon("git-scm.com"), projects: 60, details: ["Branching", "Merging", "Rebasing", "Stashing"] },
+  { id: "tech-github", name: "GitHub", category: "Tools", description: "Platform for code hosting and collaboration.", experience: "Advanced", icon: getFavicon("github.com"), projects: 100, details: ["Actions", "PRs", "Projects", "Packages"] },
+  { id: "tech-gitlab", name: "GitLab", category: "Tools", description: "Complete DevOps platform.", experience: "Intermediate", icon: getFavicon("gitlab.com"), projects: 15, details: ["CI/CD Pipelines", "Wiki", "Issue Tracking"] },
+  { id: "tech-bitbucket", name: "Bitbucket", category: "Tools", description: "Git repository management solution.", experience: "Intermediate", icon: getFavicon("bitbucket.org"), projects: 10, details: ["Pipelines", "Jira Integration", "Code Search"] },
+  { id: "tech-sourcetree", name: "SourceTree", category: "Tools", description: "Graphical Git client for Windows and Mac.", experience: "Advanced", icon: getFavicon("sourcetreeapp.com"), projects: 20, details: ["Visual History", "Conflict Resolution", "Submodules"] },
+
+  // --- API TOOLS ---
+  { id: "tech-postman", name: "Postman", category: "Tools", description: "The collaboration platform for API development.", experience: "Advanced", icon: getFavicon("postman.com"), projects: 40, details: ["Collections", "Environments", "Mock Servers", "Testing"] },
+  { id: "tech-insomnia", name: "Insomnia", category: "Tools", description: "The open-source API client for GraphQL and REST.", experience: "Intermediate", icon: getFavicon("insomnia.rest"), projects: 15, details: ["Design", "Debug", "Test"] },
+  { id: "tech-swagger", name: "Swagger", category: "Tools", description: "API documentation and design tools.", experience: "Advanced", icon: getFavicon("swagger.io"), projects: 25, details: ["OpenAPI", "UI", "Codegen"] },
+  { id: "tech-hoppscotch", name: "Hoppscotch", category: "Tools", description: "Open source API development ecosystem.", experience: "Intermediate", icon: getFavicon("hoppscotch.io"), projects: 8, details: ["Web-based", "Real-time", "Collections"] },
+  { id: "tech-jmeter", name: "JMeter", category: "Tools", description: "Load testing and performance measurement.", experience: "Intermediate", icon: getFavicon("jmeter.apache.org"), projects: 5, details: ["Load Test", "Stress Test", "Reporting"] },
+  { id: "tech-chrome", name: "Chrome DevTools", category: "Tools", description: "Web authoring and debugging tools built into Google Chrome.", experience: "Advanced", icon: getFavicon("developer.chrome.com"), projects: 100, details: ["Console", "Network", "Performance", "Elements"] },
+
+  // --- DESIGN ---
+  { id: "tech-figma", name: "Figma", category: "Design", description: "Collaborative interface design tool.", experience: "Advanced", icon: getFavicon("figma.com"), projects: 30, details: ["Auto Layout", "Prototyping", "Design Systems"] },
+  { id: "tech-xd", name: "Adobe XD", category: "Design", description: "Vector-based UI/UX design tool.", experience: "Intermediate", icon: getFavicon("adobe.com"), projects: 12, details: ["Artboards", "Assets", "Interactivity"] },
+  { id: "tech-canva", name: "Canva", category: "Design", description: "Online graphic design tool.", experience: "Advanced", icon: getFavicon("canva.com"), projects: 45, details: ["Templates", "Branding", "Social Media"] },
+  { id: "tech-dribbble", name: "Dribbble", category: "Design", description: "Platform to showcase and explore design.", experience: "Intermediate", icon: getFavicon("dribbble.com"), projects: 10, details: ["Portfolio", "Community", "Trends"] },
+  { id: "tech-behance", name: "Behance", category: "Design", description: "Social media platform to discover creative work.", experience: "Intermediate", icon: getFavicon("behance.net"), projects: 10, details: ["Showcase", "Inspiration", "Case Studies"] },
+
+  // --- DEPLOYMENT & DEVOPS ---
+  { id: "tech-vercel", name: "Vercel", category: "DevOps", description: "Frontend cloud platform for frameworks.", experience: "Advanced", icon: getFavicon("vercel.com"), projects: 40, details: ["Deployments", "Analytics", "Edge Functions"] },
+  { id: "tech-netlify", name: "Netlify", category: "DevOps", description: "Development platform for modern web projects.", experience: "Advanced", icon: getFavicon("netlify.com"), projects: 25, details: ["Auto Deployment", "Forms", "Identity"] },
+  { id: "tech-heroku", name: "Heroku", category: "DevOps", description: "Platform as a service (PaaS) for app deployment.", experience: "Intermediate", icon: getFavicon("heroku.com"), projects: 15, details: ["Dynos", "Add-ons", "CLI"] },
+  { id: "tech-render", name: "Render", category: "DevOps", description: "Unified cloud to build and run all your apps and websites.", experience: "Intermediate", icon: getFavicon("render.com"), projects: 10, details: ["Web Services", "Databases", "Statics"] },
+  { id: "tech-aws", name: "AWS", category: "DevOps", description: "Comprehensive cloud computing platform.", experience: "Intermediate", icon: getFavicon("aws.amazon.com"), projects: 12, details: ["S3", "EC2", "Lambda", "IAM"] },
+  { id: "tech-docker", name: "Docker", category: "DevOps", description: "OS-level virtualization for software delivery.", experience: "Advanced", icon: getFavicon("docker.com"), projects: 20, details: ["Images", "Containers", "Compose", "Registry"] },
+  { id: "tech-kubernetes", name: "Kubernetes", category: "DevOps", description: "Container orchestration system.", experience: "Intermediate", icon: getFavicon("kubernetes.io"), projects: 5, details: ["Pods", "Nodes", "Deployments"] },
+  { id: "tech-npm", name: "npm", category: "DevOps", description: "Default package manager for Node.js.", experience: "Advanced", icon: getFavicon("npmjs.com"), projects: 100, details: ["Scripts", "Dependency Management", "Publishing"] },
+  { id: "tech-yarn", name: "Yarn", category: "DevOps", description: "Fast, reliable, and secure dependency management.", experience: "Advanced", icon: getFavicon("yarnpkg.com"), projects: 80, details: ["Workspaces", "Plug'n'Play", "Speed"] },
+  { id: "tech-webpack", name: "Webpack", category: "DevOps", description: "Static module bundler for modern JS apps.", experience: "Advanced", icon: getFavicon("webpack.js.org"), projects: 35, details: ["Loaders", "Plugins", "Optimization"] },
+
+  // --- MONITORING ---
+  { id: "tech-sentry", name: "Sentry", category: "Tools", description: "Application monitoring and error tracking.", experience: "Advanced", icon: getFavicon("sentry.io"), projects: 15, details: ["Alerts", "Releases", "Source Maps"] },
+  { id: "tech-logrocket", name: "LogRocket", category: "Tools", description: "Frontend monitoring and session replay.", experience: "Intermediate", icon: getFavicon("logrocket.com"), projects: 8, details: ["Session Replay", "Network Logs", "UX Monitoring"] },
+  { id: "tech-datadog", name: "Datadog", category: "Tools", description: "Monitoring service for cloud-scale applications.", experience: "Intermediate", icon: getFavicon("datadoghq.com"), projects: 5, details: ["APM", "Logs", "Dashboards"] },
+  { id: "tech-newrelic", name: "New Relic", category: "Tools", description: "Observability platform for the whole stack.", experience: "Intermediate", icon: getFavicon("newrelic.com"), projects: 5, details: ["Performance", "Error Rates", "Infrastructure"] },
+
+  // --- AI TOOLS ---
+  { id: "tech-chatgpt", name: "ChatGPT", category: "AI Tools", description: "Large language model for conversational AI.", experience: "Advanced", icon: getFavicon("openai.com"), projects: 50, details: ["Prompts", "GPT-4", "Coding Assistance"] },
+  { id: "tech-copilot", name: "GitHub Copilot", category: "AI Tools", description: "AI-powered code completion tool.", experience: "Advanced", icon: getFavicon("github.com"), projects: 100, details: ["Pair Programming", "Efficiency", "Contextual Suggestions"] },
+  { id: "tech-n8n", name: "n8n", category: "AI Tools", description: "Extendable workflow automation tool.", experience: "Intermediate", icon: getFavicon("n8n.io"), projects: 10, details: ["Nodes", "Workflows", "Self-hosted"] },
+  { id: "tech-zapier", name: "Zapier", category: "AI Tools", description: "Easy automation for busy people.", experience: "Advanced", icon: getFavicon("zapier.com"), projects: 30, details: ["Zaps", "Integrations", "Automation"] },
+  { id: "tech-make", name: "Make", category: "AI Tools", description: "Visual automation platform.", experience: "Intermediate", icon: getFavicon("make.com"), projects: 15, details: ["Scenarios", "Modules", "Data Flow"] },
+
+  // --- LEARNING ---
+  { id: "tech-leetcode", name: "LeetCode", category: "Tools", description: "Platform for improving coding skills.", experience: "Advanced", icon: getFavicon("leetcode.com"), projects: 300, details: ["Algorithms", "Data Structures", "Preparation"] },
+  { id: "tech-hackerrank", name: "HackerRank", category: "Tools", description: "Skills-based platform for developers.", experience: "Advanced", icon: getFavicon("hackerrank.com"), projects: 50, details: ["Practice", "Challenges", "Ranking"] },
+  { id: "tech-fcc", name: "freeCodeCamp", category: "Tools", description: "Learn to code for free.", experience: "Advanced", icon: getFavicon("freecodecamp.org"), projects: 10, details: ["Certifications", "Full Stack", "Community"] },
+  { id: "tech-codepen", name: "CodePen", category: "Tools", description: "Social development environment for designers.", experience: "Advanced", icon: getFavicon("codepen.io"), projects: 100, details: ["Pens", "Projects", "Demos"] },
+  { id: "tech-stackoverflow", name: "Stack Overflow", category: "Tools", description: "Knowledge-sharing platform for developers.", experience: "Advanced", icon: getFavicon("stackoverflow.com"), projects: 1000, details: ["Q&A", "Debugging", "Contributions"] },
 ];
 
 export default function SkillsPage() {
@@ -119,8 +189,12 @@ export default function SkillsPage() {
                 >
                   <div className="relative z-10">
                     <div className="flex justify-between items-start mb-10">
-                      <motion.div layoutId={`icon-${tech.id}`} className="text-5xl group-hover:scale-110 transition-transform">
-                        {tech.icon}
+                      <motion.div layoutId={`icon-${tech.id}`} className="w-12 h-12 flex items-center justify-center group-hover:scale-110 transition-transform">
+                        {tech.icon.startsWith("http") ? (
+                          <img src={tech.icon} alt={tech.name} className="w-full h-full object-contain" />
+                        ) : (
+                          <span className="text-5xl">{tech.icon}</span>
+                        )}
                       </motion.div>
                       <span className="font-mono text-[9px] uppercase tracking-[0.2em] text-slate-400 font-bold">
                         {tech.experience}
@@ -158,8 +232,12 @@ export default function SkillsPage() {
                 <div className="relative z-10">
                   <div className="bg-white border-b-2 border-black p-6 md:p-8 flex justify-between items-center">
                     <div className="flex items-center gap-4 md:gap-6">
-                      <motion.div layoutId={`icon-${selectedTech.id}`} className="text-4xl md:text-6xl">
-                        {selectedTech.icon}
+                      <motion.div layoutId={`icon-${selectedTech.id}`} className="w-16 h-16 md:w-20 md:h-20 flex items-center justify-center">
+                        {selectedTech.icon.startsWith("http") ? (
+                          <img src={selectedTech.icon} alt={selectedTech.name} className="w-full h-full object-contain" />
+                        ) : (
+                          <span className="text-4xl md:text-6xl">{selectedTech.icon}</span>
+                        )}
                       </motion.div>
                       <div>
                         <Badge className="bg-orange-500 text-white rounded-none border-none px-2 mb-1 uppercase font-black tracking-widest text-[8px]">

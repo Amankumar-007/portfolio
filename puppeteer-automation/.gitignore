@@ -1,0 +1,10 @@
+node_modules/
+.env
+sessions/
+screenshots/
+metrics/
+logs/
+user_data/
+*.log
+.DS_Store
+Thumbs.db

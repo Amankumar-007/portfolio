@@ -1,0 +1,21 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(xargs grep -l \"BrowserEngine\\\\|uaData\")",
+      "Bash(node -e \"require\\('./core/browser'\\); require\\('./core/ga4'\\); require\\('./core/engagement'\\); require\\('./core/consent'\\); require\\('./core/session'\\); require\\('./core/proxy'\\); require\\('./core/captcha'\\); require\\('./core/traffic-patterns'\\); require\\('./core/network'\\); require\\('./utils/fingerprint'\\); require\\('./utils/logger'\\); require\\('./utils/metrics'\\); console.log\\('ALL MODULES LOADED OK'\\);\")",
+      "Bash(node -c index.js)",
+      "Bash(node -c flood.js)",
+      "Bash(node -c core/browser.js)",
+      "Bash(node -c core/ga4.js)",
+      "Bash(node -c core/engagement.js)",
+      "Bash(node -e \"JSON.parse\\(require\\('fs'\\).readFileSync\\('config.json','utf8'\\)\\); console.log\\('config.json valid, targets:', JSON.parse\\(require\\('fs'\\).readFileSync\\('config.json','utf8'\\)\\).targets.length\\)\")",
+      "Bash(node \"C:/Users/Aman/AppData/Local/Temp/claude/e--all-projects-New-folder--5--portfolio/a57c53eb-a32d-4050-b15c-3bfe3a5a9e58/scratchpad/diagnose-ga4.js\")",
+      "PowerShell(Get-Process chrome,chromium -ErrorAction SilentlyContinue)",
+      "PowerShell(Get-CimInstance Win32_Process -Filter \"Name='chrome.exe'\" | Select-Object ProcessId, @{N='UserDataDir';E={if\\($_.CommandLine -match '--user-data-dir=\\([^\\\\s]+\\)'\\){$matches[1]}else{'\\(none - real user chrome\\)'}}} | Group-Object UserDataDir | Select-Object Name, Count)",
+      "Bash(node \"C:/Users/Aman/AppData/Local/Temp/claude/e--all-projects-New-folder--5--portfolio/a57c53eb-a32d-4050-b15c-3bfe3a5a9e58/scratchpad/diagnose-ga4-v2.js\")",
+      "Bash(node \"C:/Users/Aman/AppData/Local/Temp/claude/e--all-projects-New-folder--5--portfolio/a57c53eb-a32d-4050-b15c-3bfe3a5a9e58/scratchpad/diagnose-ga4-headful.js\")",
+      "Bash(node -e \"JSON.parse\\(require\\('fs'\\).readFileSync\\('config.json','utf8'\\)\\); console.log\\('config valid'\\)\")",
+      "Bash(node -e \"require\\('./core/engagement'\\); console.log\\('engagement.js loads OK'\\)\")"
+    ]
+  }
+}

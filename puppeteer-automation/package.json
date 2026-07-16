@@ -1,0 +1,48 @@
+{
+  "name": "puppeteer-automation-framework",
+  "version": "1.0.0",
+  "description": "Production-ready Puppeteer browser automation framework for web testing, data collection, and application monitoring",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "dev": "node --watch index.js",
+    "test": "node index.js --test",
+    "fingerprint-test": "node index.js --fingerprint-test",
+    "flood": "node flood.js --cycles 5 --concurrency 5",
+    "flood:big": "node flood.js --cycles 20 --concurrency 8",
+    "flood:url": "node flood.js --url",
+    "analyze": "node analyze.js",
+    "analyze:last": "node analyze.js --last 5",
+    "analyze:export": "node analyze.js --export report.json",
+    "monitor": "node monitor.js",
+    "monitor:url": "node monitor.js --url",
+    "monitor:fast": "node monitor.js --interval 15",
+    "docker:build": "docker build -t puppeteer-automation .",
+    "docker:up": "docker-compose up",
+    "docker:scale": "docker-compose up --scale bot=5"
+  },
+  "keywords": ["puppeteer", "automation", "scraping", "testing", "monitoring", "stealth"],
+  "license": "MIT",
+  "dependencies": {
+    "puppeteer": "^21.6.1",
+    "puppeteer-extra": "^3.3.6",
+    "puppeteer-extra-plugin-stealth": "^2.11.2",
+    "puppeteer-extra-plugin-user-preferences": "^2.4.1",
+    "proxy-chain": "^2.3.0",
+    "user-agents": "^1.1.0",
+    "winston": "^3.11.0",
+    "winston-daily-rotate-file": "^4.7.1",
+    "axios": "^1.6.2",
+    "dotenv": "^16.3.1",
+    "commander": "^11.1.0",
+    "p-queue": "^7.4.1",
+    "uuid": "^9.0.0",
+    "fast-csv": "^4.3.6"
+  },
+  "devDependencies": {
+    "eslint": "^8.55.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

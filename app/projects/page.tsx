@@ -103,7 +103,7 @@ const ProjectsPage = () => {
     <ErrorBoundary>
       <>
         <Head>
-          <title>Projects | Best Full Stack & SaaS Projects - Aman Kumar</title>
+          <title>Projects | Full Stack & SaaS Projects - Aman Kumar</title>
           <meta name="description" content="Explore Aman Kumar's best Full Stack and SaaS projects. Modern web applications built with Next.js, React, Node.js, and MongoDB. Scalable software solutions showcase." />
           <meta name="keywords" content="Aman Kumar projects, Full Stack projects, SaaS solutions, React projects, Node.js applications, MongoDB projects, scalable software, web applications, modern portfolio projects" />
           <meta property="og:title" content="Projects | Best Full Stack Projects - Aman Kumar" />
