@@ -89,7 +89,6 @@ export default function ModernNavbar() {
           </div>
 
           <div className="modern-nav-right">
-            <ThemeToggleButton />
             <button
               onClick={() => setIsOpen(!isOpen)}
               className={`compact-burger ${isOpen ? "active" : ""}`}

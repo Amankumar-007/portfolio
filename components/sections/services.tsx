@@ -39,7 +39,7 @@ const services = [
 
 export function Services() {
   return (
-    <section className="py-24 px-4 bg-muted/30">
+    <section className="py-24 px-0 md:px-4 bg-muted/30">
       <div className="container max-w-6xl">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -53,7 +53,7 @@ export function Services() {
             <span className="text-sm font-medium uppercase tracking-wider">Services</span>
             <div className="w-12 h-0.5 bg-primary"></div>
           </div>
-          <h2 className="text-3xl md:text-4xl font-playfair font-bold mb-6">
+          <h2 className="text-3xl font-playfair font-bold mb-6">
             What I Offer
           </h2>
           <p className="text-lg text-muted-foreground">

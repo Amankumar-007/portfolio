@@ -1,0 +1,63 @@
+name: Daily Puppeteer Automation & Traffic Engagement
+
+on:
+  schedule:
+    # Runs every day at 10:00 AM IST (4:30 AM UTC)
+    # Note: GitHub Actions uses UTC time.
+    # 4:30 AM UTC = 10:00 AM IST. Change to '0 10 * * *' if you mean 10:00 AM UTC.
+    - cron: '30 4 * * *'
+  
+  # Allows manually running the action anytime from GitHub Actions tab
+  workflow_dispatch:
+    inputs:
+      cycles:
+        description: 'Number of visit cycles'
+        required: false
+        default: '5'
+      concurrency:
+        description: 'Parallel browser instances per cycle'
+        required: false
+        default: '3'
+
+jobs:
+  run-automation:
+    runs-on: ubuntu-latest
+
+    defaults:
+      run:
+        working-directory: ./puppeteer-automation
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js Environment
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+          cache-dependency-path: './puppeteer-automation/package-lock.json'
+
+      - name: Install Dependencies & Chrome
+        run: |
+          npm ci
+          npx puppeteer browsers install chrome
+
+      - name: Run Puppeteer Human Engagement Automation
+        env:
+          NODE_ENV: production
+        run: |
+          CYCLES="${{ github.event.inputs.cycles || '5' }}"
+          CONCURRENCY="${{ github.event.inputs.concurrency || '3' }}"
+          echo "🚀 Starting Puppeteer Automation with $CYCLES cycles and $CONCURRENCY parallel instances..."
+          node flood.js --cycles $CYCLES --concurrency $CONCURRENCY
+
+      - name: Upload Logs & Screenshots Artifacts on Failure
+        if: failure()
+        uses: actions/upload-artifact@v4
+        with:
+          name: automation-logs
+          path: |
+            puppeteer-automation/logs/
+            puppeteer-automation/screenshots/
+          retention-days: 7

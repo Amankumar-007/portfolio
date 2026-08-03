@@ -26,16 +26,16 @@
 }
 
 .nav-scroll-progress {
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   right: 0;
-  height: 2px;
+  height: 3px;
   background: var(--nav-accent);
   transform-origin: 0%;
-  z-index: 2001;
-  border-radius: 999px;
-  opacity: 0.8;
+  z-index: 9999;
+  border-radius: 0;
+  opacity: 1;
 }
 
 .modern-nav-container {
@@ -185,10 +185,17 @@
   background: #fff;
   z-index: 1500;
   pointer-events: auto;
-  overflow: hidden;
+  overflow-y: auto;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
+  -webkit-overflow-scrolling: touch;
+}
+
+@media (min-width: 768px) {
+  .compact-menu-overlay {
+    align-items: center;
+  }
 }
 
 .menu-noise {
@@ -202,13 +209,19 @@
 .compact-menu-content {
   width: 100%;
   max-width: 1000px;
-  padding: 6rem 2rem;
+  padding: 8rem 1.5rem 3rem 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .compact-menu-content {
+    padding: 6rem 2rem;
+  }
 }
 
 .menu-inner-grid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: 4rem;
+  gap: 2.5rem;
 }
 
 @media (min-width: 768px) {
@@ -225,42 +238,61 @@
   color: #999;
   letter-spacing: 0.3em;
   display: block;
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
+}
+
+@media (min-width: 768px) {
+  .nav-label {
+    margin-bottom: 2rem;
+  }
 }
 
 .links-grid {
   display: grid;
-  grid-template-columns: 1fr;
+  grid-template-columns: 1fr 1fr;
   gap: 0.8rem;
-}
-
-@media (min-width: 480px) {
-  .links-grid {
-    grid-template-columns: 1fr 1fr;
-  }
 }
 
 .menu-compact-link {
   display: flex;
   align-items: center;
-  gap: 1.2rem;
+  gap: 0.8rem;
   text-decoration: none;
   color: #111;
   transition: all 0.3s ease;
-  padding: 0.5rem 0;
+  padding: 0.3rem 0;
+}
+
+@media (min-width: 768px) {
+  .menu-compact-link {
+    gap: 1.2rem;
+    padding: 0.5rem 0;
+  }
 }
 
 .link-num {
-  font-size: 0.75rem;
+  font-size: 0.65rem;
   font-family: monospace;
   color: #ccc;
 }
 
+@media (min-width: 768px) {
+  .link-num {
+    font-size: 0.75rem;
+  }
+}
+
 .link-val {
-  font-size: 1.5rem;
+  font-size: 1.05rem;
   font-weight: 900;
   text-transform: uppercase;
   letter-spacing: -0.02em;
+}
+
+@media (min-width: 768px) {
+  .link-val {
+    font-size: 1.5rem;
+  }
 }
 
 .menu-compact-link:hover .link-val {

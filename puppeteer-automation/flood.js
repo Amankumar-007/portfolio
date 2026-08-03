@@ -366,14 +366,37 @@ async function main() {
     process.stdout.write(c('\n  Fetching free proxies for IP rotation... ', C.dim));
     const axios = require('axios');
     const targetCountry = config.targetCountry || 'all';
-    // Fetch from multiple popular free proxy lists for better odds
-    const [res1, res2] = await Promise.all([
-      axios.get(`https://api.proxyscrape.com/v2/?request=displayproxies&protocol=http&timeout=10000&country=${targetCountry}&ssl=all&anonymity=all`).catch(() => ({ data: '' })),
-      axios.get('https://raw.githubusercontent.com/TheSpeedX/PROXY-List/master/http.txt').catch(() => ({ data: '' }))
-    ]);
-    const rawList = res1.data + '\n' + res2.data;
-    freeProxies = [...new Set(rawList.split('\n').map(p => p.trim()).filter(p => p.length > 0).map(p => `http://${p}`))];
-    console.log(c(`✅ Fetched ${freeProxies.length} Proxies`, C.green));
+    const cc = targetCountry.toUpperCase(); // e.g. "IN"
+
+    // Fetch from multiple proxy sources in parallel for a bigger, fresher pool
+    const proxyPromises = [
+      // ProxyScrape — primary source
+      axios.get(`https://api.proxyscrape.com/v2/?request=displayproxies&protocol=http&timeout=10000&country=${targetCountry}&ssl=all&anonymity=all`, { timeout: 15000 }).catch(() => ({ data: '' })),
+      // ProxyScrape v3 API
+      axios.get(`https://api.proxyscrape.com/v3/free-proxy-list/get?request=displayproxies&protocol=http&country=${cc}&timeout=10000`, { timeout: 15000 }).catch(() => ({ data: '' })),
+      // Geonode free proxy list filtered by country
+      axios.get(`https://proxylist.geonode.com/api/proxy-list?limit=200&page=1&sort_by=lastChecked&sort_type=desc&filterUpTime=70&country=${cc}&protocols=http,https`, { timeout: 15000 })
+        .then(r => {
+          const items = (r.data && r.data.data) ? r.data.data : [];
+          return { data: items.map(p => `${p.ip}:${p.port}`).join('\n') };
+        }).catch(() => ({ data: '' })),
+      // proxy-list.download
+      axios.get(`https://www.proxy-list.download/api/v1/get?type=http&anon=elite&country=${cc}`, { timeout: 15000 }).catch(() => ({ data: '' })),
+    ];
+
+    // Always add global mix lists as extra fallback pool
+    proxyPromises.push(
+      axios.get('https://raw.githubusercontent.com/TheSpeedX/PROXY-List/master/http.txt', { timeout: 15000 }).catch(() => ({ data: '' })),
+      axios.get('https://raw.githubusercontent.com/monosans/proxy-list/main/proxies/http.txt', { timeout: 15000 }).catch(() => ({ data: '' }))
+    );
+
+    const results = await Promise.all(proxyPromises);
+    const rawList = results.map(r => (typeof r.data === 'string' ? r.data : '')).join('\n');
+    freeProxies = [...new Set(rawList.split('\n').map(p => p.trim()).filter(p => /^\d+\.\d+\.\d+\.\d+:\d+$/.test(p)).map(p => `http://${p}`))];
+    console.log(c(`✅ Fetched ${freeProxies.length} Proxies (country: ${targetCountry})`, C.green));
+    if (freeProxies.length < 20) {
+      console.log(c(`  ⚠️  Low proxy count — visits may fall back to direct IP`, C.yellow));
+    }
   } catch (e) {
     console.log(c(`⚠️ Failed to fetch free proxies. Proceeding with local IP.`, C.yellow));
   }
@@ -406,13 +429,15 @@ async function main() {
       queue.add(async () => {
         let result;
         let attempts = 0;
-        const maxAttempts = 5;
+        const maxAttempts = 8; // More retries — Indian proxies have high failure rate
 
         while (attempts < maxAttempts) {
           attempts++;
-          // Try with a random proxy for the first few attempts.
-          // If all fail, the final attempt runs without a proxy to guarantee the visit.
-          const useProxy = attempts < maxAttempts && freeProxies.length > 0;
+          const currentTargetCountry = config.targetCountry || 'all';
+          // On the very last attempt, always allow direct IP as a guaranteed fallback
+          // so the visit is never permanently lost just because all proxies timed out.
+          const isLastAttempt = attempts === maxAttempts;
+          const useProxy = !isLastAttempt && freeProxies.length > 0;
           const proxyUrl = useProxy ? freeProxies[Math.floor(Math.random() * freeProxies.length)] : null;
 
           result = await singleVisit(url, config, visitNum, cycle, proxyUrl);

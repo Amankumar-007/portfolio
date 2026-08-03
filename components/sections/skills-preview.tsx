@@ -76,7 +76,7 @@ const MagneticButton = ({ children }: { children: React.ReactNode }) => {
       onMouseLeave={reset}
       animate={{ x, y }}
       transition={{ type: "spring", stiffness: 150, damping: 15, mass: 0.1 }}
-      className="group relative w-full md:w-auto px-8 py-4 bg-neutral-900 rounded-full overflow-hidden shadow-xl"
+      className="group relative w-fit md:w-auto px-8 py-4 bg-neutral-900 rounded-full overflow-hidden shadow-xl"
     >
       <div className="absolute inset-0 bg-orange-500 translate-y-[101%] group-hover:translate-y-0 transition-transform duration-300 ease-in-out" />
       <div className="flex justify-center relative z-10">{children}</div>
@@ -110,7 +110,7 @@ export function SkillsPreview() {
   ];
 
   return (
-    <section className="py-24 px-4">
+    <section className="py-24 px-0 md:px-4">
       <div className="container">
         <motion.div 
           initial={{ opacity: 0, y: 20 }}

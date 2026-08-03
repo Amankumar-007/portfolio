@@ -42,7 +42,7 @@ const AboutContent = memo(function AboutContent() {
           About Me
         </span>
       </div>
-      <h2 className="text-3xl md:text-5xl font-playfair font-bold mb-6 text-neutral-900 leading-tight">
+      <h2 className="text-3xl font-playfair font-bold mb-6 text-neutral-900 leading-tight">
         Turning real-world problems into <span className="italic text-neutral-500 font-serif">powerful solutions.</span>
       </h2>
       <p className="text-lg text-neutral-600 mb-6 leading-relaxed">
@@ -92,7 +92,7 @@ const MagneticButton = ({ children }: { children: React.ReactNode }) => {
       onMouseLeave={reset}
       animate={{ x, y }}
       transition={{ type: "spring", stiffness: 150, damping: 15, mass: 0.1 }}
-      className="group relative w-full md:w-auto px-8 py-4 bg-neutral-900 rounded-full overflow-hidden shadow-xl"
+      className="group relative w-fit md:w-auto px-8 py-4 bg-neutral-900 rounded-full overflow-hidden shadow-xl"
     >
       <div className="absolute inset-0 bg-orange-500 translate-y-[101%] group-hover:translate-y-0 transition-transform duration-300 ease-in-out" />
       <div className="flex justify-center relative z-10">{children}</div>
@@ -102,7 +102,7 @@ const MagneticButton = ({ children }: { children: React.ReactNode }) => {
 
 export function AboutPreview() {
   return (
-    <section className="relative py-24 px-4 bg-[#FDFCFB] overflow-hidden selection:bg-orange-200 selection:text-orange-900">
+    <section className="relative py-24 px-0 md:px-4 bg-[#FDFCFB] overflow-hidden selection:bg-orange-200 selection:text-orange-900">
 
       {/* --- BACKGROUND LAYERS (From Hero) --- */}
 

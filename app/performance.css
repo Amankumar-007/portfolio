@@ -21,7 +21,6 @@ img {
 
 /* Smooth scrolling with reduced lag */
 html {
-  scroll-behavior: smooth;
   overflow-x: hidden;
 }
 

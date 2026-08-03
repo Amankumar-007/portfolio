@@ -60,7 +60,7 @@ const MagneticButton = ({ children, size = "default", onClick }: { children: Rea
   };
 
   const { x, y } = position;
-  const sizeClasses = size === "sm" ? "px-4 py-2 text-sm" : "w-full md:w-auto px-8 py-4";
+  const sizeClasses = size === "sm" ? "px-4 py-2 text-sm" : "w-fit md:w-auto px-8 py-4";
 
   return (
     <motion.button
@@ -89,7 +89,7 @@ export function ProjectsShowcase() {
       );
 
   return (
-    <section className="py-24 px-4">
+    <section className="py-24 px-0 md:px-4">
       <div className="container max-w-6xl">
         <div className="flex flex-col md:flex-row md:items-end md:justify-between gap-6 mb-12">
           <motion.div
@@ -102,7 +102,7 @@ export function ProjectsShowcase() {
               <div className="w-12 h-0.5 bg-primary"></div>
               <span className="text-sm font-medium uppercase tracking-wider">My Work</span>
             </div>
-            <h2 className="text-3xl md:text-4xl font-playfair font-bold">
+            <h2 className="text-3xl font-playfair font-bold">
               Featured Projects
             </h2>
           </motion.div>

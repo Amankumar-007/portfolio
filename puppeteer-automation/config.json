@@ -13,7 +13,7 @@
   "proxies": [],
   "captchaService": null,
   "captchaApiKey": null,
-  "defaultTimeout": 30000,
+  "defaultTimeout": 45000,
   "maxRetries": 1,
   "retryDelay": 1000,
   "screenshotsDir": "./screenshots",
@@ -21,25 +21,24 @@
   "staggeredStart": true,
   "staggerDelayMs": 800,
   "networkDelayMs": 0,
-  "targetCountry": "cn",
+  "targetCountry": "in",
   "ga4Evasion": {
     "enabled": true,
     "simulateEngagement": true,
     "simulateScrolling": true,
     "simulateClicks": true,
     "handleCookieConsent": true,
-    "bounceRate": 1.0,
-    "stayTimePerPageMs": 10000,
-    "minSessionDuration": 120000,
-    "maxSessionDuration": 180000
+    "bounceRate": 0.02,
+    "stayTimePerPageMs": 90000,
+    "minSessionDuration": 210000,
+    "maxSessionDuration": 270000
   },
   "targets": [
-    "https://startupcoaching.in",
-    "https://startupcoaching.in",
-    "https://startupcoaching.in",
-    "https://startupcoaching.in",
-    "https://startupcoaching.in",
-    "https://startupcoaching.in",
-    "https://startupcoaching.in"
+    "https://twofloww.in",
+    "https://twofloww.in/about",
+    "https://twofloww.in/projects",
+    "https://twofloww.in/services",
+    "https://twofloww.in/contact",
+    "https://www.twofloww.in/project-detail?id=1"
   ]
 }

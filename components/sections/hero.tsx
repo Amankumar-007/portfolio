@@ -60,7 +60,7 @@ const Hero = () => {
       </div>
 
       {/* --- Content Container --- */}
-      <div className="relative z-10 container mx-auto px-4 md:px-6 flex-grow flex flex-col justify-center pt-20 md:pt-0">
+      <div className="relative z-10 container mx-auto px-0 md:px-6 flex-grow flex flex-col justify-center pt-20 md:pt-0">
 
         {/* Top Bar / Status */}
         <motion.div
@@ -215,7 +215,7 @@ const MagneticButton: React.FC<MagneticButtonProps> = ({ children, router }) => 
       onClick={handleClick}
       animate={{ x, y }}
       transition={{ type: "spring", stiffness: 150, damping: 15, mass: 0.1 }}
-      className="group relative w-full md:w-auto px-8 py-4 bg-neutral-900 rounded-full overflow-hidden shadow-xl"
+      className="group relative w-fit md:w-auto px-8 py-4 bg-neutral-900 rounded-full overflow-hidden shadow-xl"
     >
       <div className="absolute inset-0 bg-orange-500 translate-y-[101%] group-hover:translate-y-0 transition-transform duration-300 ease-in-out" />
       <div className="flex justify-center">{children}</div>

@@ -48,7 +48,7 @@ const MagneticButton = ({ children, size = "default" }: { children: React.ReactN
   };
 
   const { x, y } = position;
-  const sizeClasses = size === "icon" ? "w-12 h-12 p-0" : "w-full md:w-auto px-8 py-4";
+  const sizeClasses = size === "icon" ? "w-12 h-12 p-0" : "w-fit md:w-auto px-8 py-4";
 
   return (
     <motion.button
@@ -71,7 +71,7 @@ export function Contact() {
   const FORMSPREE_ENDPOINT = "https://formspree.io/f/your-form-id";
 
   return (
-    <section className="py-24 px-4 bg-muted/30">
+    <section className="py-24 px-0 md:px-4 bg-muted/30">
       <div className="container max-w-6xl">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -87,7 +87,7 @@ export function Contact() {
             </span>
             <div className="w-12 h-0.5 bg-primary"></div>
           </div>
-          <h2 className="text-3xl md:text-4xl font-playfair font-bold mb-6">
+          <h2 className="text-3xl font-playfair font-bold mb-6">
             Let&apos;s Work Together
           </h2>
           <p className="text-lg text-muted-foreground">
