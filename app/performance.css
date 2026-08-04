@@ -1,56 +1,61 @@
-/* Performance Optimizations */
+/* ===========================================
+   Performance Optimizations — Aman Kumar Portfolio
+   =========================================== */
 
-/* Reduce paint on scroll */
-.will-change-transform {
-  will-change: transform;
-}
-
-/* Hardware acceleration for animations */
+/* Hardware acceleration for animated elements */
 .hardware-accelerated {
   transform: translateZ(0);
   backface-visibility: hidden;
   perspective: 1000px;
 }
 
-/* Optimize images for performance */
-img {
-  image-rendering: -webkit-optimize-contrast;
-  image-rendering: crisp-edges;
-  image-rendering: pixelated;
+/* will-change hint — only where animation is guaranteed */
+.will-change-transform {
+  will-change: transform;
 }
 
-/* Smooth scrolling with reduced lag */
-html {
-  overflow-x: hidden;
+/* Content-visibility: auto defers off-screen rendering — massive perf win */
+.content-visible-auto {
+  content-visibility: auto;
+  contain-intrinsic-size: 0 500px;
 }
 
-/* Reduce layout shifts */
+/* Contain layout for repeated card elements */
+.card-contained {
+  contain: layout style;
+}
+
+/* Paint containment for sections with complex backgrounds */
+.no-repaint {
+  contain: paint;
+}
+
+/* Reduce layout shifts — stable containers */
 .layout-stable {
   contain: layout;
 }
 
-/* Optimize animations */
-@media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-  }
+/* Optimized image rendering for photos */
+img {
+  /* Default: auto (best for photos) */
+  image-rendering: auto;
 }
 
-/* Optimize for mobile */
-@media (max-width: 768px) {
-  .performance-mobile {
-    transform: none;
-    will-change: auto;
-  }
+/* Crisp rendering only for pixel-art or icons */
+.pixel-art {
+  image-rendering: pixelated;
 }
 
-/* Preload critical resources */
-.critical-resource {
-  contain: layout;
+/* Smooth scroll — managed by Lenis, html uses scroll-behavior: auto */
+html {
+  overflow-x: hidden;
+  text-rendering: optimizeSpeed;
+}
+
+/* Reduce unnecessary repaints on body */
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 /* Optimize blend modes */
@@ -59,13 +64,35 @@ html {
   isolation: isolate;
 }
 
-/* Reduce repaints */
-.no-repaint {
-  contain: paint;
+/* Reduce motion for accessibility — respects OS preference */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
 
-/* Optimize SVG filters */
-.svg-filter-optimized {
-  filter: url(#roughNoise);
-  will-change: filter;
+/* Mobile performance — disable will-change on slow devices */
+@media (max-width: 768px) {
+  .performance-mobile {
+    transform: none;
+    will-change: auto;
+  }
+
+  /* Reduce blur filters on mobile for better paint performance */
+  .blur-3xl {
+    filter: blur(40px); /* Reduced from 64px */
+  }
+}
+
+/* Prefers-data: reduce network requests for metered connections */
+@media (prefers-reduced-data: reduce) {
+  video,
+  [data-background-video] {
+    display: none;
+  }
 }

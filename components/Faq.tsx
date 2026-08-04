@@ -39,64 +39,74 @@ export default function FAQ() {
   };
 
   return (
-    <section className="py-20 lg:py-24 bg-gray-50">
-      <div className="max-w-4xl mx-auto px-6 lg:px-8">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl lg:text-5xl font-bold text-gray-900 mb-6">
+    <section className="py-16 sm:py-20 lg:py-24 my-8 rounded-3xl sm:rounded-[2.5rem] lg:rounded-[3rem] bg-white border border-gray-200/80 shadow-2xl overflow-hidden relative">
+      <div className="max-w-4xl mx-auto px-6 sm:px-8 lg:px-12">
+        <div className="text-center mb-12 sm:mb-16">
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-orange-500/10 text-[#F05335] text-xs font-bold uppercase tracking-widest mb-4 border border-[#F05335]/20">
+            Got Questions?
+          </div>
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-gray-900 tracking-tight mb-4">
             Frequently Asked Questions
           </h2>
-          <p className="text-xl text-gray-600 max-w-2xl mx-auto">
+          <p className="text-base sm:text-lg text-gray-600 max-w-2xl mx-auto font-normal">
             Got questions about our work? We&apos;ve got answers.
           </p>
         </div>
 
         <div className="space-y-4">
-          {faqData.map((item, index) => (
-            <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="bg-white rounded-xl border border-gray-200 overflow-hidden"
-            >
-              <button
-                onClick={() => toggleQuestion(index)}
-                className="w-full px-6 py-5 text-left flex items-center justify-between hover:bg-gray-50 transition-colors duration-200"
+          {faqData.map((item, index) => {
+            const isOpen = activeIndex === index;
+            return (
+              <motion.div
+                key={index}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.4, delay: index * 0.08 }}
+                className={`rounded-2xl sm:rounded-3xl border transition-all duration-300 overflow-hidden ${
+                  isOpen
+                    ? "bg-orange-50/30 border-[#F05335]/40 shadow-md"
+                    : "bg-white border-gray-200/90 hover:border-gray-300 hover:shadow-sm"
+                }`}
               >
-                <h3 className="text-lg font-semibold text-gray-900">
-                  {item.question}
-                </h3>
-                <motion.div
-                  animate={{ rotate: activeIndex === index ? 180 : 0 }}
-                  transition={{ duration: 0.3 }}
-                  className="w-6 h-6 flex items-center justify-center"
+                <button
+                  onClick={() => toggleQuestion(index)}
+                  className="w-full px-6 sm:px-8 py-5 sm:py-6 text-left flex items-center justify-between gap-4 transition-colors duration-200 cursor-pointer"
                 >
-                  <svg className="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                  </svg>
-                </motion.div>
-              </button>
-              
-              <AnimatePresence>
-                {activeIndex === index && (
+                  <h3 className="text-base sm:text-lg font-bold text-gray-900 tracking-tight">
+                    {item.question}
+                  </h3>
                   <motion.div
-                    initial={{ height: 0, opacity: 0 }}
-                    animate={{ height: 'auto', opacity: 1 }}
-                    exit={{ height: 0, opacity: 0 }}
-                    transition={{ duration: 0.3 }}
-                    className="overflow-hidden"
+                    animate={{ rotate: isOpen ? 180 : 0 }}
+                    transition={{ duration: 0.3, ease: "easeInOut" }}
+                    className={`w-9 h-9 sm:w-10 sm:h-10 rounded-full flex items-center justify-center shrink-0 transition-colors ${
+                      isOpen ? "bg-[#F05335] text-white" : "bg-gray-100 text-gray-600"
+                    }`}
                   >
-                    <div className="px-6 pb-5">
-                      <p className="text-gray-600 leading-relaxed">
-                        {item.answer}
-                      </p>
-                    </div>
+                    <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M19 9l-7 7-7-7" />
+                    </svg>
                   </motion.div>
-                )}
-              </AnimatePresence>
-            </motion.div>
-          ))}
+                </button>
+                
+                <AnimatePresence>
+                  {isOpen && (
+                    <motion.div
+                      initial={{ height: 0, opacity: 0 }}
+                      animate={{ height: 'auto', opacity: 1 }}
+                      exit={{ height: 0, opacity: 0 }}
+                      transition={{ duration: 0.3, ease: "easeInOut" }}
+                      className="overflow-hidden"
+                    >
+                      <div className="px-6 sm:px-8 pb-6 text-sm sm:text-base text-gray-600 leading-relaxed border-t border-gray-100 pt-4">
+                        {item.answer}
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+              </motion.div>
+            );
+          })}
         </div>
       </div>
     </section>

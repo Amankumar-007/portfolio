@@ -1,9 +1,9 @@
 :root {
-  --nav-bg: rgba(255, 252, 249, 0.7);
-  --nav-border: rgba(0, 0, 0, 0.08);
-  --nav-accent: #f97316;
-  --nav-text: #1a1a1a;
-  --glass-blur: 12px;
+  --nav-bg: rgba(18, 18, 20, 0.9);
+  --nav-border: rgba(255, 255, 255, 0.12);
+  --nav-accent: #F05335;
+  --nav-text: #ffffff;
+  --glass-blur: 16px;
 }
 
 /* --- WRAPPER & PROGRESS --- */
@@ -61,7 +61,7 @@
 .modern-nav-wrapper.scrolled .modern-nav-container {
   max-width: 900px;
   height: 3.2rem;
-  background: rgba(255, 255, 255, 0.9);
+  background: rgba(18, 18, 20, 0.95);
 }
 
 /* --- LOGO --- */
@@ -111,27 +111,27 @@
   font-size: 0.7rem;
   font-weight: 800;
   text-transform: uppercase;
-  color: #666;
+  color: #a1a1aa;
   text-decoration: none;
   transition: all 0.3s ease;
 }
 
 .desktop-link-item:hover {
-  color: #000;
+  color: #ffffff;
 }
 
 .desktop-link-item.active {
-  color: #000;
+  color: #ffffff;
 }
 
 .active-pill {
   position: absolute;
   inset: 0;
-  background: #fff;
+  background: rgba(255, 255, 255, 0.15);
   border-radius: 9999px;
   z-index: -1;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.06);
-  border: 1px solid rgba(0, 0, 0, 0.04);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 /* --- RIGHT CONTROLS --- */

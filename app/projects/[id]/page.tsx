@@ -1,6 +1,7 @@
 import { ProjectClient } from "./ProjectClient";
 import { Suspense } from "react";
 import Loading from "./loading";
+import type { Metadata } from "next";
 
 // Sample project data (in a real app, you'd fetch this from an API or database)
 const projects = [
@@ -191,6 +192,50 @@ export async function generateStaticParams() {
   return projects.map((project) => ({
     id: project.id,
   }));
+}
+
+export async function generateMetadata(
+  { params }: { params: { id: string } }
+): Promise<Metadata> {
+  const project = projects.find((p) => p.id === params.id);
+
+  if (!project) {
+    return {
+      title: "Project Not Found | Aman Kumar",
+      description: "The requested project could not be found.",
+    };
+  }
+
+  const isExternalImage = project.image.startsWith("http");
+  const ogImage = isExternalImage ? project.image : `https://amankumarr.in${project.image}`;
+
+  return {
+    title: `${project.title} | Aman Kumar`,
+    description: `${project.description} Category: ${project.category}. Built by Aman Kumar, Full Stack Developer.`,
+    alternates: {
+      canonical: `https://amankumarr.in/projects/${project.id}`,
+    },
+    openGraph: {
+      title: `${project.title} — Aman Kumar`,
+      description: project.description,
+      url: `https://amankumarr.in/projects/${project.id}`,
+      images: [
+        {
+          url: ogImage,
+          width: 1200,
+          height: 630,
+          alt: `${project.title} — Project by Aman Kumar`,
+        },
+      ],
+      type: "article",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: `${project.title} | Aman Kumar`,
+      description: project.description,
+      images: [ogImage],
+    },
+  };
 }
 
 export default async function ProjectDetailPage({ params }: { params: { id: string } }) {

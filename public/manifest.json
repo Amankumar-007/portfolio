@@ -3,38 +3,71 @@
   "short_name": "Aman Kumar",
   "description": "Expert Full Stack Developer and SaaS specialist creating modern, high-performance web applications and scalable software solutions.",
   "start_url": "/",
+  "id": "/",
   "display": "standalone",
-  "background_color": "#FDFCFB",
+  "display_override": ["standalone", "minimal-ui"],
+  "background_color": "#0d0d0f",
   "theme_color": "#f97316",
   "orientation": "portrait-primary",
-  "categories": [
-    "portfolio",
-    "developer",
-    "web development",
-    "technology"
-  ],
+  "categories": ["portfolio", "developer", "web development", "technology"],
   "lang": "en",
   "scope": "/",
+  "prefer_related_applications": false,
   "icons": [
+    {
+      "src": "/favicon-16x16.png",
+      "sizes": "16x16",
+      "type": "image/png"
+    },
+    {
+      "src": "/favicon-32x32.png",
+      "sizes": "32x32",
+      "type": "image/png"
+    },
     {
       "src": "/android-chrome-192x192.png",
       "sizes": "192x192",
       "type": "image/png",
-      "purpose": "any maskable"
+      "purpose": "any"
+    },
+    {
+      "src": "/android-chrome-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
     },
     {
       "src": "/android-chrome-512x512.png",
       "sizes": "512x512",
       "type": "image/png",
-      "purpose": "any maskable"
+      "purpose": "any"
+    },
+    {
+      "src": "/android-chrome-512x512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
     }
   ],
   "screenshots": [
     {
       "src": "/about-image.png",
-      "sizes": "1280x720",
+      "sizes": "1200x630",
       "type": "image/png",
-      "form_factor": "wide"
+      "form_factor": "wide",
+      "label": "Aman Kumar Portfolio — Home Page"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Projects",
+      "url": "/projects",
+      "description": "View all portfolio projects"
+    },
+    {
+      "name": "Contact",
+      "url": "/contact",
+      "description": "Get in touch with Aman Kumar"
     }
   ]
 }

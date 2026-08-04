@@ -1,96 +1,39 @@
-'use client';
-import { motion } from 'framer-motion';
-import Hero from '@/components/sections/hero';
-import { ProjectsShowcase } from '@/components/sections/projects-showcase';
-import { AboutPreview } from '@/components/sections/about-preview';
-import { Services } from '@/components/sections/services';
-import { SkillsPreview } from '@/components/sections/skills-preview';
-import { Contact } from '@/components/sections/contact';
-import Head from 'next/head';
-import { useLenis } from '@/hooks/useLenis';
+import type { Metadata } from "next";
+import StickyPortfolioHomepage from "@/components/sections/sticky-portfolio-homepage";
+
+export const metadata: Metadata = {
+  title: "Aman Kumar | Software Engineer & Full Stack Developer",
+  description:
+    "Welcome to Aman Kumar's portfolio. Software Engineer specializing in SaaS solutions, full stack web apps, React, Next.js, and modern performance-focused designs. Available for hire.",
+  alternates: {
+    canonical: "https://amankumarr.in",
+  },
+  openGraph: {
+    title: "Aman Kumar | Software Engineer & Full Stack Developer",
+    description:
+      "Welcome to Aman Kumar's portfolio — Software Engineer specializing in SaaS solutions and modern web applications.",
+    url: "https://amankumarr.in",
+    images: [
+      {
+        url: "/about-image.png",
+        width: 1200,
+        height: 630,
+        alt: "Aman Kumar — Full Stack Developer Portfolio",
+      },
+    ],
+  },
+  twitter: {
+    title: "Aman Kumar | Software Engineer & Full Stack Developer",
+    description:
+      "Software Engineer specializing in SaaS solutions, full stack web apps, and modern designs.",
+    images: ["/about-image.png"],
+  },
+};
 
 export default function Home() {
-  const { isLoading } = useLenis();
-
   return (
-    <>
-      <Head>
-        <title>Home | Best Modern Portfolio - Aman Kumar</title>
-        <meta name="description" content="Welcome to Aman Kumar's best modern portfolio. Expert Full Stack developer specializing in SaaS solutions, innovative web projects, React applications, and high-performance development." />
-        <meta name="keywords" content="Aman Kumar portfolio, best modern portfolio, Full Stack projects, SaaS solutions, React developer portfolio, full stack developer showcase, web development portfolio, modern portfolio design, best portfolio website" />
-        <meta property="og:title" content="Home | Best Modern Portfolio - Aman Kumar" />
-        <meta property="og:description" content="Welcome to Aman Kumar's best modern portfolio. Expert Full Stack developer specializing in SaaS solutions and high-performance development." />
-        <meta property="og:url" content="https://amankumarr.in/" />
-        <meta property="og:image" content="https://amankumarr.in/about-image.png" />
-        <meta property="og:type" content="website" />
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Home | Best Modern Portfolio - Aman Kumar" />
-        <meta name="twitter:description" content="Welcome to Aman Kumar's best modern portfolio. Expert Full Stack developer specializing in modern web applications." />
-        <meta name="twitter:image" content="https://amankumarr.in/about-image.png" />
-        <link rel="canonical" href="https://amankumarr.in/" />
-
-        {/* Structured Data */}
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "Person",
-              "name": "Aman Kumar",
-              "url": "https://amankumarr.in",
-              "sameAs": [
-                "https://github.com/Amankumar-007",
-                "https://www.linkedin.com/in/amankumarweb/"
-              ],
-              "jobTitle": "Full Stack Developer",
-              "description": "Expert Full Stack Developer and SaaS Solutions specialist creating modern, high-performance web applications",
-              "knowsAbout": [
-                "React", "Node.js", "MongoDB", "Express.js", "TypeScript", "Next.js", "JavaScript", "SaaS Solutions"
-              ],
-              "image": "https://amankumarr.in/about-image.png"
-            })
-          }}
-        />
-      </Head>
-      <main
-        className="relative min-h-screen bg-[#FDFCFB] selection:bg-orange-200 selection:text-orange-900"
-      >
-
-        {/* --- GLOBAL FIXED BACKGROUND (Optimized for performance) --- */}
-        <div className="fixed inset-0 z-0 pointer-events-none overflow-hidden will-change-transform">
-
-          {/* 1. Optimized Grain Overlay - using CSS for better performance */}
-          <div
-            className="absolute inset-0 opacity-[0.12] mix-blend-multiply will-change-transform"
-            style={{
-              backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`,
-              transform: 'translateZ(0)' // Hardware acceleration
-            }}
-          />
-
-          {/* 2. Optimized Gradient Orb - reduced animation complexity */}
-          <motion.div
-            className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[90vw] h-[90vw] md:w-[50vw] md:h-[50vw] rounded-full blur-3xl opacity-20 will-change-transform"
-            style={{
-              background: 'conic-gradient(from 90deg at 50% 50%, #FFD700, #FF8C00, #FF4500, #FFD700)',
-              transform: 'translateZ(0)' // Hardware acceleration
-            }}
-          />
-        </div>
-
-        {/* --- SCROLLABLE CONTENT --- */}
-        {/* z-10 ensures content sits on top of the fixed background */}
-        <div className="relative z-10">
-          <Hero />
-          <AboutPreview />
-          <ProjectsShowcase />
-          <Services />
-          <SkillsPreview />
-          <Contact />
-
-        </div>
-
-      </main>
-    </>
+    <main className="min-h-screen bg-[#0b0b0e]">
+      <StickyPortfolioHomepage />
+    </main>
   );
 }

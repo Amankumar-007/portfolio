@@ -58,12 +58,13 @@ export function Chat() {
 
   return (
     <>
-      {/* Floating Toggle Button - Lower z-index than Navbar */}
+      {/* Floating Toggle Button - Toggles open & close state on click */}
       <Button
-        onClick={() => setIsOpen(true)}
-        className="fixed bottom-6 right-6 rounded-none w-12 h-12 p-0 bg-orange-500 hover:bg-black border-2 border-black shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] z-30 transition-all active:translate-x-[2px] active:translate-y-[2px] active:shadow-none"
+        onClick={() => setIsOpen((prev) => !prev)}
+        className="fixed bottom-6 right-6 rounded-none w-12 h-12 p-0 bg-[#F05335] hover:bg-orange-600 border-2 border-white/20 shadow-[4px_4px_0px_0px_rgba(240,83,53,0.5)] z-40 transition-all active:translate-x-[2px] active:translate-y-[2px] active:shadow-none cursor-pointer"
+        title={isOpen ? "Close Chat" : "Open AI Assistant"}
       >
-        <MessageCircle className="h-5 w-5 text-white" />
+        {isOpen ? <X className="h-5 w-5 text-white" /> : <MessageCircle className="h-5 w-5 text-white" />}
       </Button>
 
       <AnimatePresence>
@@ -72,50 +73,56 @@ export function Chat() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 20 }}
-            /* z-40 ensures it stays below Navbar (usually z-50 or z-100) */
-            className="fixed bottom-20 right-6 w-[320px] md:w-[350px] bg-[#fffcf9] border-2 border-black shadow-[8px_8px_0px_0px_rgba(251,146,60,0.2)] z-40 overflow-hidden flex flex-col"
+            className="fixed bottom-20 right-6 w-[320px] md:w-[360px] bg-[#0d0d0f] border-2 border-zinc-700 shadow-[8px_8px_0px_0px_rgba(240,83,53,0.3)] z-40 overflow-hidden flex flex-col text-white rounded-none"
           >
-            {/* NOISE ENGINE */}
-            <div className="absolute inset-0 z-0 pointer-events-none opacity-[0.1] bg-[url('https://grainy-gradients.vercel.app/noise.svg')]"></div>
-
-            {/* HEADER - Compact */}
-            <div className="relative z-10 p-3 border-b-2 border-black flex justify-between items-center bg-white">
-              <span className="font-black uppercase tracking-tighter text-[10px] flex items-center gap-2">
-                <span className="w-1.5 h-1.5 bg-orange-500 rounded-full" /> AI_ASSISTANT.SH
+            {/* HEADER */}
+            <div className="relative z-10 p-3.5 border-b-2 border-zinc-800 flex justify-between items-center bg-zinc-950">
+              <span className="font-black uppercase tracking-wider text-[11px] flex items-center gap-2 text-white">
+                <span className="w-2 h-2 bg-[#F05335] rounded-full animate-pulse" /> AI_ASSISTANT.SH
               </span>
-              <Button variant="ghost" size="icon" className="h-6 w-6 rounded-none hover:bg-orange-50" onClick={() => setIsOpen(false)}>
-                <X size={14} />
+              <Button variant="ghost" size="icon" className="h-7 w-7 rounded-none text-zinc-400 hover:text-white hover:bg-zinc-900 cursor-pointer" onClick={() => setIsOpen(false)}>
+                <X size={16} className="text-white" />
               </Button>
             </div>
 
-            {/* MESSAGE AREA - Reduced height (300px) */}
+            {/* MESSAGE AREA */}
             <div
               ref={chatContainerRef}
-              className="relative z-10 h-[300px] overflow-y-auto p-4 space-y-4 bg-transparent custom-scrollbar"
+              className="relative z-10 h-[320px] overflow-y-auto p-4 space-y-4 bg-[#0d0d0f] text-white custom-scrollbar"
             >
+              {messages.length === 0 && (
+                <div className="text-center py-10 text-zinc-500 text-xs font-mono">
+                  <Bot size={28} className="mx-auto mb-2 text-[#F05335] opacity-80" />
+                  Ask me anything about Aman&apos;s projects, skills, or experience!
+                </div>
+              )}
               {messages.map((message, index) => (
                 <div key={index} className={`flex gap-2 ${message.role === "user" ? "flex-row-reverse" : "flex-row"}`}>
-                  <div className={`p-1 border border-black h-fit ${message.role === "user" ? "bg-black text-white" : "bg-orange-500 text-white"}`}>
-                    {message.role === "user" ? <User size={10} /> : <Bot size={10} />}
+                  <div className={`p-1.5 border border-zinc-700 h-fit ${message.role === "user" ? "bg-white text-black" : "bg-[#F05335] text-white"}`}>
+                    {message.role === "user" ? <User size={12} /> : <Bot size={12} />}
                   </div>
-                  <div className={`p-3 border-2 border-black text-xs font-medium max-w-[85%] ${message.role === "user" ? "bg-white" : "bg-orange-50"}`}>
-                    <ReactMarkdown>{message.content}</ReactMarkdown>
+                  <div className={`p-3 border text-xs font-medium max-w-[85%] leading-relaxed ${message.role === "user" ? "bg-zinc-900 text-white border-zinc-700" : "bg-zinc-950 text-zinc-200 border-zinc-800"}`}>
+                    <div className="prose prose-invert prose-xs max-w-none"><ReactMarkdown>{message.content}</ReactMarkdown></div>
                   </div>
                 </div>
               ))}
-              {isLoading && <div className="p-2 border border-black bg-white text-[10px] font-mono animate-pulse w-fit">Processing...</div>}
+              {isLoading && (
+                <div className="flex gap-2 items-center text-zinc-400 text-[11px] font-mono animate-pulse">
+                  <Bot size={12} className="text-[#F05335]" /> Processing response...
+                </div>
+              )}
             </div>
 
             {/* INPUT FIELD */}
-            <form onSubmit={handleSubmit} className="relative z-10 p-3 border-t-2 border-black bg-white">
+            <form onSubmit={handleSubmit} className="relative z-10 p-3 border-t-2 border-zinc-800 bg-zinc-950">
               <div className="flex gap-2">
                 <Input
                   value={input}
                   onChange={(e) => setInput(e.target.value)}
-                  placeholder="Type code..."
-                  className="rounded-none border-2 border-black h-9 text-xs bg-[#fffcf9] focus-visible:ring-0"
+                  placeholder="Type message or question..."
+                  className="rounded-none border border-zinc-800 h-10 text-xs bg-[#0d0d0f] text-white placeholder:text-zinc-500 focus-visible:border-[#F05335] focus-visible:ring-0"
                 />
-                <Button type="submit" size="icon" className="h-9 w-9 bg-black rounded-none shadow-[2px_2px_0px_0px_rgba(251,146,60,1)]">
+                <Button type="submit" size="icon" className="h-10 w-10 bg-[#F05335] hover:bg-orange-600 text-white rounded-none shadow-[2px_2px_0px_0px_rgba(0,0,0,1)] cursor-pointer">
                   <Send size={14} className="text-white" />
                 </Button>
               </div>
