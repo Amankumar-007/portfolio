@@ -24,14 +24,16 @@ const poppins = Poppins({
 
 export const metadata: Metadata = {
   title: {
-    default: "Aman Kumar | Full Stack Developer & SaaS Solutions Expert",
+    default: "Aman Kumar | Full Stack Engineer — MERN Stack Developer, India",
     template: "%s | Aman Kumar",
   },
   description:
-    "Aman Kumar — Expert Full Stack Developer specializing in high-performance web applications and SaaS solutions. React, Node.js, Next.js, TypeScript. Available for freelance & collaboration.",
+    "Aman Kumar — Full Stack Engineer with 2+ years of experience on the MERN stack, Next.js, and TypeScript. Currently at StartupCoaching, previously Ninepages Techsolutions. Creator of SnippetsX, TomatoAI, and Awasdhara. Available for freelance & collaboration.",
   keywords: [
     "Aman Kumar",
+    "Full Stack Engineer",
     "Full Stack Developer",
+    "MERN Stack Developer",
     "SaaS Developer",
     "React developer",
     "Node.js developer",
@@ -44,6 +46,9 @@ export const metadata: Metadata = {
     "JavaScript developer",
     "Software as a Service",
     "Custom SaaS development",
+    "SnippetsX",
+    "TomatoAI",
+    "Awasdhara",
     "portfolio website",
     "hire developer India",
   ],
@@ -74,25 +79,25 @@ export const metadata: Metadata = {
     type: "website",
     locale: "en_US",
     url: "https://amankumarr.in",
-    title: "Aman Kumar | Full Stack Developer & SaaS Solutions Expert",
+    title: "Aman Kumar | Full Stack Engineer — MERN Stack Developer, India",
     description:
-      "Expert Full Stack Developer creating modern, high-performance web applications and SaaS solutions. Showcasing React, Node.js, Next.js projects.",
+      "Full Stack Engineer building on the MERN stack and Next.js — creator of SnippetsX, TomatoAI, and Awasdhara, currently shipping at StartupCoaching.",
     siteName: "Aman Kumar — Portfolio",
     images: [
       {
         url: "/about-image.png",
         width: 1200,
         height: 630,
-        alt: "Aman Kumar — Full Stack Developer Portfolio",
+        alt: "Aman Kumar — Full Stack Engineer Portfolio",
         type: "image/png",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Aman Kumar | Full Stack Developer & SaaS Solutions Expert",
+    title: "Aman Kumar | Full Stack Engineer — MERN Stack Developer, India",
     description:
-      "Expert Full Stack Developer creating modern, high-performance web applications and SaaS solutions.",
+      "Full Stack Engineer building on the MERN stack and Next.js — creator of SnippetsX, TomatoAI, and Awasdhara.",
     images: [{ url: "/about-image.png", alt: "Aman Kumar Portfolio" }],
     creator: "@amankumarweb",
     site: "@amankumarweb",

@@ -10,24 +10,24 @@ interface FAQItem {
 
 const faqData: FAQItem[] = [
   {
-    question: "What technologies do you work with?",
-    answer: "We work with modern web technologies including React, Next.js, TypeScript, Node.js, and various cloud platforms. Our tech stack is chosen based on project requirements to ensure optimal performance and scalability."
+    question: "What technologies does Aman Kumar work with?",
+    answer: "I specialize in the MERN stack — React, Node.js, Express.js, and MongoDB — along with Next.js, TypeScript, Redux, and Tailwind CSS. I've used this stack in production at Ninepages Techsolutions and StartupCoaching, and to build SnippetsX, TomatoAI, and Awasdhara."
   },
   {
-    question: "How long does a typical project take?",
-    answer: "Project timelines vary depending on complexity and scope. A simple website might take 2-4 weeks, while a complex web application could take 2-6 months. We provide detailed timelines during the planning phase."
+    question: "How much experience does Aman Kumar have as a Full Stack Engineer?",
+    answer: "2+ years of professional experience as a Full Stack Engineer — 1 year 5 months at Ninepages Techsolutions followed by an ongoing role at StartupCoaching — built on a self-taught foundation and a full-stack developer training program with Learn2Earn."
   },
   {
-    question: "Do you provide ongoing support?",
-    answer: "Yes, we offer ongoing maintenance and support services. This includes bug fixes, updates, performance optimization, and feature enhancements as your business needs evolve."
+    question: "Is Aman Kumar available for freelance or collaboration?",
+    answer: "Yes — I'm open to freelance projects and collaboration alongside my current full-time role. Reach out through the contact page and I typically respond within 24 hours."
   },
   {
-    question: "What is your development process?",
-    answer: "We follow an agile development process with clear phases: discovery, planning, design, development, testing, and deployment. We maintain regular communication and provide progress updates throughout the project."
+    question: "What projects has Aman Kumar built?",
+    answer: "Production SaaS and client platforms including SnippetsX (a real-time collaborative code editor), TomatoAI (an all-in-one AI tools platform), Awasdhara (a real estate & land investment platform), and TwoFloww, alongside e-commerce, LMS, and real estate apps."
   },
   {
-    question: "Can you work with existing projects?",
-    answer: "Absolutely! We can take over existing projects, perform code audits, implement new features, or improve performance. We'll assess your current setup and provide recommendations for improvement."
+    question: "Where is Aman Kumar based?",
+    answer: "India — currently working on-site in Delhi as a Full Stack Engineer at StartupCoaching, after 1 year 5 months on-site in Agra, Uttar Pradesh at Ninepages Techsolutions."
   }
 ];
 
@@ -38,8 +38,25 @@ export default function FAQ() {
     setActiveIndex(activeIndex === index ? null : index);
   };
 
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    mainEntity: faqData.map((item) => ({
+      "@type": "Question",
+      name: item.question,
+      acceptedAnswer: {
+        "@type": "Answer",
+        text: item.answer,
+      },
+    })),
+  };
+
   return (
     <section className="py-16 sm:py-20 lg:py-24 my-8 rounded-3xl sm:rounded-[2.5rem] lg:rounded-[3rem] bg-white border border-gray-200/80 shadow-2xl overflow-hidden relative">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+      />
       <div className="max-w-4xl mx-auto px-6 sm:px-8 lg:px-12">
         <div className="text-center mb-12 sm:mb-16">
           <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-orange-500/10 text-[#F05335] text-xs font-bold uppercase tracking-widest mb-4 border border-[#F05335]/20">
@@ -49,7 +66,7 @@ export default function FAQ() {
             Frequently Asked Questions
           </h2>
           <p className="text-base sm:text-lg text-gray-600 max-w-2xl mx-auto font-normal">
-            Got questions about our work? We&apos;ve got answers.
+            Common questions about my stack, experience, and availability.
           </p>
         </div>
 
@@ -88,7 +105,7 @@ export default function FAQ() {
                     </svg>
                   </motion.div>
                 </button>
-                
+
                 <AnimatePresence>
                   {isOpen && (
                     <motion.div

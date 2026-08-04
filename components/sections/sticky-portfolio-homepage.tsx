@@ -16,14 +16,11 @@ import {
   Twitter,
   Instagram,
   Youtube,
-  Github,
-  Layers,
-  Layout,
   Send,
   CheckCircle2,
   ArrowRight,
   BookOpen,
-  Play
+  Newspaper,
 } from "lucide-react";
 import {
   AnimatedNumber,
@@ -31,6 +28,7 @@ import {
   StaggerContainer,
   staggerChild,
 } from "@/components/ui/scroll-animations";
+import { getAllThoughts } from "@/data/thoughts";
 
 
 interface ProjectItem {
@@ -48,43 +46,34 @@ interface ToolItem {
   icon: React.ReactNode;
 }
 
-interface ArticleItem {
-  id: string;
-  title: string;
-  excerpt: string;
-  date: string;
-  readTime: string;
-  link: string;
-}
-
 const recentProjects: ProjectItem[] = [
   {
-    id: "najmai",
-    title: "NajmAI",
-    subtitle: "SaaS Framer Template",
+    id: "project-5",
+    title: "TomatoAI",
+    subtitle: "All-in-one AI Tools Platform",
     thumbImage: "/ai-tools/ai-tools.png",
-    link: "https://github.com/Amankumar-007"
+    link: "/projects/project-5"
   },
   {
-    id: "damas",
-    title: "Damas",
-    subtitle: "Free Framer Template",
-    thumbImage: "/ss-3.png",
-    link: "https://github.com/Amankumar-007"
+    id: "project-10",
+    title: "Awasdhara",
+    subtitle: "Real Estate & Land Investment Platform",
+    thumbImage: "/logos/awasdhara-logo.png",
+    link: "/projects/project-10"
   },
   {
-    id: "majd",
-    title: "Majd",
-    subtitle: "Free Portfolio Template",
-    thumbImage: "/ss-1.png",
-    link: "https://github.com/Amankumar-007"
+    id: "project-9",
+    title: "SnippetsX",
+    subtitle: "Real-time Collaborative Code Editor",
+    thumbImage: "/projects/snippetsx-cover.png",
+    link: "/projects/project-9"
   },
   {
-    id: "getbeds",
-    title: "GetBeds",
-    subtitle: "Accommodation SaaS Platform",
-    thumbImage: "/ss-3.png",
-    link: "https://github.com/Amankumar-007"
+    id: "project-11",
+    title: "TwoFloww",
+    subtitle: "Software Development & Digital Agency",
+    thumbImage: "/projects/twofloww-cover.png",
+    link: "/projects/project-11"
   }
 ];
 
@@ -191,54 +180,49 @@ const premiumTools: ToolItem[] = [
   }
 ];
 
-const designThoughts: ArticleItem[] = [
-  {
-    id: "career-in-web-design",
-    title: "Starting and Growing a Career in Web Design",
-    excerpt: "As the internet continues to develop and grow exponentially, jobs related to the industry do too, particularly those that relate to web design and development.",
-    date: "Apr 8, 2024",
-    readTime: "6min read",
-    link: "https://github.com/Amankumar-007"
-  },
-  {
-    id: "landing-page-performance",
-    title: "Create a Landing Page That Performs Great",
-    excerpt: "Whether you work in marketing, sales, or product design, you understand the importance of a quality landing page. Landing pages are standalone websites used to generate leads or sales.",
-    date: "Mar 15, 2024",
-    readTime: "6min read",
-    link: "https://github.com/Amankumar-007"
-  },
-  {
-    id: "future-designers",
-    title: "How Can Designers Prepare for the Future?",
-    excerpt: "Whether you work in marketing, sales, or product design, you understand the importance of a quality landing page. Landing pages help you increase your revenue.",
-    date: "Feb 28, 2024",
-    readTime: "6min read",
-    link: "https://github.com/Amankumar-007"
-  }
-];
+const designThoughts = getAllThoughts().slice(0, 3).map((t) => ({
+  id: t.id,
+  title: t.title,
+  excerpt: t.excerpt,
+  date: t.displayDate,
+  readTime: t.readTime,
+  link: `/thoughts/${t.id}`
+}));
 
 const experienceList = [
   {
-    period: "2024 - PRESENT",
-    role: "Senior Full Stack & SaaS Architect",
-    company: "Independent SaaS Studio",
-    description: "Architected and deployed full-stack SaaS applications including NajmAI, Damas, and GetBeds. Engineered high-concurrency Node.js REST & GraphQL APIs with PostgreSQL database optimization.",
-    skills: ["Next.js 14", "TypeScript", "Node.js", "PostgreSQL", "TailwindCSS", "AWS"]
+    period: "OCT 2025 - PRESENT",
+    role: "Full Stack Engineer",
+    company: "StartupCoaching",
+    location: "Delhi, India · On-site",
+    logo: "/logos/startupcoaching-logo.png",
+    description: "Developing scalable web applications and digital solutions at StartupCoaching.in — working across frontend, backend, APIs, databases, and performance optimization to deliver seamless user experiences.",
+    skills: ["MERN Stack", "Next.js", "TypeScript", "REST APIs", "Tailwind CSS", "Git"]
+  },
+  {
+    period: "JUN 2024 - OCT 2025",
+    role: "Full Stack Engineer",
+    company: "Ninepages Techsolutions Pvt. Ltd.",
+    location: "Agra, Uttar Pradesh, India · On-site",
+    logo: "/logos/ninepagestech-logo.png",
+    description: "Built and shipped client web applications end-to-end on the MERN stack over 1 year 5 months — from MongoDB schema design and REST APIs to Redux-driven React frontends.",
+    skills: ["MERN Stack", "Redux.js", "Express.js", "MongoDB", "React.js", "Node.js"]
   },
   {
     period: "2023 - 2024",
-    role: "Lead Full Stack Developer",
-    company: "Tech Solutions Inc.",
-    description: "Led development of enterprise Web Apps, LMS portals, and dynamic analytics dashboards. Designed reusable component design systems used across core applications.",
-    skills: ["React.js", "Express.js", "MongoDB", "GraphQL", "Redux Toolkit", "Docker"]
+    role: "Full Stack Developer Training",
+    company: "Learn2Earn",
+    location: "Structured Training Program",
+    description: "Completed an intensive full-stack developer training program — structured code reviews and production-style project specs that bridged self-taught fundamentals into job-ready practice.",
+    skills: ["JavaScript (ES6+)", "React.js", "Node.js", "MongoDB", "Git & GitHub"]
   },
   {
-    period: "2021 - 2023",
-    role: "Software Engineer & Frontend Specialist",
-    company: "Digital Craft Agency",
-    description: "Developed 25+ production websites for global clients. Translated complex Figma designs into responsive, accessible code with automated CI/CD deployment pipelines.",
-    skills: ["JavaScript (ES6+)", "React.js", "REST APIs", "CSS3 / SASS", "Git", "Vercel"]
+    period: "2022 - 2023",
+    role: "Intern Developer",
+    company: "Self-learning and Open Source Projects",
+    location: "Remote / Independent",
+    description: "Worked on personal projects, contributed to open-source, and participated in coding challenges to enhance development skills. Gained hands-on experience in web development and backend technologies.",
+    skills: ["HTML5", "CSS3", "JavaScript", "Git", "Open Source"]
   }
 ];
 
@@ -297,9 +281,8 @@ export default function StickyPortfolioHomepage() {
         <div className="bg-[#1e1e20]/90 backdrop-blur-md border border-white/10 px-3.5 py-1.5 rounded-2xl shadow-2xl flex items-center gap-2 sm:gap-2.5">
           <Link
             href="/"
-            className={`p-2 rounded-xl transition-all ${
-              activeTab === "home" ? "bg-white/15 text-white shadow-sm" : "text-zinc-400 hover:text-white hover:bg-white/5"
-            }`}
+            className={`p-2 rounded-xl transition-all ${activeTab === "home" ? "bg-white/15 text-white shadow-sm" : "text-zinc-400 hover:text-white hover:bg-white/5"
+              }`}
             title="Home"
           >
             <Home className="w-4 h-4" />
@@ -307,9 +290,8 @@ export default function StickyPortfolioHomepage() {
 
           <Link
             href="/projects"
-            className={`p-2 rounded-xl transition-all ${
-              activeTab === "projects" ? "bg-white/15 text-white shadow-sm" : "text-zinc-400 hover:text-white hover:bg-white/5"
-            }`}
+            className={`p-2 rounded-xl transition-all ${activeTab === "projects" ? "bg-white/15 text-white shadow-sm" : "text-zinc-400 hover:text-white hover:bg-white/5"
+              }`}
             title="Projects Directory"
           >
             <Folder className="w-4 h-4" />
@@ -317,9 +299,8 @@ export default function StickyPortfolioHomepage() {
 
           <Link
             href="/skills"
-            className={`p-2 rounded-xl transition-all ${
-              activeTab === "tools" ? "bg-white/15 text-white shadow-sm" : "text-zinc-400 hover:text-white hover:bg-white/5"
-            }`}
+            className={`p-2 rounded-xl transition-all ${activeTab === "tools" ? "bg-white/15 text-white shadow-sm" : "text-zinc-400 hover:text-white hover:bg-white/5"
+              }`}
             title="Tools & Skills"
           >
             <Wrench className="w-4 h-4" />
@@ -327,19 +308,25 @@ export default function StickyPortfolioHomepage() {
 
           <Link
             href="/about"
-            className={`p-2 rounded-xl transition-all ${
-              activeTab === "thoughts" ? "bg-white/15 text-white shadow-sm" : "text-zinc-400 hover:text-white hover:bg-white/5"
-            }`}
-            title="About / Thoughts"
+            className="p-2 rounded-xl transition-all text-zinc-400 hover:text-white hover:bg-white/5"
+            title="About"
           >
             <BookOpen className="w-4 h-4" />
           </Link>
 
           <Link
+            href="/thoughts"
+            className={`p-2 rounded-xl transition-all ${activeTab === "thoughts" ? "bg-white/15 text-white shadow-sm" : "text-zinc-400 hover:text-white hover:bg-white/5"
+              }`}
+            title="Design Thoughts"
+          >
+            <Newspaper className="w-4 h-4" />
+          </Link>
+
+          <Link
             href="/career"
-            className={`p-2 rounded-xl transition-all ${
-              activeTab === "experience" ? "bg-white/15 text-white shadow-sm" : "text-zinc-400 hover:text-white hover:bg-white/5"
-            }`}
+            className={`p-2 rounded-xl transition-all ${activeTab === "experience" ? "bg-white/15 text-white shadow-sm" : "text-zinc-400 hover:text-white hover:bg-white/5"
+              }`}
             title="Career Experience"
           >
             <Briefcase className="w-4 h-4" />
@@ -347,9 +334,8 @@ export default function StickyPortfolioHomepage() {
 
           <Link
             href="/contact"
-            className={`p-2 rounded-xl transition-all ${
-              activeTab === "contact" ? "bg-white/15 text-white shadow-sm" : "text-zinc-400 hover:text-white hover:bg-white/5"
-            }`}
+            className={`p-2 rounded-xl transition-all ${activeTab === "contact" ? "bg-white/15 text-white shadow-sm" : "text-zinc-400 hover:text-white hover:bg-white/5"
+              }`}
             title="Contact"
           >
             <Edit3 className="w-4 h-4" />
@@ -413,7 +399,7 @@ export default function StickyPortfolioHomepage() {
 
               {/* Profile Content */}
               <div className="text-center relative z-10">
-                
+
                 {/* Name directly below photo */}
                 <h1 className="text-3xl font-extrabold tracking-tight text-black font-sans mb-3">
                   Aman Kumar
@@ -428,7 +414,7 @@ export default function StickyPortfolioHomepage() {
 
                 {/* Short Bio */}
                 <p className="text-xs sm:text-sm font-semibold text-zinc-500 leading-relaxed max-w-[260px] mx-auto mb-6">
-                  A Software Engineer who has developed countless innovative solutions.
+                  A Full Stack Engineer building production SaaS on the MERN stack.
                 </p>
 
                 {/* Social Links Row (Orange Outline Icons matching reference) */}
@@ -487,7 +473,7 @@ export default function StickyPortfolioHomepage() {
               <div className="select-none mb-6">
                 <FadeInView delay={0}>
                   <h2 className="text-4xl xs:text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-black text-white uppercase tracking-wide leading-[0.88] block">
-                    SOFTWARE
+                    FULL STACK
                   </h2>
                 </FadeInView>
                 <FadeInView delay={0.12}>
@@ -500,7 +486,7 @@ export default function StickyPortfolioHomepage() {
               {/* Headline Bio */}
               <FadeInView delay={0.22}>
                 <p className="text-sm sm:text-lg text-[#888888] max-w-xl leading-relaxed mb-8 sm:mb-12 font-normal">
-                  Passionate about creating intuitive and engaging user experiences. Specialize in transforming ideas into beautifully crafted products.
+                  Full Stack Engineer on the MERN stack — from self-taught fundamentals to shipping production SaaS products like SnippetsX, TomatoAI, and Awasdhara.
                 </p>
               </FadeInView>
 
@@ -510,7 +496,7 @@ export default function StickyPortfolioHomepage() {
                   {/* Stat 1 */}
                   <motion.div variants={staggerChild}>
                     <div className="text-3xl sm:text-5xl lg:text-6xl font-black text-white tracking-tight">
-                      +<AnimatedNumber value={12} duration={1.8} />
+                      +<AnimatedNumber value={2} duration={1.2} />
                     </div>
                     <div className="text-[10px] sm:text-[11px] font-bold text-zinc-500 uppercase tracking-wider mt-1.5 leading-tight">
                       YEARS OF<br />EXPERIENCE
@@ -520,7 +506,7 @@ export default function StickyPortfolioHomepage() {
                   {/* Stat 2 */}
                   <motion.div variants={staggerChild}>
                     <div className="text-3xl sm:text-5xl lg:text-6xl font-black text-white tracking-tight">
-                      +<AnimatedNumber value={46} duration={2} />
+                      +<AnimatedNumber value={11} duration={1.6} />
                     </div>
                     <div className="text-[10px] sm:text-[11px] font-bold text-zinc-500 uppercase tracking-wider mt-1.5 leading-tight">
                       PROJECTS<br />COMPLETED
@@ -530,10 +516,10 @@ export default function StickyPortfolioHomepage() {
                   {/* Stat 3 */}
                   <motion.div variants={staggerChild}>
                     <div className="text-3xl sm:text-5xl lg:text-6xl font-black text-white tracking-tight">
-                      +<AnimatedNumber value={20} duration={1.6} />
+                      +<AnimatedNumber value={15} duration={1.8} />
                     </div>
                     <div className="text-[10px] sm:text-[11px] font-bold text-zinc-500 uppercase tracking-wider mt-1.5 leading-tight">
-                      WORLDWIDE<br />CLIENTS
+                      TECHNOLOGIES<br />MASTERED
                     </div>
                   </motion.div>
                 </StaggerContainer>
@@ -562,14 +548,14 @@ export default function StickyPortfolioHomepage() {
                   {/* Top Left Stacked Layers Icon */}
                   <div className="relative z-10">
                     <svg className="w-8 h-8 text-white fill-current" viewBox="0 0 24 24">
-                      <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round"/>
+                      <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
                     </svg>
                   </div>
 
                   {/* Heading */}
                   <div className="relative z-10">
                     <h3 className="text-xl sm:text-2xl font-extrabold tracking-tight uppercase leading-[1.15] max-w-[240px]">
-                      DYNAMIC ANIMATION, <br /> MOTION DESIGN
+                      MERN STACK, <br /> REAL-TIME SYSTEMS
                     </h3>
                   </div>
 
@@ -613,7 +599,7 @@ export default function StickyPortfolioHomepage() {
                   {/* Heading */}
                   <div className="relative z-10">
                     <h3 className="text-xl sm:text-2xl font-extrabold tracking-tight uppercase leading-[1.15] max-w-[240px]">
-                      FRAMER, FIGMA, <br /> WORDPRESS, REACTJS
+                      REACT, NODE.JS, <br /> NEXT.JS, MONGODB
                     </h3>
                   </div>
 
@@ -644,38 +630,48 @@ export default function StickyPortfolioHomepage() {
 
               <StaggerContainer className="space-y-8" staggerDelay={0.12}>
                 {recentProjects.map((proj) => (
-                  <motion.div
-                    key={proj.id}
-                    variants={staggerChild}
-                    className="flex items-center justify-between gap-6 group cursor-pointer py-2 border-b border-zinc-900/60 hover:border-zinc-800 transition-colors"
-                    onClick={() => window.open(proj.link, "_blank")}
-                  >
-                    <div className="flex items-center gap-6">
-                      <div className="w-24 h-24 sm:w-28 sm:h-28 rounded-2xl bg-zinc-900 border border-zinc-800/80 overflow-hidden relative flex-shrink-0 shadow-md">
-                        <Image
-                          src={proj.thumbImage}
-                          alt={proj.title}
-                          fill
-                          sizes="112px"
-                          className="object-cover group-hover:scale-105 transition-transform duration-500"
-                        />
+                  <motion.div key={proj.id} variants={staggerChild}>
+                    <Link
+                      href={proj.link}
+                      className="flex items-center justify-between gap-6 group py-2 border-b border-zinc-900/60 hover:border-zinc-800 transition-colors"
+                    >
+                      <div className="flex items-center gap-6">
+                        <div className="w-24 h-24 sm:w-28 sm:h-28 rounded-2xl bg-zinc-900 border border-zinc-800/80 overflow-hidden relative flex-shrink-0 shadow-md">
+                          <Image
+                            src={proj.thumbImage}
+                            alt={proj.title}
+                            fill
+                            sizes="112px"
+                            className="object-cover group-hover:scale-105 transition-transform duration-500"
+                          />
+                        </div>
+                        <div>
+                          <h3 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight group-hover:text-[#F05335] transition-colors">
+                            {proj.title}
+                          </h3>
+                          <p className="text-sm font-medium text-zinc-400 mt-1">
+                            {proj.subtitle}
+                          </p>
+                        </div>
                       </div>
-                      <div>
-                        <h3 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight group-hover:text-[#F05335] transition-colors">
-                          {proj.title}
-                        </h3>
-                        <p className="text-sm font-medium text-zinc-400 mt-1">
-                          {proj.subtitle}
-                        </p>
-                      </div>
-                    </div>
 
-                    <div className="text-[#F05335] group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform p-2">
-                      <ArrowUpRight className="w-6 h-6 stroke-[2.5]" />
-                    </div>
+                      <div className="text-[#F05335] group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform p-2">
+                        <ArrowUpRight className="w-6 h-6 stroke-[2.5]" />
+                      </div>
+                    </Link>
                   </motion.div>
                 ))}
               </StaggerContainer>
+
+              <div className="mt-8 pt-2">
+                <Link
+                  href="/projects"
+                  className="inline-flex items-center gap-2.5 px-6 py-3.5 rounded-2xl bg-zinc-900 border border-zinc-800 text-white font-bold text-xs uppercase tracking-wider hover:bg-[#F05335] hover:border-[#F05335] transition-all group"
+                >
+                  <span>View All Projects</span>
+                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                </Link>
+              </div>
             </section>
 
             {/* PREMIUM TOOLS SECTION (#tools) */}
@@ -707,7 +703,7 @@ export default function StickyPortfolioHomepage() {
                       <h3 className="text-xs sm:text-lg font-bold text-white tracking-tight group-hover:text-[#F05335] transition-colors leading-tight truncate">
                         {tool.name}
                       </h3>
-                        <p className="text-[10px] sm:text-xs font-medium text-zinc-400 mt-0.5 leading-tight truncate">
+                      <p className="text-[10px] sm:text-xs font-medium text-zinc-400 mt-0.5 leading-tight truncate">
                         {tool.subtitle}
                       </p>
                     </div>
@@ -733,32 +729,42 @@ export default function StickyPortfolioHomepage() {
 
               <StaggerContainer className="space-y-8" staggerDelay={0.13}>
                 {designThoughts.map((article) => (
-                  <motion.div
-                    key={article.id}
-                    variants={staggerChild}
-                    className="group cursor-pointer py-4 border-b border-zinc-900/80 hover:border-zinc-800 transition-colors"
-                    onClick={() => window.open(article.link, "_blank")}
-                  >
-                    <div className="flex items-start justify-between gap-4">
-                      <h3 className="text-xl sm:text-2xl font-extrabold text-white tracking-tight leading-snug group-hover:text-[#F05335] transition-colors max-w-xl">
-                        {article.title}
-                      </h3>
-                      <div className="text-[#F05335] group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform p-1 flex-shrink-0">
-                        <ArrowUpRight className="w-5 h-5 stroke-[2.5]" />
+                  <motion.div key={article.id} variants={staggerChild}>
+                    <Link
+                      href={article.link}
+                      className="group block py-4 border-b border-zinc-900/80 hover:border-zinc-800 transition-colors"
+                    >
+                      <div className="flex items-start justify-between gap-4">
+                        <h3 className="text-xl sm:text-2xl font-extrabold text-white tracking-tight leading-snug group-hover:text-[#F05335] transition-colors max-w-xl">
+                          {article.title}
+                        </h3>
+                        <div className="text-[#F05335] group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform p-1 flex-shrink-0">
+                          <ArrowUpRight className="w-5 h-5 stroke-[2.5]" />
+                        </div>
                       </div>
-                    </div>
 
-                    <p className="text-xs sm:text-sm text-zinc-400 font-normal leading-relaxed mt-2.5 max-w-xl">
-                      {article.excerpt}
-                    </p>
+                      <p className="text-xs sm:text-sm text-zinc-400 font-normal leading-relaxed mt-2.5 max-w-xl">
+                        {article.excerpt}
+                      </p>
 
-                    <div className="flex items-center justify-between gap-4 mt-5 text-xs font-medium text-zinc-500">
-                      <span>{article.date}</span>
-                      <span>{article.readTime}</span>
-                    </div>
+                      <div className="flex items-center justify-between gap-4 mt-5 text-xs font-medium text-zinc-500">
+                        <span>{article.date}</span>
+                        <span>{article.readTime}</span>
+                      </div>
+                    </Link>
                   </motion.div>
                 ))}
               </StaggerContainer>
+
+              <div className="mt-8 pt-2">
+                <Link
+                  href="/thoughts"
+                  className="inline-flex items-center gap-2.5 px-6 py-3.5 rounded-2xl bg-zinc-900 border border-zinc-800 text-white font-bold text-xs uppercase tracking-wider hover:bg-[#F05335] hover:border-[#F05335] transition-all group"
+                >
+                  <span>Read All Thoughts</span>
+                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                </Link>
+              </div>
             </section>
 
             {/* EXPERIENCE SECTION (#experience) */}
@@ -833,65 +839,65 @@ export default function StickyPortfolioHomepage() {
 
               <FadeInView delay={0.15}>
                 <div className="bg-[#1a1a1c] border border-zinc-800/90 p-6 sm:p-10 rounded-[32px] shadow-2xl relative overflow-hidden mb-12">
-                
-                {/* Contact Quick Info Badges */}
-                <div className="flex flex-wrap gap-3 mb-8 pb-6 border-b border-zinc-800/80">
-                  <div className="px-3.5 py-1.5 rounded-full bg-zinc-900 border border-zinc-800 text-xs font-semibold text-zinc-300 flex items-center gap-2">
-                    <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-                    <span>Available for Hire</span>
-                  </div>
-                  <div className="px-3.5 py-1.5 rounded-full bg-zinc-900 border border-zinc-800 text-xs font-semibold text-zinc-300">
-                    Response time: &lt; 24 hrs
-                  </div>
-                </div>
 
-                {formSubmitted ? (
-                  <div className="p-6 rounded-2xl bg-emerald-500/15 border border-emerald-500/30 text-emerald-400 text-sm font-semibold flex items-center gap-3">
-                    <CheckCircle2 className="w-6 h-6 flex-shrink-0" />
-                    <span>Message sent successfully! I will reply soon.</span>
+                  {/* Contact Quick Info Badges */}
+                  <div className="flex flex-wrap gap-3 mb-8 pb-6 border-b border-zinc-800/80">
+                    <div className="px-3.5 py-1.5 rounded-full bg-zinc-900 border border-zinc-800 text-xs font-semibold text-zinc-300 flex items-center gap-2">
+                      <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+                      <span>Available for Hire</span>
+                    </div>
+                    <div className="px-3.5 py-1.5 rounded-full bg-zinc-900 border border-zinc-800 text-xs font-semibold text-zinc-300">
+                      Response time: &lt; 24 hrs
+                    </div>
                   </div>
-                ) : (
-                  <form onSubmit={handleContactSubmit} className="space-y-5">
-                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                      <div>
-                        <label className="text-xs font-bold text-zinc-400 uppercase tracking-wider block mb-2">Your Name</label>
-                        <input
-                          type="text"
-                          required
-                          placeholder="e.g. Alex Smith"
-                          className="w-full px-4 py-3.5 rounded-2xl bg-zinc-900/90 border border-zinc-700/80 text-white placeholder-zinc-400 text-sm font-medium focus:outline-none focus:border-[#F05335] focus:ring-2 focus:ring-[#F05335]/30 transition-all shadow-inner"
-                        />
+
+                  {formSubmitted ? (
+                    <div className="p-6 rounded-2xl bg-emerald-500/15 border border-emerald-500/30 text-emerald-400 text-sm font-semibold flex items-center gap-3">
+                      <CheckCircle2 className="w-6 h-6 flex-shrink-0" />
+                      <span>Message sent successfully! I will reply soon.</span>
+                    </div>
+                  ) : (
+                    <form onSubmit={handleContactSubmit} className="space-y-5">
+                      <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
+                        <div>
+                          <label className="text-xs font-bold text-zinc-400 uppercase tracking-wider block mb-2">Your Name</label>
+                          <input
+                            type="text"
+                            required
+                            placeholder="e.g. Alex Smith"
+                            className="w-full px-4 py-3.5 rounded-2xl bg-zinc-900/90 border border-zinc-700/80 text-white placeholder-zinc-400 text-sm font-medium focus:outline-none focus:border-[#F05335] focus:ring-2 focus:ring-[#F05335]/30 transition-all shadow-inner"
+                          />
+                        </div>
+                        <div>
+                          <label className="text-xs font-bold text-zinc-400 uppercase tracking-wider block mb-2">Your Email</label>
+                          <input
+                            type="email"
+                            required
+                            placeholder="e.g. alex@example.com"
+                            className="w-full px-4 py-3.5 rounded-2xl bg-zinc-900/90 border border-zinc-700/80 text-white placeholder-zinc-400 text-sm font-medium focus:outline-none focus:border-[#F05335] focus:ring-2 focus:ring-[#F05335]/30 transition-all shadow-inner"
+                          />
+                        </div>
                       </div>
                       <div>
-                        <label className="text-xs font-bold text-zinc-400 uppercase tracking-wider block mb-2">Your Email</label>
-                        <input
-                          type="email"
+                        <label className="text-xs font-bold text-zinc-400 uppercase tracking-wider block mb-2">Your Message</label>
+                        <textarea
+                          rows={4}
                           required
-                          placeholder="e.g. alex@example.com"
-                          className="w-full px-4 py-3.5 rounded-2xl bg-zinc-900/90 border border-zinc-700/80 text-white placeholder-zinc-400 text-sm font-medium focus:outline-none focus:border-[#F05335] focus:ring-2 focus:ring-[#F05335]/30 transition-all shadow-inner"
+                          placeholder="Tell me about your project or inquiry..."
+                          className="w-full px-4 py-3.5 rounded-2xl bg-zinc-900/90 border border-zinc-700/80 text-white placeholder-zinc-400 text-sm font-medium focus:outline-none focus:border-[#F05335] focus:ring-2 focus:ring-[#F05335]/30 transition-all shadow-inner resize-none"
                         />
                       </div>
-                    </div>
-                    <div>
-                      <label className="text-xs font-bold text-zinc-400 uppercase tracking-wider block mb-2">Your Message</label>
-                      <textarea
-                        rows={4}
-                        required
-                        placeholder="Tell me about your project or inquiry..."
-                        className="w-full px-4 py-3.5 rounded-2xl bg-zinc-900/90 border border-zinc-700/80 text-white placeholder-zinc-400 text-sm font-medium focus:outline-none focus:border-[#F05335] focus:ring-2 focus:ring-[#F05335]/30 transition-all shadow-inner resize-none"
-                      />
-                    </div>
-                    <button
-                      type="submit"
-                      disabled={isSubmitting}
-                      className="w-full py-4 px-6 rounded-2xl bg-[#F05335] hover:bg-[#ff5d3d] active:scale-[0.99] text-white font-extrabold text-sm uppercase tracking-wider shadow-[0_10px_25px_rgba(240,83,53,0.35)] transition-all flex items-center justify-center gap-2.5 cursor-pointer"
-                    >
-                      <Send className="w-4.5 h-4.5" />
-                      <span>{isSubmitting ? "Sending..." : "Send Message"}</span>
-                    </button>
-                  </form>
-                )}
-              </div>
+                      <button
+                        type="submit"
+                        disabled={isSubmitting}
+                        className="w-full py-4 px-6 rounded-2xl bg-[#F05335] hover:bg-[#ff5d3d] active:scale-[0.99] text-white font-extrabold text-sm uppercase tracking-wider shadow-[0_10px_25px_rgba(240,83,53,0.35)] transition-all flex items-center justify-center gap-2.5 cursor-pointer"
+                      >
+                        <Send className="w-4.5 h-4.5" />
+                        <span>{isSubmitting ? "Sending..." : "Send Message"}</span>
+                      </button>
+                    </form>
+                  )}
+                </div>
               </FadeInView>
 
               {/* Aesthetic Footer Strip */}

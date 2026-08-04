@@ -1,5 +1,6 @@
 import { MetadataRoute } from 'next'
 import { getAllProjects } from '@/data/projects'
+import { getAllThoughts } from '@/data/thoughts'
 
 export default function sitemap(): MetadataRoute.Sitemap {
     const baseUrl = 'https://amankumarr.in'
@@ -7,6 +8,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
     // Get all actual projects from data
     const projects = getAllProjects()
+    const thoughts = getAllThoughts()
 
     // Static routes — only pages that actually exist and return 200
     const staticRoutes = [
@@ -51,6 +53,18 @@ export default function sitemap(): MetadataRoute.Sitemap {
             lastModified: currentDate,
             changeFrequency: 'monthly' as const,
             priority: 0.6
+        },
+        {
+            url: `${baseUrl}/experience`,
+            lastModified: currentDate,
+            changeFrequency: 'monthly' as const,
+            priority: 0.8
+        },
+        {
+            url: `${baseUrl}/thoughts`,
+            lastModified: currentDate,
+            changeFrequency: 'weekly' as const,
+            priority: 0.8
         }
     ]
 
@@ -62,5 +76,13 @@ export default function sitemap(): MetadataRoute.Sitemap {
         priority: 0.7
     }))
 
-    return [...staticRoutes, ...projectRoutes]
+    // Dynamic thought/article detail pages
+    const thoughtRoutes = thoughts.map((thought) => ({
+        url: `${baseUrl}/thoughts/${thought.id}`,
+        lastModified: thought.date,
+        changeFrequency: 'yearly' as const,
+        priority: 0.6
+    }))
+
+    return [...staticRoutes, ...projectRoutes, ...thoughtRoutes]
 }

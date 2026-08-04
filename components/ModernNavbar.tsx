@@ -2,7 +2,7 @@
 
 import { usePathname } from "next/navigation";
 import Link from "next/link";
-import { Home, Folder, Wrench, BookOpen, Briefcase, Edit3 } from "lucide-react";
+import { Home, Folder, Wrench, BookOpen, Newspaper, Briefcase, Edit3 } from "lucide-react";
 
 export default function ModernNavbar() {
   const pathname = usePathname();
@@ -51,6 +51,16 @@ export default function ModernNavbar() {
           title="About"
         >
           <BookOpen className="w-4 h-4" />
+        </Link>
+
+        <Link
+          href="/thoughts"
+          className={`p-2 rounded-xl transition-all ${
+            pathname.startsWith("/thoughts") ? "bg-white/15 text-white shadow-sm" : "text-zinc-400 hover:text-white hover:bg-white/5"
+          }`}
+          title="Thoughts"
+        >
+          <Newspaper className="w-4 h-4" />
         </Link>
 
         <Link

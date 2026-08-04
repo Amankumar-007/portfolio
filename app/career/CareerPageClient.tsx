@@ -1,24 +1,39 @@
 "use client";
 
 import { motion, useScroll, useTransform } from "framer-motion";
+import Link from "next/link";
 import { PageTransition } from "@/components/page-transition";
 import { useLenis } from '@/hooks/useLenis';
-import { Terminal, ArrowRight, Zap, Layers, Microscope, History } from "lucide-react";
+import { Terminal, ArrowRight, Zap, Layers, Microscope, History, GitBranch } from "lucide-react";
 
 const JOURNEY_DATA = [
   {
     date: "2026",
-    title: "The Architect Era",
-    desc: "Focusing on distributed systems, micro-frontend architecture, and AI-driven automation.",
-    skills: ["Next.js 16", "Rust", "Docker", "Terraform"],
+    title: "Full Stack Engineer @ StartupCoaching",
+    desc: "Shipping scalable web applications and digital solutions — owning frontend, backend, APIs, databases, and performance in the same sprint.",
+    skills: ["Next.js", "TypeScript", "MERN Stack", "REST APIs"],
     icon: <Zap size={20} />
   },
   {
-    date: "2024",
-    title: "Full Stack & SaaS Expert",
-    desc: "Mastering scalable architectures and SaaS solutions. Real-time sockets, subscription models, and cloud optimization.",
-    skills: ["Next.js", "Node.js", "MongoDB", "SaaS"],
+    date: "2025",
+    title: "17 Months in Production @ Ninepages Techsolutions",
+    desc: "Built and shipped client web applications end-to-end on the MERN stack, from MongoDB schema design to Redux-driven React frontends.",
+    skills: ["MERN Stack", "Redux.js", "Express.js", "MongoDB"],
     icon: <Layers size={20} />
+  },
+  {
+    date: "2024",
+    title: "The Bridge: Learn2Earn Training",
+    desc: "Completed an intensive full-stack developer training program — structured code reviews and deadline-driven builds that turned self-taught skills into job-ready practice.",
+    skills: ["JavaScript", "React.js", "Node.js", "Git"],
+    icon: <GitBranch size={20} />
+  },
+  {
+    date: "2023",
+    title: "Deep in Open Source",
+    desc: "Kept contributing to open-source and personal projects while training, sharpening the fundamentals that carried straight into the first full-time role.",
+    skills: ["JavaScript", "Open Source", "GitHub"],
+    icon: <History size={20} />
   },
   {
     date: "2022",
@@ -117,9 +132,9 @@ export default function CareerPageClient() {
             {/* METRICS */}
             <section className="mt-60 grid grid-cols-2 md:grid-cols-4 gap-10">
               {[
-                { val: "1.2k", lab: "Commits" },
-                { val: "18", lab: "Languages" },
-                { val: "24/7", lab: "Thinking" },
+                { val: "2+", lab: "Years Pro" },
+                { val: "11+", lab: "Projects Shipped" },
+                { val: "MERN", lab: "Core Stack" },
                 { val: "∞", lab: "Curiosity" }
               ].map((s, i) => (
                 <div key={i} className="border-l-4 border-orange-500 pl-4">
@@ -140,12 +155,14 @@ export default function CareerPageClient() {
                 </blockquote>
                 <div className="text-orange-500 font-mono tracking-widest text-xs">— B.B. KING // ACCESS_GRANTED</div>
 
-                <motion.button
-                  whileHover={{ scale: 1.05 }}
-                  className="mt-20 px-10 py-4 bg-orange-500 text-white font-black uppercase tracking-widest text-xs border border-white hover:bg-white hover:text-black transition-all"
-                >
-                  Continue the Tour <ArrowRight className="inline ml-2" size={16} />
-                </motion.button>
+                <Link href="/thoughts">
+                  <motion.span
+                    whileHover={{ scale: 1.05 }}
+                    className="inline-block mt-20 px-10 py-4 bg-orange-500 text-white font-black uppercase tracking-widest text-xs border border-white hover:bg-white hover:text-black transition-all cursor-pointer"
+                  >
+                    Read the Field Notes <ArrowRight className="inline ml-2" size={16} />
+                  </motion.span>
+                </Link>
               </div>
             </footer>
 

@@ -2,14 +2,14 @@ import type { Metadata } from "next";
 import ProjectsPageClient from "./ProjectsPageClient";
 
 export const metadata: Metadata = {
-  title: "Projects — Aman Kumar | Full Stack & SaaS Portfolio",
+  title: "Projects — Aman Kumar | Full Stack Engineer Portfolio",
   description:
     "Explore Aman Kumar's portfolio of projects: e-commerce platforms, real estate apps, LMS systems, AI tools, SaaS solutions, and more. Built with React, Next.js, Node.js, and MongoDB.",
   alternates: {
     canonical: "https://amankumarr.in/projects",
   },
   openGraph: {
-    title: "Projects — Aman Kumar | Full Stack & SaaS Portfolio",
+    title: "Projects — Aman Kumar | Full Stack Engineer Portfolio",
     description:
       "Explore Aman Kumar's portfolio of full-stack projects including e-commerce, real estate, LMS, and AI tools.",
     url: "https://amankumarr.in/projects",
@@ -23,7 +23,7 @@ export const metadata: Metadata = {
     ],
   },
   twitter: {
-    title: "Projects — Aman Kumar | Full Stack & SaaS Portfolio",
+    title: "Projects — Aman Kumar | Full Stack Engineer Portfolio",
     description:
       "Explore Aman Kumar's portfolio of full-stack projects including e-commerce, real estate, LMS, and AI tools.",
     images: ["/about-image.png"],

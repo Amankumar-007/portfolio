@@ -105,11 +105,68 @@ const projects = [
     ]
   },
   {
+    id: "project-9",
+    title: "SnippetsX",
+    description: "A browser-based platform for developers to share, run, and collaborate on code in real time — a modern alternative to Pastebin with a live collaborative editor.",
+    category: "SaaS / Developer Tools",
+    image: "/projects/snippetsx-cover.png",
+    demoUrl: "https://snippetsx.com",
+    githubUrl: "#",
+    year: "2025",
+    client: "Personal Product",
+    role: "Full Stack Engineer",
+    challenge: "Developers still fall back on screenshots, ZIP files, and screen-sharing to review or pair-program on code together. The goal was a single browser-based workspace where code could be shared, edited live, and executed instantly — without local setup.",
+    solution: "Built a real-time collaborative editor with live cursors and auto-sync, an in-browser execution engine supporting 40+ languages via isolated containers, shareable links with expiry/burn-after-view privacy controls, and team workspaces with permission management for interviewers, teams, and educators.",
+    results: "Now used for pair programming, technical interviews, and quick code sharing — replacing screen-share-based interview flows with live-typed, runnable code rooms.",
+    gallery: [
+      "/projects/snippetsx-cover.png"
+    ],
+    technologies: ["Next.js", "Node.js", "WebSockets", "Monaco Editor", "Docker", "Real-time Sync"]
+  },
+  {
+    id: "project-10",
+    title: "Awasdhara",
+    description: "A real estate platform focused on residential plots and land investment, built around verified listings, transparent pricing, and installment-based buying.",
+    category: "Real Estate",
+    image: "/logos/awasdhara-logo.png",
+    demoUrl: "https://awasdhara.in",
+    githubUrl: "#",
+    year: "2025",
+    client: "Real Estate Client",
+    role: "Full Stack Developer",
+    challenge: "First-time land buyers and investors need to compare verified plots across cities, understand EMI-based buying options, and get in touch with the sales team without friction.",
+    solution: "Built property listing pages with location/budget/type filters, an inquiry and callback-request flow that routes leads to the sales team, EMI plan displays for flexible purchasing, and a verified-plots badge system for RERA-ready projects.",
+    results: "Gives buyers a clear browse-to-inquiry journey and gives the sales team a steady, structured stream of qualified leads from the site.",
+    gallery: [
+      "/logos/awasdhara-logo.png"
+    ],
+    technologies: ["Next.js", "React", "Node.js", "MongoDB", "Lead Generation"]
+  },
+  {
+    id: "project-11",
+    title: "TwoFloww",
+    description: "A software development and digital agency platform offering website & app development, UI/UX design, AI-powered solutions, and SEO-first builds for startups and businesses.",
+    category: "Web Development",
+    image: "/projects/twofloww-cover.png",
+    demoUrl: "https://www.twofloww.in",
+    githubUrl: "#",
+    year: "2025",
+    client: "Digital Agency",
+    role: "Full Stack Developer",
+    challenge: "Startups and small businesses across India need a single team that can take them from idea to a shipped website, mobile app, or AI-powered product — without stitching together freelancers for design, dev, and SEO separately.",
+    solution: "Built the agency's own platform and delivery workflow spanning website & web app development, Flutter-based mobile apps, UI/UX design, AI strategy/custom solutions, and technical SEO — following a clear requirement → design → development → testing → deployment → maintenance process.",
+    results: "Positioned as a one-stop delivery partner for startups, small businesses, and enterprises across Delhi NCR and beyond.",
+    gallery: [
+      "/projects/twofloww-cover.png"
+    ],
+    technologies: ["Next.js", "React", "Flutter", "Node.js", "SEO"]
+  },
+  {
     id: "project-5",
-    title: "AI Tools Platform",
-    description: "A suite of AI-powered tools for text, image, and workflow automation. Includes chat assistants, content generation, summarization, and image enhancement with fine-tuned models.",
+    title: "TomatoAI",
+    description: "An all-in-one AI tools platform bringing text generation, image generation, AI search, and data tools into a single modern interface.",
     category: "AI Tools",
-    image: "https://images.pexels.com/photos/8386440/pexels-photo-8386440.jpeg",
+    image: "/ai-tools/ai-tools.png",
     demoUrl: "https://ai-tools-web-app-topaz.vercel.app/",
     githubUrl: "#",
     year: "2025",
@@ -119,9 +176,7 @@ const projects = [
     solution: "Implemented modular tool architecture with rate-limiting, retry logic, and prompt templates. Added history, export, and share features. Optimized inference through batching and caching.",
     results: "Reduced average response latency by 32% and cut inference costs ~18% with caching. Early users reported 2x faster content creation.",
     gallery: [
-      "https://images.pexels.com/photos/8386440/pexels-photo-8386440.jpeg",
-      "https://images.pexels.com/photos/8438925/pexels-photo-8438925.jpeg",
-      "https://images.pexels.com/photos/5473956/pexels-photo-5473956.jpeg"
+      "/ai-tools/ai-tools.png"
     ]
   },
   {

@@ -29,16 +29,22 @@ const skillCategories = [
 
 const experiences = [
   {
-    period: "2024 - Present",
-    role: "Full Stack & SaaS Developer",
-    company: "Freelancer Personal Projects",
-    description: "Building scalable web applications and SaaS solutions using Next.js, React, Node.js, and MongoDB. Specializing in subscription models and high-performance architectures.",
+    period: "Oct 2025 - Present",
+    role: "Full Stack Engineer",
+    company: "StartupCoaching",
+    description: "Developing scalable web applications and digital solutions — working across frontend, backend, APIs, databases, and performance optimization to deliver seamless user experiences.",
+  },
+  {
+    period: "Jun 2024 - Oct 2025",
+    role: "Full Stack Engineer",
+    company: "Ninepages Techsolutions Pvt. Ltd.",
+    description: "Built and shipped client web applications end-to-end on the MERN stack over 1 year 5 months — MongoDB schema design, REST APIs, and Redux-driven React frontends.",
   },
   {
     period: "2023 - 2024",
-    role: "Junior Developer",
-    company: "Freelance Web Developer",
-    description: "Developed and maintained responsive websites for small businesses, improving their digital presence. Focused on frontend technologies like HTML, CSS, JavaScript, and React.",
+    role: "Full Stack Developer Training",
+    company: "Learn2Earn",
+    description: "Completed an intensive full-stack developer training program, bridging self-taught fundamentals into job-ready practice through structured code reviews and deadline-driven builds.",
   },
   {
     period: "2022 - 2023",

@@ -38,16 +38,16 @@ export const StructuredData = () => {
             "width": 1200,
             "height": 630
         },
-        "jobTitle": "Full Stack Developer",
-        "description": "Expert Software Engineer and SaaS Solutions specialist creating modern, high-performance web applications with React, Next.js, Node.js, and MongoDB.",
+        "jobTitle": "Full Stack Engineer",
+        "description": "Full Stack Engineer with 2+ years of professional experience specializing in the MERN stack, Next.js, and TypeScript. Creator of SnippetsX, TomatoAI, and Awasdhara.",
         "nationality": {
             "@type": "Country",
             "name": "India"
         },
         "knowsAbout": [
             "React", "Next.js", "Node.js", "TypeScript", "JavaScript", "MongoDB",
-            "Express.js", "SaaS Development", "Full Stack Development", "Web Performance",
-            "Docker", "REST APIs", "Tailwind CSS", "Git"
+            "Express.js", "Redux.js", "MERN Stack", "SaaS Development", "Full Stack Development",
+            "Web Performance", "Docker", "REST APIs", "Tailwind CSS", "Git"
         ],
         "knowsLanguage": ["English", "Hindi"],
         "sameAs": [
@@ -56,16 +56,24 @@ export const StructuredData = () => {
         ],
         "worksFor": {
             "@type": "Organization",
-            "name": "Freelance / Self-employed"
+            "name": "StartupCoaching",
+            "url": "https://startupcoaching.in"
         },
+        "alumniOf": [
+            {
+                "@type": "Organization",
+                "name": "Ninepages Techsolutions Pvt. Ltd.",
+                "url": "https://ninepagestech.com"
+            }
+        ],
         "hasOccupation": {
             "@type": "Occupation",
-            "name": "Full Stack Developer",
+            "name": "Full Stack Engineer",
             "occupationLocation": {
                 "@type": "Country",
                 "name": "India"
             },
-            "skills": "React, Next.js, Node.js, TypeScript, MongoDB, SaaS Architecture"
+            "skills": "React, Next.js, Node.js, TypeScript, MongoDB, Redux.js, MERN Stack"
         },
         "contactPoint": {
             "@type": "ContactPoint",

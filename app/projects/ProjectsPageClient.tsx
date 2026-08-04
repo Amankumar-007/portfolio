@@ -20,7 +20,7 @@ import {
 import ErrorBoundary from "@/components/ErrorBoundary";
 import { motion, AnimatePresence } from "framer-motion";
 
-const categories = ["All", "AI Tools", "Full Stack", "Web Development", "Restaurant", "Mobile App", "SaaS"];
+const categories = ["All", "AI Tools", "Full Stack", "Web Development", "Real Estate", "Restaurant", "Mobile App", "SaaS"];
 
 export default function ProjectsPageClient() {
   const projects = useMemo(() => getAllProjects() || [], []);

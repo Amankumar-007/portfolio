@@ -10,20 +10,62 @@ export interface Project {
   }>;
   year: string;
   tags?: string[];
+  link?: string;
+  featured?: boolean;
 }
 
 export const getAllProjects = (): Project[] => [
   {
+    id: "project-9",
+    title: "SnippetsX",
+    description: "A browser-based, real-time collaborative code editor that replaces Pastebin-style sharing with live multi-cursor editing, in-browser execution for 40+ languages, and team workspaces — built for developers, technical interviewers, and students.",
+    category: "SaaS",
+    screenshots: [
+      { url: "/projects/snippetsx-cover.png", alt: "SnippetsX — real-time collaborative code editor" }
+    ],
+    year: "2025",
+    tags: ["Real-time Collaboration", "Code Execution", "Next.js", "WebSockets"],
+    link: "https://snippetsx.com",
+    featured: true
+  },
+  {
+    id: "project-10",
+    title: "Awasdhara",
+    description: "A real estate platform for residential plots and land investments, with verified property listings, location/budget filters, EMI plan display, and lead-generation inquiry flows for buyers and investors.",
+    category: "Real Estate",
+    screenshots: [
+      { url: "/logos/awasdhara-logo.png", alt: "Awasdhara — real estate & land investment platform" }
+    ],
+    year: "2025",
+    tags: ["Real Estate", "Next.js", "Lead Generation", "MongoDB"],
+    link: "https://awasdhara.in",
+    featured: true
+  },
+  {
+    id: "project-11",
+    title: "TwoFloww",
+    description: "A software development and digital agency platform offering website & app development, UI/UX design, AI-powered solutions, and SEO-first builds for startups and businesses across India.",
+    category: "Web Development",
+    screenshots: [
+      { url: "/projects/twofloww-cover.png", alt: "TwoFloww — software development & digital agency" }
+    ],
+    year: "2025",
+    tags: ["Next.js", "React", "Flutter", "SEO"],
+    link: "https://www.twofloww.in",
+    featured: true
+  },
+  {
     id: "project-5",
-    title: "AI Tools Platform",
-    description: "Explore an innovative AI platform featuring a suite of intelligent tools designed to automate tasks, enhance productivity, and drive smarter decision-making.",
+    title: "TomatoAI",
+    description: "An all-in-one AI tools platform bringing text generation, image generation, AI search, and data tools into a single modern interface — with secure JWT auth and a fully responsive UI.",
     category: "AI Tools",
     video: "/ai-tools/ai-tools.mp4",
     screenshots: [
-      { url: "/ai-tools/ai-tools.png", alt: "AI Tools Platform" }
+      { url: "/ai-tools/ai-tools.png", alt: "TomatoAI — AI tools platform" }
     ],
     year: "2025",
-    tags: ["AI", "Automation", "Productivity"]
+    tags: ["AI", "Automation", "Productivity"],
+    featured: true
   },
   {
     id: "project-3",

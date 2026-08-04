@@ -2,30 +2,30 @@ import type { Metadata } from "next";
 import AboutPageClient from "./AboutPageClient";
 
 export const metadata: Metadata = {
-  title: "About — Aman Kumar | Full Stack Developer & SaaS Expert",
+  title: "About — Aman Kumar | Full Stack Engineer",
   description:
-    "Learn about Aman Kumar, an expert Full Stack Developer specializing in high-performance web apps and SaaS solutions. Skilled in React, Next.js, Node.js, TypeScript, and MongoDB.",
+    "Aman Kumar is a Full Stack Engineer with 2+ years of experience on the MERN stack, Next.js, and TypeScript — from self-taught beginnings and Learn2Earn training to Ninepages Techsolutions and StartupCoaching.",
   alternates: {
     canonical: "https://amankumarr.in/about",
   },
   openGraph: {
-    title: "About — Aman Kumar | Full Stack Developer & SaaS Expert",
+    title: "About — Aman Kumar | Full Stack Engineer",
     description:
-      "Learn about Aman Kumar, expert Full Stack developer specializing in modern web applications and SaaS solutions.",
+      "Aman Kumar's journey from self-taught developer to Full Stack Engineer on the MERN stack — Learn2Earn, Ninepages Techsolutions, and StartupCoaching.",
     url: "https://amankumarr.in/about",
     images: [
       {
         url: "/about-image.png",
         width: 1200,
         height: 630,
-        alt: "Aman Kumar — Full Stack Developer",
+        alt: "Aman Kumar — Full Stack Engineer",
       },
     ],
   },
   twitter: {
-    title: "About — Aman Kumar | Full Stack Developer & SaaS Expert",
+    title: "About — Aman Kumar | Full Stack Engineer",
     description:
-      "Learn about Aman Kumar, expert Full Stack developer specializing in modern web applications and SaaS solutions.",
+      "Aman Kumar's journey from self-taught developer to Full Stack Engineer on the MERN stack.",
     images: ["/about-image.png"],
   },
 };
