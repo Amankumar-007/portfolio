@@ -11,14 +11,14 @@ const JOURNEY_DATA = [
     date: "2026",
     title: "Full Stack Engineer @ StartupCoaching",
     desc: "Shipping scalable web applications and digital solutions — owning frontend, backend, APIs, databases, and performance in the same sprint.",
-    skills: ["Next.js", "TypeScript", "MERN Stack", "REST APIs"],
+    skills: ["Next.js", "TypeScript", "Full Stack", "REST APIs"],
     icon: <Zap size={20} />
   },
   {
     date: "2025",
     title: "17 Months in Production @ Ninepages Techsolutions",
-    desc: "Built and shipped client web applications end-to-end on the MERN stack, from MongoDB schema design to Redux-driven React frontends.",
-    skills: ["MERN Stack", "Redux.js", "Express.js", "MongoDB"],
+    desc: "Built and shipped client web applications end-to-end as a Full Stack Engineer, from database schema design to Redux-driven React frontends.",
+    skills: ["Full Stack", "Redux.js", "Express.js", "MongoDB"],
     icon: <Layers size={20} />
   },
   {
@@ -134,7 +134,7 @@ export default function CareerPageClient() {
               {[
                 { val: "2+", lab: "Years Pro" },
                 { val: "11+", lab: "Projects Shipped" },
-                { val: "MERN", lab: "Core Stack" },
+                { val: "Full Stack", lab: "Core Role" },
                 { val: "∞", lab: "Curiosity" }
               ].map((s, i) => (
                 <div key={i} className="border-l-4 border-orange-500 pl-4">

@@ -15,6 +15,8 @@ import {
   Instagram,
   Youtube,
   CheckCircle2,
+  BookOpen,
+  Newspaper,
 } from "lucide-react";
 
 const experienceTimeline = [
@@ -32,7 +34,7 @@ const experienceTimeline = [
       "Working across frontend, backend, APIs, databases, and performance optimization to deliver seamless user experiences.",
       "Collaborating directly with the product team to ship features end-to-end, from schema to UI."
     ],
-    skills: ["MERN Stack", "Next.js", "TypeScript", "REST APIs", "Tailwind CSS", "Git"]
+    skills: ["Full Stack", "Next.js", "TypeScript", "REST APIs", "Tailwind CSS", "Git"]
   },
   {
     id: "exp-2",
@@ -44,12 +46,12 @@ const experienceTimeline = [
     type: "Full-Time · On-site",
     duration: "1 yr 5 mos",
     highlights: [
-      "Built and maintained client web applications end-to-end on the MERN stack.",
+      "Built and maintained client web applications end-to-end as a Full Stack Engineer.",
       "Designed MongoDB schemas and REST APIs, and implemented Redux-driven React frontends.",
       "Shipped a full role-based Learning Management System (LMS) covering admin, trainer, student, and examiner workflows.",
       "Worked on-site with a small team, owning features across the full stack rather than a single layer."
     ],
-    skills: ["MERN Stack", "Redux.js", "Express.js", "MongoDB", "React.js", "Node.js"]
+    skills: ["Full Stack", "Redux.js", "Express.js", "MongoDB", "React.js", "Node.js"]
   },
   {
     id: "exp-3",
@@ -61,7 +63,7 @@ const experienceTimeline = [
     highlights: [
       "Completed an intensive full-stack developer training program bridging self-taught fundamentals into job-ready practice.",
       "Practiced structured code reviews, deadline-driven builds, and production-style project specs.",
-      "Built full MERN-stack applications from scratch under real deadlines and review cycles."
+      "Built full-stack web applications from scratch under real deadlines and review cycles."
     ],
     skills: ["JavaScript (ES6+)", "React.js", "Node.js", "MongoDB", "Express.js", "Git & GitHub"]
   },
@@ -75,7 +77,7 @@ const experienceTimeline = [
     highlights: [
       "Worked on personal projects, contributed to open-source, and participated in coding challenges to enhance development skills.",
       "Gained hands-on experience in web development and backend technologies.",
-      "Built the foundation in HTML, CSS, and JavaScript that later became the basis for the MERN stack."
+      "Built the foundation in HTML, CSS, and JavaScript that later became the basis for full-stack engineering."
     ],
     skills: ["HTML5", "CSS3", "JavaScript", "Git", "Open Source"]
   }
@@ -90,131 +92,81 @@ export default function ExperiencePageClient() {
         <div className="liquid-glass-dock px-3.5 py-2 rounded-full flex items-center gap-1.5 transition-all duration-300">
           <Link
             href="/"
-            className="p-2.5 rounded-full text-zinc-400 hover:text-white hover:bg-white/10 transition-all"
-            title="Home"
-          >
-            <Home className="w-4.5 h-4.5" />
-          </Link>
-          <Link
-            href="/#projects"
-            className="p-2.5 rounded-full text-zinc-400 hover:text-white hover:bg-white/10 transition-all"
-            title="Projects"
-          >
-            <Folder className="w-4.5 h-4.5" />
-          </Link>
-          <Link
-            href="/experience"
-            className="p-2.5 rounded-full bg-[#F05335] text-white shadow-[0_8px_20px_rgba(240,83,53,0.5)] scale-110 transition-all"
-            title="Experience"
-          >
-            <Briefcase className="w-4.5 h-4.5" />
-          </Link>
-          <Link
-            href="/#tools"
-            className="p-2.5 rounded-full text-zinc-400 hover:text-white hover:bg-white/10 transition-all"
-            title="Tools"
-          >
-            <Wrench className="w-4.5 h-4.5" />
-          </Link>
-          <Link
-            href="/#contact"
-            className="p-2.5 rounded-full text-zinc-400 hover:text-white hover:bg-white/10 transition-all"
-            title="Contact"
-          >
-            <Edit3 className="w-4.5 h-4.5" />
-          </Link>
-        </div>
-      </header>
-
-      {/* DESKTOP ONLY: FLOATING TOP PILL NAVBAR */}
-      <header className="hidden sm:block fixed top-6 left-1/2 -translate-x-1/2 z-50">
-        <div className="bg-[#1e1e20]/90 backdrop-blur-md border border-white/10 px-4 py-2 rounded-2xl shadow-2xl flex items-center gap-3">
-          <Link
-            href="/"
-            className="p-2.5 rounded-xl text-zinc-400 hover:text-white hover:bg-white/5 transition-all"
+            className="p-2 rounded-full text-zinc-400 hover:text-white hover:bg-white/10 transition-colors"
             title="Home"
           >
             <Home className="w-4 h-4" />
           </Link>
           <Link
-            href="/#projects"
-            className="p-2.5 rounded-xl text-zinc-400 hover:text-white hover:bg-white/5 transition-all"
+            href="/projects"
+            className="p-2 rounded-full text-zinc-400 hover:text-white hover:bg-white/10 transition-colors"
             title="Projects"
           >
             <Folder className="w-4 h-4" />
           </Link>
           <Link
+            href="/skills"
+            className="p-2 rounded-full text-zinc-400 hover:text-white hover:bg-white/10 transition-colors"
+            title="Skills"
+          >
+            <Wrench className="w-4 h-4" />
+          </Link>
+          <Link
+            href="/about"
+            className="p-2 rounded-full text-zinc-400 hover:text-white hover:bg-white/10 transition-colors"
+            title="About"
+          >
+            <BookOpen className="w-4 h-4" />
+          </Link>
+          <Link
+            href="/thoughts"
+            className="p-2 rounded-full text-zinc-400 hover:text-white hover:bg-white/10 transition-colors"
+            title="Thoughts"
+          >
+            <Newspaper className="w-4 h-4" />
+          </Link>
+          <Link
             href="/experience"
-            className="p-2.5 rounded-xl bg-[#F05335] text-white shadow-md transition-all"
+            className="p-2 rounded-full bg-[#F05335] text-white shadow-md shadow-[#F05335]/30 transition-all"
             title="Experience"
           >
             <Briefcase className="w-4 h-4" />
           </Link>
           <Link
-            href="/#tools"
-            className="p-2.5 rounded-xl text-zinc-400 hover:text-white hover:bg-white/5 transition-all"
-            title="Tools"
-          >
-            <Wrench className="w-4 h-4" />
-          </Link>
-          <Link
-            href="/#contact"
-            className="p-2.5 rounded-xl text-zinc-400 hover:text-white hover:bg-white/5 transition-all"
-            title="Contact"
+            href="/contact"
+            className="p-2 rounded-full text-zinc-400 hover:text-white hover:bg-white/10 transition-colors"
+            title="Edit3"
           >
             <Edit3 className="w-4 h-4" />
           </Link>
         </div>
       </header>
 
-      {/* Main Container */}
-      <div className="max-w-[1440px] mx-auto px-4 sm:px-12 lg:px-24 xl:px-32 pt-10 sm:pt-40 lg:pt-44 pb-36 sm:pb-32">
-        <div className="flex flex-col lg:flex-row gap-14 lg:gap-16 xl:gap-24 items-start relative">
+      {/* Main Experience Layout */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-24">
 
-          {/* Sticky Profile Sidebar (Matching Reference Image) */}
-          <aside className="w-full lg:w-[340px] xl:w-[360px] flex-shrink-0 lg:sticky lg:top-6 xl:top-8 z-30 self-start">
-            <div className="bg-white text-black rounded-[36px] p-6 shadow-[0_25px_60px_rgba(0,0,0,0.3)] relative overflow-hidden flex flex-col justify-between border border-zinc-200/90">
+        <div className="flex flex-col lg:flex-row gap-12 lg:gap-16 items-start">
 
-              {/* 1. Top-Left Dashed Orange Arc */}
-              <svg
-                className="absolute -top-4 -left-4 w-48 h-48 pointer-events-none z-0"
-                viewBox="0 0 200 200"
-                fill="none"
-              >
-                <path
-                  d="M 10 120 C 30 30, 110 10, 190 15"
-                  stroke="#F05335"
-                  strokeWidth="2.5"
-                  strokeDasharray="5 5"
+          {/* Left Sticky Profile Card */}
+          <aside className="w-full lg:w-[340px] xl:w-[360px] lg:sticky lg:top-28 shrink-0">
+
+            <div className="bg-[#f7f5f2] rounded-3xl p-6 sm:p-8 text-zinc-900 shadow-2xl relative overflow-hidden border border-zinc-200">
+
+              {/* Status Badge Top Right */}
+              <div className="absolute top-5 right-5 flex items-center gap-1.5 bg-emerald-100 border border-emerald-300 text-emerald-800 text-[10px] font-bold px-2.5 py-1 rounded-full uppercase tracking-wider">
+                <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                Active
+              </div>
+
+              {/* Profile Image */}
+              <div className="relative w-28 h-28 mx-auto mb-6 rounded-full overflow-hidden border-4 border-white shadow-xl">
+                <Image
+                  src="/aman.jpg"
+                  alt="Aman Kumar"
+                  fill
+                  className="object-cover"
+                  priority
                 />
-              </svg>
-
-              {/* 2. Bottom-Left Dashed Orange Curve to Flame Badge */}
-              <svg
-                className="absolute bottom-28 -left-6 w-56 h-36 pointer-events-none z-0"
-                viewBox="0 0 220 140"
-                fill="none"
-              >
-                <path
-                  d="M 0 110 Q 90 105, 125 45"
-                  stroke="#F05335"
-                  strokeWidth="2.5"
-                  strokeDasharray="5 5"
-                />
-              </svg>
-
-              {/* Photo Container with Orange Portrait Background */}
-              <div className="relative z-10 mb-5 mt-1">
-                <div className="bg-gradient-to-b from-[#E64A19] to-[#D84315] relative rounded-[28px] overflow-hidden aspect-[4/4.2] shadow-lg border border-black/5 flex items-end justify-center">
-                  <Image
-                    src="/about.PNG"
-                    alt="Aman Kumar"
-                    fill
-                    sizes="360px"
-                    priority
-                    className="object-cover object-top grayscale contrast-125 mix-blend-luminosity hover:scale-105 transition-transform duration-500"
-                  />
-                </div>
               </div>
 
               {/* Profile Details */}
@@ -223,16 +175,9 @@ export default function ExperiencePageClient() {
                   Aman Kumar
                 </h1>
 
-                {/* Central Flame Badge */}
-                <div className="flex justify-center mb-3.5 relative">
-                  <div className="w-9 h-9 rounded-full bg-[#F05335] text-white flex items-center justify-center shadow-lg shadow-orange-500/30 relative z-10">
-                    <Flame className="w-4.5 h-4.5 fill-white text-white" />
-                  </div>
-                </div>
-
                 {/* Short Bio */}
                 <p className="text-xs sm:text-sm font-semibold text-zinc-500 leading-relaxed max-w-[260px] mx-auto mb-6">
-                  A Full Stack Engineer building production SaaS on the MERN stack.
+                  A Full Stack Engineer building production SaaS products.
                 </p>
 
                 {/* Orange Outline Social Icons */}
@@ -251,7 +196,6 @@ export default function ExperiencePageClient() {
                   </a>
                 </div>
               </div>
-
             </div>
           </aside>
 
@@ -269,7 +213,7 @@ export default function ExperiencePageClient() {
                 </h2>
               </div>
               <p className="text-base sm:text-lg text-zinc-400 max-w-2xl leading-relaxed font-normal">
-                2+ years of professional experience building on the MERN stack — from a self-taught
+                2+ years of professional experience in full stack engineering — from a self-taught
                 intern to a Full Stack Engineer shipping production applications.
               </p>
             </div>

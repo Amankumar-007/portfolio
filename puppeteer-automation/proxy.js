@@ -27,39 +27,117 @@ const COUNT_ONLY = args.includes('--count');
 const TEST_URL = 'https://www.google.com';
 const TEST_TIMEOUT = 6000; // 6 seconds
 
-// ─── Proxy Sources ────────────────────────────────────────────────────────────
-const SOURCES = [
-  {
-    name: 'ProxyScrape (HTTP)',
-    url: 'https://api.proxyscrape.com/v2/?request=displayproxies&protocol=http&timeout=10000&country=all&ssl=all&anonymity=all',
-  },
-  {
-    name: 'TheSpeedX GitHub List',
-    url: 'https://raw.githubusercontent.com/TheSpeedX/PROXY-List/master/http.txt',
-  },
-  {
-    name: 'ProxyScrape (SOCKS4)',
-    url: 'https://api.proxyscrape.com/v2/?request=displayproxies&protocol=socks4&timeout=10000&country=all',
-  },
-];
+let targetCountry = 'all';
+try {
+  const cfg = require('./config.json');
+  if (cfg.targetCountry) targetCountry = cfg.targetCountry;
+} catch (e) {}
 
-// ─── Fetch proxies from all sources ──────────────────────────────────────────
+// Helper to normalize countries input to an array of uppercase country codes
+function getCountryCodes(input) {
+  if (Array.isArray(input)) {
+    return input.map(c => String(c).trim().toUpperCase()).filter(Boolean);
+  }
+  if (typeof input === 'string') {
+    return input.split(',').map(c => c.trim().toUpperCase()).filter(Boolean);
+  }
+  return ['ALL'];
+}
+
+// ─── Proxy Sources ────────────────────────────────────────────────────────────
 async function fetchProxies() {
-  const results = await Promise.all(
-    SOURCES.map(async (source) => {
-      try {
-        const res = await axios.get(source.url, { timeout: 10000 });
-        const proxies = res.data
-          .split('\n')
-          .map(p => p.trim())
-          .filter(p => p.length > 4 && p.includes(':'));
-        return { name: source.name, proxies, error: null };
-      } catch (e) {
-        return { name: source.name, proxies: [], error: e.message };
-      }
-    })
+  const axios = require('axios');
+  const countries = getCountryCodes(targetCountry);
+  const isAll = countries.includes('ALL') || countries.includes('*');
+  const countrySet = new Set(countries);
+
+  const promises = [];
+
+  if (isAll) {
+    promises.push(
+      axios.get('https://api.proxyscrape.com/v2/?request=displayproxies&protocol=http&timeout=10000&country=all&ssl=all&anonymity=all', { timeout: 12000 }).catch(() => ({ data: '' })),
+      axios.get('https://api.proxyscrape.com/v2/?request=displayproxies&protocol=socks4&timeout=10000&country=all', { timeout: 12000 }).catch(() => ({ data: '' })),
+      axios.get('https://api.proxyscrape.com/v2/?request=displayproxies&protocol=socks5&timeout=10000&country=all', { timeout: 12000 }).catch(() => ({ data: '' })),
+      axios.get('https://raw.githubusercontent.com/TheSpeedX/PROXY-List/master/http.txt', { timeout: 15000 }).catch(() => ({ data: '' })),
+      axios.get('https://raw.githubusercontent.com/monosans/proxy-list/main/proxies/http.txt', { timeout: 15000 }).catch(() => ({ data: '' })),
+      axios.get('https://proxylist.geonode.com/api/proxy-list?limit=500&page=1&sort_by=lastChecked&sort_type=desc', { timeout: 15000 })
+        .then(r => ({ data: (r.data?.data || []).map(p => `${p.ip}:${p.port}`).join('\n') })).catch(() => ({ data: '' })),
+    );
+  } else {
+    // For each specific target country in array/list
+    for (const cc of countrySet) {
+      const lower = cc.toLowerCase();
+      promises.push(
+        // ProxyScrape HTTP, SOCKS4, SOCKS5
+        axios.get(`https://api.proxyscrape.com/v2/?request=displayproxies&protocol=http&timeout=10000&country=${lower}&ssl=all&anonymity=all`, { timeout: 12000 }).catch(() => ({ data: '' })),
+        axios.get(`https://api.proxyscrape.com/v3/free-proxy-list/get?request=displayproxies&protocol=http&country=${cc}&timeout=10000`, { timeout: 12000 }).catch(() => ({ data: '' })),
+        axios.get(`https://api.proxyscrape.com/v2/?request=displayproxies&protocol=socks4&timeout=10000&country=${lower}`, { timeout: 12000 }).catch(() => ({ data: '' })),
+        axios.get(`https://api.proxyscrape.com/v2/?request=displayproxies&protocol=socks5&timeout=10000&country=${lower}`, { timeout: 12000 }).catch(() => ({ data: '' })),
+
+        // Geonode Pages 1 through 5
+        axios.get(`https://proxylist.geonode.com/api/proxy-list?limit=500&page=1&sort_by=lastChecked&sort_type=desc&country=${cc}`, { timeout: 15000 }).then(r => ({ data: (r.data?.data || []).map(p => `${p.ip}:${p.port}`).join('\n') })).catch(() => ({ data: '' })),
+        axios.get(`https://proxylist.geonode.com/api/proxy-list?limit=500&page=2&sort_by=lastChecked&sort_type=desc&country=${cc}`, { timeout: 15000 }).then(r => ({ data: (r.data?.data || []).map(p => `${p.ip}:${p.port}`).join('\n') })).catch(() => ({ data: '' })),
+        axios.get(`https://proxylist.geonode.com/api/proxy-list?limit=500&page=3&sort_by=lastChecked&sort_type=desc&country=${cc}`, { timeout: 15000 }).then(r => ({ data: (r.data?.data || []).map(p => `${p.ip}:${p.port}`).join('\n') })).catch(() => ({ data: '' })),
+        axios.get(`https://proxylist.geonode.com/api/proxy-list?limit=500&page=4&sort_by=lastChecked&sort_type=desc&country=${cc}`, { timeout: 15000 }).then(r => ({ data: (r.data?.data || []).map(p => `${p.ip}:${p.port}`).join('\n') })).catch(() => ({ data: '' })),
+        axios.get(`https://proxylist.geonode.com/api/proxy-list?limit=500&page=5&sort_by=lastChecked&sort_type=desc&country=${cc}`, { timeout: 15000 }).then(r => ({ data: (r.data?.data || []).map(p => `${p.ip}:${p.port}`).join('\n') })).catch(() => ({ data: '' })),
+
+        // FreeProxy.World Scraper
+        axios.get(`https://www.freeproxy.world/?country=${cc}`, { headers: { 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)' }, timeout: 15000 })
+          .then(r => {
+            if (typeof r.data !== 'string') return { data: '' };
+            const matches = [];
+            const regex = /<td class="left">([0-9\.]+)<\/td>[\s\S]*?<a href="\/port\/([0-9]+)"/gi;
+            let m;
+            while ((m = regex.exec(r.data)) !== null) {
+              matches.push(`${m[1]}:${m[2]}`);
+            }
+            return { data: matches.join('\n') };
+          }).catch(() => ({ data: '' })),
+
+        // Proxy-List.download
+        axios.get(`https://www.proxy-list.download/api/v1/get?type=http&country=${cc}`, { timeout: 12000 }).catch(() => ({ data: '' })),
+        axios.get(`https://www.proxy-list.download/api/v1/get?type=https&country=${cc}`, { timeout: 12000 }).catch(() => ({ data: '' })),
+        axios.get(`https://www.proxy-list.download/api/v1/get?type=socks4&country=${cc}`, { timeout: 12000 }).catch(() => ({ data: '' })),
+        axios.get(`https://www.proxy-list.download/api/v1/get?type=socks5&country=${cc}`, { timeout: 12000 }).catch(() => ({ data: '' })),
+      );
+    }
+  }
+
+  // ── Global Multi-Country Dataset Parsing (Proxifly + Fate0) ────────────────────
+  promises.push(
+    axios.get('https://raw.githubusercontent.com/proxifly/free-proxy-list/main/proxies/all/data.json', { timeout: 15000 })
+      .then(r => {
+        if (!Array.isArray(r.data)) return { data: '' };
+        const filtered = isAll ? r.data : r.data.filter(p => {
+          const code = (p.geolocation?.country?.code || p.countryCode || '').toUpperCase();
+          return countrySet.has(code);
+        });
+        return { data: filtered.map(p => `${p.ip}:${p.port}`).join('\n') };
+      }).catch(() => ({ data: '' })),
+
+    axios.get('https://raw.githubusercontent.com/fate0/proxylist/master/proxy.list', { timeout: 15000 })
+      .then(r => {
+        if (typeof r.data !== 'string') return { data: '' };
+        const lines = r.data.split('\n');
+        const list = [];
+        for (const line of lines) {
+          try {
+            const obj = JSON.parse(line);
+            if (isAll || (obj.country && countrySet.has(obj.country.toUpperCase()))) {
+              list.push(`${obj.host}:${obj.port}`);
+            }
+          } catch (_) {}
+        }
+        return { data: list.join('\n') };
+      }).catch(() => ({ data: '' })),
   );
-  return results;
+
+  const results = await Promise.all(promises);
+  const rawList = results.map(r => (typeof r.data === 'string' ? r.data : '')).join('\n');
+  const allProxies = [...new Set(rawList.split('\n').map(p => p.trim()).filter(p => /^\d+\.\d+\.\d+\.\d+:\d+$/.test(p)))];
+
+  const label = isAll ? 'ALL' : countries.join(', ');
+  return [{ name: `Aggregated Sources (${label})`, proxies: allProxies, error: null }];
 }
 
 // ─── Test a single proxy ──────────────────────────────────────────────────────

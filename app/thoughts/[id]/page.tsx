@@ -55,5 +55,7 @@ export default function ThoughtDetailPage({ params }: { params: { id: string } }
   const thought = getThoughtById(params.id);
   if (!thought) return notFound();
 
-  return <ThoughtClient thought={thought} />;
+  const allThoughts = getAllThoughts();
+
+  return <ThoughtClient thought={thought} allThoughts={allThoughts} />;
 }

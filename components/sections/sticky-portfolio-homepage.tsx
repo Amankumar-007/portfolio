@@ -197,7 +197,7 @@ const experienceList = [
     location: "Delhi, India · On-site",
     logo: "/logos/startupcoaching-logo.png",
     description: "Developing scalable web applications and digital solutions at StartupCoaching.in — working across frontend, backend, APIs, databases, and performance optimization to deliver seamless user experiences.",
-    skills: ["MERN Stack", "Next.js", "TypeScript", "REST APIs", "Tailwind CSS", "Git"]
+    skills: ["Full Stack", "Next.js", "TypeScript", "REST APIs", "Tailwind CSS", "Git"]
   },
   {
     period: "JUN 2024 - OCT 2025",
@@ -205,8 +205,8 @@ const experienceList = [
     company: "Ninepages Techsolutions Pvt. Ltd.",
     location: "Agra, Uttar Pradesh, India · On-site",
     logo: "/logos/ninepagestech-logo.png",
-    description: "Built and shipped client web applications end-to-end on the MERN stack over 1 year 5 months — from MongoDB schema design and REST APIs to Redux-driven React frontends.",
-    skills: ["MERN Stack", "Redux.js", "Express.js", "MongoDB", "React.js", "Node.js"]
+    description: "Built and shipped client web applications end-to-end as a Full Stack Engineer over 1 year 5 months — from database schema design and REST APIs to Redux-driven React frontends.",
+    skills: ["Full Stack", "Redux.js", "Express.js", "MongoDB", "React.js", "Node.js"]
   },
   {
     period: "2023 - 2024",
@@ -414,7 +414,7 @@ export default function StickyPortfolioHomepage() {
 
                 {/* Short Bio */}
                 <p className="text-xs sm:text-sm font-semibold text-zinc-500 leading-relaxed max-w-[260px] mx-auto mb-6">
-                  A Full Stack Engineer building production SaaS on the MERN stack.
+                  A Full Stack Engineer building production SaaS products.
                 </p>
 
                 {/* Social Links Row (Orange Outline Icons matching reference) */}
@@ -486,7 +486,7 @@ export default function StickyPortfolioHomepage() {
               {/* Headline Bio */}
               <FadeInView delay={0.22}>
                 <p className="text-sm sm:text-lg text-[#888888] max-w-xl leading-relaxed mb-8 sm:mb-12 font-normal">
-                  Full Stack Engineer on the MERN stack — from self-taught fundamentals to shipping production SaaS products like SnippetsX, TomatoAI, and Awasdhara.
+                  Full Stack Engineer — from self-taught fundamentals to shipping production SaaS products like SnippetsX, TomatoAI, and Awasdhara.
                 </p>
               </FadeInView>
 
@@ -555,7 +555,7 @@ export default function StickyPortfolioHomepage() {
                   {/* Heading */}
                   <div className="relative z-10">
                     <h3 className="text-xl sm:text-2xl font-extrabold tracking-tight uppercase leading-[1.15] max-w-[240px]">
-                      MERN STACK, <br /> REAL-TIME SYSTEMS
+                      FULL STACK, <br /> REAL-TIME SYSTEMS
                     </h3>
                   </div>
 
@@ -674,6 +674,61 @@ export default function StickyPortfolioHomepage() {
               </div>
             </section>
 
+            {/* EXPERIENCE SECTION (#experience) */}
+            <section id="experience" className="scroll-mt-28">
+              <div className="select-none mb-10">
+                <FadeInView delay={0}>
+                  <h2 className="text-6xl sm:text-7xl font-black text-white uppercase tracking-wide font-sans leading-[0.88] block">
+                    WORK
+                  </h2>
+                </FadeInView>
+                <FadeInView delay={0.1}>
+                  <h2 className="text-6xl sm:text-7xl font-black text-zinc-800/80 uppercase tracking-wide font-sans leading-[0.88] block">
+                    EXPERIENCE
+                  </h2>
+                </FadeInView>
+              </div>
+
+              <div className="space-y-6">
+                {experienceList.map((exp, idx) => (
+                  <div
+                    key={idx}
+                    className="bg-[#1a1a1c] border border-zinc-800/70 p-6 sm:p-7 rounded-3xl hover:border-zinc-700 transition-colors"
+                  >
+                    <div className="flex justify-between items-center mb-3">
+                      <span className="text-xs font-bold text-[#F05335] uppercase tracking-wider">
+                        {exp.period}
+                      </span>
+                      <span className="text-xs text-zinc-400 font-medium">
+                        {exp.company}
+                      </span>
+                    </div>
+                    <h3 className="text-xl font-black text-white mb-2">{exp.role}</h3>
+                    <p className="text-xs sm:text-sm text-zinc-400 leading-relaxed mb-4">
+                      {exp.description}
+                    </p>
+                    <div className="flex flex-wrap gap-2">
+                      {exp.skills.map((s, i) => (
+                        <span key={i} className="px-2.5 py-1 rounded-lg bg-zinc-900 border border-zinc-800 text-[11px] font-semibold text-zinc-400">
+                          {s}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              <div className="mt-8 pt-2">
+                <a
+                  href="/experience"
+                  className="inline-flex items-center gap-2.5 px-6 py-3.5 rounded-2xl bg-zinc-900 border border-zinc-800 text-white font-bold text-xs uppercase tracking-wider hover:bg-[#F05335] hover:border-[#F05335] transition-all group"
+                >
+                  <span>Explore Full Career Experience & Credentials</span>
+                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                </a>
+              </div>
+            </section>
+
             {/* PREMIUM TOOLS SECTION (#tools) */}
             <section id="tools" className="scroll-mt-28">
               <div className="select-none mb-10">
@@ -764,61 +819,6 @@ export default function StickyPortfolioHomepage() {
                   <span>Read All Thoughts</span>
                   <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                 </Link>
-              </div>
-            </section>
-
-            {/* EXPERIENCE SECTION (#experience) */}
-            <section id="experience" className="scroll-mt-28">
-              <div className="select-none mb-10">
-                <FadeInView delay={0}>
-                  <h2 className="text-6xl sm:text-7xl font-black text-white uppercase tracking-wide font-sans leading-[0.88] block">
-                    WORK
-                  </h2>
-                </FadeInView>
-                <FadeInView delay={0.1}>
-                  <h2 className="text-6xl sm:text-7xl font-black text-zinc-800/80 uppercase tracking-wide font-sans leading-[0.88] block">
-                    EXPERIENCE
-                  </h2>
-                </FadeInView>
-              </div>
-
-              <div className="space-y-6">
-                {experienceList.map((exp, idx) => (
-                  <div
-                    key={idx}
-                    className="bg-[#1a1a1c] border border-zinc-800/70 p-6 sm:p-7 rounded-3xl hover:border-zinc-700 transition-colors"
-                  >
-                    <div className="flex justify-between items-center mb-3">
-                      <span className="text-xs font-bold text-[#F05335] uppercase tracking-wider">
-                        {exp.period}
-                      </span>
-                      <span className="text-xs text-zinc-400 font-medium">
-                        {exp.company}
-                      </span>
-                    </div>
-                    <h3 className="text-xl font-black text-white mb-2">{exp.role}</h3>
-                    <p className="text-xs sm:text-sm text-zinc-400 leading-relaxed mb-4">
-                      {exp.description}
-                    </p>
-                    <div className="flex flex-wrap gap-2">
-                      {exp.skills.map((s, i) => (
-                        <span key={i} className="px-2.5 py-1 rounded-lg bg-zinc-900 border border-zinc-800 text-[11px] font-semibold text-zinc-400">
-                          {s}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-                ))}
-              </div>
-
-              <div className="mt-8 pt-2">
-                <a
-                  href="/experience"
-                  className="inline-flex items-center gap-2.5 px-6 py-3.5 rounded-2xl bg-zinc-900 border border-zinc-800 text-white font-bold text-xs uppercase tracking-wider hover:bg-[#F05335] hover:border-[#F05335] transition-all group"
-                >
-                  <span>Explore Full Career Experience & Credentials</span>
-                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                </a>
               </div>
             </section>
 

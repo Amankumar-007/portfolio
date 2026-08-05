@@ -40,7 +40,7 @@ export const getAllThoughts = (): Thought[] => [
     date: "2026-07-14",
     displayDate: "Jul 14, 2026",
     readTime: "5 min read",
-    tags: ["Career", "StartupCoaching", "MERN Stack"],
+    tags: ["Career", "StartupCoaching", "Full Stack"],
   },
   {
     id: "self-taught-to-full-stack-engineer",
@@ -59,12 +59,12 @@ export const getAllThoughts = (): Thought[] => [
     tags: ["Career", "Self-Learning", "Growth"],
   },
   {
-    id: "mern-in-production-ninepages",
-    title: "MERN Stack in Production: Lessons from Ninepages Techsolutions",
+    id: "fullstack-in-production-ninepages",
+    title: "Full Stack Development in Production: Lessons from Ninepages Techsolutions",
     excerpt:
-      "Seventeen months building client work on the MERN stack at Ninepages Techsolutions taught me more about Redux than any tutorial ever did — mostly by showing me how not to use it.",
+      "Seventeen months building client work as a Full Stack Engineer at Ninepages Techsolutions taught me more about Redux than any tutorial ever did — mostly by showing me how not to use it.",
     content: [
-      "Seventeen months building client work on the MERN stack at Ninepages Techsolutions in Agra taught me more about state management than any tutorial ever did — mostly by showing me how *not* to use it.",
+      "Seventeen months building client work as a Full Stack Engineer at Ninepages Techsolutions in Agra taught me more about state management than any tutorial ever did — mostly by showing me how *not* to use it.",
       "Redux is easy to reach for and easy to overuse. A lot of what I actually learned there was where state should live: what belongs in a global store, what belongs in local component state, and what should never have been state at all and could just be derived on render.",
       "The other constant was MongoDB schema design under real client requirements that changed mid-project. Flexible schemas are a gift until three different features assume three different shapes for the same document — after that, you start writing validation layers whether the client's spec asked for them or not.",
       "Working on-site with a small team meant shipping features end-to-end — frontend, API, and database — instead of owning one layer. That full-stack ownership is probably the single habit that's carried over most directly into everything I've built since.",
@@ -72,7 +72,7 @@ export const getAllThoughts = (): Thought[] => [
     date: "2026-06-09",
     displayDate: "Jun 9, 2026",
     readTime: "5 min read",
-    tags: ["MERN Stack", "Ninepages Techsolutions", "Redux"],
+    tags: ["Full Stack", "Ninepages Techsolutions", "Redux"],
   },
   {
     id: "open-source-after-fulltime-job",

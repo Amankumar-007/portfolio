@@ -11,7 +11,7 @@ interface FAQItem {
 const faqData: FAQItem[] = [
   {
     question: "What technologies does Aman Kumar work with?",
-    answer: "I specialize in the MERN stack — React, Node.js, Express.js, and MongoDB — along with Next.js, TypeScript, Redux, and Tailwind CSS. I've used this stack in production at Ninepages Techsolutions and StartupCoaching, and to build SnippetsX, TomatoAI, and Awasdhara."
+    answer: "I build full-stack web applications using React, Node.js, Express.js, and MongoDB — along with Next.js, TypeScript, Redux, and Tailwind CSS. I've used this stack in production at Ninepages Techsolutions and StartupCoaching, and to build SnippetsX, TomatoAI, and Awasdhara."
   },
   {
     question: "How much experience does Aman Kumar have as a Full Stack Engineer?",

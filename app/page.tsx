@@ -2,16 +2,16 @@ import type { Metadata } from "next";
 import StickyPortfolioHomepage from "@/components/sections/sticky-portfolio-homepage";
 
 export const metadata: Metadata = {
-  title: "Aman Kumar | Full Stack Engineer — MERN Stack Developer, India",
+  title: "Aman Kumar | Full Stack Engineer, India",
   description:
-    "Aman Kumar is a Full Stack Engineer from India specializing in the MERN stack, Next.js, and TypeScript. Currently building at StartupCoaching, previously Ninepages Techsolutions. Creator of SnippetsX, TomatoAI, and Awasdhara. Available for hire.",
+    "Aman Kumar is a Full Stack Engineer from India specializing in React, Node.js, Next.js, and TypeScript. Currently building at StartupCoaching, previously Ninepages Techsolutions. Creator of SnippetsX, TomatoAI, and Awasdhara. Available for hire.",
   alternates: {
     canonical: "https://amankumarr.in",
   },
   openGraph: {
-    title: "Aman Kumar | Full Stack Engineer — MERN Stack Developer, India",
+    title: "Aman Kumar | Full Stack Engineer, India",
     description:
-      "Full Stack Engineer specializing in the MERN stack and Next.js — building SnippetsX, TomatoAI, and Awasdhara, and shipping production apps at StartupCoaching.",
+      "Full Stack Engineer specializing in modern web web applications and Next.js — building SnippetsX, TomatoAI, and Awasdhara, and shipping production apps at StartupCoaching.",
     url: "https://amankumarr.in",
     images: [
       {
@@ -23,9 +23,9 @@ export const metadata: Metadata = {
     ],
   },
   twitter: {
-    title: "Aman Kumar | Full Stack Engineer — MERN Stack Developer, India",
+    title: "Aman Kumar | Full Stack Engineer, India",
     description:
-      "Full Stack Engineer specializing in the MERN stack and Next.js — building SnippetsX, TomatoAI, and Awasdhara.",
+      "Full Stack Engineer specializing in modern web applications and Next.js — building SnippetsX, TomatoAI, and Awasdhara.",
     images: ["/about-image.png"],
   },
 };

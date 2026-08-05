@@ -29,7 +29,7 @@ export default function RoadmapPageClient() {
               About My <br /> <span className="text-orange-500 italic font-serif lowercase">Journey.</span>
             </h1>
             <p className="mt-8 text-xl md:text-2xl font-bold tracking-tight max-w-3xl leading-snug text-slate-800">
-              I&apos;m a MERN stack developer who started with curiosity and stayed because I enjoy building things that <span className="text-orange-600">actually work.</span>
+              I&apos;m a Full Stack Engineer who started with curiosity and stayed because I enjoy building things that <span className="text-orange-600">actually work.</span>
             </p>
           </header>
 

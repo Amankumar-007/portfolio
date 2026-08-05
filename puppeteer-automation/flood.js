@@ -345,7 +345,6 @@ async function main() {
   const totalVisits = cycles * totalVisitsPerCycle;
 
   // ── Header ────────────────────────────────────────────────────────────────
-  console.clear();
   console.log(c('╔' + '═'.repeat(W - 2) + '╗', C.blue));
   console.log(c('║  🚀  TRAFFIC FLOOD — YOUR SITE ONLY                                           ║', C.blue, C.bold));
   console.log(c('╚' + '═'.repeat(W - 2) + '╝', C.blue));
@@ -360,46 +359,113 @@ async function main() {
   console.log(c('  ℹ️  Each browser visit = 1 unique session in analytics', C.dim));
   console.log(hr());
 
-  // ── Fetch Free Proxies ────────────────────────────────────────────────────
-  let freeProxies = [];
-  try {
-    process.stdout.write(c('\n  Fetching free proxies for IP rotation... ', C.dim));
-    const axios = require('axios');
-    const targetCountry = config.targetCountry || 'all';
-    const cc = targetCountry.toUpperCase(); // e.g. "IN"
+  // Helper function to fetch freshest proxy pool from all major providers & JSON repos
+  async function fetchFreshProxies() {
+    try {
+      const axios = require('axios');
+      const targetInput = config.targetCountry || 'all';
 
-    // Fetch from multiple proxy sources in parallel for a bigger, fresher pool
-    const proxyPromises = [
-      // ProxyScrape — primary source
-      axios.get(`https://api.proxyscrape.com/v2/?request=displayproxies&protocol=http&timeout=10000&country=${targetCountry}&ssl=all&anonymity=all`, { timeout: 15000 }).catch(() => ({ data: '' })),
-      // ProxyScrape v3 API
-      axios.get(`https://api.proxyscrape.com/v3/free-proxy-list/get?request=displayproxies&protocol=http&country=${cc}&timeout=10000`, { timeout: 15000 }).catch(() => ({ data: '' })),
-      // Geonode free proxy list filtered by country
-      axios.get(`https://proxylist.geonode.com/api/proxy-list?limit=200&page=1&sort_by=lastChecked&sort_type=desc&filterUpTime=70&country=${cc}&protocols=http,https`, { timeout: 15000 })
-        .then(r => {
-          const items = (r.data && r.data.data) ? r.data.data : [];
-          return { data: items.map(p => `${p.ip}:${p.port}`).join('\n') };
-        }).catch(() => ({ data: '' })),
-      // proxy-list.download
-      axios.get(`https://www.proxy-list.download/api/v1/get?type=http&anon=elite&country=${cc}`, { timeout: 15000 }).catch(() => ({ data: '' })),
-    ];
+      function getCountryCodes(input) {
+        if (Array.isArray(input)) return input.map(c => String(c).trim().toUpperCase()).filter(Boolean);
+        if (typeof input === 'string') return input.split(',').map(c => c.trim().toUpperCase()).filter(Boolean);
+        return ['ALL'];
+      }
 
-    // Always add global mix lists as extra fallback pool
-    proxyPromises.push(
-      axios.get('https://raw.githubusercontent.com/TheSpeedX/PROXY-List/master/http.txt', { timeout: 15000 }).catch(() => ({ data: '' })),
-      axios.get('https://raw.githubusercontent.com/monosans/proxy-list/main/proxies/http.txt', { timeout: 15000 }).catch(() => ({ data: '' }))
-    );
+      const countries = getCountryCodes(targetInput);
+      const isAll = countries.includes('ALL') || countries.includes('*');
+      const countrySet = new Set(countries);
+      const proxyPromises = [];
 
-    const results = await Promise.all(proxyPromises);
-    const rawList = results.map(r => (typeof r.data === 'string' ? r.data : '')).join('\n');
-    freeProxies = [...new Set(rawList.split('\n').map(p => p.trim()).filter(p => /^\d+\.\d+\.\d+\.\d+:\d+$/.test(p)).map(p => `http://${p}`))];
-    console.log(c(`✅ Fetched ${freeProxies.length} Proxies (country: ${targetCountry})`, C.green));
-    if (freeProxies.length < 20) {
-      console.log(c(`  ⚠️  Low proxy count — visits may fall back to direct IP`, C.yellow));
+      if (isAll) {
+        proxyPromises.push(
+          axios.get('https://api.proxyscrape.com/v2/?request=displayproxies&protocol=http&timeout=10000&country=all&ssl=all&anonymity=all', { timeout: 12000 }).catch(() => ({ data: '' })),
+          axios.get('https://api.proxyscrape.com/v2/?request=displayproxies&protocol=socks4&timeout=10000&country=all', { timeout: 12000 }).catch(() => ({ data: '' })),
+          axios.get('https://api.proxyscrape.com/v2/?request=displayproxies&protocol=socks5&timeout=10000&country=all', { timeout: 12000 }).catch(() => ({ data: '' })),
+          axios.get('https://raw.githubusercontent.com/TheSpeedX/PROXY-List/master/http.txt', { timeout: 15000 }).catch(() => ({ data: '' })),
+          axios.get('https://raw.githubusercontent.com/monosans/proxy-list/main/proxies/http.txt', { timeout: 15000 }).catch(() => ({ data: '' })),
+          axios.get('https://proxylist.geonode.com/api/proxy-list?limit=500&page=1&sort_by=lastChecked&sort_type=desc', { timeout: 15000 })
+            .then(r => ({ data: (r.data?.data || []).map(p => `${p.ip}:${p.port}`).join('\n') })).catch(() => ({ data: '' })),
+        );
+      } else {
+        for (const cc of countrySet) {
+          const lower = cc.toLowerCase();
+          proxyPromises.push(
+            // ProxyScrape HTTP, SOCKS4, SOCKS5
+            axios.get(`https://api.proxyscrape.com/v2/?request=displayproxies&protocol=http&timeout=10000&country=${lower}&ssl=all&anonymity=all`, { timeout: 12000 }).catch(() => ({ data: '' })),
+            axios.get(`https://api.proxyscrape.com/v3/free-proxy-list/get?request=displayproxies&protocol=http&country=${cc}&timeout=10000`, { timeout: 12000 }).catch(() => ({ data: '' })),
+            axios.get(`https://api.proxyscrape.com/v2/?request=displayproxies&protocol=socks4&timeout=10000&country=${lower}`, { timeout: 12000 }).catch(() => ({ data: '' })),
+            axios.get(`https://api.proxyscrape.com/v2/?request=displayproxies&protocol=socks5&timeout=10000&country=${lower}`, { timeout: 12000 }).catch(() => ({ data: '' })),
+
+            // Geonode Pages 1 through 5
+            axios.get(`https://proxylist.geonode.com/api/proxy-list?limit=500&page=1&sort_by=lastChecked&sort_type=desc&country=${cc}`, { timeout: 15000 }).then(r => ({ data: (r.data?.data || []).map(p => `${p.ip}:${p.port}`).join('\n') })).catch(() => ({ data: '' })),
+            axios.get(`https://proxylist.geonode.com/api/proxy-list?limit=500&page=2&sort_by=lastChecked&sort_type=desc&country=${cc}`, { timeout: 15000 }).then(r => ({ data: (r.data?.data || []).map(p => `${p.ip}:${p.port}`).join('\n') })).catch(() => ({ data: '' })),
+            axios.get(`https://proxylist.geonode.com/api/proxy-list?limit=500&page=3&sort_by=lastChecked&sort_type=desc&country=${cc}`, { timeout: 15000 }).then(r => ({ data: (r.data?.data || []).map(p => `${p.ip}:${p.port}`).join('\n') })).catch(() => ({ data: '' })),
+            axios.get(`https://proxylist.geonode.com/api/proxy-list?limit=500&page=4&sort_by=lastChecked&sort_type=desc&country=${cc}`, { timeout: 15000 }).then(r => ({ data: (r.data?.data || []).map(p => `${p.ip}:${p.port}`).join('\n') })).catch(() => ({ data: '' })),
+            axios.get(`https://proxylist.geonode.com/api/proxy-list?limit=500&page=5&sort_by=lastChecked&sort_type=desc&country=${cc}`, { timeout: 15000 }).then(r => ({ data: (r.data?.data || []).map(p => `${p.ip}:${p.port}`).join('\n') })).catch(() => ({ data: '' })),
+
+            // FreeProxy.World Scraper
+            axios.get(`https://www.freeproxy.world/?country=${cc}`, { headers: { 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64)' }, timeout: 15000 })
+              .then(r => {
+                if (typeof r.data !== 'string') return { data: '' };
+                const matches = [];
+                const regex = /<td class="left">([0-9\.]+)<\/td>[\s\S]*?<a href="\/port\/([0-9]+)"/gi;
+                let m;
+                while ((m = regex.exec(r.data)) !== null) {
+                  matches.push(`${m[1]}:${m[2]}`);
+                }
+                return { data: matches.join('\n') };
+              }).catch(() => ({ data: '' })),
+
+            // Proxy-List.download
+            axios.get(`https://www.proxy-list.download/api/v1/get?type=http&country=${cc}`, { timeout: 12000 }).catch(() => ({ data: '' })),
+            axios.get(`https://www.proxy-list.download/api/v1/get?type=https&country=${cc}`, { timeout: 12000 }).catch(() => ({ data: '' })),
+            axios.get(`https://www.proxy-list.download/api/v1/get?type=socks4&country=${cc}`, { timeout: 12000 }).catch(() => ({ data: '' })),
+            axios.get(`https://www.proxy-list.download/api/v1/get?type=socks5&country=${cc}`, { timeout: 12000 }).catch(() => ({ data: '' })),
+          );
+        }
+      }
+
+      // Multi-country JSON feeds
+      proxyPromises.push(
+        axios.get('https://raw.githubusercontent.com/proxifly/free-proxy-list/main/proxies/all/data.json', { timeout: 15000 })
+          .then(r => {
+            if (!Array.isArray(r.data)) return { data: '' };
+            const filtered = isAll ? r.data : r.data.filter(p => {
+              const code = (p.geolocation?.country?.code || p.countryCode || '').toUpperCase();
+              return countrySet.has(code);
+            });
+            return { data: filtered.map(p => `${p.ip}:${p.port}`).join('\n') };
+          }).catch(() => ({ data: '' })),
+
+        axios.get('https://raw.githubusercontent.com/fate0/proxylist/master/proxy.list', { timeout: 15000 })
+          .then(r => {
+            if (typeof r.data !== 'string') return { data: '' };
+            const lines = r.data.split('\n');
+            const list = [];
+            for (const line of lines) {
+              try {
+                const obj = JSON.parse(line);
+                if (isAll || (obj.country && countrySet.has(obj.country.toUpperCase()))) {
+                  list.push(`${obj.host}:${obj.port}`);
+                }
+              } catch (_) {}
+            }
+            return { data: list.join('\n') };
+          }).catch(() => ({ data: '' })),
+      );
+
+      const results = await Promise.all(proxyPromises);
+      const rawList = results.map(r => (typeof r.data === 'string' ? r.data : '')).join('\n');
+      return [...new Set(rawList.split('\n').map(p => p.trim()).filter(p => /^\d+\.\d+\.\d+\.\d+:\d+$/.test(p)).map(p => `http://${p}`))];
+    } catch (e) {
+      return [];
     }
-  } catch (e) {
-    console.log(c(`⚠️ Failed to fetch free proxies. Proceeding with local IP.`, C.yellow));
   }
+
+  // ── Fetch Initial Free Proxies ────────────────────────────────────────────
+  process.stdout.write(c('\n  Fetching free proxies for IP rotation... ', C.dim));
+  let freeProxies = await fetchFreshProxies();
+  console.log(c(`✅ Fetched ${freeProxies.length} Proxies (country: ${config.targetCountry || 'all'})`, C.green));
 
   // ── Analytics tip ─────────────────────────────────────────────────────────
   console.log(c('\n  📊 WHERE TO SEE THE SPIKE:', C.bold, C.yellow));
@@ -415,6 +481,16 @@ async function main() {
   const runStart = Date.now();
 
   for (let cycle = 1; cycle <= cycles; cycle++) {
+    // Periodically auto-refetch proxies every 5 cycles to keep the pool fresh
+    if (cycle > 1 && (cycle % 5 === 0 || freeProxies.length < 5)) {
+      process.stdout.write(c(`  Refreshing proxy pool... `, C.dim));
+      const fresh = await fetchFreshProxies();
+      if (fresh.length > 0) {
+        freeProxies = [...new Set([...freeProxies, ...fresh])];
+        console.log(c(`Done! (${freeProxies.length} available)`, C.green));
+      }
+    }
+
     const cycleStart = Date.now();
     console.log(hr('─'));
     console.log(c(`  Cycle ${cycle}/${cycles} — launching ${totalVisitsPerCycle} browsers...`, C.bold, C.cyan));
@@ -429,13 +505,10 @@ async function main() {
       queue.add(async () => {
         let result;
         let attempts = 0;
-        const maxAttempts = 8; // More retries — Indian proxies have high failure rate
+        const maxAttempts = 8;
 
         while (attempts < maxAttempts) {
           attempts++;
-          const currentTargetCountry = config.targetCountry || 'all';
-          // On the very last attempt, always allow direct IP as a guaranteed fallback
-          // so the visit is never permanently lost just because all proxies timed out.
           const isLastAttempt = attempts === maxAttempts;
           const useProxy = !isLastAttempt && freeProxies.length > 0;
           const proxyUrl = useProxy ? freeProxies[Math.floor(Math.random() * freeProxies.length)] : null;
@@ -444,6 +517,9 @@ async function main() {
 
           if (result.status === 'success') {
             break;
+          } else if (proxyUrl) {
+            // Prune dead proxy from active memory so we don't pick it again
+            freeProxies = freeProxies.filter(p => p !== proxyUrl);
           }
         }
 

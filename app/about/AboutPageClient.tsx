@@ -38,7 +38,7 @@ const experiences = [
     period: "Jun 2024 - Oct 2025",
     role: "Full Stack Engineer",
     company: "Ninepages Techsolutions Pvt. Ltd.",
-    description: "Built and shipped client web applications end-to-end on the MERN stack over 1 year 5 months — MongoDB schema design, REST APIs, and Redux-driven React frontends.",
+    description: "Built and shipped client web applications end-to-end as a Full Stack Engineer over 1 year 5 months — database schema design, REST APIs, and modern React frontends.",
   },
   {
     period: "2023 - 2024",

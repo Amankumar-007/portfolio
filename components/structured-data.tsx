@@ -39,14 +39,14 @@ export const StructuredData = () => {
             "height": 630
         },
         "jobTitle": "Full Stack Engineer",
-        "description": "Full Stack Engineer with 2+ years of professional experience specializing in the MERN stack, Next.js, and TypeScript. Creator of SnippetsX, TomatoAI, and Awasdhara.",
+        "description": "Full Stack Engineer with 2+ years of professional experience specializing in React, Node.js, Next.js, and TypeScript. Creator of SnippetsX, TomatoAI, and Awasdhara.",
         "nationality": {
             "@type": "Country",
             "name": "India"
         },
         "knowsAbout": [
             "React", "Next.js", "Node.js", "TypeScript", "JavaScript", "MongoDB",
-            "Express.js", "Redux.js", "MERN Stack", "SaaS Development", "Full Stack Development",
+            "Express.js", "Redux.js", "SaaS Development", "Full Stack Development",
             "Web Performance", "Docker", "REST APIs", "Tailwind CSS", "Git"
         ],
         "knowsLanguage": ["English", "Hindi"],
@@ -73,7 +73,7 @@ export const StructuredData = () => {
                 "@type": "Country",
                 "name": "India"
             },
-            "skills": "React, Next.js, Node.js, TypeScript, MongoDB, Redux.js, MERN Stack"
+            "skills": "React, Next.js, Node.js, TypeScript, MongoDB, Redux.js, Full Stack Development"
         },
         "contactPoint": {
             "@type": "ContactPoint",

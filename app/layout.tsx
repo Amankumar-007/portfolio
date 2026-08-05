@@ -24,16 +24,15 @@ const poppins = Poppins({
 
 export const metadata: Metadata = {
   title: {
-    default: "Aman Kumar | Full Stack Engineer — MERN Stack Developer, India",
+    default: "Aman Kumar | Full Stack Engineer, India",
     template: "%s | Aman Kumar",
   },
   description:
-    "Aman Kumar — Full Stack Engineer with 2+ years of experience on the MERN stack, Next.js, and TypeScript. Currently at StartupCoaching, previously Ninepages Techsolutions. Creator of SnippetsX, TomatoAI, and Awasdhara. Available for freelance & collaboration.",
+    "Aman Kumar — Full Stack Engineer with 2+ years of experience in React, Node.js, Next.js, and TypeScript. Currently at StartupCoaching, previously Ninepages Techsolutions. Creator of SnippetsX, TomatoAI, and Awasdhara. Available for freelance & collaboration.",
   keywords: [
     "Aman Kumar",
     "Full Stack Engineer",
     "Full Stack Developer",
-    "MERN Stack Developer",
     "SaaS Developer",
     "React developer",
     "Node.js developer",
@@ -79,9 +78,9 @@ export const metadata: Metadata = {
     type: "website",
     locale: "en_US",
     url: "https://amankumarr.in",
-    title: "Aman Kumar | Full Stack Engineer — MERN Stack Developer, India",
+    title: "Aman Kumar | Full Stack Engineer, India",
     description:
-      "Full Stack Engineer building on the MERN stack and Next.js — creator of SnippetsX, TomatoAI, and Awasdhara, currently shipping at StartupCoaching.",
+      "Full Stack Engineer building modern web apps with React, Node.js, and Next.js — creator of SnippetsX, TomatoAI, and Awasdhara, currently shipping at StartupCoaching.",
     siteName: "Aman Kumar — Portfolio",
     images: [
       {
@@ -95,9 +94,9 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Aman Kumar | Full Stack Engineer — MERN Stack Developer, India",
+    title: "Aman Kumar | Full Stack Engineer, India",
     description:
-      "Full Stack Engineer building on the MERN stack and Next.js — creator of SnippetsX, TomatoAI, and Awasdhara.",
+      "Full Stack Engineer building modern web apps with React, Node.js, and Next.js — creator of SnippetsX, TomatoAI, and Awasdhara.",
     images: [{ url: "/about-image.png", alt: "Aman Kumar Portfolio" }],
     creator: "@amankumarweb",
     site: "@amankumarweb",
