@@ -61,7 +61,7 @@ export default function CaseStudyClient() {
   const { isLoading } = useLenis();
 
   return (
-    <div data-scroll-container className="relative min-h-screen bg-[#fffcf9] text-[#1a1a1a] overflow-hidden selection:bg-orange-500 selection:text-white">
+    <div data-scroll-container className="relative min-h-screen bg-[#fffcf9] text-[#1a1a1a] overflow-x-hidden selection:bg-orange-500 selection:text-white">
       
       {/* --- OPTIMIZED NOISE LAYER --- */}
       <div 

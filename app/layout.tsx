@@ -17,7 +17,7 @@ const poppins = Poppins({
   subsets: ["latin"],
   variable: "--font-poppins",
   display: "swap",
-  weight: ["400", "600", "800"],
+  weight: ["300", "400", "500", "600", "700", "800", "900"],
   preload: true,
   fallback: ["-apple-system", "BlinkMacSystemFont", "Segoe UI", "sans-serif"],
 });

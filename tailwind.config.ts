@@ -23,7 +23,8 @@ const config = {
     },
     extend: {
       fontFamily: {
-        sans: ["var(--font-sans)", ...fontFamily.sans],
+        poppins: ["var(--font-poppins)", ...fontFamily.sans],
+        sans: ["var(--font-poppins)", ...fontFamily.sans],
         playfair: ["var(--font-playfair)", ...fontFamily.serif],
       },
       colors: {

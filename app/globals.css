@@ -78,22 +78,24 @@ html {
   -webkit-tap-highlight-color: transparent;
 }
 
-[data-scroll-container] {
-  overflow: hidden;
-  position: relative;
+html.lenis, html.lenis body {
+  height: auto;
 }
 
-[data-scroll-section] {
-  position: relative;
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
   overflow: hidden;
 }
 
-.has-scroll-smooth {
-  overflow: hidden;
-}
-
-.has-scroll-smooth body {
-  overflow: hidden;
+.lenis.lenis-smooth iframe {
+  pointer-events: none;
 }
 
 @layer base {
@@ -127,12 +129,14 @@ body {
 
 .font-black {
   font-weight: 900 !important;
-  letter-spacing: 0.02em;
+  -webkit-text-stroke: 0.8px currentColor;
 }
 
-.ultra-bold {
+.ultra-bold,
+.ultra-heavy {
   font-weight: 900 !important;
-  letter-spacing: 0.03em;
+  -webkit-text-stroke: 1.2px currentColor;
+  letter-spacing: -0.02em;
 }
 
 .liquid-glass-dock {

@@ -271,17 +271,17 @@ export default function StickyPortfolioHomepage() {
   };
 
   return (
-    <div className="bg-[#121212] text-zinc-100 min-h-screen selection:bg-[#F05335] selection:text-white font-sans antialiased relative">
+    <div className="bg-[#121212] text-zinc-100 min-h-screen selection:bg-[#F05335] selection:text-white font-poppins antialiased relative">
 
 
       {/* ========================================================= */}
       {/* FLOATING TOP PILL NAVBAR (COMPACT)                        */}
       {/* ========================================================= */}
-      <header className="fixed top-5 left-1/2 -translate-x-1/2 z-50">
-        <div className="bg-[#1e1e20]/90 backdrop-blur-md border border-white/10 px-3.5 py-1.5 rounded-2xl shadow-2xl flex items-center gap-2 sm:gap-2.5">
+      <header className="fixed top-3 sm:top-5 left-1/2 -translate-x-1/2 z-50 max-w-[calc(100vw-1rem)] px-1">
+        <div className="bg-[#1e1e20]/90 backdrop-blur-md border border-white/10 px-2 sm:px-3.5 py-1.5 rounded-2xl shadow-2xl flex items-center gap-1 sm:gap-2.5 overflow-x-auto scrollbar-none">
           <Link
             href="/"
-            className={`p-2 rounded-xl transition-all ${activeTab === "home" ? "bg-white/15 text-white shadow-sm" : "text-zinc-400 hover:text-white hover:bg-white/5"
+            className={`p-1.5 sm:p-2 rounded-xl transition-all ${activeTab === "home" ? "bg-white/15 text-white shadow-sm" : "text-zinc-400 hover:text-white hover:bg-white/5"
               }`}
             title="Home"
           >
@@ -290,7 +290,7 @@ export default function StickyPortfolioHomepage() {
 
           <Link
             href="/projects"
-            className={`p-2 rounded-xl transition-all ${activeTab === "projects" ? "bg-white/15 text-white shadow-sm" : "text-zinc-400 hover:text-white hover:bg-white/5"
+            className={`p-1.5 sm:p-2 rounded-xl transition-all ${activeTab === "projects" ? "bg-white/15 text-white shadow-sm" : "text-zinc-400 hover:text-white hover:bg-white/5"
               }`}
             title="Projects Directory"
           >
@@ -299,7 +299,7 @@ export default function StickyPortfolioHomepage() {
 
           <Link
             href="/skills"
-            className={`p-2 rounded-xl transition-all ${activeTab === "tools" ? "bg-white/15 text-white shadow-sm" : "text-zinc-400 hover:text-white hover:bg-white/5"
+            className={`p-1.5 sm:p-2 rounded-xl transition-all ${activeTab === "tools" ? "bg-white/15 text-white shadow-sm" : "text-zinc-400 hover:text-white hover:bg-white/5"
               }`}
             title="Tools & Skills"
           >
@@ -308,7 +308,7 @@ export default function StickyPortfolioHomepage() {
 
           <Link
             href="/about"
-            className="p-2 rounded-xl transition-all text-zinc-400 hover:text-white hover:bg-white/5"
+            className="p-1.5 sm:p-2 rounded-xl transition-all text-zinc-400 hover:text-white hover:bg-white/5"
             title="About"
           >
             <BookOpen className="w-4 h-4" />
@@ -316,7 +316,7 @@ export default function StickyPortfolioHomepage() {
 
           <Link
             href="/thoughts"
-            className={`p-2 rounded-xl transition-all ${activeTab === "thoughts" ? "bg-white/15 text-white shadow-sm" : "text-zinc-400 hover:text-white hover:bg-white/5"
+            className={`p-1.5 sm:p-2 rounded-xl transition-all ${activeTab === "thoughts" ? "bg-white/15 text-white shadow-sm" : "text-zinc-400 hover:text-white hover:bg-white/5"
               }`}
             title="Design Thoughts"
           >
@@ -325,7 +325,7 @@ export default function StickyPortfolioHomepage() {
 
           <Link
             href="/career"
-            className={`p-2 rounded-xl transition-all ${activeTab === "experience" ? "bg-white/15 text-white shadow-sm" : "text-zinc-400 hover:text-white hover:bg-white/5"
+            className={`p-1.5 sm:p-2 rounded-xl transition-all ${activeTab === "experience" ? "bg-white/15 text-white shadow-sm" : "text-zinc-400 hover:text-white hover:bg-white/5"
               }`}
             title="Career Experience"
           >
@@ -334,7 +334,7 @@ export default function StickyPortfolioHomepage() {
 
           <Link
             href="/contact"
-            className={`p-2 rounded-xl transition-all ${activeTab === "contact" ? "bg-white/15 text-white shadow-sm" : "text-zinc-400 hover:text-white hover:bg-white/5"
+            className={`p-1.5 sm:p-2 rounded-xl transition-all ${activeTab === "contact" ? "bg-white/15 text-white shadow-sm" : "text-zinc-400 hover:text-white hover:bg-white/5"
               }`}
             title="Contact"
           >
@@ -346,7 +346,7 @@ export default function StickyPortfolioHomepage() {
       {/* ========================================================= */}
       {/* MAIN CONTAINER WITH EXACT GAP AND PADDING                  */}
       {/* ========================================================= */}
-      <div className="max-w-[1440px] mx-auto px-4 sm:px-12 lg:px-24 xl:px-32 pt-10 sm:pt-40 lg:pt-44 pb-36 sm:pb-32">
+      <div className="max-w-[1440px] mx-auto px-4 sm:px-12 lg:px-24 xl:px-32 pt-20 sm:pt-40 lg:pt-44 pb-36 sm:pb-32">
         <div className="flex flex-col lg:flex-row gap-14 lg:gap-16 xl:gap-24 items-start relative">
 
           {/* ------------------------------------------------------- */}
@@ -401,7 +401,7 @@ export default function StickyPortfolioHomepage() {
               <div className="text-center relative z-10">
 
                 {/* Name directly below photo */}
-                <h1 className="text-3xl font-extrabold tracking-tight text-black font-sans mb-3">
+                <h1 className="text-3xl font-black tracking-tight text-black font-poppins mb-3">
                   Aman Kumar
                 </h1>
 
@@ -472,12 +472,12 @@ export default function StickyPortfolioHomepage() {
               {/* Massive Stacked Header — letter-by-letter fade in */}
               <div className="select-none mb-6">
                 <FadeInView delay={0}>
-                  <h2 className="text-4xl xs:text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-black text-white uppercase tracking-wide leading-[0.88] block">
+                  <h2 className="text-4xl xs:text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-black text-white uppercase tracking-tight leading-[0.88] block font-poppins ultra-heavy">
                     FULL STACK
                   </h2>
                 </FadeInView>
                 <FadeInView delay={0.12}>
-                  <h2 className="text-4xl xs:text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-black text-[#262628] uppercase tracking-wide leading-[0.88] block">
+                  <h2 className="text-4xl xs:text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-black text-[#262628] uppercase tracking-tight leading-[0.88] block font-poppins ultra-heavy">
                     ENGINEER
                   </h2>
                 </FadeInView>
@@ -495,30 +495,30 @@ export default function StickyPortfolioHomepage() {
                 <StaggerContainer className="grid grid-cols-3 gap-3 sm:gap-10" staggerDelay={0.15}>
                   {/* Stat 1 */}
                   <motion.div variants={staggerChild}>
-                    <div className="text-3xl sm:text-5xl lg:text-6xl font-black text-white tracking-tight">
+                    <div className="text-3xl sm:text-5xl lg:text-6xl font-black text-white tracking-tight font-poppins">
                       +<AnimatedNumber value={2} duration={1.2} />
                     </div>
-                    <div className="text-[10px] sm:text-[11px] font-bold text-zinc-500 uppercase tracking-wider mt-1.5 leading-tight">
+                    <div className="text-[10px] sm:text-[11px] font-bold text-zinc-500 uppercase tracking-wider mt-1.5 leading-tight font-poppins">
                       YEARS OF<br />EXPERIENCE
                     </div>
                   </motion.div>
 
                   {/* Stat 2 */}
                   <motion.div variants={staggerChild}>
-                    <div className="text-3xl sm:text-5xl lg:text-6xl font-black text-white tracking-tight">
+                    <div className="text-3xl sm:text-5xl lg:text-6xl font-black text-white tracking-tight font-poppins">
                       +<AnimatedNumber value={11} duration={1.6} />
                     </div>
-                    <div className="text-[10px] sm:text-[11px] font-bold text-zinc-500 uppercase tracking-wider mt-1.5 leading-tight">
+                    <div className="text-[10px] sm:text-[11px] font-bold text-zinc-500 uppercase tracking-wider mt-1.5 leading-tight font-poppins">
                       PROJECTS<br />COMPLETED
                     </div>
                   </motion.div>
 
                   {/* Stat 3 */}
                   <motion.div variants={staggerChild}>
-                    <div className="text-3xl sm:text-5xl lg:text-6xl font-black text-white tracking-tight">
+                    <div className="text-3xl sm:text-5xl lg:text-6xl font-black text-white tracking-tight font-poppins">
                       +<AnimatedNumber value={15} duration={1.8} />
                     </div>
-                    <div className="text-[10px] sm:text-[11px] font-bold text-zinc-500 uppercase tracking-wider mt-1.5 leading-tight">
+                    <div className="text-[10px] sm:text-[11px] font-bold text-zinc-500 uppercase tracking-wider mt-1.5 leading-tight font-poppins">
                       TECHNOLOGIES<br />MASTERED
                     </div>
                   </motion.div>
@@ -617,12 +617,12 @@ export default function StickyPortfolioHomepage() {
             <section id="projects" className="scroll-mt-28">
               <div className="select-none mb-10">
                 <FadeInView delay={0}>
-                  <h2 className="text-6xl sm:text-7xl xl:text-8xl font-black text-white uppercase tracking-wide font-sans leading-[0.88] block">
+                  <h2 className="text-6xl sm:text-7xl xl:text-8xl font-black text-white uppercase tracking-tight font-poppins leading-[0.88] block ultra-heavy">
                     RECENT
                   </h2>
                 </FadeInView>
                 <FadeInView delay={0.1}>
-                  <h2 className="text-6xl sm:text-7xl xl:text-8xl font-black text-zinc-800/80 uppercase tracking-wide font-sans leading-[0.88] block">
+                  <h2 className="text-6xl sm:text-7xl xl:text-8xl font-black text-zinc-800/80 uppercase tracking-tight font-poppins leading-[0.88] block ultra-heavy">
                     PROJECTS
                   </h2>
                 </FadeInView>
@@ -633,10 +633,10 @@ export default function StickyPortfolioHomepage() {
                   <motion.div key={proj.id} variants={staggerChild}>
                     <Link
                       href={proj.link}
-                      className="flex items-center justify-between gap-6 group py-2 border-b border-zinc-900/60 hover:border-zinc-800 transition-colors"
+                      className="flex items-center justify-between gap-3 sm:gap-6 group py-2 border-b border-zinc-900/60 hover:border-zinc-800 transition-colors"
                     >
-                      <div className="flex items-center gap-6">
-                        <div className="w-24 h-24 sm:w-28 sm:h-28 rounded-2xl bg-zinc-900 border border-zinc-800/80 overflow-hidden relative flex-shrink-0 shadow-md">
+                      <div className="flex items-center gap-3 sm:gap-6 min-w-0">
+                        <div className="w-16 h-16 sm:w-28 sm:h-28 rounded-2xl bg-zinc-900 border border-zinc-800/80 overflow-hidden relative flex-shrink-0 shadow-md">
                           <Image
                             src={proj.thumbImage}
                             alt={proj.title}
@@ -645,18 +645,18 @@ export default function StickyPortfolioHomepage() {
                             className="object-cover group-hover:scale-105 transition-transform duration-500"
                           />
                         </div>
-                        <div>
-                          <h3 className="text-2xl sm:text-3xl font-extrabold text-white tracking-tight group-hover:text-[#F05335] transition-colors">
+                        <div className="min-w-0 flex-1">
+                          <h3 className="text-lg sm:text-3xl font-extrabold text-white tracking-tight group-hover:text-[#F05335] transition-colors truncate font-poppins">
                             {proj.title}
                           </h3>
-                          <p className="text-sm font-medium text-zinc-400 mt-1">
+                          <p className="text-xs sm:text-sm font-medium text-zinc-400 mt-1 line-clamp-1 font-poppins">
                             {proj.subtitle}
                           </p>
                         </div>
                       </div>
 
-                      <div className="text-[#F05335] group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform p-2">
-                        <ArrowUpRight className="w-6 h-6 stroke-[2.5]" />
+                      <div className="text-[#F05335] group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform p-1 sm:p-2 flex-shrink-0">
+                        <ArrowUpRight className="w-5 h-5 sm:w-6 sm:h-6 stroke-[2.5]" />
                       </div>
                     </Link>
                   </motion.div>
@@ -666,7 +666,7 @@ export default function StickyPortfolioHomepage() {
               <div className="mt-8 pt-2">
                 <Link
                   href="/projects"
-                  className="inline-flex items-center gap-2.5 px-6 py-3.5 rounded-2xl bg-zinc-900 border border-zinc-800 text-white font-bold text-xs uppercase tracking-wider hover:bg-[#F05335] hover:border-[#F05335] transition-all group"
+                  className="inline-flex items-center gap-2.5 px-6 py-3.5 rounded-2xl bg-zinc-900 border border-zinc-800 text-white font-bold text-xs uppercase tracking-wider hover:bg-[#F05335] hover:border-[#F05335] transition-all group font-poppins"
                 >
                   <span>View All Projects</span>
                   <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
@@ -678,12 +678,12 @@ export default function StickyPortfolioHomepage() {
             <section id="experience" className="scroll-mt-28">
               <div className="select-none mb-10">
                 <FadeInView delay={0}>
-                  <h2 className="text-6xl sm:text-7xl font-black text-white uppercase tracking-wide font-sans leading-[0.88] block">
+                  <h2 className="text-6xl sm:text-7xl font-black text-white uppercase tracking-tight font-poppins leading-[0.88] block ultra-heavy">
                     WORK
                   </h2>
                 </FadeInView>
                 <FadeInView delay={0.1}>
-                  <h2 className="text-6xl sm:text-7xl font-black text-zinc-800/80 uppercase tracking-wide font-sans leading-[0.88] block">
+                  <h2 className="text-6xl sm:text-7xl font-black text-zinc-800/80 uppercase tracking-tight font-poppins leading-[0.88] block ultra-heavy">
                     EXPERIENCE
                   </h2>
                 </FadeInView>
@@ -693,9 +693,9 @@ export default function StickyPortfolioHomepage() {
                 {experienceList.map((exp, idx) => (
                   <div
                     key={idx}
-                    className="bg-[#1a1a1c] border border-zinc-800/70 p-6 sm:p-7 rounded-3xl hover:border-zinc-700 transition-colors"
+                    className="bg-[#1a1a1c] border border-zinc-800/70 p-5 sm:p-7 rounded-3xl hover:border-zinc-700 transition-colors"
                   >
-                    <div className="flex justify-between items-center mb-3">
+                    <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-1 sm:gap-0 mb-3">
                       <span className="text-xs font-bold text-[#F05335] uppercase tracking-wider">
                         {exp.period}
                       </span>
@@ -733,12 +733,12 @@ export default function StickyPortfolioHomepage() {
             <section id="tools" className="scroll-mt-28">
               <div className="select-none mb-10">
                 <FadeInView delay={0}>
-                  <h2 className="text-6xl sm:text-7xl xl:text-8xl font-black text-white uppercase tracking-wide font-sans leading-[0.88] block">
+                  <h2 className="text-6xl sm:text-7xl xl:text-8xl font-black text-white uppercase tracking-tight font-poppins leading-[0.88] block ultra-heavy">
                     PREMIUM
                   </h2>
                 </FadeInView>
                 <FadeInView delay={0.1}>
-                  <h2 className="text-6xl sm:text-7xl xl:text-8xl font-black text-zinc-800/80 uppercase tracking-wide font-sans leading-[0.88] block">
+                  <h2 className="text-6xl sm:text-7xl xl:text-8xl font-black text-zinc-800/80 uppercase tracking-tight font-poppins leading-[0.88] block ultra-heavy">
                     TOOLS
                   </h2>
                 </FadeInView>
@@ -755,10 +755,10 @@ export default function StickyPortfolioHomepage() {
                     </div>
 
                     <div className="min-w-0 flex-1">
-                      <h3 className="text-xs sm:text-lg font-bold text-white tracking-tight group-hover:text-[#F05335] transition-colors leading-tight truncate">
+                      <h3 className="text-xs sm:text-lg font-bold text-white tracking-tight group-hover:text-[#F05335] transition-colors leading-tight truncate font-poppins">
                         {tool.name}
                       </h3>
-                      <p className="text-[10px] sm:text-xs font-medium text-zinc-400 mt-0.5 leading-tight truncate">
+                      <p className="text-[10px] sm:text-xs font-medium text-zinc-400 mt-0.5 leading-tight truncate font-poppins">
                         {tool.subtitle}
                       </p>
                     </div>
@@ -771,12 +771,12 @@ export default function StickyPortfolioHomepage() {
             <section id="thoughts" className="scroll-mt-28">
               <div className="select-none mb-10">
                 <FadeInView delay={0}>
-                  <h2 className="text-6xl sm:text-7xl xl:text-8xl font-black text-white uppercase tracking-wide font-sans leading-[0.88] block">
+                  <h2 className="text-6xl sm:text-7xl xl:text-8xl font-black text-white uppercase tracking-tight font-poppins leading-[0.88] block ultra-heavy">
                     DESIGN
                   </h2>
                 </FadeInView>
                 <FadeInView delay={0.1}>
-                  <h2 className="text-6xl sm:text-7xl xl:text-8xl font-black text-zinc-800/80 uppercase tracking-wide font-sans leading-[0.88] block">
+                  <h2 className="text-6xl sm:text-7xl xl:text-8xl font-black text-zinc-800/80 uppercase tracking-tight font-poppins leading-[0.88] block ultra-heavy">
                     THOUGHTS
                   </h2>
                 </FadeInView>
@@ -790,7 +790,7 @@ export default function StickyPortfolioHomepage() {
                       className="group block py-4 border-b border-zinc-900/80 hover:border-zinc-800 transition-colors"
                     >
                       <div className="flex items-start justify-between gap-4">
-                        <h3 className="text-xl sm:text-2xl font-extrabold text-white tracking-tight leading-snug group-hover:text-[#F05335] transition-colors max-w-xl">
+                        <h3 className="text-xl sm:text-2xl font-extrabold text-white tracking-tight leading-snug group-hover:text-[#F05335] transition-colors max-w-xl font-poppins">
                           {article.title}
                         </h3>
                         <div className="text-[#F05335] group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform p-1 flex-shrink-0">
@@ -798,11 +798,11 @@ export default function StickyPortfolioHomepage() {
                         </div>
                       </div>
 
-                      <p className="text-xs sm:text-sm text-zinc-400 font-normal leading-relaxed mt-2.5 max-w-xl">
+                      <p className="text-xs sm:text-sm text-zinc-400 font-normal leading-relaxed mt-2.5 max-w-xl font-poppins">
                         {article.excerpt}
                       </p>
 
-                      <div className="flex items-center justify-between gap-4 mt-5 text-xs font-medium text-zinc-500">
+                      <div className="flex items-center justify-between gap-4 mt-5 text-xs font-medium text-zinc-500 font-poppins">
                         <span>{article.date}</span>
                         <span>{article.readTime}</span>
                       </div>
@@ -814,7 +814,7 @@ export default function StickyPortfolioHomepage() {
               <div className="mt-8 pt-2">
                 <Link
                   href="/thoughts"
-                  className="inline-flex items-center gap-2.5 px-6 py-3.5 rounded-2xl bg-zinc-900 border border-zinc-800 text-white font-bold text-xs uppercase tracking-wider hover:bg-[#F05335] hover:border-[#F05335] transition-all group"
+                  className="inline-flex items-center gap-2.5 px-6 py-3.5 rounded-2xl bg-zinc-900 border border-zinc-800 text-white font-bold text-xs uppercase tracking-wider hover:bg-[#F05335] hover:border-[#F05335] transition-all group font-poppins"
                 >
                   <span>Read All Thoughts</span>
                   <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
@@ -826,12 +826,12 @@ export default function StickyPortfolioHomepage() {
             <section id="contact" className="scroll-mt-28 mb-24 sm:mb-32 pb-12">
               <div className="select-none mb-10">
                 <FadeInView delay={0}>
-                  <h2 className="text-6xl sm:text-7xl font-black text-white uppercase tracking-wide font-sans leading-[0.88] block">
+                  <h2 className="text-6xl sm:text-7xl font-black text-white uppercase tracking-tight font-poppins leading-[0.88] block ultra-heavy">
                     GET IN
                   </h2>
                 </FadeInView>
                 <FadeInView delay={0.1}>
-                  <h2 className="text-6xl sm:text-7xl font-black text-zinc-800/80 uppercase tracking-wide font-sans leading-[0.88] block">
+                  <h2 className="text-6xl sm:text-7xl font-black text-zinc-800/80 uppercase tracking-tight font-poppins leading-[0.88] block ultra-heavy">
                     TOUCH
                   </h2>
                 </FadeInView>
@@ -902,7 +902,6 @@ export default function StickyPortfolioHomepage() {
 
               {/* Aesthetic Footer Strip */}
               <div className="pt-8 border-t border-zinc-900 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-medium text-zinc-500">
-                <p>© 2026 Aman Kumar. All rights reserved.</p>
                 <button
                   onClick={() => scrollTo("hero")}
                   className="hover:text-white transition-colors flex items-center gap-1.5 cursor-pointer"
