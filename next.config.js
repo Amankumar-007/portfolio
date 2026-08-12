@@ -29,17 +29,7 @@ const nextConfig = {
   compress: true,
   generateEtags: true,
 
-  // www → non-www canonical redirect (fixes Google Search Console "Alternate page with proper canonical tag")
-  async redirects() {
-    return [
-      {
-        source: '/:path*',
-        has: [{ type: 'host', value: 'www.amankumarr.in' }],
-        destination: 'https://amankumarr.in/:path*',
-        permanent: true, // 308 — tells Google this is the definitive domain
-      },
-    ]
-  },
+
 
   // Performance & Security headers
   async headers() {
