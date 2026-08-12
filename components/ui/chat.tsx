@@ -1,9 +1,10 @@
 "use client";
 
 import { useState, useRef, useEffect } from "react";
+import Link from "next/link";
 import { Button } from "./button";
 import { Input } from "./input";
-import { MessageCircle, Send, X, Bot, User } from "lucide-react";
+import { MessageCircle, Send, X, Bot, User, ArrowRight } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import ReactMarkdown from "react-markdown";
 
@@ -73,7 +74,8 @@ export function Chat() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: 20 }}
-            className="fixed bottom-20 right-6 w-[320px] md:w-[360px] bg-[#0d0d0f] border-2 border-zinc-700 shadow-[8px_8px_0px_0px_rgba(240,83,53,0.3)] z-40 overflow-hidden flex flex-col text-white rounded-none"
+            data-lenis-prevent
+            className="fixed bottom-20 right-6 w-[320px] md:w-[360px] max-h-[80vh] bg-[#0d0d0f] border-2 border-zinc-700 shadow-[8px_8px_0px_0px_rgba(240,83,53,0.3)] z-40 overflow-hidden flex flex-col text-white rounded-none"
           >
             {/* HEADER */}
             <div className="relative z-10 p-3.5 border-b-2 border-zinc-800 flex justify-between items-center bg-zinc-950">
@@ -88,7 +90,8 @@ export function Chat() {
             {/* MESSAGE AREA */}
             <div
               ref={chatContainerRef}
-              className="relative z-10 h-[320px] overflow-y-auto p-4 space-y-4 bg-[#0d0d0f] text-white custom-scrollbar"
+              data-lenis-prevent
+              className="relative z-10 h-[340px] max-h-[60vh] overflow-y-auto p-4 space-y-4 bg-[#0d0d0f] text-white overscroll-contain scrollbar-thin scrollbar-thumb-zinc-700 scrollbar-track-zinc-900"
             >
               {messages.length === 0 && (
                 <div className="text-center py-10 text-zinc-500 text-xs font-mono">
@@ -102,7 +105,24 @@ export function Chat() {
                     {message.role === "user" ? <User size={12} /> : <Bot size={12} />}
                   </div>
                   <div className={`p-3 border text-xs font-medium max-w-[85%] leading-relaxed ${message.role === "user" ? "bg-zinc-900 text-white border-zinc-700" : "bg-zinc-950 text-zinc-200 border-zinc-800"}`}>
-                    <div className="prose prose-invert prose-xs max-w-none"><ReactMarkdown>{message.content}</ReactMarkdown></div>
+                    <div className="prose prose-invert prose-xs max-w-none">
+                      <ReactMarkdown
+                        components={{
+                          a: ({ href, children }) => (
+                            <Link
+                              href={href || "#"}
+                              onClick={() => setIsOpen(false)}
+                              className="my-1.5 px-3 py-1.5 rounded-lg bg-[#F05335] hover:bg-[#ff5d3d] text-white font-extrabold text-[11px] uppercase tracking-wider inline-flex items-center gap-1.5 shadow-[0_4px_12px_rgba(240,83,53,0.4)] transition-all hover:scale-[1.02] active:scale-[0.98] border border-white/20 no-underline cursor-pointer"
+                            >
+                              <span>{children}</span>
+                              <ArrowRight size={12} className="stroke-[3]" />
+                            </Link>
+                          ),
+                        }}
+                      >
+                        {message.content}
+                      </ReactMarkdown>
+                    </div>
                   </div>
                 </div>
               ))}

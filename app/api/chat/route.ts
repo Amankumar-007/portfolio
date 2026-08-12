@@ -8,53 +8,67 @@ interface ResponseTemplate {
 // Knowledge base for the AI assistant
 const knowledge: { [key: string]: ResponseTemplate } = {
   skills: {
-    patterns: ["skills", "what can you do", "capabilities", "expertise", "what do you know"],
+    patterns: ["skills", "skill", "what can you do", "capabilities", "expertise", "what do you know", "stack", "tech", "tools", "technology"],
     responses: [
-      "I'd be happy to tell you about Aman's skills! He's a Full Stack & SaaS specialist with expertise in Next.js, React, Node.js, MongoDB. He's also strong in building cloud architectures and scalable software. What specific aspect would you like to know more about?",
-      "Aman's primary expertise lies in full-stack development and SaaS solutions. He's particularly skilled in building responsive, performant web applications with modern tech stacks. Would you like me to elaborate on any specific technology?",
-      "Let me share Aman's technical expertise! His core strengths include React, Next.js, Node.js, MongoDB, and creating end-to-end SaaS products. He's also well-versed in TypeScript and Tailwind. Is there a particular area you're interested in?"
+      "Aman Kumar is a **Full Stack & SaaS Specialist** with extensive experience in modern web technologies.\n\n**Core Technical Stack:**\n• **Frontend:** Next.js (App Router), React, TypeScript, Tailwind CSS, Framer Motion\n• **Backend:** Node.js, Express.js, REST APIs, GraphQL, Microservices\n• **Databases & DevOps:** MongoDB, PostgreSQL, Docker, Git/GitHub, Vercel\n\n[Explore All Skills & Tools](/skills)",
+      "Aman specializes in building scalable end-to-end SaaS applications, responsive user interfaces, and high-throughput backend APIs using **React, Next.js, Node.js, and TypeScript**.\n\n[View Full Tech Stack](/skills)"
     ]
   },
   projects: {
-    patterns: ["projects", "portfolio", "work", "examples", "showcase", "built", "created"],
+    patterns: ["projects", "project", "portfolio", "work", "examples", "showcase", "built", "created", "apps", "snippetsx", "tomatoai", "awasdhara", "twofloww"],
     responses: [
-      "I'd love to tell you about Aman's projects! He's worked on several impressive applications, including e-commerce platforms, financial apps, and corporate websites. Would you like to hear about a specific project in detail?",
-      "Aman has developed various exciting projects! His portfolio includes responsive e-commerce solutions, sophisticated financial applications, and modern corporate websites. Each project demonstrates his commitment to quality and user experience. Which type of project interests you most?",
-      "Some of Aman's notable projects include custom e-commerce platforms, financial management tools, and corporate web solutions. Each showcases different aspects of his technical expertise. Would you like me to focus on any particular project?"
+      "Aman has engineered and shipped several high-impact production SaaS platforms and web applications:\n\n• **TomatoAI:** All-in-one AI tools platform for creative generation & workflows\n• **Awasdhara:** Real estate & land investment platform with smart filters\n• **SnippetsX:** Real-time collaborative code editor with live syntax sharing\n• **TwoFloww:** Digital agency web platform & software architecture\n\n[Explore Projects Directory](/projects)",
+      "Aman's portfolio includes real-time collaborative applications, AI productivity platforms, real estate web portals, and custom client software.\n\n[View All Featured Projects](/projects)"
     ]
   },
   contact: {
-    patterns: ["contact", "reach", "hire", "email", "message", "get in touch"],
+    patterns: ["contact", "reach", "hire", "email", "message", "get in touch", "connect", "call", "freelance"],
     responses: [
-      "You can easily get in touch with Aman through the contact form on this website! He's always excited to discuss new projects and opportunities. Would you like me to guide you to the contact section?",
-      "The best way to reach Aman is through the contact form here on the website. He responds promptly to all inquiries, especially regarding potential collaborations or project discussions. Should I show you where to find the contact form?",
-      "I'd be happy to help you connect with Aman! The most direct way is through the website's contact form. He's always open to discussing new opportunities and innovative project ideas. Would you like to reach out to him?"
+      "Looking to hire Aman or collaborate on a project?\n\n• **Services:** Full-stack SaaS builds, custom web apps, API architecture, frontend redesigns\n• **Availability:** Freelance contracts, project engagements, and full-time roles\n• **Response Time:** Typically within 24 hours!\n\n[Send a Message to Aman](/contact)",
+      "The best way to reach Aman is through the interactive contact form on this site. He's always open to discussing innovative project ideas.\n\n[Go to Contact Form](/contact)"
     ]
   },
   experience: {
-    patterns: ["experience", "background", "history", "worked", "career"],
+    patterns: ["experience", "career", "background", "history", "worked", "jobs", "role", "company", "startupcoaching", "ninepages"],
     responses: [
-      "Aman brings solid experience in full-stack development, specializing in SaaS and modern web architectures. His background includes building various applications from scratch and delivering high-performance solutions. What specific aspect of his experience interests you?",
-      "As a Full Stack developer, Aman has accumulated significant experience in building complex SaaS applications. He's particularly skilled in create-to-launch pipelines and modern development practices. Would you like to know more about any specific area?",
-      "Aman's experience spans across full-stack development, with a focus on SaaS, performance optimization, and best practices. He's particularly experienced with the Next.js and Node.js ecosystems. Is there a particular aspect of his background you'd like to explore?"
+      "Aman brings solid industry experience in full-stack engineering and software deployment:\n\n• **StartupCoaching** *(Oct 2025 - Present)* — Full Stack Engineer building web applications, database schemas, and dashboards.\n• **Ninepages Techsolutions** *(Jun 2024 - Oct 2025)* — Full Stack Engineer (1.5 yrs) delivering client platforms end-to-end.\n• **Learn2Earn** *(2023 - 2024)* — Full Stack Developer Intensive Training & Code Reviews.\n\n[View Full Career & Experience](/career)",
+      "Aman's experience covers database schema design, RESTful API development, state management, and modern React frontends.\n\n[Check Career Experience Page](/career)"
+    ]
+  },
+  about: {
+    patterns: ["about", "who is aman", "who are you", "bio", "details", "info", "personal"],
+    responses: [
+      "Aman Kumar is a **Full Stack Engineer based in India** dedicated to transforming complex client ideas into fast, production-ready SaaS products.\n\nHe specializes in clean code, modern UI/UX aesthetics, scalable backend APIs, and performance optimization.\n\n[Read Full Bio on About Page](/about)"
+    ]
+  },
+  thoughts: {
+    patterns: ["thoughts", "blog", "articles", "writings", "design thoughts", "posts"],
+    responses: [
+      "Aman writes technical articles covering full-stack architecture, Next.js performance optimizations, and modern web UI/UX patterns.\n\n[Read Design Thoughts & Articles](/thoughts)"
+    ]
+  },
+  roadmap: {
+    patterns: ["roadmap", "path", "learning", "journey"],
+    responses: [
+      "Explore Aman's developer roadmap and technical skill progression over time!\n\n[View Developer Roadmap](/roadmap)"
     ]
   },
   greeting: {
     patterns: ["hi", "hello", "hey", "greetings", "good morning", "good afternoon", "good evening"],
     responses: [
-      "Hello! I'm Aman's AI assistant. I'd be happy to tell you about his skills, projects, or help you get in touch. What would you like to know?",
-      "Hi there! I'm here to help you learn more about Aman's work and expertise. Feel free to ask about his projects, skills, or anything else!",
-      "Welcome! I can help you learn more about Aman's development expertise and projects. What brings you here today?"
+      "Hello! 👋 I'm Aman's AI Assistant. How can I help you today?\n\nFeel free to ask me anything about his work, or jump directly to a page:\n\n[Read About Aman](/about)\n\n[Explore Skills & Tools](/skills)\n\n[View Featured Projects](/projects)\n\n[Check Career Experience](/career)\n\n[Contact / Hire Aman](/contact)",
+      "Hi there! Ask me anything about Aman's development skills, projects, or background, or jump directly to any page:\n\n[View Projects Directory](/projects)\n\n[Check Tech Stack & Skills](/skills)\n\n[Send a Message to Aman](/contact)"
     ]
   }
 };
+
 function generateResponse(message: string): string {
   const lowerMessage = message.toLowerCase();
 
   // First check for exact pattern matches
   for (const [category, template] of Object.entries(knowledge)) {
     for (const pattern of template.patterns) {
-      if (pattern === "*") continue; // Skip wildcard pattern on first pass
+      if (pattern === "*") continue;
       if (lowerMessage.includes(pattern.toLowerCase())) {
         const randomIndex = Math.floor(Math.random() * template.responses.length);
         return template.responses[randomIndex];
@@ -62,15 +76,8 @@ function generateResponse(message: string): string {
     }
   }
 
-  // If no exact matches, use the general response
-  if (knowledge.general) {
-    const randomIndex = Math.floor(Math.random() * knowledge.general.responses.length);
-    let response = knowledge.general.responses[randomIndex];
-    return response.replace("{input}", message.trim());
-  }
-
   // Default response if no patterns match
-  return "I'm here to help you learn more about Aman! Feel free to ask about his skills, projects, experience, or how to get in touch. What would you like to know?";
+  return "I'm here to help you explore Aman's work! You can ask about his skills, projects, experience, or use these direct links:\n\n• 👉 [About Aman](/about)\n• 👉 [Skills & Tools](/skills)\n• 👉 [Projects Directory](/projects)\n• 👉 [Career Experience](/career)\n• 👉 [Contact Page](/contact)";
 }
 
 export async function POST(req: Request) {
