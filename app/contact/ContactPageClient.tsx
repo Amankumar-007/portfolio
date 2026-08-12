@@ -51,13 +51,13 @@ export default function ContactPageClient() {
       </svg>
 
       <PageTransition>
-        <div className="relative z-10 max-w-7xl mx-auto px-6 py-12">
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
           
           <motion.header 
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="mb-20 space-y-4"
+            className="mb-12 sm:mb-20 space-y-3 sm:space-y-4"
           >
             <div className="inline-flex items-center gap-2.5 text-xs font-mono tracking-[0.25em] uppercase text-zinc-400">
               <span className="relative flex h-2 w-2">
@@ -66,26 +66,26 @@ export default function ContactPageClient() {
               </span>
               <span className="font-bold text-zinc-300">Get In Touch</span>
             </div>
-            <h1 className="text-7xl md:text-9xl font-black tracking-tighter leading-[0.85] uppercase text-white">
+            <h1 className="text-4xl xs:text-5xl sm:text-7xl md:text-9xl font-black tracking-tighter leading-[0.9] uppercase text-white">
               Let&apos;s <br /> <span className="text-[#F05335] italic font-serif lowercase pr-4">connect.</span>
             </h1>
           </motion.header>
 
-          <div className="grid lg:grid-cols-[1fr_1.5fr] gap-16 items-start">
+          <div className="grid lg:grid-cols-[1fr_1.5fr] gap-10 sm:gap-16 items-start">
             {/* LEFT SIDE: INFO */}
             <motion.div initial={{ opacity: 0, x: -15 }} animate={{ opacity: 1, x: 0 }} transition={{ duration: 0.5, delay: 0.1 }}>
-              <div className="space-y-12">
+              <div className="space-y-8 sm:space-y-12">
                 <div>
-                  <h3 className="text-xs font-mono uppercase tracking-[0.3em] text-zinc-500 mb-6 font-bold">Contact Details</h3>
-                  <div className="space-y-4">
+                  <h3 className="text-xs font-mono uppercase tracking-[0.3em] text-zinc-500 mb-4 sm:mb-6 font-bold">Contact Details</h3>
+                  <div className="space-y-3 sm:space-y-4">
                     {contactInfo.map((item, index) => (
-                      <a key={index} href={item.link} className="group flex items-center gap-6 p-6 bg-zinc-950/80 border border-zinc-800/80 hover:border-[#F05335]/60 transition-all rounded-2xl shadow-lg">
-                        <div className="p-3 bg-zinc-900 text-[#F05335] rounded-xl group-hover:bg-[#F05335] group-hover:text-white transition-colors">
+                      <a key={index} href={item.link} className="group flex items-center gap-3.5 sm:gap-6 p-4 sm:p-6 bg-zinc-950/80 border border-zinc-800/80 hover:border-[#F05335]/60 transition-all rounded-2xl shadow-lg min-w-0">
+                        <div className="p-2.5 sm:p-3 bg-zinc-900 text-[#F05335] rounded-xl group-hover:bg-[#F05335] group-hover:text-white transition-colors shrink-0">
                           {item.icon}
                         </div>
-                        <div>
-                          <p className="text-xs font-bold uppercase tracking-widest text-zinc-400">{item.title}</p>
-                          <p className="text-xl font-bold text-white">{item.details}</p>
+                        <div className="min-w-0 flex-1">
+                          <p className="text-[10px] sm:text-xs font-bold uppercase tracking-widest text-zinc-400">{item.title}</p>
+                          <p className="text-sm xs:text-base sm:text-xl font-bold text-white truncate">{item.details}</p>
                         </div>
                       </a>
                     ))}
@@ -93,8 +93,8 @@ export default function ContactPageClient() {
                 </div>
 
                 <div>
-                  <h3 className="text-xs font-mono uppercase tracking-[0.3em] text-zinc-500 mb-6 font-bold">Socials</h3>
-                  <div className="flex flex-wrap gap-3">
+                  <h3 className="text-xs font-mono uppercase tracking-[0.3em] text-zinc-500 mb-4 sm:mb-6 font-bold">Socials</h3>
+                  <div className="flex flex-wrap gap-2.5 sm:gap-3">
                     {[
                       { name: 'LinkedIn', url: 'https://www.linkedin.com/in/amankumarweb/' },
                       { name: 'GitHub', url: 'https://github.com/Amankumar-007' },
@@ -106,7 +106,7 @@ export default function ContactPageClient() {
                         href={social.url} 
                         target="_blank" 
                         rel="noopener noreferrer"
-                        className="rounded-full px-6 py-2.5 bg-zinc-950 border border-zinc-800 text-zinc-300 hover:border-[#F05335] hover:text-white transition-all font-bold text-xs"
+                        className="rounded-full px-4 sm:px-6 py-2 sm:py-2.5 bg-zinc-950 border border-zinc-800 text-zinc-300 hover:border-[#F05335] hover:text-white transition-all font-bold text-xs"
                       >
                         {social.name}
                       </a>
@@ -121,17 +121,17 @@ export default function ContactPageClient() {
               initial={{ opacity: 0, x: 15 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.5, delay: 0.2 }}
-              className="bg-zinc-950/90 p-8 md:p-12 rounded-[2.5rem] border border-zinc-800/90 shadow-[0_25px_60px_rgba(0,0,0,0.95)]"
+              className="bg-zinc-950/90 p-5 sm:p-8 md:p-12 rounded-3xl sm:rounded-[2.5rem] border border-zinc-800/90 shadow-[0_25px_60px_rgba(0,0,0,0.95)]"
             >
-              <h2 className="text-3xl md:text-4xl font-black uppercase tracking-tight text-white mb-8">Send a Message</h2>
+              <h2 className="text-2xl sm:text-3xl md:text-4xl font-black uppercase tracking-tight text-white mb-6 sm:mb-8">Send a Message</h2>
               <Form {...form}>
-                <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
-                  <div className="grid md:grid-cols-2 gap-8">
+                <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6 sm:space-y-8">
+                  <div className="grid md:grid-cols-2 gap-6 sm:gap-8">
                     <FormField control={form.control} name="name" render={({ field }) => (
                       <FormItem>
                         <FormLabel className="font-bold uppercase tracking-widest text-[10px] text-zinc-400">Name</FormLabel>
                         <FormControl>
-                          <Input className="bg-transparent border-0 border-b-2 border-zinc-800 rounded-none focus-visible:ring-0 focus-visible:border-[#F05335] text-lg text-white px-0 placeholder:text-zinc-600" placeholder="John Doe" {...field} />
+                          <Input className="bg-transparent border-0 border-b-2 border-zinc-800 rounded-none focus-visible:ring-0 focus-visible:border-[#F05335] text-base sm:text-lg text-white px-0 placeholder:text-zinc-600" placeholder="John Doe" {...field} />
                         </FormControl>
                         <FormMessage />
                       </FormItem>
@@ -140,7 +140,7 @@ export default function ContactPageClient() {
                       <FormItem>
                         <FormLabel className="font-bold uppercase tracking-widest text-[10px] text-zinc-400">Email Address</FormLabel>
                         <FormControl>
-                          <Input className="bg-transparent border-0 border-b-2 border-zinc-800 rounded-none focus-visible:ring-0 focus-visible:border-[#F05335] text-lg text-white px-0 placeholder:text-zinc-600" placeholder="hello@example.com" {...field} />
+                          <Input className="bg-transparent border-0 border-b-2 border-zinc-800 rounded-none focus-visible:ring-0 focus-visible:border-[#F05335] text-base sm:text-lg text-white px-0 placeholder:text-zinc-600" placeholder="hello@example.com" {...field} />
                         </FormControl>
                         <FormMessage />
                       </FormItem>
@@ -150,7 +150,7 @@ export default function ContactPageClient() {
                     <FormItem>
                       <FormLabel className="font-bold uppercase tracking-widest text-[10px] text-zinc-400">Subject</FormLabel>
                       <FormControl>
-                        <Input className="bg-transparent border-0 border-b-2 border-zinc-800 rounded-none focus-visible:ring-0 focus-visible:border-[#F05335] text-lg text-white px-0 placeholder:text-zinc-600" placeholder="Project Inquiry" {...field} />
+                        <Input className="bg-transparent border-0 border-b-2 border-zinc-800 rounded-none focus-visible:ring-0 focus-visible:border-[#F05335] text-base sm:text-lg text-white px-0 placeholder:text-zinc-600" placeholder="Project Inquiry" {...field} />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
@@ -159,15 +159,15 @@ export default function ContactPageClient() {
                     <FormItem>
                       <FormLabel className="font-bold uppercase tracking-widest text-[10px] text-zinc-400">Message</FormLabel>
                       <FormControl>
-                        <Textarea className="bg-transparent border-0 border-b-2 border-zinc-800 rounded-none focus-visible:ring-0 focus-visible:border-[#F05335] text-lg text-white px-0 min-h-[120px] resize-none placeholder:text-zinc-600" placeholder="Tell me about your project..." {...field} />
+                        <Textarea className="bg-transparent border-0 border-b-2 border-zinc-800 rounded-none focus-visible:ring-0 focus-visible:border-[#F05335] text-base sm:text-lg text-white px-0 min-h-[100px] sm:min-h-[120px] resize-none placeholder:text-zinc-600" placeholder="Tell me about your project..." {...field} />
                       </FormControl>
                       <FormMessage />
                     </FormItem>
                   )} />
                   
-                  <Button type="submit" className="w-full h-16 bg-[#F05335] hover:bg-orange-600 text-white rounded-2xl text-xl font-black uppercase tracking-tight transition-all shadow-[0_10px_30px_rgba(240,83,53,0.3)] group cursor-pointer">
+                  <Button type="submit" className="w-full h-14 sm:h-16 bg-[#F05335] hover:bg-orange-600 text-white rounded-2xl text-base sm:text-xl font-black uppercase tracking-tight transition-all shadow-[0_10px_30px_rgba(240,83,53,0.3)] group cursor-pointer">
                     Send Inquiry
-                    <Send className="ml-3 h-5 w-5 group-hover:translate-x-2 group-hover:-translate-y-2 transition-transform" />
+                    <Send className="ml-3 h-4 w-4 sm:h-5 sm:w-5 group-hover:translate-x-2 group-hover:-translate-y-2 transition-transform" />
                   </Button>
                 </form>
               </Form>
