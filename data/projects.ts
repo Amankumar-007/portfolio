@@ -18,13 +18,13 @@ export const getAllProjects = (): Project[] => [
   {
     id: "project-9",
     title: "SnippetsX",
-    description: "A browser-based, real-time collaborative code editor that replaces Pastebin-style sharing with live multi-cursor editing, in-browser execution for 40+ languages, and team workspaces — built for developers, technical interviewers, and students.",
+    description: "Real-time collaboration platform with a custom Operational Transformation engine for live cursors and sub-10ms sync. Built a real-time multiplayer code editor with in-browser execution for 40+ languages inside isolated Docker containers, streaming output live to collaborators. Shipped team workspaces with RBAC, private and expiring links, burn-on-view snippets, an embeddable widget and a REST API.",
     category: "SaaS",
     screenshots: [
       { url: "/projects/snippetsx-cover.png", alt: "SnippetsX — real-time collaborative code editor" }
     ],
     year: "2025",
-    tags: ["Real-time Collaboration", "Code Execution", "Next.js", "WebSockets"],
+    tags: ["Real-time Collaboration", "Code Execution", "WebSockets", "Docker", "Redis", "PostgreSQL"],
     link: "https://snippetsx.com",
     featured: true
   },
@@ -57,39 +57,40 @@ export const getAllProjects = (): Project[] => [
   {
     id: "project-5",
     title: "TomatoAI",
-    description: "An all-in-one AI tools platform bringing text generation, image generation, AI search, and data tools into a single modern interface — with secure JWT auth and a fully responsive UI.",
+    description: "AI tools directory and multi-agent assistant with parallel workspaces, streaming responses, guest sessions and chat history migration. Developed an SEO-optimised AI tools directory with category, trending and review pages, server-rendered in Next.js. Shipped in-product AI tooling — resume analyser, prompt optimiser, content generator, summariser and n8n workflow templates. LLM-powered intelligent automation for productivity.",
     category: "AI Tools",
     video: "/ai-tools/ai-tools.mp4",
     screenshots: [
       { url: "/ai-tools/ai-tools.png", alt: "TomatoAI — AI tools platform" }
     ],
     year: "2025",
-    tags: ["AI", "Automation", "Productivity"],
+    tags: ["AI", "LLM APIs", "Automation", "Next.js", "TypeScript", "Node.js"],
+    link: "https://tomatoai.in",
     featured: true
   },
   {
     id: "project-3",
     title: "Learning Management System (LMS)",
-    description: "A comprehensive LMS that supports interactive learning, role-based access, detailed assessments, and certifications to empower educators and learners.",
+    description: "Four-role EdTech platform (Admin, Instructor, Student, Examiner) with JWT-protected routes, role-based access control (RBAC) and Stripe course payments. Comprehensive learning management system with interactive courses, detailed assessments, certifications, and student progress tracking for seamless educational experiences.",
     category: "Full Stack",
     video: "/lms/lms.mp4",
     screenshots: [
       { url: "/lms/Screenshot 2025-05-27 131624.png", alt: "LMS Dashboard" }
     ],
-    year: "2023",
-    tags: ["Education", "React", "Node.js"]
+    year: "2025",
+    tags: ["Education", "React", "Node.js", "MongoDB", "JWT", "Stripe"]
   },
   {
     id: "project-2",
-    title: "Real Estate Platform",
-    description: "A feature-rich real estate platform offering seamless property browsing, advanced search filters, and secure transactions for buyers and sellers.",
+    title: "Real Estate Marketplace",
+    description: "Property portal with separate admin, seller and buyer dashboards and multi-parameter search on indexed MongoDB queries. Built a comprehensive real estate marketplace with advanced filtering by location, price, property type, and amenities. Implemented efficient database queries and real-time property listings for seamless browsing experience.",
     category: "Web Development",
     video: "/real-estate/real-estate.mp4",
     screenshots: [
       { url: "/ss-3.png", alt: "Real Estate Platform" }
     ],
-    year: "2023",
-    tags: ["Real Estate", "React", "MongoDB"]
+    year: "2025",
+    tags: ["Real Estate", "React", "Node.js", "MongoDB", "Express"]
   },
   {
     id: "project-6",

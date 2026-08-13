@@ -2,17 +2,18 @@ import type { Metadata } from "next";
 import AboutPageClient from "./AboutPageClient";
 
 export const metadata: Metadata = {
-  title: "About — Aman Kumar | Full Stack Engineer",
+  title: "About Aman Kumar | Full Stack Engineer & AI Developer",
   description:
-    "Aman Kumar is a Full Stack Engineer with 2+ years of experience in full stack web development, Next.js, and TypeScript — from self-taught beginnings and Learn2Earn training to Ninepages Techsolutions and StartupCoaching.",
+    "Learn about Aman Kumar's journey: 2+ years building production SaaS and AI applications. Self-taught to full-time Full Stack Engineer. Expert in React, Next.js, Node.js, TypeScript, AWS, and LLM integration. Education: MCA (AKTU) & BCA (Dr. Bhimrao Ambedkar University).",
   alternates: {
     canonical: "https://amankumarr.in/about",
   },
   openGraph: {
-    title: "About — Aman Kumar | Full Stack Engineer",
+    title: "About Aman Kumar | Full Stack Engineer & AI Developer",
     description:
-      "Aman Kumar's journey from self-taught developer to Full Stack Engineer — Learn2Earn, Ninepages Techsolutions, and StartupCoaching.",
+      "Full Stack Engineer with 2+ years shipping production applications. Self-taught journey through Learn2Earn, Ninepages Techsolutions, and StartupCoaching. Expert in modern web stack and AI integration.",
     url: "https://amankumarr.in/about",
+    type: "website",
     images: [
       {
         url: "/about-image.png",
@@ -23,9 +24,10 @@ export const metadata: Metadata = {
     ],
   },
   twitter: {
-    title: "About — Aman Kumar | Full Stack Engineer",
+    card: "summary_large_image",
+    title: "About Aman Kumar | Full Stack Engineer",
     description:
-      "Aman Kumar's journey from self-taught developer to Full Stack Engineer.",
+      "2+ years shipping production SaaS. React, Next.js, Node.js specialist. Self-taught to Full Stack Engineer journey.",
     images: ["/about-image.png"],
   },
 };

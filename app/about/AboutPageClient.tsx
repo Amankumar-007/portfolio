@@ -11,19 +11,34 @@ import { Terminal, Code2, Cpu, Globe, Sparkles } from "lucide-react";
 // Categorized Skills for better organization
 const skillCategories = [
   {
-    name: "Core Tech",
+    name: "Languages",
     icon: <Code2 size={14} />,
-    items: ["React", "Next.js", "Node.js", "TypeScript", "JavaScript", "MongoDB", "Express.js"]
+    items: ["JavaScript (ES6+)", "TypeScript", "Python", "SQL"]
   },
   {
-    name: "Frontend & UI",
+    name: "Frontend",
     icon: <Globe size={14} />,
-    items: ["Tailwind CSS", "Responsive Design", "UI/UX Implementation", "CSS3", "HTML5", "Animations"]
+    items: ["React", "Next.js", "Redux Toolkit", "Tailwind CSS", "Responsive UI", "Component-driven"]
   },
   {
-    name: "Workflow",
+    name: "Backend & APIs",
     icon: <Cpu size={14} />,
-    items: ["Git & GitHub", "Agile", "REST APIs", "Problem Solving", "Open Source"]
+    items: ["Node.js", "Express", "REST APIs", "GraphQL", "WebSockets", "JWT & OAuth", "Stripe"]
+  },
+  {
+    name: "Databases",
+    icon: <Cpu size={14} />,
+    items: ["MongoDB", "PostgreSQL", "MySQL", "Supabase", "Redis"]
+  },
+  {
+    name: "Cloud & DevOps",
+    icon: <Cpu size={14} />,
+    items: ["AWS (EC2, S3, Lambda)", "Docker", "CI/CD with GitHub Actions", "Vercel", "Render", "Netlify"]
+  },
+  {
+    name: "AI Engineering",
+    icon: <Sparkles size={14} />,
+    items: ["LLM APIs", "OpenAI Integration", "Claude Integration", "Prompt Engineering", "RAG Pipelines", "n8n Automation"]
   }
 ];
 
@@ -32,25 +47,25 @@ const experiences = [
     period: "Oct 2025 - Present",
     role: "Full Stack Engineer",
     company: "StartupCoaching",
-    description: "Developing scalable web applications and digital solutions — working across frontend, backend, APIs, databases, and performance optimization to deliver seamless user experiences.",
+    description: "Build and maintain scalable full-stack applications — React/Next.js interfaces, Node.js services, REST APIs and data layers. Design and optimise data models and API contracts, cutting redundant queries and improving response times on core flows. Integrate LLM and workflow-automation features into client products, turning founder requirements into shipped releases.",
   },
   {
     period: "Jun 2024 - Oct 2025",
     role: "Full Stack Engineer",
     company: "Ninepages Techsolutions Pvt. Ltd.",
-    description: "Built and shipped client web applications end-to-end as a Full Stack Engineer over 1 year 5 months — database schema design, REST APIs, and modern React frontends.",
+    description: "Delivered features across 3 production applications in Agile teams, contributing to a 25% increase in client engagement. Reduced API latency by ~20% via query optimisation and caching, while holding a 95% on-time sprint completion rate. Implemented secure authentication and role-based access control with JWT, plus Stripe payment flows for transactional modules.",
   },
   {
     period: "2023 - 2024",
     role: "Full Stack Developer Training",
     company: "Learn2Earn",
-    description: "Completed an intensive full-stack developer training program, bridging self-taught fundamentals into job-ready practice through structured code reviews and deadline-driven builds.",
+    description: "Completed an intensive full-stack developer training program with structured code reviews and production-style project specifications. Bridged self-taught fundamentals into job-ready practice through deadline-driven builds and real-world project patterns.",
   },
   {
     period: "2022 - 2023",
-    role: "Intern Developer",
-    company: "Self-learning and Open Source Projects",
-    description: "Worked on personal projects, contributed to open-source, and participated in coding challenges to enhance development skills. Gained hands-on experience in web development and backend technologies.",
+    role: "Self-taught Developer & Open Source",
+    company: "Independent Learning",
+    description: "Worked on personal projects, built multiple web applications, contributed to open-source repositories, and participated in coding challenges. Gained hands-on experience in full-stack web development, backend technologies, and modern JavaScript frameworks.",
   }
 ];
 
@@ -71,7 +86,7 @@ export default function AboutPageClient() {
 
             {/* INTRO SECTION */}
             <div className="grid gap-16 lg:grid-cols-2 items-center">
-              <div data-scroll data-scroll-speed="1" className="space-y-6">
+              <div data-scroll data-scroll-speed="1" className="space-y-8">
                 <div className="inline-flex items-center gap-2.5 text-xs font-mono tracking-[0.25em] uppercase text-zinc-400">
                   <span className="relative flex h-2 w-2">
                     <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#F05335] opacity-75"></span>
@@ -84,7 +99,7 @@ export default function AboutPageClient() {
                   Aman <br /> <span className="text-[#F05335] italic font-serif lowercase pr-4">Kumar.</span>
                 </h1>
                 <p className="text-base md:text-lg text-zinc-400 font-normal max-w-md leading-relaxed">
-                  Full-stack developer building robust SaaS applications and web platforms with a focus on performance and modern aesthetics.
+                  Full Stack Engineer with 2+ years shipping production applications end to end. Expert in React, Next.js, Node.js, TypeScript, and modern web architectures. Building AI-powered SaaS products and developer tools.
                 </p>
 
                 {/* SPECIAL SKILLS BENTO GRID */}
@@ -133,6 +148,55 @@ export default function AboutPageClient() {
             </div>
 
             <Separator className="my-16 bg-zinc-900" />
+
+            {/* EDUCATION */}
+            <div data-scroll data-scroll-speed="1" className="pb-12">
+              <div className="mb-12">
+                <span className="text-xs font-mono text-[#F05335] font-bold uppercase tracking-wider block mb-1">Education & Credentials</span>
+                <h2 className="text-4xl md:text-6xl font-black tracking-tighter uppercase text-white">
+                  Academic <span className="text-[#F05335] italic font-serif lowercase">Foundation</span>
+                </h2>
+              </div>
+
+              <div className="grid md:grid-cols-2 gap-6">
+                <div className="border-l-2 border-[#F05335] pl-8 space-y-3">
+                  <h3 className="text-xl sm:text-2xl font-black tracking-tight uppercase text-white">Master of Computer Applications (MCA)</h3>
+                  <p className="text-zinc-400 font-mono text-xs uppercase tracking-wider">Dr. A.P.J. Abdul Kalam Technical University (AKTU), Lucknow</p>
+                  <p className="text-zinc-300 text-sm leading-relaxed">Aug 2025 – Jun 2027</p>
+                  <p className="text-zinc-300 text-sm leading-relaxed font-semibold">CGPA: 8.4 / 10</p>
+                </div>
+
+                <div className="border-l-2 border-zinc-700 pl-8 space-y-3">
+                  <h3 className="text-xl sm:text-2xl font-black tracking-tight uppercase text-white">Bachelor of Computer Applications (BCA)</h3>
+                  <p className="text-zinc-400 font-mono text-xs uppercase tracking-wider">Dr. Bhimrao Ambedkar University, Agra</p>
+                  <p className="text-zinc-300 text-sm leading-relaxed">Jun 2021 – Jul 2024</p>
+                  <p className="text-zinc-300 text-sm leading-relaxed font-semibold">Percentage: 74.92%</p>
+                </div>
+              </div>
+
+              <div className="mt-8">
+                <h3 className="text-xs font-mono text-zinc-500 uppercase tracking-wider font-bold mb-4">Relevant Coursework</h3>
+                <div className="flex flex-wrap gap-2">
+                  {["Data Structures & Algorithms", "Operating Systems", "DBMS", "OOP", "Computer Networks", "Web Development"].map((course, i) => (
+                    <span key={i} className="px-3 py-1.5 rounded-lg bg-zinc-900 border border-zinc-800 text-xs font-medium text-zinc-300">
+                      {course}
+                    </span>
+                  ))}
+                </div>
+              </div>
+
+              <div className="mt-8">
+                <h3 className="text-xs font-mono text-zinc-500 uppercase tracking-wider font-bold mb-4">Certifications</h3>
+                <div className="flex flex-wrap gap-3">
+                  <div className="px-4 py-2.5 rounded-xl bg-[#F05335]/15 border border-[#F05335]/30 text-sm font-semibold text-[#F05335]">
+                    Generative AI — LinkedIn Learning, 2024
+                  </div>
+                  <div className="px-4 py-2.5 rounded-xl bg-cyan-500/15 border border-cyan-500/30 text-sm font-semibold text-cyan-400">
+                    MERN Stack Development — Simplilearn, 2024
+                  </div>
+                </div>
+              </div>
+            </div>
 
             {/* WORK EXPERIENCE */}
             <div data-scroll data-scroll-speed="1">

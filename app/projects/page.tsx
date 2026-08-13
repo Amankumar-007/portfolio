@@ -2,17 +2,19 @@ import type { Metadata } from "next";
 import ProjectsPageClient from "./ProjectsPageClient";
 
 export const metadata: Metadata = {
-  title: "Projects — Aman Kumar | Full Stack Engineer Portfolio",
+  title: "Projects Portfolio — Aman Kumar | SaaS, AI & Full Stack Apps",
   description:
-    "Explore Aman Kumar's portfolio of projects: e-commerce platforms, real estate apps, LMS systems, AI tools, SaaS solutions, and more. Built with React, Next.js, Node.js, and MongoDB.",
+    "Portfolio of 11+ full-stack projects: SnippetsX (real-time code editor), TomatoAI (AI tools platform), Awasdhara (real estate), LMS, e-commerce, and more. Built with React, Next.js, Node.js, TypeScript, MongoDB, PostgreSQL, AWS, and LLM APIs.",
+  keywords: ["Projects", "Portfolio", "SnippetsX", "TomatoAI", "Awasdhara", "SaaS", "AI Tools", "Full Stack", "React", "Next.js", "Web Development"],
   alternates: {
     canonical: "https://amankumarr.in/projects",
   },
   openGraph: {
-    title: "Projects — Aman Kumar | Full Stack Engineer Portfolio",
+    title: "Projects Portfolio — Aman Kumar | SaaS, AI & Full Stack Apps",
     description:
-      "Explore Aman Kumar's portfolio of full-stack projects including e-commerce, real estate, LMS, and AI tools.",
+      "11+ production projects: SnippetsX (real-time collaboration), TomatoAI (AI platform), Awasdhara (real estate). React, Next.js, Node.js, TypeScript, MongoDB, AWS.",
     url: "https://amankumarr.in/projects",
+    type: "website",
     images: [
       {
         url: "/about-image.png",
@@ -23,9 +25,10 @@ export const metadata: Metadata = {
     ],
   },
   twitter: {
-    title: "Projects — Aman Kumar | Full Stack Engineer Portfolio",
+    card: "summary_large_image",
+    title: "Projects Portfolio — Aman Kumar",
     description:
-      "Explore Aman Kumar's portfolio of full-stack projects including e-commerce, real estate, LMS, and AI tools.",
+      "11+ SaaS & full-stack projects. SnippetsX, TomatoAI, Awasdhara. React, Next.js, Node.js, TypeScript, PostgreSQL, AWS.",
     images: ["/about-image.png"],
   },
 };

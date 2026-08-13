@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import {
   Home,
   Folder,
@@ -12,15 +12,18 @@ import {
   Edit3,
   ArrowUpRight,
   Flame,
-  Dribbble,
   Twitter,
-  Instagram,
-  Youtube,
   Send,
   CheckCircle2,
   ArrowRight,
-  BookOpen,
   Newspaper,
+  Cpu,
+  GraduationCap,
+  Award,
+  HelpCircle,
+  Code2,
+  Mail,
+  Check
 } from "lucide-react";
 import {
   AnimatedNumber,
@@ -29,7 +32,6 @@ import {
   staggerChild,
 } from "@/components/ui/scroll-animations";
 import { getAllThoughts } from "@/data/thoughts";
-
 
 interface ProjectItem {
   id: string;
@@ -50,28 +52,28 @@ const recentProjects: ProjectItem[] = [
   {
     id: "project-5",
     title: "TomatoAI",
-    subtitle: "All-in-one AI Tools Platform",
+    subtitle: "All-in-one AI Tools Directory & Platform",
     thumbImage: "/ai-tools/ai-tools.png",
     link: "/projects/project-5"
   },
   {
     id: "project-10",
     title: "Awasdhara",
-    subtitle: "Real Estate & Land Investment Platform",
+    subtitle: "Real Estate & Land Investment Portal",
     thumbImage: "/logos/awasdhara-logo.png",
     link: "/projects/project-10"
   },
   {
     id: "project-9",
     title: "SnippetsX",
-    subtitle: "Real-time Collaborative Code Editor",
+    subtitle: "Real-time Multi-Language Collaborative Code Platform",
     thumbImage: "/projects/snippetsx-cover.png",
     link: "/projects/project-9"
   },
   {
     id: "project-11",
     title: "TwoFloww",
-    subtitle: "Software Development & Digital Agency",
+    subtitle: "Software Development & Digital Agency Platform",
     thumbImage: "/projects/twofloww-cover.png",
     link: "/projects/project-11"
   }
@@ -81,73 +83,9 @@ const premiumTools: ToolItem[] = [
   {
     id: "react",
     name: "React",
-    subtitle: "Frontend Library",
+    subtitle: "Frontend UI Library",
     icon: (
       <Image src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" alt="React" width={24} height={24} unoptimized className="w-6 h-6 object-contain" />
-    )
-  },
-  {
-    id: "nodejs",
-    name: "Node.js",
-    subtitle: "JavaScript Runtime",
-    icon: (
-      <Image src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" alt="Node.js" width={24} height={24} unoptimized className="w-6 h-6 object-contain" />
-    )
-  },
-  {
-    id: "postgresql",
-    name: "PostgreSQL",
-    subtitle: "Relational Database",
-    icon: (
-      <Image src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg" alt="PostgreSQL" width={24} height={24} unoptimized className="w-6 h-6 object-contain" />
-    )
-  },
-  {
-    id: "docker",
-    name: "Docker",
-    subtitle: "Container Platform",
-    icon: (
-      <Image src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg" alt="Docker" width={24} height={24} unoptimized className="w-6 h-6 object-contain" />
-    )
-  },
-  {
-    id: "kubernetes",
-    name: "Kubernetes",
-    subtitle: "Container Orchestration",
-    icon: (
-      <Image src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/kubernetes/kubernetes-plain.svg" alt="Kubernetes" width={24} height={24} unoptimized className="w-6 h-6 object-contain" />
-    )
-  },
-  {
-    id: "graphql",
-    name: "GraphQL",
-    subtitle: "Query Language",
-    icon: (
-      <Image src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/graphql/graphql-plain.svg" alt="GraphQL" width={24} height={24} unoptimized className="w-6 h-6 object-contain" />
-    )
-  },
-  {
-    id: "vscode",
-    name: "VS Code",
-    subtitle: "Code Editor",
-    icon: (
-      <Image src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg" alt="VS Code" width={24} height={24} unoptimized className="w-6 h-6 object-contain" />
-    )
-  },
-  {
-    id: "git",
-    name: "Git",
-    subtitle: "Version Control",
-    icon: (
-      <Image src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" alt="Git" width={24} height={24} unoptimized className="w-6 h-6 object-contain" />
-    )
-  },
-  {
-    id: "terraform",
-    name: "Terraform",
-    subtitle: "Infrastructure as Code",
-    icon: (
-      <Image src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/terraform/terraform-original.svg" alt="Terraform" width={24} height={24} unoptimized className="w-6 h-6 object-contain" />
     )
   },
   {
@@ -161,22 +99,257 @@ const premiumTools: ToolItem[] = [
     )
   },
   {
-    id: "figma",
-    name: "Figma",
-    subtitle: "Design Tool",
+    id: "typescript",
+    name: "TypeScript",
+    subtitle: "Typed JavaScript",
     icon: (
-      <Image src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/figma/figma-original.svg" alt="Figma" width={24} height={24} unoptimized className="w-6 h-6 object-contain" />
+      <Image src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg" alt="TypeScript" width={24} height={24} unoptimized className="w-6 h-6 object-contain" />
     )
   },
   {
-    id: "framer",
-    name: "Framer",
-    subtitle: "Website Builder",
+    id: "nodejs",
+    name: "Node.js",
+    subtitle: "JS Backend Runtime",
     icon: (
-      <svg className="w-6 h-6 text-black fill-black" viewBox="0 0 24 24">
-        <path d="M4 0h16v8h-8zM4 8h8l8 8H4zM4 16h8v8z" fill="#000000" />
-      </svg>
+      <Image src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" alt="Node.js" width={24} height={24} unoptimized className="w-6 h-6 object-contain" />
     )
+  },
+  {
+    id: "express",
+    name: "Express.js",
+    subtitle: "REST API Framework",
+    icon: (
+      <Image src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original.svg" alt="Express" width={24} height={24} unoptimized className="w-6 h-6 object-contain" />
+    )
+  },
+  {
+    id: "mongodb",
+    name: "MongoDB",
+    subtitle: "Document Database",
+    icon: (
+      <Image src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg" alt="MongoDB" width={24} height={24} unoptimized className="w-6 h-6 object-contain" />
+    )
+  },
+  {
+    id: "postgresql",
+    name: "PostgreSQL",
+    subtitle: "Relational Database",
+    icon: (
+      <Image src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg" alt="PostgreSQL" width={24} height={24} unoptimized className="w-6 h-6 object-contain" />
+    )
+  },
+  {
+    id: "redis",
+    name: "Redis",
+    subtitle: "In-Memory Cache",
+    icon: (
+      <Image src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/redis/redis-original.svg" alt="Redis" width={24} height={24} unoptimized className="w-6 h-6 object-contain" />
+    )
+  },
+  {
+    id: "docker",
+    name: "Docker",
+    subtitle: "Container Runtime",
+    icon: (
+      <Image src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg" alt="Docker" width={24} height={24} unoptimized className="w-6 h-6 object-contain" />
+    )
+  },
+  {
+    id: "aws",
+    name: "AWS",
+    subtitle: "Cloud Services (EC2, S3)",
+    icon: (
+      <Image src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-original.svg" alt="AWS" width={24} height={24} unoptimized className="w-6 h-6 object-contain" />
+    )
+  },
+  {
+    id: "tailwindcss",
+    name: "Tailwind CSS",
+    subtitle: "Utility Styling",
+    icon: (
+      <Image src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg" alt="Tailwind" width={24} height={24} unoptimized className="w-6 h-6 object-contain" />
+    )
+  },
+  {
+    id: "git",
+    name: "Git & GitHub",
+    subtitle: "Version Control",
+    icon: (
+      <Image src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" alt="Git" width={24} height={24} unoptimized className="w-6 h-6 object-contain" />
+    )
+  }
+];
+
+const architectureMilestones = [
+  {
+    id: "ot-engine",
+    title: "SnippetsX Real-Time OT Engine",
+    metric: "< 10ms",
+    metricLabel: "Sync Latency",
+    highlight: "Custom Operational Transformation engine enabling live multi-cursor code editing with sub-10ms peer synchronization.",
+    details: [
+      "Custom OT concurrency matrix preventing code race conditions",
+      "WebSocket delta streaming with client-side optimistic UI",
+      "Sub-10ms state synchronization across distributed clients"
+    ],
+    tech: ["WebSockets", "Node.js", "Redis", "OT Algorithm"]
+  },
+  {
+    id: "docker-sandbox",
+    title: "Isolated Multi-Language Sandbox",
+    metric: "40+",
+    metricLabel: "Active Runtimes",
+    highlight: "Containerized execution sandbox running 40+ programming languages in isolated Docker containers with live streaming outputs.",
+    details: [
+      "Ephemeral Docker container creation with strict memory & CPU limits",
+      "Real-time stdout/stderr log streaming via WebSockets",
+      "Security sandbox isolation protecting host infrastructure"
+    ],
+    tech: ["Docker", "Linux Containers", "Node.js", "WebSockets"]
+  },
+  {
+    id: "latency-opt",
+    title: "Database Indexing & Redis Caching",
+    metric: "~20%",
+    metricLabel: "Latency Cut",
+    highlight: "Optimized complex MongoDB & SQL queries, structured Redis caching layers, cutting core application response times by 20%.",
+    details: [
+      "Indexed MongoDB query pipelines & payload footprint reduction",
+      "Multi-layer Redis key caching with automatic invalidation",
+      "Maintained 95%+ on-time sprint completion rate"
+    ],
+    tech: ["MongoDB", "Redis", "Express REST APIs", "SQL"]
+  },
+  {
+    id: "security-stripe",
+    title: "Enterprise RBAC & Stripe Checkout",
+    metric: "4-Role",
+    metricLabel: "Security RBAC",
+    highlight: "Implemented JWT authentication, 4-tier Role-Based Access Control (Admin, Instructor, Student, Examiner), and transactional Stripe payments.",
+    details: [
+      "JWT-protected routes with encrypted refresh token rotation",
+      "Stripe payment checkout webhook integrations for course sales",
+      "Granular role authorization middlewares across API routes"
+    ],
+    tech: ["JWT Auth", "RBAC", "Stripe API", "Security Best Practices"]
+  }
+];
+
+const experienceList = [
+  {
+    period: "OCT 2025 - PRESENT",
+    role: "Full Stack Engineer",
+    company: "Startup Coaching",
+    location: "Delhi, India · On-site",
+    logo: "/logos/startupcoaching-logo.png",
+    description: "Build and maintain scalable full-stack applications — React/Next.js interfaces, Node.js services, REST APIs and data layers. Design and optimise data models and API contracts, cutting redundant queries and improving response times on core flows.",
+    skills: ["React/Next.js", "TypeScript", "Node.js", "REST APIs", "AWS", "MongoDB"]
+  },
+  {
+    period: "JUN 2024 - OCT 2025",
+    role: "Full Stack Engineer",
+    company: "Ninepages Techsolutions Pvt. Ltd.",
+    location: "Agra, Uttar Pradesh, India · On-site",
+    logo: "/logos/ninepagestech-logo.png",
+    description: "Delivered features across 3 production applications in Agile teams, contributing to a 25% increase in client engagement. Reduced API latency by ~20% via query optimisation and caching, while holding a 95% on-time sprint completion rate. Implemented secure authentication and role-based access control with JWT, plus Stripe payment flows.",
+    skills: ["Full Stack", "JWT Auth", "Stripe", "MongoDB", "React.js", "Node.js"]
+  },
+  {
+    period: "2023 - 2024",
+    role: "Full Stack Developer Training",
+    company: "Learn2Earn",
+    location: "Structured Training Program",
+    description: "Completed an intensive full-stack developer training program with structured code reviews and production-style project specs. Bridged self-taught fundamentals into job-ready practice with deadline-driven builds and real-world project patterns.",
+    skills: ["JavaScript (ES6+)", "React.js", "Node.js", "MongoDB", "Git & GitHub"]
+  },
+  {
+    period: "2022 - 2023",
+    role: "Self-taught Developer & Open Source",
+    company: "Independent Learning & Contributions",
+    location: "Remote / Independent",
+    description: "Worked on personal projects, built web applications, contributed to open-source repositories, and participated in coding challenges. Gained hands-on experience in web development, backend technologies, and modern web frameworks.",
+    skills: ["HTML5", "CSS3", "JavaScript", "React", "Git", "Problem Solving"]
+  }
+];
+
+const educationTimeline = [
+  {
+    degree: "Master of Computer Applications (MCA)",
+    field: "Computer Science & Engineering",
+    institution: "Dr. A.P.J. Abdul Kalam Technical University (AKTU), Lucknow",
+    period: "Aug 2025 – Jun 2027",
+    score: "CGPA: 8.4 / 10",
+    status: "Pursuing",
+    description: "Specializing in advanced software design, distributed cloud systems, database indexing, and system architecture.",
+    highlights: ["Advanced DSA", "System Design", "Cloud Infrastructure", "DBMS", "Enterprise Architectures"]
+  },
+  {
+    degree: "Bachelor of Computer Applications (BCA)",
+    field: "Computer Science",
+    institution: "Dr. Bhimrao Ambedkar University, Agra",
+    period: "Jun 2021 – Jul 2024",
+    score: "Percentage: 74.92%",
+    status: "Graduated",
+    description: "Core computer science fundamentals: Data Structures & Algorithms, Operating Systems, Database Management Systems, Computer Networks, and Full-Stack Web Development.",
+    highlights: ["Data Structures & Algorithms", "DBMS", "Operating Systems", "Computer Networks", "Web Applications"]
+  }
+];
+
+const certificationsBadges = [
+  {
+    title: "MERN Stack Development",
+    issuer: "Simplilearn",
+    year: "2024",
+    skills: ["React.js", "Node.js", "Express.js", "MongoDB", "Full-Stack Patterns"],
+    accentColor: "#C4F135"
+  },
+  {
+    title: "Full Stack Web Engineering",
+    issuer: "Learn2Earn",
+    year: "2024",
+    skills: ["Full Stack Architecture", "REST APIs", "Database Optimization"],
+    accentColor: "#F05335"
+  }
+];
+
+const testimonials = [
+  {
+    quote: "Aman is an exceptionally sharp engineer. He delivered production features across multiple applications while maintaining clean architecture, reducing API latencies by ~20% and meeting sprint deadlines effortlessly.",
+    author: "Senior Engineering Manager",
+    org: "Ninepages Techsolutions Pvt. Ltd."
+  },
+  {
+    quote: "His ability to build real-time low-latency systems and scalable full-stack applications is outstanding. Aman turned requirements into high-performing client products with great attention to detail.",
+    author: "Technical Lead",
+    org: "Startup Coaching"
+  },
+  {
+    quote: "Building platforms like SnippetsX (sub-10ms OT multiplayer editor) shows Aman's deep technical commitment and ability to ship end-to-end full-stack applications.",
+    author: "Open Source Peer Reviewer",
+    org: "Developer Ecosystem"
+  }
+];
+
+const homeFaqData = [
+  {
+    question: "What primary tech stack does Aman Kumar specialize in?",
+    answer: "Aman specializes in React.js, Next.js, Node.js, Express.js, TypeScript, and Tailwind CSS, backed by MongoDB, PostgreSQL, Redis, Docker, and AWS."
+  },
+  {
+    question: "How much professional full-stack experience does Aman have?",
+    answer: "Aman has 2+ years of hands-on experience shipping production web applications end-to-end — currently at Startup Coaching (Delhi) and previously 1 year 5 months at Ninepages Techsolutions Pvt. Ltd."
+  },
+  {
+    question: "Is Aman available for full-time employment, contract work, or freelance?",
+    answer: "Yes! Aman is open to full-time engineering roles, freelance SaaS projects, and technical web collaborations. Reach out through the contact form or directly via email at amanr3388@gmail.com."
+  },
+  {
+    question: "What key real-time & performance achievements has Aman accomplished?",
+    answer: "Aman engineered SnippetsX — a real-time collaborative editor with custom Operational Transformation (OT) achieving sub-10ms sync and supporting code execution for 40+ languages inside isolated Docker containers."
+  },
+  {
+    question: "What is Aman's educational background?",
+    answer: "Aman is pursuing a Master of Computer Applications (MCA) in Computer Science from Dr. A.P.J. Abdul Kalam Technical University (AKTU) with an 8.4/10 CGPA, having completed a Bachelor of Computer Applications (BCA) from Dr. Bhimrao Ambedkar University with 74.92%."
   }
 ];
 
@@ -189,51 +362,27 @@ const designThoughts = getAllThoughts().slice(0, 3).map((t) => ({
   link: `/thoughts/${t.id}`
 }));
 
-const experienceList = [
-  {
-    period: "OCT 2025 - PRESENT",
-    role: "Full Stack Engineer",
-    company: "StartupCoaching",
-    location: "Delhi, India · On-site",
-    logo: "/logos/startupcoaching-logo.png",
-    description: "Developing scalable web applications and digital solutions at StartupCoaching.in — working across frontend, backend, APIs, databases, and performance optimization to deliver seamless user experiences.",
-    skills: ["Full Stack", "Next.js", "TypeScript", "REST APIs", "Tailwind CSS", "Git"]
-  },
-  {
-    period: "JUN 2024 - OCT 2025",
-    role: "Full Stack Engineer",
-    company: "Ninepages Techsolutions Pvt. Ltd.",
-    location: "Agra, Uttar Pradesh, India · On-site",
-    logo: "/logos/ninepagestech-logo.png",
-    description: "Built and shipped client web applications end-to-end as a Full Stack Engineer over 1 year 5 months — from database schema design and REST APIs to Redux-driven React frontends.",
-    skills: ["Full Stack", "Redux.js", "Express.js", "MongoDB", "React.js", "Node.js"]
-  },
-  {
-    period: "2023 - 2024",
-    role: "Full Stack Developer Training",
-    company: "Learn2Earn",
-    location: "Structured Training Program",
-    description: "Completed an intensive full-stack developer training program — structured code reviews and production-style project specs that bridged self-taught fundamentals into job-ready practice.",
-    skills: ["JavaScript (ES6+)", "React.js", "Node.js", "MongoDB", "Git & GitHub"]
-  },
-  {
-    period: "2022 - 2023",
-    role: "Intern Developer",
-    company: "Self-learning and Open Source Projects",
-    location: "Remote / Independent",
-    description: "Worked on personal projects, contributed to open-source, and participated in coding challenges to enhance development skills. Gained hands-on experience in web development and backend technologies.",
-    skills: ["HTML5", "CSS3", "JavaScript", "Git", "Open Source"]
-  }
-];
-
 export default function StickyPortfolioHomepage() {
   const [activeTab, setActiveTab] = useState("home");
   const [formSubmitted, setFormSubmitted] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [activeTestimonial, setActiveTestimonial] = useState(0);
+  const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(0);
 
   useEffect(() => {
     const handleScroll = () => {
-      const sections = ["hero", "projects", "tools", "thoughts", "experience", "contact"];
+      const sections = [
+        "hero",
+        "projects",
+        "architecture",
+        "experience",
+        "tools",
+        "education",
+        "testimonials",
+        "thoughts",
+        "faq",
+        "contact"
+      ];
       const scrollPos = window.scrollY + 250;
 
       for (const sectionId of sections) {
@@ -253,12 +402,17 @@ export default function StickyPortfolioHomepage() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const scrollTo = (id: string) => {
-    const el = document.getElementById(id);
-    if (el) {
-      el.scrollIntoView({ behavior: "smooth" });
+  useEffect(() => {
+    if (typeof window !== "undefined" && window.location.hash) {
+      const targetId = window.location.hash.replace("#", "");
+      setTimeout(() => {
+        const el = document.getElementById(targetId);
+        if (el) {
+          el.scrollIntoView({ behavior: "smooth" });
+        }
+      }, 200);
     }
-  };
+  }, []);
 
   const handleContactSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -270,92 +424,29 @@ export default function StickyPortfolioHomepage() {
     }, 1000);
   };
 
+  const scrollTo = (id: string) => {
+    const el = document.getElementById(id);
+    if (el) {
+      el.scrollIntoView({ behavior: "smooth" });
+    }
+  };
+
   return (
     <div className="bg-[#121212] text-zinc-100 min-h-screen selection:bg-[#F05335] selection:text-white font-poppins antialiased relative">
 
-
       {/* ========================================================= */}
-      {/* FLOATING TOP PILL NAVBAR (COMPACT)                        */}
-      {/* ========================================================= */}
-      <header className="fixed top-3 sm:top-5 left-1/2 -translate-x-1/2 z-50 max-w-[calc(100vw-1rem)] px-1">
-        <div className="bg-[#1e1e20]/90 backdrop-blur-md border border-white/10 px-2 sm:px-3.5 py-1.5 rounded-2xl shadow-2xl flex items-center gap-1 sm:gap-2.5 overflow-x-auto scrollbar-none">
-          <Link
-            href="/"
-            className={`p-1.5 sm:p-2 rounded-xl transition-all ${activeTab === "home" ? "bg-white/15 text-white shadow-sm" : "text-zinc-400 hover:text-white hover:bg-white/5"
-              }`}
-            title="Home"
-          >
-            <Home className="w-4 h-4" />
-          </Link>
-
-          <Link
-            href="/projects"
-            className={`p-1.5 sm:p-2 rounded-xl transition-all ${activeTab === "projects" ? "bg-white/15 text-white shadow-sm" : "text-zinc-400 hover:text-white hover:bg-white/5"
-              }`}
-            title="Projects Directory"
-          >
-            <Folder className="w-4 h-4" />
-          </Link>
-
-          <Link
-            href="/skills"
-            className={`p-1.5 sm:p-2 rounded-xl transition-all ${activeTab === "tools" ? "bg-white/15 text-white shadow-sm" : "text-zinc-400 hover:text-white hover:bg-white/5"
-              }`}
-            title="Tools & Skills"
-          >
-            <Wrench className="w-4 h-4" />
-          </Link>
-
-          <Link
-            href="/about"
-            className="p-1.5 sm:p-2 rounded-xl transition-all text-zinc-400 hover:text-white hover:bg-white/5"
-            title="About"
-          >
-            <BookOpen className="w-4 h-4" />
-          </Link>
-
-          <Link
-            href="/thoughts"
-            className={`p-1.5 sm:p-2 rounded-xl transition-all ${activeTab === "thoughts" ? "bg-white/15 text-white shadow-sm" : "text-zinc-400 hover:text-white hover:bg-white/5"
-              }`}
-            title="Design Thoughts"
-          >
-            <Newspaper className="w-4 h-4" />
-          </Link>
-
-          <Link
-            href="/career"
-            className={`p-1.5 sm:p-2 rounded-xl transition-all ${activeTab === "experience" ? "bg-white/15 text-white shadow-sm" : "text-zinc-400 hover:text-white hover:bg-white/5"
-              }`}
-            title="Career Experience"
-          >
-            <Briefcase className="w-4 h-4" />
-          </Link>
-
-          <Link
-            href="/contact"
-            className={`p-1.5 sm:p-2 rounded-xl transition-all ${activeTab === "contact" ? "bg-white/15 text-white shadow-sm" : "text-zinc-400 hover:text-white hover:bg-white/5"
-              }`}
-            title="Contact"
-          >
-            <Edit3 className="w-4 h-4" />
-          </Link>
-        </div>
-      </header>
-
-      {/* ========================================================= */}
-      {/* MAIN CONTAINER WITH EXACT GAP AND PADDING                  */}
+      {/* MAIN CONTAINER                                             */}
       {/* ========================================================= */}
       <div className="max-w-[1440px] mx-auto px-4 sm:px-12 lg:px-24 xl:px-32 pt-20 sm:pt-40 lg:pt-44 pb-36 sm:pb-32">
         <div className="flex flex-col lg:flex-row gap-14 lg:gap-16 xl:gap-24 items-start relative">
 
           {/* ------------------------------------------------------- */}
-          {/* LEFT COLUMN: STICKY PROFILE CARD (MATCHING REFERENCE)  */}
+          {/* LEFT COLUMN: STICKY PROFILE CARD                        */}
           {/* ------------------------------------------------------- */}
           <aside className="w-full lg:w-[340px] xl:w-[360px] flex-shrink-0 lg:sticky lg:top-6 xl:top-8 z-30 self-start">
             <div className="bg-white text-black rounded-[36px] p-6 shadow-[0_25px_60px_rgba(0,0,0,0.3)] relative overflow-hidden flex flex-col justify-between border border-zinc-200/90">
 
-              {/* 1. Top-Left Dashed Orange Arc (Matching Screenshot) */}
+              {/* Decorative Dashed Arcs */}
               <svg
                 className="absolute -top-4 -left-4 w-48 h-48 pointer-events-none z-0"
                 viewBox="0 0 200 200"
@@ -369,7 +460,6 @@ export default function StickyPortfolioHomepage() {
                 />
               </svg>
 
-              {/* 2. Bottom-Left Dashed Orange Curve to Flame Badge (Matching Screenshot) */}
               <svg
                 className="absolute bottom-28 -left-6 w-56 h-36 pointer-events-none z-0"
                 viewBox="0 0 220 140"
@@ -383,7 +473,7 @@ export default function StickyPortfolioHomepage() {
                 />
               </svg>
 
-              {/* Photo Container with Orange Portrait Gradient */}
+              {/* Photo Container */}
               <div className="relative z-10 mb-5 mt-1">
                 <div className="bg-gradient-to-b from-[#E64A19] to-[#D84315] relative rounded-[28px] overflow-hidden aspect-[4/4.2] shadow-lg border border-black/5 flex items-end justify-center">
                   <Image
@@ -400,60 +490,56 @@ export default function StickyPortfolioHomepage() {
               {/* Profile Content */}
               <div className="text-center relative z-10">
 
-                {/* Name directly below photo */}
                 <h1 className="text-3xl font-black tracking-tight text-black font-poppins mb-3">
                   Aman Kumar
                 </h1>
 
-                {/* Central Flame Badge connected to bottom-left dashed arc */}
+                {/* Central Flame Badge */}
                 <div className="flex justify-center mb-3.5 relative">
                   <div className="w-9 h-9 rounded-full bg-[#F05335] text-white flex items-center justify-center shadow-lg shadow-orange-500/30 relative z-10">
                     <Flame className="w-4.5 h-4.5 fill-white text-white" />
                   </div>
                 </div>
 
-                {/* Short Bio */}
-                <p className="text-xs sm:text-sm font-semibold text-zinc-500 leading-relaxed max-w-[260px] mx-auto mb-6">
-                  A Full Stack Engineer building production SaaS products.
+                <p className="text-xs sm:text-sm font-semibold text-zinc-600 leading-relaxed max-w-[260px] mx-auto mb-6">
+                  Full Stack Engineer building production SaaS, real-time systems, and scalable web applications.
                 </p>
 
-                {/* Social Links Row (Orange Outline Icons matching reference) */}
-                <div className="flex items-center justify-center gap-5 text-[#F05335] pt-1">
+                {/* Social Links Row */}
+                <div className="flex items-center justify-center gap-4 text-[#F05335] pt-1">
                   <a
-                    href="https://dribbble.com"
+                    href="https://github.com/Amankumar-007"
                     target="_blank"
                     rel="noreferrer"
-                    className="p-1.5 rounded-full hover:bg-orange-50 transition-colors"
-                    title="Dribbble"
+                    className="p-2 rounded-full hover:bg-orange-50 transition-colors"
+                    title="GitHub Profile"
                   >
-                    <Dribbble className="w-5 h-5 stroke-[2.2]" />
+                    <Code2 className="w-5 h-5 stroke-[2.2]" />
+                  </a>
+                  <a
+                    href="https://linkedin.com/in/amankumarweb"
+                    target="_blank"
+                    rel="noreferrer"
+                    className="p-2 rounded-full hover:bg-orange-50 transition-colors"
+                    title="LinkedIn Profile"
+                  >
+                    <Briefcase className="w-5 h-5 stroke-[2.2]" />
+                  </a>
+                  <a
+                    href="mailto:amanr3388@gmail.com"
+                    className="p-2 rounded-full hover:bg-orange-50 transition-colors"
+                    title="Email Aman"
+                  >
+                    <Mail className="w-5 h-5 stroke-[2.2]" />
                   </a>
                   <a
                     href="https://twitter.com/amankumarweb"
                     target="_blank"
                     rel="noreferrer"
-                    className="p-1.5 rounded-full hover:bg-orange-50 transition-colors"
+                    className="p-2 rounded-full hover:bg-orange-50 transition-colors"
                     title="Twitter"
                   >
                     <Twitter className="w-5 h-5 stroke-[2.2]" />
-                  </a>
-                  <a
-                    href="https://instagram.com"
-                    target="_blank"
-                    rel="noreferrer"
-                    className="p-1.5 rounded-full hover:bg-orange-50 transition-colors"
-                    title="Instagram"
-                  >
-                    <Instagram className="w-5 h-5 stroke-[2.2]" />
-                  </a>
-                  <a
-                    href="https://youtube.com"
-                    target="_blank"
-                    rel="noreferrer"
-                    className="p-1.5 rounded-full hover:bg-orange-50 transition-colors"
-                    title="YouTube"
-                  >
-                    <Youtube className="w-5 h-5 stroke-[2.2]" />
                   </a>
                 </div>
 
@@ -469,31 +555,28 @@ export default function StickyPortfolioHomepage() {
 
             {/* HERO SECTION (#hero) */}
             <section id="hero" className="scroll-mt-28">
-              {/* Massive Stacked Header — letter-by-letter fade in */}
               <div className="select-none mb-6">
                 <FadeInView delay={0}>
-                  <h2 className="text-4xl xs:text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-black text-white uppercase tracking-tight leading-[0.88] block font-poppins ultra-heavy">
+                  <h2 className="text-3xl xs:text-4xl sm:text-6xl lg:text-7xl xl:text-8xl font-black text-white uppercase tracking-tight leading-[0.88] block font-poppins ultra-heavy">
                     FULL STACK
                   </h2>
                 </FadeInView>
                 <FadeInView delay={0.12}>
-                  <h2 className="text-4xl xs:text-5xl sm:text-6xl lg:text-7xl xl:text-8xl font-black text-[#262628] uppercase tracking-tight leading-[0.88] block font-poppins ultra-heavy">
+                  <h2 className="text-3xl xs:text-4xl sm:text-6xl lg:text-7xl xl:text-8xl font-black text-[#262628] uppercase tracking-tight leading-[0.88] block font-poppins ultra-heavy">
                     ENGINEER
                   </h2>
                 </FadeInView>
               </div>
 
-              {/* Headline Bio */}
               <FadeInView delay={0.22}>
                 <p className="text-sm sm:text-lg text-[#888888] max-w-xl leading-relaxed mb-8 sm:mb-12 font-normal">
-                  Full Stack Engineer — from self-taught fundamentals to shipping production SaaS products like SnippetsX, TomatoAI, and Awasdhara.
+                  Full Stack Engineer with 2+ years shipping production web applications end to end — React and Next.js interfaces, Node.js and Express APIs, MongoDB and SQL data layers deployed on AWS. Currently building developer tools and high-performance products.
                 </p>
               </FadeInView>
 
-              {/* Stats Row — animated counters */}
+              {/* Stats Row */}
               <div className="flex flex-col xl:flex-row xl:items-end justify-between gap-8 pb-10 sm:pb-12 border-b border-zinc-900/80 mb-10 sm:mb-12">
                 <StaggerContainer className="grid grid-cols-3 gap-3 sm:gap-10" staggerDelay={0.15}>
-                  {/* Stat 1 */}
                   <motion.div variants={staggerChild}>
                     <div className="text-3xl sm:text-5xl lg:text-6xl font-black text-white tracking-tight font-poppins">
                       +<AnimatedNumber value={2} duration={1.2} />
@@ -503,7 +586,6 @@ export default function StickyPortfolioHomepage() {
                     </div>
                   </motion.div>
 
-                  {/* Stat 2 */}
                   <motion.div variants={staggerChild}>
                     <div className="text-3xl sm:text-5xl lg:text-6xl font-black text-white tracking-tight font-poppins">
                       +<AnimatedNumber value={11} duration={1.6} />
@@ -513,7 +595,6 @@ export default function StickyPortfolioHomepage() {
                     </div>
                   </motion.div>
 
-                  {/* Stat 3 */}
                   <motion.div variants={staggerChild}>
                     <div className="text-3xl sm:text-5xl lg:text-6xl font-black text-white tracking-tight font-poppins">
                       +<AnimatedNumber value={15} duration={1.8} />
@@ -525,14 +606,12 @@ export default function StickyPortfolioHomepage() {
                 </StaggerContainer>
               </div>
 
-              {/* Bento Cards Grid matching exact reference screenshot 2 */}
+              {/* Bento Feature Cards */}
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
-                {/* Left Card: Vibrant Orange (#F05335) with topographic lines */}
                 <div
-                  onClick={() => scrollTo("tools")}
+                  onClick={() => scrollTo("architecture")}
                   className="bg-[#F05335] text-white rounded-[30px] p-7 sm:p-8 relative overflow-hidden flex flex-col justify-between h-56 group cursor-pointer shadow-[0_15px_40px_rgba(240,83,53,0.25)] hover:shadow-[0_20px_50px_rgba(240,83,53,0.4)] hover:-translate-y-1 transition-all duration-300"
                 >
-                  {/* Subtle Wavy Topographic Background SVG */}
                   <svg
                     className="absolute inset-0 w-full h-full opacity-20 pointer-events-none"
                     viewBox="0 0 300 200"
@@ -545,21 +624,18 @@ export default function StickyPortfolioHomepage() {
                     />
                   </svg>
 
-                  {/* Top Left Stacked Layers Icon */}
                   <div className="relative z-10">
                     <svg className="w-8 h-8 text-white fill-current" viewBox="0 0 24 24">
                       <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" />
                     </svg>
                   </div>
 
-                  {/* Heading */}
                   <div className="relative z-10">
                     <h3 className="text-xl sm:text-2xl font-extrabold tracking-tight uppercase leading-[1.15] max-w-[240px]">
                       FULL STACK, <br /> REAL-TIME SYSTEMS
                     </h3>
                   </div>
 
-                  {/* Bottom Right Rounded Button with right arrow */}
                   <div className="absolute bottom-6 right-6 z-10">
                     <div className="w-10 h-10 rounded-xl border border-white/40 flex items-center justify-center text-white group-hover:bg-white group-hover:text-[#F05335] transition-all">
                       <ArrowRight className="w-5 h-5" />
@@ -567,12 +643,10 @@ export default function StickyPortfolioHomepage() {
                   </div>
                 </div>
 
-                {/* Right Card: Neon Lime (#C4F135) with zigzag geometric lines */}
                 <div
-                  onClick={() => scrollTo("projects")}
+                  onClick={() => scrollTo("tools")}
                   className="bg-[#C4F135] text-zinc-950 rounded-[30px] p-7 sm:p-8 relative overflow-hidden flex flex-col justify-between h-56 group cursor-pointer shadow-[0_15px_40px_rgba(196,241,53,0.2)] hover:shadow-[0_20px_50px_rgba(196,241,53,0.35)] hover:-translate-y-1 transition-all duration-300"
                 >
-                  {/* Subtle Geometric Zigzag Pattern SVG */}
                   <svg
                     className="absolute inset-0 w-full h-full opacity-35 pointer-events-none"
                     viewBox="0 0 250 200"
@@ -585,25 +659,21 @@ export default function StickyPortfolioHomepage() {
                     />
                   </svg>
 
-                  {/* Top Left Minimalist Layout/Window Icon */}
-                  <div className="relative z-10">
-                    <div className="w-8 h-8 rounded-lg border-2 border-zinc-950 flex flex-col justify-between p-1">
-                      <div className="w-full h-2 bg-zinc-950 rounded-sm" />
-                      <div className="flex gap-1 h-3">
-                        <div className="w-1/2 h-full bg-zinc-950 rounded-sm" />
-                        <div className="w-1/2 h-full bg-zinc-950 rounded-sm" />
-                      </div>
+                  <div className="relative z-10 flex items-center justify-between">
+                    <div className="w-9 h-9 rounded-xl bg-zinc-950 text-[#C4F135] flex items-center justify-center shadow">
+                      <Code2 className="w-5 h-5" />
                     </div>
+                    <span className="px-2.5 py-0.5 rounded-full bg-zinc-950/10 border border-zinc-950/20 text-[11px] font-extrabold tracking-wider uppercase">
+                      TECH STACK
+                    </span>
                   </div>
 
-                  {/* Heading */}
                   <div className="relative z-10">
                     <h3 className="text-xl sm:text-2xl font-extrabold tracking-tight uppercase leading-[1.15] max-w-[240px]">
                       REACT, NODE.JS, <br /> NEXT.JS, MONGODB
                     </h3>
                   </div>
 
-                  {/* Bottom Right Rounded Button with right arrow */}
                   <div className="absolute bottom-6 right-6 z-10">
                     <div className="w-10 h-10 rounded-xl border border-black/40 flex items-center justify-center text-zinc-950 group-hover:bg-zinc-950 group-hover:text-[#C4F135] transition-all">
                       <ArrowRight className="w-5 h-5" />
@@ -617,12 +687,12 @@ export default function StickyPortfolioHomepage() {
             <section id="projects" className="scroll-mt-28">
               <div className="select-none mb-10">
                 <FadeInView delay={0}>
-                  <h2 className="text-6xl sm:text-7xl xl:text-8xl font-black text-white uppercase tracking-tight font-poppins leading-[0.88] block ultra-heavy">
+                  <h2 className="text-4xl xs:text-5xl sm:text-7xl xl:text-8xl font-black text-white uppercase tracking-tight font-poppins leading-[0.88] block ultra-heavy">
                     RECENT
                   </h2>
                 </FadeInView>
                 <FadeInView delay={0.1}>
-                  <h2 className="text-6xl sm:text-7xl xl:text-8xl font-black text-zinc-800/80 uppercase tracking-tight font-poppins leading-[0.88] block ultra-heavy">
+                  <h2 className="text-4xl xs:text-5xl sm:text-7xl xl:text-8xl font-black text-zinc-800/80 uppercase tracking-tight font-poppins leading-[0.88] block ultra-heavy">
                     PROJECTS
                   </h2>
                 </FadeInView>
@@ -674,45 +744,167 @@ export default function StickyPortfolioHomepage() {
               </div>
             </section>
 
-            {/* EXPERIENCE SECTION (#experience) */}
+            {/* SYSTEM ARCHITECTURE PERFORMANCE MATRIX (#architecture) */}
+            <section id="architecture" className="scroll-mt-28">
+              <div className="select-none mb-10">
+                <FadeInView delay={0}>
+                  <h2 className="text-3xl xs:text-4xl sm:text-6xl xl:text-7xl font-extrabold text-white uppercase tracking-normal font-poppins leading-none block">
+                    SYSTEM
+                  </h2>
+                </FadeInView>
+                <FadeInView delay={0.1}>
+                  <h2 className="text-3xl xs:text-4xl sm:text-6xl xl:text-7xl font-extrabold text-zinc-800/80 uppercase tracking-normal font-poppins leading-none block">
+                    ARCHITECTURE
+                  </h2>
+                </FadeInView>
+              </div>
+
+              {/* Glowing KPI Metric Ribbon Strip */}
+              <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-10">
+                <div className="bg-[#18181a] border border-zinc-800/90 p-5 rounded-2xl text-center">
+                  <div className="text-2xl sm:text-3xl font-bold text-[#F05335] tracking-normal font-poppins">
+                    &lt; 10ms
+                  </div>
+                  <div className="text-[10px] sm:text-xs font-semibold text-zinc-400 uppercase tracking-wider mt-1">
+                    Multiplayer Sync
+                  </div>
+                </div>
+
+                <div className="bg-[#18181a] border border-zinc-800/90 p-5 rounded-2xl text-center">
+                  <div className="text-2xl sm:text-3xl font-bold text-[#C4F135] tracking-normal font-poppins">
+                    40+
+                  </div>
+                  <div className="text-[10px] sm:text-xs font-semibold text-zinc-400 uppercase tracking-wider mt-1">
+                    Docker Runtimes
+                  </div>
+                </div>
+
+                <div className="bg-[#18181a] border border-zinc-800/90 p-5 rounded-2xl text-center">
+                  <div className="text-2xl sm:text-3xl font-bold text-sky-400 tracking-normal font-poppins">
+                    ~20%
+                  </div>
+                  <div className="text-[10px] sm:text-xs font-semibold text-zinc-400 uppercase tracking-wider mt-1">
+                    API Latency Cut
+                  </div>
+                </div>
+
+                <div className="bg-[#18181a] border border-zinc-800/90 p-5 rounded-2xl text-center">
+                  <div className="text-2xl sm:text-3xl font-bold text-purple-400 tracking-normal font-poppins">
+                    95%+
+                  </div>
+                  <div className="text-[10px] sm:text-xs font-semibold text-zinc-400 uppercase tracking-wider mt-1">
+                    Sprint Completion
+                  </div>
+                </div>
+              </div>
+
+              {/* Minimalist Editorial Pipeline Breakdown */}
+              <div className="space-y-6">
+                {architectureMilestones.map((milestone, idx) => (
+                  <div
+                    key={milestone.id}
+                    className="p-6 sm:p-8 rounded-3xl bg-[#161618] border border-zinc-800/80 hover:border-zinc-700 transition-colors relative overflow-hidden"
+                  >
+                    <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-6 pb-6 border-b border-zinc-800/80">
+                      <div>
+                        <div className="flex items-center gap-3 mb-2">
+                          <span className="text-xs font-semibold text-zinc-400 font-mono">
+                            0{idx + 1} {"//"} ARCHITECTURE
+                          </span>
+                          <span className="w-1.5 h-1.5 rounded-full bg-zinc-700" />
+                          <span className="text-xs font-semibold text-[#F05335] uppercase tracking-wider">
+                            {milestone.metric} {milestone.metricLabel}
+                          </span>
+                        </div>
+                        <h3 className="text-lg sm:text-xl font-bold text-zinc-100 tracking-normal font-poppins">
+                          {milestone.title}
+                        </h3>
+                      </div>
+
+                      <div className="flex flex-wrap gap-2">
+                        {milestone.tech.map((t, i) => (
+                          <span
+                            key={i}
+                            className="px-3 py-1 rounded-full bg-zinc-900 border border-zinc-800 text-xs font-semibold text-zinc-300"
+                          >
+                            {t}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+
+                    <div className="pt-6 grid grid-cols-1 md:grid-cols-12 gap-6 items-center">
+                      <div className="md:col-span-7">
+                        <p className="text-xs sm:text-sm text-zinc-400 leading-relaxed">
+                          {milestone.highlight}
+                        </p>
+                      </div>
+
+                      <div className="md:col-span-5 space-y-2">
+                        {milestone.details.map((detail, dIdx) => (
+                          <div key={dIdx} className="flex items-start gap-2 text-xs text-zinc-300">
+                            <Check className="w-4 h-4 text-emerald-400 flex-shrink-0 mt-0.5" />
+                            <span>{detail}</span>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </section>
+
+            {/* WORK EXPERIENCE SECTION (#experience) */}
             <section id="experience" className="scroll-mt-28">
               <div className="select-none mb-10">
                 <FadeInView delay={0}>
-                  <h2 className="text-6xl sm:text-7xl font-black text-white uppercase tracking-tight font-poppins leading-[0.88] block ultra-heavy">
+                  <h2 className="text-3xl xs:text-4xl sm:text-6xl xl:text-7xl font-extrabold text-white uppercase tracking-normal font-poppins leading-none block">
                     WORK
                   </h2>
                 </FadeInView>
                 <FadeInView delay={0.1}>
-                  <h2 className="text-6xl sm:text-7xl font-black text-zinc-800/80 uppercase tracking-tight font-poppins leading-[0.88] block ultra-heavy">
+                  <h2 className="text-3xl xs:text-4xl sm:text-6xl xl:text-7xl font-extrabold text-zinc-800/80 uppercase tracking-normal font-poppins leading-none block">
                     EXPERIENCE
                   </h2>
                 </FadeInView>
               </div>
 
-              <div className="space-y-6">
+              <div className="relative pl-6 sm:pl-10 border-l border-zinc-800/90 space-y-10">
                 {experienceList.map((exp, idx) => (
-                  <div
-                    key={idx}
-                    className="bg-[#1a1a1c] border border-zinc-800/70 p-5 sm:p-7 rounded-3xl hover:border-zinc-700 transition-colors"
-                  >
-                    <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-1 sm:gap-0 mb-3">
-                      <span className="text-xs font-bold text-[#F05335] uppercase tracking-wider">
-                        {exp.period}
-                      </span>
-                      <span className="text-xs text-zinc-400 font-medium">
-                        {exp.company}
-                      </span>
-                    </div>
-                    <h3 className="text-xl font-black text-white mb-2">{exp.role}</h3>
-                    <p className="text-xs sm:text-sm text-zinc-400 leading-relaxed mb-4">
-                      {exp.description}
-                    </p>
-                    <div className="flex flex-wrap gap-2">
-                      {exp.skills.map((s, i) => (
-                        <span key={i} className="px-2.5 py-1 rounded-lg bg-zinc-900 border border-zinc-800 text-[11px] font-semibold text-zinc-400">
-                          {s}
+                  <div key={idx} className="relative group pb-8 border-b border-zinc-900/80 last:border-0 last:pb-0">
+                    {/* Glowing Node Marker */}
+                    <div className="absolute -left-[31px] sm:-left-[47px] top-2 w-3.5 h-3.5 rounded-full bg-[#121212] border-2 border-[#F05335] group-hover:bg-[#F05335] group-hover:scale-125 transition-all duration-300 shadow-[0_0_12px_rgba(240,83,53,0.5)]" />
+
+                    <div>
+                      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-1 mb-1">
+                        <h3 className="text-xl sm:text-2xl font-bold text-zinc-100 group-hover:text-[#F05335] transition-colors tracking-normal font-poppins">
+                          {exp.role}
+                        </h3>
+                        <span className="text-xs font-semibold text-[#F05335] uppercase tracking-wider">
+                          {exp.period}
                         </span>
-                      ))}
+                      </div>
+
+                      <div className="text-xs font-medium text-zinc-400 mb-3 tracking-wide flex items-center gap-2">
+                        <span>{exp.company}</span>
+                        <span>·</span>
+                        <span className="text-zinc-500 font-normal">{exp.location}</span>
+                      </div>
+
+                      <p className="text-xs sm:text-sm text-zinc-300 leading-relaxed max-w-2xl font-normal">
+                        {exp.description}
+                      </p>
+
+                      <div className="flex flex-wrap gap-2 mt-4">
+                        {exp.skills.map((s, i) => (
+                          <span
+                            key={i}
+                            className="px-3 py-1 rounded-full bg-zinc-900/90 border border-zinc-800 text-[11px] font-medium text-zinc-300 group-hover:border-zinc-700 transition-colors"
+                          >
+                            {s}
+                          </span>
+                        ))}
+                      </div>
                     </div>
                   </div>
                 ))}
@@ -733,12 +925,12 @@ export default function StickyPortfolioHomepage() {
             <section id="tools" className="scroll-mt-28">
               <div className="select-none mb-10">
                 <FadeInView delay={0}>
-                  <h2 className="text-6xl sm:text-7xl xl:text-8xl font-black text-white uppercase tracking-tight font-poppins leading-[0.88] block ultra-heavy">
+                  <h2 className="text-3xl xs:text-4xl sm:text-6xl xl:text-7xl font-extrabold text-white uppercase tracking-normal font-poppins leading-none block">
                     PREMIUM
                   </h2>
                 </FadeInView>
                 <FadeInView delay={0.1}>
-                  <h2 className="text-6xl sm:text-7xl xl:text-8xl font-black text-zinc-800/80 uppercase tracking-tight font-poppins leading-[0.88] block ultra-heavy">
+                  <h2 className="text-3xl xs:text-4xl sm:text-6xl xl:text-7xl font-extrabold text-zinc-800/80 uppercase tracking-normal font-poppins leading-none block">
                     TOOLS
                   </h2>
                 </FadeInView>
@@ -755,10 +947,10 @@ export default function StickyPortfolioHomepage() {
                     </div>
 
                     <div className="min-w-0 flex-1">
-                      <h3 className="text-xs sm:text-lg font-bold text-white tracking-tight group-hover:text-[#F05335] transition-colors leading-tight truncate font-poppins">
+                      <h3 className="text-xs sm:text-base font-semibold text-zinc-100 tracking-normal group-hover:text-[#F05335] transition-colors leading-tight truncate font-poppins">
                         {tool.name}
                       </h3>
-                      <p className="text-[10px] sm:text-xs font-medium text-zinc-400 mt-0.5 leading-tight truncate font-poppins">
+                      <p className="text-[10px] sm:text-xs font-normal text-zinc-400 mt-0.5 leading-tight truncate font-poppins">
                         {tool.subtitle}
                       </p>
                     </div>
@@ -767,16 +959,177 @@ export default function StickyPortfolioHomepage() {
               </div>
             </section>
 
+            {/* EDITORIAL ACADEMIC TIMELINE & RIBBON (#education) */}
+            <section id="education" className="scroll-mt-28">
+              <div className="select-none mb-10">
+                <FadeInView delay={0}>
+                  <h2 className="text-3xl xs:text-4xl sm:text-6xl xl:text-7xl font-extrabold text-white uppercase tracking-normal font-poppins leading-none block">
+                    EDUCATION &
+                  </h2>
+                </FadeInView>
+                <FadeInView delay={0.1}>
+                  <h2 className="text-3xl xs:text-4xl sm:text-6xl xl:text-7xl font-extrabold text-zinc-800/80 uppercase tracking-normal font-poppins leading-none block">
+                    CREDENTIALS
+                  </h2>
+                </FadeInView>
+              </div>
+
+              {/* Vertical Editorial Timeline */}
+              <div className="relative pl-6 sm:pl-8 border-l border-zinc-800 space-y-12 mb-12">
+                {educationTimeline.map((edu, idx) => (
+                  <div key={idx} className="relative group">
+                    <div className="absolute -left-[31px] sm:-left-[39px] top-1.5 w-4 h-4 rounded-full bg-black border-2 border-[#F05335] group-hover:bg-[#F05335] transition-colors" />
+
+                    <div className="bg-[#161618] border border-zinc-800/80 p-6 sm:p-8 rounded-3xl hover:border-zinc-700 transition-colors">
+                      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 mb-3">
+                        <div className="flex items-center gap-3">
+                          <GraduationCap className="w-5 h-5 text-[#F05335]" />
+                          <div>
+                            <span className="text-xs font-semibold text-[#F05335] uppercase tracking-wider block">
+                              {edu.period}
+                            </span>
+                            <span className="text-xs text-zinc-400 font-normal">
+                              {edu.institution}
+                            </span>
+                          </div>
+                        </div>
+
+                        <span className="px-3.5 py-1 rounded-full bg-zinc-900 border border-zinc-700 text-xs font-semibold text-zinc-200 self-start sm:self-auto">
+                          {edu.score}
+                        </span>
+                      </div>
+
+                      <h3 className="text-lg sm:text-xl font-bold text-zinc-100 tracking-normal leading-snug mb-2 font-poppins">
+                        {edu.degree}
+                      </h3>
+                      <p className="text-xs sm:text-sm text-zinc-400 leading-relaxed mb-4 font-normal">
+                        {edu.description}
+                      </p>
+
+                      <div className="flex flex-wrap gap-2 pt-2 border-t border-zinc-800/60">
+                        {edu.highlights.map((h, hIdx) => (
+                          <span
+                            key={hIdx}
+                            className="px-3 py-1 rounded-lg bg-zinc-900 border border-zinc-800 text-xs font-medium text-zinc-300"
+                          >
+                            {h}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              {/* Certifications Badge Ribbon */}
+              <div className="bg-[#161618] border border-zinc-800/80 p-6 sm:p-8 rounded-3xl">
+                <div className="flex items-center gap-3 mb-6">
+                  <Award className="w-6 h-6 text-[#C4F135]" />
+                  <h3 className="text-base sm:text-lg font-bold text-zinc-100 uppercase tracking-wider font-poppins">
+                    Verified Industry Certifications
+                  </h3>
+                </div>
+
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                  {certificationsBadges.map((cert, idx) => (
+                    <div
+                      key={idx}
+                      className="p-5 rounded-2xl bg-zinc-900/90 border border-zinc-800/90 flex items-center justify-between gap-4 hover:border-zinc-700 transition-colors"
+                    >
+                      <div>
+                        <span className="text-[10px] font-semibold text-zinc-400 block uppercase">
+                          {cert.issuer} · {cert.year}
+                        </span>
+                        <h4 className="text-sm sm:text-base font-bold text-zinc-100 tracking-normal mt-0.5 font-poppins">
+                          {cert.title}
+                        </h4>
+                        <div className="flex flex-wrap gap-1.5 mt-2">
+                          {cert.skills.map((s, i) => (
+                            <span key={i} className="text-[10px] font-medium text-zinc-400 bg-black/60 px-2 py-0.5 rounded">
+                              {s}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+
+                      <div className="w-9 h-9 rounded-full bg-emerald-500/10 border border-emerald-500/30 flex items-center justify-center text-emerald-400 flex-shrink-0">
+                        <CheckCircle2 className="w-5 h-5" />
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </section>
+
+            {/* SINGLE FOCUS TESTIMONIAL STAGE (#testimonials) */}
+            <section id="testimonials" className="scroll-mt-28">
+              <div className="select-none mb-10">
+                <FadeInView delay={0}>
+                  <h2 className="text-4xl xs:text-5xl sm:text-7xl xl:text-8xl font-black text-white uppercase tracking-tight font-poppins leading-[0.88] block ultra-heavy">
+                    CLIENT
+                  </h2>
+                </FadeInView>
+                <FadeInView delay={0.1}>
+                  <h2 className="text-4xl xs:text-5xl sm:text-7xl xl:text-8xl font-black text-zinc-800/80 uppercase tracking-tight font-poppins leading-[0.88] block ultra-heavy">
+                    TESTIMONIALS
+                  </h2>
+                </FadeInView>
+              </div>
+
+              <div className="bg-[#161618] border border-zinc-800/90 rounded-3xl p-8 sm:p-12 relative overflow-hidden flex flex-col justify-between min-h-[280px]">
+                <div className="text-7xl font-black text-[#F05335]/20 font-serif leading-none select-none absolute top-4 left-6">
+                  “
+                </div>
+
+                <AnimatePresence mode="wait">
+                  <motion.div
+                    key={activeTestimonial}
+                    initial={{ opacity: 0, x: 20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    exit={{ opacity: 0, x: -20 }}
+                    transition={{ duration: 0.3 }}
+                    className="relative z-10 space-y-6"
+                  >
+                    <p className="text-base sm:text-xl text-zinc-200 leading-relaxed font-medium">
+                      &quot;{testimonials[activeTestimonial].quote}&quot;
+                    </p>
+
+                    <div className="pt-6 border-t border-zinc-800 flex items-center justify-between gap-4">
+                      <div>
+                        <div className="text-base sm:text-lg font-extrabold text-white">
+                          {testimonials[activeTestimonial].author}
+                        </div>
+                        <div className="text-xs text-[#F05335] font-semibold">
+                          {testimonials[activeTestimonial].org}
+                        </div>
+                      </div>
+
+                      <div className="flex items-center gap-2">
+                        {testimonials.map((_, i) => (
+                          <button
+                            key={i}
+                            onClick={() => setActiveTestimonial(i)}
+                            className={`h-2.5 rounded-full transition-all cursor-pointer ${activeTestimonial === i ? "w-8 bg-[#F05335]" : "w-2.5 bg-zinc-800 hover:bg-zinc-700"
+                              }`}
+                          />
+                        ))}
+                      </div>
+                    </div>
+                  </motion.div>
+                </AnimatePresence>
+              </div>
+            </section>
+
             {/* DESIGN THOUGHTS SECTION (#thoughts) */}
             <section id="thoughts" className="scroll-mt-28">
               <div className="select-none mb-10">
                 <FadeInView delay={0}>
-                  <h2 className="text-6xl sm:text-7xl xl:text-8xl font-black text-white uppercase tracking-tight font-poppins leading-[0.88] block ultra-heavy">
+                  <h2 className="text-4xl xs:text-5xl sm:text-7xl xl:text-8xl font-black text-white uppercase tracking-tight font-poppins leading-[0.88] block ultra-heavy">
                     DESIGN
                   </h2>
                 </FadeInView>
                 <FadeInView delay={0.1}>
-                  <h2 className="text-6xl sm:text-7xl xl:text-8xl font-black text-zinc-800/80 uppercase tracking-tight font-poppins leading-[0.88] block ultra-heavy">
+                  <h2 className="text-4xl xs:text-5xl sm:text-7xl xl:text-8xl font-black text-zinc-800/80 uppercase tracking-tight font-poppins leading-[0.88] block ultra-heavy">
                     THOUGHTS
                   </h2>
                 </FadeInView>
@@ -822,16 +1175,75 @@ export default function StickyPortfolioHomepage() {
               </div>
             </section>
 
+            {/* MINIMALIST ACCORDION FAQ (#faq) */}
+            <section id="faq" className="scroll-mt-28">
+              <div className="select-none mb-10">
+                <FadeInView delay={0}>
+                  <h2 className="text-4xl xs:text-5xl sm:text-7xl xl:text-8xl font-black text-white uppercase tracking-tight font-poppins leading-[0.88] block ultra-heavy">
+                    FREQUENTLY ASKED
+                  </h2>
+                </FadeInView>
+                <FadeInView delay={0.1}>
+                  <h2 className="text-4xl xs:text-5xl sm:text-7xl xl:text-8xl font-black text-zinc-800/80 uppercase tracking-tight font-poppins leading-[0.88] block ultra-heavy">
+                    QUESTIONS
+                  </h2>
+                </FadeInView>
+              </div>
+
+              <div className="divide-y divide-zinc-900 border-t border-b border-zinc-900">
+                {homeFaqData.map((item, index) => {
+                  const isOpen = openFaqIndex === index;
+                  return (
+                    <div key={index} className="py-5 sm:py-6 transition-colors">
+                      <button
+                        onClick={() => setOpenFaqIndex(isOpen ? null : index)}
+                        className="w-full text-left flex items-center justify-between gap-4 cursor-pointer group"
+                      >
+                        <div className="flex items-center gap-4 min-w-0">
+                          <span className="text-xs font-mono font-bold text-[#F05335]">
+                            0{index + 1}
+                          </span>
+                          <h3 className="text-base sm:text-lg font-bold text-white tracking-tight group-hover:text-[#F05335] transition-colors">
+                            {item.question}
+                          </h3>
+                        </div>
+                        <div className={`w-7 h-7 rounded-full flex items-center justify-center flex-shrink-0 transition-transform duration-300 ${isOpen ? "bg-[#F05335] text-white rotate-45" : "bg-zinc-900 text-zinc-400 group-hover:text-white"
+                          }`}>
+                          +
+                        </div>
+                      </button>
+
+                      <AnimatePresence>
+                        {isOpen && (
+                          <motion.div
+                            initial={{ height: 0, opacity: 0 }}
+                            animate={{ height: "auto", opacity: 1 }}
+                            exit={{ height: 0, opacity: 0 }}
+                            transition={{ duration: 0.25 }}
+                            className="overflow-hidden"
+                          >
+                            <p className="pt-3 pl-8 sm:pl-10 text-xs sm:text-sm text-zinc-400 leading-relaxed max-w-2xl">
+                              {item.answer}
+                            </p>
+                          </motion.div>
+                        )}
+                      </AnimatePresence>
+                    </div>
+                  );
+                })}
+              </div>
+            </section>
+
             {/* CONTACT SECTION (#contact) */}
             <section id="contact" className="scroll-mt-28 mb-24 sm:mb-32 pb-12">
               <div className="select-none mb-10">
                 <FadeInView delay={0}>
-                  <h2 className="text-6xl sm:text-7xl font-black text-white uppercase tracking-tight font-poppins leading-[0.88] block ultra-heavy">
+                  <h2 className="text-4xl xs:text-5xl sm:text-7xl font-black text-white uppercase tracking-tight font-poppins leading-[0.88] block ultra-heavy">
                     GET IN
                   </h2>
                 </FadeInView>
                 <FadeInView delay={0.1}>
-                  <h2 className="text-6xl sm:text-7xl font-black text-zinc-800/80 uppercase tracking-tight font-poppins leading-[0.88] block ultra-heavy">
+                  <h2 className="text-4xl xs:text-5xl sm:text-7xl font-black text-zinc-800/80 uppercase tracking-tight font-poppins leading-[0.88] block ultra-heavy">
                     TOUCH
                   </h2>
                 </FadeInView>
@@ -840,12 +1252,7 @@ export default function StickyPortfolioHomepage() {
               <FadeInView delay={0.15}>
                 <div className="bg-[#1a1a1c] border border-zinc-800/90 p-6 sm:p-10 rounded-[32px] shadow-2xl relative overflow-hidden mb-12">
 
-                  {/* Contact Quick Info Badges */}
                   <div className="flex flex-wrap gap-3 mb-8 pb-6 border-b border-zinc-800/80">
-                    <div className="px-3.5 py-1.5 rounded-full bg-zinc-900 border border-zinc-800 text-xs font-semibold text-zinc-300 flex items-center gap-2">
-                      <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-                      <span>Available for Hire</span>
-                    </div>
                     <div className="px-3.5 py-1.5 rounded-full bg-zinc-900 border border-zinc-800 text-xs font-semibold text-zinc-300">
                       Response time: &lt; 24 hrs
                     </div>
@@ -865,7 +1272,7 @@ export default function StickyPortfolioHomepage() {
                             type="text"
                             required
                             placeholder="e.g. Alex Smith"
-                            className="w-full px-4 py-3.5 rounded-2xl bg-zinc-900/90 border border-zinc-700/80 text-white placeholder-zinc-400 text-sm font-medium focus:outline-none focus:border-[#F05335] focus:ring-2 focus:ring-[#F05335]/30 transition-all shadow-inner"
+                            className="w-full px-4 py-3.5 rounded-2xl bg-zinc-900/90 border border-zinc-700/80 text-white placeholder-zinc-500 text-sm font-medium focus:outline-none focus:border-[#F05335] focus:ring-2 focus:ring-[#F05335]/30 transition-all shadow-inner"
                           />
                         </div>
                         <div>
@@ -874,7 +1281,7 @@ export default function StickyPortfolioHomepage() {
                             type="email"
                             required
                             placeholder="e.g. alex@example.com"
-                            className="w-full px-4 py-3.5 rounded-2xl bg-zinc-900/90 border border-zinc-700/80 text-white placeholder-zinc-400 text-sm font-medium focus:outline-none focus:border-[#F05335] focus:ring-2 focus:ring-[#F05335]/30 transition-all shadow-inner"
+                            className="w-full px-4 py-3.5 rounded-2xl bg-zinc-900/90 border border-zinc-700/80 text-white placeholder-zinc-500 text-sm font-medium focus:outline-none focus:border-[#F05335] focus:ring-2 focus:ring-[#F05335]/30 transition-all shadow-inner"
                           />
                         </div>
                       </div>
@@ -883,8 +1290,8 @@ export default function StickyPortfolioHomepage() {
                         <textarea
                           rows={4}
                           required
-                          placeholder="Tell me about your project or inquiry..."
-                          className="w-full px-4 py-3.5 rounded-2xl bg-zinc-900/90 border border-zinc-700/80 text-white placeholder-zinc-400 text-sm font-medium focus:outline-none focus:border-[#F05335] focus:ring-2 focus:ring-[#F05335]/30 transition-all shadow-inner resize-none"
+                          placeholder="Tell me about your project or opportunity..."
+                          className="w-full px-4 py-3.5 rounded-2xl bg-zinc-900/90 border border-zinc-700/80 text-white placeholder-zinc-500 text-sm font-medium focus:outline-none focus:border-[#F05335] focus:ring-2 focus:ring-[#F05335]/30 transition-all shadow-inner resize-none"
                         />
                       </div>
                       <button
@@ -900,8 +1307,8 @@ export default function StickyPortfolioHomepage() {
                 </div>
               </FadeInView>
 
-              {/* Aesthetic Footer Strip */}
               <div className="pt-8 border-t border-zinc-900 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs font-medium text-zinc-500">
+                <span>© {new Date().getFullYear()} Aman Kumar. All rights reserved.</span>
                 <button
                   onClick={() => scrollTo("hero")}
                   className="hover:text-white transition-colors flex items-center gap-1.5 cursor-pointer"

@@ -87,6 +87,10 @@ const technologies = [
   { id: "tech-newrelic", name: "New Relic", category: "Tools", description: "Observability platform for the whole stack.", experience: "Intermediate", icon: getFavicon("newrelic.com"), projects: 5, details: ["Performance", "Error Rates", "Infrastructure"] },
 
   // --- AI TOOLS ---
+  { id: "tech-openai", name: "OpenAI API", category: "AI Tools", description: "GPT-4, GPT-3.5 integration for intelligent applications.", experience: "Advanced", icon: getFavicon("openai.com"), projects: 25, details: ["GPT-4", "Embeddings", "Fine-tuning", "Streaming"] },
+  { id: "tech-claude", name: "Claude API", category: "AI Tools", description: "Anthropic's Claude LLM for advanced AI applications.", experience: "Advanced", icon: getFavicon("anthropic.com"), projects: 20, details: ["Context Windows", "Vision", "Tool Use", "Streaming"] },
+  { id: "tech-prompt-eng", name: "Prompt Engineering", category: "AI Tools", description: "Crafting effective prompts for LLM applications.", experience: "Advanced", icon: "🎯", projects: 30, details: ["Few-shot Learning", "Chain-of-thought", "Optimization", "Testing"] },
+  { id: "tech-rag", name: "RAG Pipelines", category: "AI Tools", description: "Retrieval-Augmented Generation for knowledge-enhanced AI.", experience: "Intermediate", icon: "📚", projects: 8, details: ["Vector Search", "Embeddings", "LangChain", "Document Processing"] },
   { id: "tech-chatgpt", name: "ChatGPT", category: "AI Tools", description: "Large language model for conversational AI.", experience: "Advanced", icon: getFavicon("openai.com"), projects: 50, details: ["Prompts", "GPT-4", "Coding Assistance"] },
   { id: "tech-copilot", name: "GitHub Copilot", category: "AI Tools", description: "AI-powered code completion tool.", experience: "Advanced", icon: getFavicon("github.com"), projects: 100, details: ["Pair Programming", "Efficiency", "Contextual Suggestions"] },
   { id: "tech-n8n", name: "n8n", category: "AI Tools", description: "Extendable workflow automation tool.", experience: "Intermediate", icon: getFavicon("n8n.io"), projects: 10, details: ["Nodes", "Workflows", "Self-hosted"] },

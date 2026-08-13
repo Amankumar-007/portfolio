@@ -2,17 +2,19 @@ import type { Metadata } from "next";
 import ExperiencePageClient from "./ExperiencePageClient";
 
 export const metadata: Metadata = {
-  title: "Experience — Aman Kumar | Full Stack Engineer",
+  title: "Work Experience — Aman Kumar | Full Stack Engineer Career",
   description:
-    "2+ years of professional experience as a Full Stack Engineer — StartupCoaching, Ninepages Techsolutions, Learn2Earn training, and a self-taught foundation in open source.",
+    "2+ years professional full stack engineering experience: StartupCoaching (current), Ninepages Techsolutions (1yr 5mo), Learn2Earn training, and self-taught beginnings. Expertise in React, Next.js, Node.js, TypeScript, MongoDB, PostgreSQL, AWS, and LLM integration.",
+  keywords: ["Full Stack Engineer", "Work Experience", "StartupCoaching", "Ninepages", "Career Timeline", "Developer Journey"],
   alternates: {
     canonical: "https://amankumarr.in/experience",
   },
   openGraph: {
-    title: "Experience — Aman Kumar | Full Stack Engineer",
+    title: "Work Experience — Aman Kumar | Full Stack Engineer Career",
     description:
-      "Aman Kumar's full work history: StartupCoaching, Ninepages Techsolutions, Learn2Earn training, and self-taught beginnings — 2+ years of full stack engineering.",
+      "2+ years shipping production applications. Current: StartupCoaching. Previous: Ninepages Techsolutions (1yr 5mo). Trained at Learn2Earn. Self-taught beginnings.",
     url: "https://amankumarr.in/experience",
+    type: "website",
     images: [
       {
         url: "/about-image.png",
@@ -23,9 +25,10 @@ export const metadata: Metadata = {
     ],
   },
   twitter: {
-    title: "Experience — Aman Kumar | Full Stack Engineer",
+    card: "summary_large_image",
+    title: "Work Experience — Aman Kumar | Full Stack Engineer",
     description:
-      "Aman Kumar's full work history: StartupCoaching, Ninepages Techsolutions, Learn2Earn training, and self-taught beginnings.",
+      "2+ years: StartupCoaching, Ninepages Techsolutions, Learn2Earn. React, Next.js, Node.js, TypeScript, MongoDB, PostgreSQL, AWS.",
     images: ["/about-image.png"],
   },
 };

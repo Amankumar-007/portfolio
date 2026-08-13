@@ -2,17 +2,19 @@ import type { Metadata } from "next";
 import SkillsPageClient from "./SkillsPageClient";
 
 export const metadata: Metadata = {
-  title: "Skills — Aman Kumar | Tech Stack & Expertise",
+  title: "Skills & Tech Stack — Aman Kumar | Full Stack Developer",
   description:
-    "Explore Aman Kumar's technical skills: React, Next.js, Node.js, TypeScript, MongoDB, Docker, and more. Searchable skills directory organized by Frontend, Backend, Database, DevOps, and Design.",
+    "Complete tech stack: React, Next.js, TypeScript, Node.js, Express, MongoDB, PostgreSQL, Redis, Docker, AWS, Tailwind CSS, GraphQL, WebSockets, JWT, Stripe, LLM APIs (OpenAI, Claude), and more. Full Stack Engineer with expertise in modern web development and AI integration.",
+  keywords: ["React", "Next.js", "Node.js", "TypeScript", "MongoDB", "PostgreSQL", "Docker", "AWS", "Full Stack", "Web Development", "LLM", "GraphQL", "WebSockets"],
   alternates: {
     canonical: "https://amankumarr.in/skills",
   },
   openGraph: {
-    title: "Skills — Aman Kumar | Tech Stack & Expertise",
+    title: "Skills & Tech Stack — Aman Kumar | Full Stack Developer",
     description:
-      "Explore Aman Kumar's technical skills across Frontend, Backend, Database, DevOps, and Design.",
+      "React, Next.js, Node.js, TypeScript, MongoDB, PostgreSQL, AWS, Docker, LLM APIs — complete tech stack of a Full Stack Engineer.",
     url: "https://amankumarr.in/skills",
+    type: "website",
     images: [
       {
         url: "/about-image.png",
@@ -23,9 +25,10 @@ export const metadata: Metadata = {
     ],
   },
   twitter: {
-    title: "Skills — Aman Kumar | Tech Stack & Expertise",
+    card: "summary_large_image",
+    title: "Skills & Tech Stack — Aman Kumar",
     description:
-      "Explore Aman Kumar's full tech stack: React, Next.js, Node.js, TypeScript, MongoDB, and more.",
+      "Full Stack: React, Next.js, Node.js, TypeScript, MongoDB, PostgreSQL, Docker, AWS, LLM APIs.",
     images: ["/about-image.png"],
   },
 };

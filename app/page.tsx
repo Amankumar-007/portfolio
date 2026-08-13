@@ -2,30 +2,33 @@ import type { Metadata } from "next";
 import StickyPortfolioHomepage from "@/components/sections/sticky-portfolio-homepage";
 
 export const metadata: Metadata = {
-  title: "Aman Kumar | Full Stack Engineer, India",
+  title: "Aman Kumar | Full Stack Engineer & AI Developer",
   description:
-    "Aman Kumar is a Full Stack Engineer from India specializing in React, Node.js, Next.js, and TypeScript. Currently building at StartupCoaching, previously Ninepages Techsolutions. Creator of SnippetsX, TomatoAI, and Awasdhara. Available for hire.",
+    "Full Stack Engineer with 2+ years shipping production SaaS and AI products. Expert in React, Next.js, Node.js, TypeScript, MongoDB, PostgreSQL, AWS, and LLM integration. Creator of SnippetsX (real-time code editor), TomatoAI (AI tools platform), and Awasdhara (real estate platform). Available for hire.",
+  keywords: ["Full Stack Engineer", "React Developer", "Next.js Developer", "Node.js", "TypeScript", "AI Engineer", "SaaS Developer", "Web Developer India", "LLM Integration", "Full Stack Development"],
   alternates: {
     canonical: "https://amankumarr.in",
   },
   openGraph: {
-    title: "Aman Kumar | Full Stack Engineer, India",
+    title: "Aman Kumar | Full Stack Engineer & AI Developer",
     description:
-      "Full Stack Engineer specializing in modern web web applications and Next.js — building SnippetsX, TomatoAI, and Awasdhara, and shipping production apps at StartupCoaching.",
+      "2+ years building production SaaS and AI-powered applications. React, Next.js, Node.js, TypeScript specialist. Creator of SnippetsX, TomatoAI, Awasdhara. Currently at StartupCoaching.",
     url: "https://amankumarr.in",
+    type: "website",
     images: [
       {
         url: "/about-image.png",
         width: 1200,
         height: 630,
-        alt: "Aman Kumar — Full Stack Engineer Portfolio",
+        alt: "Aman Kumar — Full Stack Engineer & AI Developer",
       },
     ],
   },
   twitter: {
-    title: "Aman Kumar | Full Stack Engineer, India",
+    card: "summary_large_image",
+    title: "Aman Kumar | Full Stack Engineer & AI Developer",
     description:
-      "Full Stack Engineer specializing in modern web applications and Next.js — building SnippetsX, TomatoAI, and Awasdhara.",
+      "2+ years shipping production SaaS. React, Next.js, Node.js, TypeScript, AWS, LLM APIs. Building SnippetsX, TomatoAI, Awasdhara.",
     images: ["/about-image.png"],
   },
 };

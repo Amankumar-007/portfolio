@@ -28,13 +28,14 @@ const experienceTimeline = [
     logo: "/logos/startupcoaching-logo.png",
     location: "Delhi, India",
     type: "Full-Time · On-site",
-    duration: "11 mos",
+    duration: "Current",
     highlights: [
-      "Developing scalable web applications and digital solutions at StartupCoaching.in.",
-      "Working across frontend, backend, APIs, databases, and performance optimization to deliver seamless user experiences.",
-      "Collaborating directly with the product team to ship features end-to-end, from schema to UI."
+      "Build and maintain scalable full-stack applications — React/Next.js interfaces, Node.js services, REST APIs and data layers.",
+      "Design and optimise data models and API contracts, cutting redundant queries and improving response times on core flows.",
+      "Integrate LLM and workflow-automation features into client products, turning founder requirements into shipped releases.",
+      "Collaborate directly with the product team to own features across the entire stack."
     ],
-    skills: ["Full Stack", "Next.js", "TypeScript", "REST APIs", "Tailwind CSS", "Git"]
+    skills: ["React/Next.js", "TypeScript", "Node.js", "LLM APIs", "REST APIs", "AWS"]
   },
   {
     id: "exp-2",
@@ -46,12 +47,12 @@ const experienceTimeline = [
     type: "Full-Time · On-site",
     duration: "1 yr 5 mos",
     highlights: [
-      "Built and maintained client web applications end-to-end as a Full Stack Engineer.",
-      "Designed MongoDB schemas and REST APIs, and implemented Redux-driven React frontends.",
-      "Shipped a full role-based Learning Management System (LMS) covering admin, trainer, student, and examiner workflows.",
-      "Worked on-site with a small team, owning features across the full stack rather than a single layer."
+      "Delivered features across 3 production applications in Agile teams, contributing to a 25% increase in client engagement.",
+      "Reduced API latency by ~20% via query optimisation and caching, while holding a 95% on-time sprint completion rate.",
+      "Implemented secure authentication and role-based access control with JWT, plus Stripe payment flows for transactional modules.",
+      "Owned full-stack features from MongoDB schema design through REST API implementation to Redux-driven React frontends."
     ],
-    skills: ["Full Stack", "Redux.js", "Express.js", "MongoDB", "React.js", "Node.js"]
+    skills: ["Full Stack", "JWT Auth", "Stripe", "MongoDB", "Express.js", "Redux.js"]
   },
   {
     id: "exp-3",
@@ -60,26 +61,30 @@ const experienceTimeline = [
     company: "Learn2Earn",
     location: "Structured Training Program",
     type: "Training Program",
+    duration: "1 yr",
     highlights: [
-      "Completed an intensive full-stack developer training program bridging self-taught fundamentals into job-ready practice.",
-      "Practiced structured code reviews, deadline-driven builds, and production-style project specs.",
-      "Built full-stack web applications from scratch under real deadlines and review cycles."
+      "Completed an intensive full-stack developer training program with structured code reviews and production-style project specifications.",
+      "Bridged self-taught fundamentals into job-ready practice through deadline-driven builds and real-world project patterns.",
+      "Built multiple full-stack web applications from scratch under real deadlines and rigorous review cycles.",
+      "Gained practical experience in shipping production features and working in Agile environments."
     ],
-    skills: ["JavaScript (ES6+)", "React.js", "Node.js", "MongoDB", "Express.js", "Git & GitHub"]
+    skills: ["JavaScript (ES6+)", "React", "Node.js", "MongoDB", "Express", "Git & GitHub"]
   },
   {
     id: "exp-4",
     period: "2022 - 2023",
-    role: "Intern Developer",
-    company: "Self-learning and Open Source Projects",
+    role: "Self-Taught Developer & Open Source",
+    company: "Independent Learning",
     location: "Remote / Independent",
     type: "Self-Directed",
+    duration: "1 yr",
     highlights: [
-      "Worked on personal projects, contributed to open-source, and participated in coding challenges to enhance development skills.",
-      "Gained hands-on experience in web development and backend technologies.",
-      "Built the foundation in HTML, CSS, and JavaScript that later became the basis for full-stack engineering."
+      "Worked on personal projects building web applications and contributed to open-source repositories.",
+      "Participated in coding challenges and online communities to enhance development skills continuously.",
+      "Built the foundational knowledge in HTML, CSS, and JavaScript that became the basis for full-stack engineering.",
+      "Developed problem-solving skills and familiarity with modern development tools and workflows."
     ],
-    skills: ["HTML5", "CSS3", "JavaScript", "Git", "Open Source"]
+    skills: ["HTML5", "CSS3", "JavaScript", "React Basics", "Git", "Problem Solving"]
   }
 ];
 

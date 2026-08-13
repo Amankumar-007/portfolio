@@ -32,6 +32,8 @@ export const StructuredData = () => {
         "givenName": "Aman",
         "familyName": "Kumar",
         "url": "https://amankumarr.in",
+        "email": "amanr3388@gmail.com",
+        "telephone": "+91 79067 53589",
         "image": {
             "@type": "ImageObject",
             "url": "https://amankumarr.in/about-image.png",
@@ -39,20 +41,29 @@ export const StructuredData = () => {
             "height": 630
         },
         "jobTitle": "Full Stack Engineer",
-        "description": "Full Stack Engineer with 2+ years of professional experience specializing in React, Node.js, Next.js, and TypeScript. Creator of SnippetsX, TomatoAI, and Awasdhara.",
+        "description": "Full Stack Engineer with 2+ years shipping production SaaS and AI applications. Expert in React, Next.js, Node.js, TypeScript, MongoDB, PostgreSQL, AWS, and LLM integration. Creator of SnippetsX (real-time code editor), TomatoAI (AI tools platform), and Awasdhara (real estate).",
         "nationality": {
             "@type": "Country",
             "name": "India"
         },
+        "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Delhi",
+            "addressCountry": "India"
+        },
         "knowsAbout": [
-            "React", "Next.js", "Node.js", "TypeScript", "JavaScript", "MongoDB",
-            "Express.js", "Redux.js", "SaaS Development", "Full Stack Development",
-            "Web Performance", "Docker", "REST APIs", "Tailwind CSS", "Git"
+            "React", "Next.js", "Node.js", "Express", "TypeScript", "JavaScript",
+            "MongoDB", "PostgreSQL", "MySQL", "Redis", "SaaS Development",
+            "Full Stack Development", "Web Performance", "Docker", "AWS",
+            "REST APIs", "GraphQL", "WebSockets", "Tailwind CSS", "Git",
+            "JWT Authentication", "Stripe Integration", "LLM APIs",
+            "OpenAI Integration", "Claude Integration", "Prompt Engineering"
         ],
         "knowsLanguage": ["English", "Hindi"],
         "sameAs": [
             "https://github.com/Amankumar-007",
-            "https://www.linkedin.com/in/amankumarweb/"
+            "https://www.linkedin.com/in/amankumarweb/",
+            "https://twitter.com/amankumarweb"
         ],
         "worksFor": {
             "@type": "Organization",
@@ -60,6 +71,20 @@ export const StructuredData = () => {
             "url": "https://startupcoaching.in"
         },
         "alumniOf": [
+            {
+                "@type": "EducationalOrganization",
+                "name": "Dr. A.P.J. Abdul Kalam Technical University (AKTU)",
+                "educationDetails": {
+                    "degreeName": "Master of Computer Applications (MCA)"
+                }
+            },
+            {
+                "@type": "EducationalOrganization",
+                "name": "Dr. Bhimrao Ambedkar University, Agra",
+                "educationDetails": {
+                    "degreeName": "Bachelor of Computer Applications (BCA)"
+                }
+            },
             {
                 "@type": "Organization",
                 "name": "Ninepages Techsolutions Pvt. Ltd.",
@@ -73,11 +98,12 @@ export const StructuredData = () => {
                 "@type": "Country",
                 "name": "India"
             },
-            "skills": "React, Next.js, Node.js, TypeScript, MongoDB, Redux.js, Full Stack Development"
+            "skills": "React, Next.js, Node.js, TypeScript, MongoDB, PostgreSQL, AWS, Docker, REST APIs, GraphQL, WebSockets, JWT, Stripe, LLM APIs"
         },
         "contactPoint": {
             "@type": "ContactPoint",
             "email": "amanr3388@gmail.com",
+            "telephone": "+91 79067 53589",
             "contactType": "professional",
             "availableLanguage": ["English", "Hindi"]
         }
