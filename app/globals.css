@@ -163,3 +163,48 @@ body {
   scrollbar-width: none !important;
   /* Firefox */
 }
+
+/* Performance Optimizations */
+@media (prefers-reduced-motion: no-preference) {
+  /* GPU acceleration for smooth animations */
+  [class*="transition-"],
+  [class*="animate-"],
+  .motion-div {
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    perspective: 1000px;
+  }
+
+  /* Optimize hover states */
+  .group:hover > * {
+    will-change: auto;
+  }
+
+  /* Optimize scrolling performance */
+  * {
+    scroll-behavior: smooth;
+  }
+}
+
+/* Reduce motion for accessibility */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Image optimization */
+img {
+  content-visibility: auto;
+}
+
+/* Container query support for responsive images */
+@supports (container-type: inline-size) {
+  img {
+    container-type: size;
+  }
+}

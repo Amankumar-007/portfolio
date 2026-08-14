@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
+import { throttle } from "@/utils/throttle";
 import {
   Home,
   Folder,
@@ -32,6 +33,15 @@ import {
   staggerChild,
 } from "@/components/ui/scroll-animations";
 import { getAllThoughts } from "@/data/thoughts";
+import {
+  ProfileCardArc1,
+  ProfileCardArc2,
+  HeroCardPattern1,
+  HeroCardPattern2,
+  NextJsIcon,
+} from "@/components/decorative-svgs";
+import { ToolCard } from "@/components/tool-card";
+import { ProjectCard } from "@/components/project-card";
 
 interface ProjectItem {
   id: string;
@@ -50,32 +60,32 @@ interface ToolItem {
 
 const recentProjects: ProjectItem[] = [
   {
+    id: "project-12",
+    title: "ShockMe",
+    subtitle: "Modern Web Platform & Digital Experience",
+    thumbImage: "/shockme.vercel.app_20260814_114537/hero_desktop.png",
+    link: "/projects/project-12"
+  },
+  {
+    id: "project-9",
+    title: "SnippetsX",
+    subtitle: "Real-time Multi-Language Collaborative Code Platform",
+    thumbImage: "/snippetsx.com_20260814_114421/hero_desktop.png",
+    link: "/projects/project-9"
+  },
+  {
     id: "project-5",
     title: "TomatoAI",
     subtitle: "All-in-one AI Tools Directory & Platform",
-    thumbImage: "/ai-tools/ai-tools.png",
+    thumbImage: "/tomatoai.in_20260814_114450/hero_desktop.png",
     link: "/projects/project-5"
   },
   {
     id: "project-10",
     title: "Awasdhara",
     subtitle: "Real Estate & Land Investment Portal",
-    thumbImage: "/logos/awasdhara-logo.png",
+    thumbImage: "/awasdhara.in_20260814_114713/hero_desktop.png",
     link: "/projects/project-10"
-  },
-  {
-    id: "project-9",
-    title: "SnippetsX",
-    subtitle: "Real-time Multi-Language Collaborative Code Platform",
-    thumbImage: "/projects/snippetsx-cover.png",
-    link: "/projects/project-9"
-  },
-  {
-    id: "project-11",
-    title: "TwoFloww",
-    subtitle: "Software Development & Digital Agency Platform",
-    thumbImage: "/projects/twofloww-cover.png",
-    link: "/projects/project-11"
   }
 ];
 
@@ -85,18 +95,14 @@ const premiumTools: ToolItem[] = [
     name: "React",
     subtitle: "Frontend UI Library",
     icon: (
-      <Image src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" alt="React" width={24} height={24} unoptimized className="w-6 h-6 object-contain" />
+      <Image src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" alt="React" width={24} height={24} className="w-6 h-6 object-contain" />
     )
   },
   {
     id: "nextjs",
     name: "Next.js",
     subtitle: "React Framework",
-    icon: (
-      <svg className="w-6 h-6 text-black fill-black" viewBox="0 0 24 24">
-        <path d="M12 0C5.37 0 0 5.37 0 12s5.37 12 12 12 12-5.37 12-12S18.63 0 12 0zm5.4 17.1l-6.8-9.4v9.4H9V6.9h2.3l6.5 9v-9h1.6v10.2h-2z" fill="#000000" />
-      </svg>
-    )
+    icon: <NextJsIcon />
   },
   {
     id: "typescript",
@@ -370,19 +376,20 @@ export default function StickyPortfolioHomepage() {
   const [openFaqIndex, setOpenFaqIndex] = useState<number | null>(0);
 
   useEffect(() => {
+    const sections = [
+      "hero",
+      "projects",
+      "architecture",
+      "experience",
+      "tools",
+      "education",
+      "testimonials",
+      "thoughts",
+      "faq",
+      "contact"
+    ];
+
     const handleScroll = () => {
-      const sections = [
-        "hero",
-        "projects",
-        "architecture",
-        "experience",
-        "tools",
-        "education",
-        "testimonials",
-        "thoughts",
-        "faq",
-        "contact"
-      ];
       const scrollPos = window.scrollY + 250;
 
       for (const sectionId of sections) {
@@ -398,8 +405,9 @@ export default function StickyPortfolioHomepage() {
       }
     };
 
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
+    const throttledScroll = throttle(handleScroll, 50);
+    window.addEventListener("scroll", throttledScroll, { passive: true });
+    return () => window.removeEventListener("scroll", throttledScroll);
   }, []);
 
   useEffect(() => {
@@ -447,31 +455,8 @@ export default function StickyPortfolioHomepage() {
             <div className="bg-white text-black rounded-[36px] p-6 shadow-[0_25px_60px_rgba(0,0,0,0.3)] relative overflow-hidden flex flex-col justify-between border border-zinc-200/90">
 
               {/* Decorative Dashed Arcs */}
-              <svg
-                className="absolute -top-4 -left-4 w-48 h-48 pointer-events-none z-0"
-                viewBox="0 0 200 200"
-                fill="none"
-              >
-                <path
-                  d="M 10 120 C 30 30, 110 10, 190 15"
-                  stroke="#F05335"
-                  strokeWidth="2.5"
-                  strokeDasharray="5 5"
-                />
-              </svg>
-
-              <svg
-                className="absolute bottom-28 -left-6 w-56 h-36 pointer-events-none z-0"
-                viewBox="0 0 220 140"
-                fill="none"
-              >
-                <path
-                  d="M 0 110 Q 90 105, 125 45"
-                  stroke="#F05335"
-                  strokeWidth="2.5"
-                  strokeDasharray="5 5"
-                />
-              </svg>
+              <ProfileCardArc1 />
+              <ProfileCardArc2 />
 
               {/* Photo Container */}
               <div className="relative z-10 mb-5 mt-1">
@@ -482,6 +467,7 @@ export default function StickyPortfolioHomepage() {
                     fill
                     sizes="360px"
                     priority
+                    quality={85}
                     className="object-cover object-top hover:scale-105 transition-transform duration-500"
                   />
                 </div>
@@ -612,17 +598,7 @@ export default function StickyPortfolioHomepage() {
                   onClick={() => scrollTo("architecture")}
                   className="bg-[#F05335] text-white rounded-[30px] p-7 sm:p-8 relative overflow-hidden flex flex-col justify-between h-56 group cursor-pointer shadow-[0_15px_40px_rgba(240,83,53,0.25)] hover:shadow-[0_20px_50px_rgba(240,83,53,0.4)] hover:-translate-y-1 transition-all duration-300"
                 >
-                  <svg
-                    className="absolute inset-0 w-full h-full opacity-20 pointer-events-none"
-                    viewBox="0 0 300 200"
-                    fill="none"
-                  >
-                    <path
-                      d="M-50 50 C 50 150, 150 -20, 350 100 M-20 120 C 80 200, 180 50, 350 160"
-                      stroke="#000"
-                      strokeWidth="24"
-                    />
-                  </svg>
+                  <HeroCardPattern1 />
 
                   <div className="relative z-10">
                     <svg className="w-8 h-8 text-white fill-current" viewBox="0 0 24 24">
@@ -647,17 +623,7 @@ export default function StickyPortfolioHomepage() {
                   onClick={() => scrollTo("tools")}
                   className="bg-[#C4F135] text-zinc-950 rounded-[30px] p-7 sm:p-8 relative overflow-hidden flex flex-col justify-between h-56 group cursor-pointer shadow-[0_15px_40px_rgba(196,241,53,0.2)] hover:shadow-[0_20px_50px_rgba(196,241,53,0.35)] hover:-translate-y-1 transition-all duration-300"
                 >
-                  <svg
-                    className="absolute inset-0 w-full h-full opacity-35 pointer-events-none"
-                    viewBox="0 0 250 200"
-                    fill="none"
-                  >
-                    <path
-                      d="M10 200 L50 20 L90 200 L140 0 L180 200 L230 40"
-                      stroke="#86bd00"
-                      strokeWidth="3.5"
-                    />
-                  </svg>
+                  <HeroCardPattern2 />
 
                   <div className="relative z-10 flex items-center justify-between">
                     <div className="w-9 h-9 rounded-xl bg-zinc-950 text-[#C4F135] flex items-center justify-center shadow">
@@ -701,34 +667,7 @@ export default function StickyPortfolioHomepage() {
               <StaggerContainer className="space-y-8" staggerDelay={0.12}>
                 {recentProjects.map((proj) => (
                   <motion.div key={proj.id} variants={staggerChild}>
-                    <Link
-                      href={proj.link}
-                      className="flex items-center justify-between gap-3 sm:gap-6 group py-2 border-b border-zinc-900/60 hover:border-zinc-800 transition-colors"
-                    >
-                      <div className="flex items-center gap-3 sm:gap-6 min-w-0">
-                        <div className="w-16 h-16 sm:w-28 sm:h-28 rounded-2xl bg-zinc-900 border border-zinc-800/80 overflow-hidden relative flex-shrink-0 shadow-md">
-                          <Image
-                            src={proj.thumbImage}
-                            alt={proj.title}
-                            fill
-                            sizes="112px"
-                            className="object-cover group-hover:scale-105 transition-transform duration-500"
-                          />
-                        </div>
-                        <div className="min-w-0 flex-1">
-                          <h3 className="text-lg sm:text-3xl font-extrabold text-white tracking-tight group-hover:text-[#F05335] transition-colors truncate font-poppins">
-                            {proj.title}
-                          </h3>
-                          <p className="text-xs sm:text-sm font-medium text-zinc-400 mt-1 line-clamp-1 font-poppins">
-                            {proj.subtitle}
-                          </p>
-                        </div>
-                      </div>
-
-                      <div className="text-[#F05335] group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform p-1 sm:p-2 flex-shrink-0">
-                        <ArrowUpRight className="w-5 h-5 sm:w-6 sm:h-6 stroke-[2.5]" />
-                      </div>
-                    </Link>
+                    <ProjectCard {...proj} />
                   </motion.div>
                 ))}
               </StaggerContainer>
@@ -938,23 +877,7 @@ export default function StickyPortfolioHomepage() {
 
               <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-3.5 sm:gap-5">
                 {premiumTools.map((tool) => (
-                  <div
-                    key={tool.id}
-                    className="flex items-center gap-2.5 sm:gap-3.5 group cursor-pointer p-2 sm:p-2.5 rounded-2xl bg-zinc-950/60 sm:bg-transparent border border-zinc-800/60 sm:border-0 hover:bg-zinc-900/40 transition-colors"
-                  >
-                    <div className="w-10 h-10 sm:w-13 sm:h-13 bg-white rounded-[14px] sm:rounded-[16px] flex items-center justify-center flex-shrink-0 shadow-md group-hover:scale-105 group-hover:shadow-[0_10px_20px_rgba(240,83,53,0.2)] transition-all duration-300">
-                      {tool.icon}
-                    </div>
-
-                    <div className="min-w-0 flex-1">
-                      <h3 className="text-xs sm:text-base font-semibold text-zinc-100 tracking-normal group-hover:text-[#F05335] transition-colors leading-tight truncate font-poppins">
-                        {tool.name}
-                      </h3>
-                      <p className="text-[10px] sm:text-xs font-normal text-zinc-400 mt-0.5 leading-tight truncate font-poppins">
-                        {tool.subtitle}
-                      </p>
-                    </div>
-                  </div>
+                  <ToolCard key={tool.id} {...tool} />
                 ))}
               </div>
             </section>

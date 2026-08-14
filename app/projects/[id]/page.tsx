@@ -105,11 +105,31 @@ const projects = [
     ]
   },
   {
+    id: "project-12",
+    title: "ShockMe",
+    description: "Modern interactive web platform delivering high-performance UI components, seamless user experience, and real-time design systems.",
+    category: "SaaS",
+    image: "/shockme.vercel.app_20260814_114537/hero_desktop.png",
+    demoUrl: "https://shockme.vercel.app",
+    githubUrl: "#",
+    year: "2025",
+    client: "Interactive Web Platform",
+    role: "Full Stack Engineer",
+    challenge: "Deliver a fluid, reactive, and visually arresting user interface with sub-frame animation responses and zero-friction client state transitions.",
+    solution: "Architected modern Next.js component system with Framer Motion micro-animations, server-side caching, and Tailwind CSS styling.",
+    results: "Achieved perfect Lighthouse performance scores, instant initial page load, and exceptional engagement metrics.",
+    gallery: [
+      "/shockme.vercel.app_20260814_114537/hero_desktop.png",
+      "/shockme.vercel.app_20260814_114537/hero_mobile.png"
+    ],
+    technologies: ["Next.js", "React", "Tailwind CSS", "Vercel", "Framer Motion"]
+  },
+  {
     id: "project-9",
     title: "SnippetsX",
     description: "A browser-based platform for developers to share, run, and collaborate on code in real time — a modern alternative to Pastebin with a live collaborative editor.",
     category: "SaaS / Developer Tools",
-    image: "/projects/snippetsx-cover.png",
+    image: "/snippetsx.com_20260814_114421/hero_desktop.png",
     demoUrl: "https://snippetsx.com",
     githubUrl: "#",
     year: "2025",
@@ -119,7 +139,8 @@ const projects = [
     solution: "Built a real-time collaborative editor with live cursors and auto-sync, an in-browser execution engine supporting 40+ languages via isolated containers, shareable links with expiry/burn-after-view privacy controls, and team workspaces with permission management for interviewers, teams, and educators.",
     results: "Now used for pair programming, technical interviews, and quick code sharing — replacing screen-share-based interview flows with live-typed, runnable code rooms.",
     gallery: [
-      "/projects/snippetsx-cover.png"
+      "/snippetsx.com_20260814_114421/hero_desktop.png",
+      "/snippetsx.com_20260814_114421/hero_mobile.png"
     ],
     technologies: ["Next.js", "Node.js", "WebSockets", "Monaco Editor", "Docker", "Real-time Sync"]
   },
@@ -128,7 +149,7 @@ const projects = [
     title: "Awasdhara",
     description: "A real estate platform focused on residential plots and land investment, built around verified listings, transparent pricing, and installment-based buying.",
     category: "Real Estate",
-    image: "/logos/awasdhara-logo.png",
+    image: "/awasdhara.in_20260814_114713/hero_desktop.png",
     demoUrl: "https://awasdhara.in",
     githubUrl: "#",
     year: "2025",
@@ -138,7 +159,8 @@ const projects = [
     solution: "Built property listing pages with location/budget/type filters, an inquiry and callback-request flow that routes leads to the sales team, EMI plan displays for flexible purchasing, and a verified-plots badge system for RERA-ready projects.",
     results: "Gives buyers a clear browse-to-inquiry journey and gives the sales team a steady, structured stream of qualified leads from the site.",
     gallery: [
-      "/logos/awasdhara-logo.png"
+      "/awasdhara.in_20260814_114713/hero_desktop.png",
+      "/awasdhara.in_20260814_114713/hero_mobile.png"
     ],
     technologies: ["Next.js", "React", "Node.js", "MongoDB", "Lead Generation"]
   },
@@ -166,8 +188,8 @@ const projects = [
     title: "TomatoAI",
     description: "An all-in-one AI tools platform bringing text generation, image generation, AI search, and data tools into a single modern interface.",
     category: "AI Tools",
-    image: "/ai-tools/ai-tools.png",
-    demoUrl: "https://ai-tools-web-app-topaz.vercel.app/",
+    image: "/tomatoai.in_20260814_114450/hero_desktop.png",
+    demoUrl: "https://tomatoai.in",
     githubUrl: "#",
     year: "2025",
     client: "Personal Project",
@@ -176,7 +198,8 @@ const projects = [
     solution: "Implemented modular tool architecture with rate-limiting, retry logic, and prompt templates. Added history, export, and share features. Optimized inference through batching and caching.",
     results: "Reduced average response latency by 32% and cut inference costs ~18% with caching. Early users reported 2x faster content creation.",
     gallery: [
-      "/ai-tools/ai-tools.png"
+      "/tomatoai.in_20260814_114450/hero_desktop.png",
+      "/tomatoai.in_20260814_114450/hero_mobile.png"
     ]
   },
   {

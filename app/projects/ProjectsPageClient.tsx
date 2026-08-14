@@ -33,25 +33,31 @@ export default function ProjectsPageClient() {
     return projects.filter((p) => p.category === activeCategory);
   }, [projects, activeCategory]);
 
-  // Ensure currentIndex stays within bounds when category changes
+  // Featured showcase projects for the top view & dock (ShockMe, SnippetsX, TomatoAI, Awasdhara)
+  const dockProjects = useMemo(() => {
+    const showcaseIds = ["project-12", "project-9", "project-5", "project-10"];
+    const list = projects.filter((p) => showcaseIds.includes(p.id));
+    return list.sort((a, b) => showcaseIds.indexOf(a.id) - showcaseIds.indexOf(b.id));
+  }, [projects]);
+
+  // Ensure currentIndex stays within bounds of dockProjects
   const activeProject: Project | undefined = useMemo(() => {
-    if (filteredProjects.length === 0) return undefined;
-    return filteredProjects[currentIndex % filteredProjects.length] || filteredProjects[0];
-  }, [filteredProjects, currentIndex]);
+    if (dockProjects.length === 0) return undefined;
+    return dockProjects[currentIndex % dockProjects.length];
+  }, [dockProjects, currentIndex]);
 
   const handleNext = useCallback(() => {
-    if (filteredProjects.length === 0) return;
-    setCurrentIndex((prev) => (prev + 1) % filteredProjects.length);
-  }, [filteredProjects.length]);
+    if (dockProjects.length === 0) return;
+    setCurrentIndex((prev) => (prev + 1) % dockProjects.length);
+  }, [dockProjects.length]);
 
   const handlePrev = useCallback(() => {
-    if (filteredProjects.length === 0) return;
-    setCurrentIndex((prev) => (prev - 1 + filteredProjects.length) % filteredProjects.length);
-  }, [filteredProjects.length]);
+    if (dockProjects.length === 0) return;
+    setCurrentIndex((prev) => (prev - 1 + dockProjects.length) % dockProjects.length);
+  }, [dockProjects.length]);
 
   const handleCategoryChange = (cat: string) => {
     setActiveCategory(cat);
-    setCurrentIndex(0);
   };
 
   // Support left/right arrow key navigation
@@ -158,12 +164,12 @@ export default function ProjectsPageClient() {
                           <div className="w-2.5 h-2.5 rounded-full bg-green-500/80" />
                         </div>
                         <div className="text-[10px] font-mono text-zinc-400 bg-zinc-900/90 px-3 py-1 rounded-full border border-zinc-800 truncate max-w-[220px] sm:max-w-xs font-semibold">
-                          amankumarr.in/projects/{activeProject.id}
+                          {activeProject.link ? activeProject.link.replace(/^https?:\/\//, "") : `amankumarr.in/projects/${activeProject.id}`}
                         </div>
                         <div className="w-8" />
                       </div>
 
-                      {/* Web Viewport Image (High Quality & Crisp) */}
+                      {/* Web Viewport Image (High Quality & Crisp Desktop Screenshot) */}
                       <div className="relative w-full aspect-[16/9.5] rounded-[12px] sm:rounded-[18px] overflow-hidden bg-black border border-zinc-800/80">
                         <Image
                           src={activeProject.screenshots[0]?.url || "/about-image.png"}
@@ -187,7 +193,7 @@ export default function ProjectsPageClient() {
                         <div className="w-1.5 sm:w-2 h-1.5 sm:h-2 rounded-full bg-indigo-500/30" />
                       </div>
 
-                      {/* Mobile Screenshot Screen (High Quality & Crisp) */}
+                      {/* Mobile Screenshot Screen (High Quality & Crisp Mobile View) */}
                       <div className="relative w-full h-full rounded-[20px] sm:rounded-[34px] overflow-hidden bg-black border border-zinc-800">
                         <Image
                           src={
@@ -245,7 +251,18 @@ export default function ProjectsPageClient() {
                   </div>
 
                   {/* Actions */}
-                  <div className="flex items-center gap-3 shrink-0">
+                  <div className="flex flex-wrap items-center gap-3 shrink-0">
+                    {activeProject.link && (
+                      <a
+                        href={activeProject.link}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-zinc-800 text-white hover:bg-zinc-700 text-xs font-black uppercase tracking-widest transition-all border border-zinc-700 hover:scale-105 active:scale-95"
+                      >
+                        <span>Visit Live Site</span>
+                        <ExternalLink className="w-4 h-4 text-[#F05335]" />
+                      </a>
+                    )}
                     <Link
                       href={`/projects/${activeProject.id}`}
                       className="inline-flex items-center gap-2 px-6 py-3 rounded-xl bg-[#F05335] text-white hover:bg-[#d84427] text-xs font-black uppercase tracking-widest transition-all shadow-lg hover:shadow-[#F05335]/20 hover:scale-105 active:scale-95"
@@ -262,7 +279,7 @@ export default function ProjectsPageClient() {
           {/* ------------------------------------------------------------------- */}
           {/* PROJECT PREVIEWS DOCK (MACOS STYLE INTERACTIVE RIBBON)              */}
           {/* ------------------------------------------------------------------- */}
-          {filteredProjects.length > 0 && (
+          {dockProjects.length > 0 && (
             <div className="relative bg-gradient-to-b from-[#181414] to-[#100d0d] border border-white/10 rounded-[2rem] sm:rounded-[2.5rem] p-5 sm:p-7 shadow-[0_20px_70px_rgba(0,0,0,0.9)] overflow-hidden">
               
               {/* Dock Header Bar */}
@@ -283,13 +300,13 @@ export default function ProjectsPageClient() {
                 <div className="text-xs font-mono font-bold tracking-widest text-zinc-400">
                   <span className="text-[#F05335] font-black">{String(currentIndex + 1).padStart(2, "0")}</span>
                   <span className="mx-1 text-zinc-600">/</span>
-                  <span>{String(filteredProjects.length).padStart(2, "0")}</span>
+                  <span>{String(dockProjects.length).padStart(2, "0")}</span>
                 </div>
               </div>
 
               {/* Horizontal Scrollable Thumbnails Dock */}
               <div className="flex gap-4 sm:gap-6 overflow-x-auto pt-5 pb-2 px-1 scrollbar-none scroll-smooth">
-                {filteredProjects.map((project, idx) => {
+                {dockProjects.map((project, idx) => {
                   const isActive = idx === currentIndex;
                   const itemNumber = String(idx + 1).padStart(2, "0");
 

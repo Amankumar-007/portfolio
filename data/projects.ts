@@ -16,16 +16,46 @@ export interface Project {
 
 export const getAllProjects = (): Project[] => [
   {
+    id: "project-12",
+    title: "ShockMe",
+    description: "Modern interactive web platform delivering high-performance UI components, seamless user experience, and real-time design systems.",
+    category: "SaaS",
+    screenshots: [
+      { url: "/shockme.vercel.app_20260814_114537/hero_desktop.png", alt: "ShockMe — Desktop View" },
+      { url: "/shockme.vercel.app_20260814_114537/hero_mobile.png", alt: "ShockMe — Mobile View" }
+    ],
+    year: "2025",
+    tags: ["Next.js", "React", "Tailwind CSS", "Vercel", "Web App"],
+    link: "https://shockme.vercel.app",
+    featured: true
+  },
+  {
     id: "project-9",
     title: "SnippetsX",
     description: "Real-time collaboration platform with a custom Operational Transformation engine for live cursors and sub-10ms sync. Built a real-time multiplayer code editor with in-browser execution for 40+ languages inside isolated Docker containers, streaming output live to collaborators. Shipped team workspaces with RBAC, private and expiring links, burn-on-view snippets, an embeddable widget and a REST API.",
     category: "SaaS",
     screenshots: [
-      { url: "/projects/snippetsx-cover.png", alt: "SnippetsX — real-time collaborative code editor" }
+      { url: "/snippetsx.com_20260814_114421/hero_desktop.png", alt: "SnippetsX — Desktop View" },
+      { url: "/snippetsx.com_20260814_114421/hero_mobile.png", alt: "SnippetsX — Mobile View" }
     ],
     year: "2025",
     tags: ["Real-time Collaboration", "Code Execution", "WebSockets", "Docker", "Redis", "PostgreSQL"],
     link: "https://snippetsx.com",
+    featured: true
+  },
+  {
+    id: "project-5",
+    title: "TomatoAI",
+    description: "AI tools directory and multi-agent assistant with parallel workspaces, streaming responses, guest sessions and chat history migration. Developed an SEO-optimised AI tools directory with category, trending and review pages, server-rendered in Next.js. Shipped in-product AI tooling — resume analyser, prompt optimiser, content generator, summariser and n8n workflow templates.",
+    category: "AI Tools",
+    video: "/ai-tools/ai-tools.mp4",
+    screenshots: [
+      { url: "/tomatoai.in_20260814_114450/hero_desktop.png", alt: "TomatoAI — Desktop View" },
+      { url: "/tomatoai.in_20260814_114450/hero_mobile.png", alt: "TomatoAI — Mobile View" }
+    ],
+    year: "2025",
+    tags: ["AI", "LLM APIs", "Automation", "Next.js", "TypeScript", "Node.js"],
+    link: "https://tomatoai.in",
     featured: true
   },
   {
@@ -34,7 +64,8 @@ export const getAllProjects = (): Project[] => [
     description: "A real estate platform for residential plots and land investments, with verified property listings, location/budget filters, EMI plan display, and lead-generation inquiry flows for buyers and investors.",
     category: "Real Estate",
     screenshots: [
-      { url: "/logos/awasdhara-logo.png", alt: "Awasdhara — real estate & land investment platform" }
+      { url: "/awasdhara.in_20260814_114713/hero_desktop.png", alt: "Awasdhara — Desktop View" },
+      { url: "/awasdhara.in_20260814_114713/hero_mobile.png", alt: "Awasdhara — Mobile View" }
     ],
     year: "2025",
     tags: ["Real Estate", "Next.js", "Lead Generation", "MongoDB"],
@@ -51,22 +82,7 @@ export const getAllProjects = (): Project[] => [
     ],
     year: "2025",
     tags: ["Next.js", "React", "Flutter", "SEO"],
-    link: "https://www.twofloww.in",
-    featured: true
-  },
-  {
-    id: "project-5",
-    title: "TomatoAI",
-    description: "AI tools directory and multi-agent assistant with parallel workspaces, streaming responses, guest sessions and chat history migration. Developed an SEO-optimised AI tools directory with category, trending and review pages, server-rendered in Next.js. Shipped in-product AI tooling — resume analyser, prompt optimiser, content generator, summariser and n8n workflow templates. LLM-powered intelligent automation for productivity.",
-    category: "AI Tools",
-    video: "/ai-tools/ai-tools.mp4",
-    screenshots: [
-      { url: "/ai-tools/ai-tools.png", alt: "TomatoAI — AI tools platform" }
-    ],
-    year: "2025",
-    tags: ["AI", "LLM APIs", "Automation", "Next.js", "TypeScript", "Node.js"],
-    link: "https://tomatoai.in",
-    featured: true
+    link: "https://www.twofloww.in"
   },
   {
     id: "project-3",
