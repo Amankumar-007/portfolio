@@ -172,7 +172,7 @@ export default function ProjectsPageClient() {
                       {/* Web Viewport Image (High Quality & Crisp Desktop Screenshot) */}
                       <div className="relative w-full aspect-[16/9.5] rounded-[12px] sm:rounded-[18px] overflow-hidden bg-black border border-zinc-800/80">
                         <Image
-                          src={activeProject.screenshots[0]?.url || "/about-image.png"}
+                          src={activeProject.screenshots[0]?.url || "/og-image.jpg"}
                           alt={activeProject.screenshots[0]?.alt || activeProject.title}
                           fill
                           priority
@@ -322,7 +322,7 @@ export default function ProjectsPageClient() {
                     >
                       {/* High Quality Crisp Image */}
                       <Image
-                        src={project.screenshots[0]?.url || "/about-image.png"}
+                        src={project.screenshots[0]?.url || "/og-image.jpg"}
                         alt={project.title}
                         fill
                         quality={100}
@@ -393,7 +393,7 @@ export default function ProjectsPageClient() {
                   <div className="space-y-3">
                     <div className="relative h-44 w-full rounded-xl overflow-hidden bg-zinc-900 border border-zinc-800">
                       <Image
-                        src={project.screenshots[0]?.url || "/about-image.png"}
+                        src={project.screenshots[0]?.url || "/og-image.jpg"}
                         alt={project.title}
                         fill
                         quality={100}

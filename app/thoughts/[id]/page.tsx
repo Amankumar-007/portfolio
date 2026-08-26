@@ -35,7 +35,7 @@ export async function generateMetadata(
       tags: thought.tags,
       images: [
         {
-          url: "/about-image.png",
+          url: "/og-image.jpg",
           width: 1200,
           height: 630,
           alt: thought.title,
@@ -46,7 +46,7 @@ export async function generateMetadata(
       card: "summary_large_image",
       title: thought.title,
       description: thought.excerpt,
-      images: ["/about-image.png"],
+      images: ["/og-image.jpg"],
     },
   };
 }

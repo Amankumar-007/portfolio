@@ -15,7 +15,7 @@ export const metadata: Metadata = {
     url: "https://amankumarr.in/roadmap",
     images: [
       {
-        url: "/about-image.png",
+        url: "/og-image.jpg",
         width: 1200,
         height: 630,
         alt: "Aman Kumar — Developer Roadmap",
@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     title: "Roadmap — Aman Kumar | Developer Growth Plan",
     description:
       "Discover Aman Kumar's developer roadmap — upcoming technologies and future project directions.",
-    images: ["/about-image.png"],
+    images: ["/og-image.jpg"],
   },
 };
 

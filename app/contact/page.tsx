@@ -15,7 +15,7 @@ export const metadata: Metadata = {
     url: "https://amankumarr.in/contact",
     images: [
       {
-        url: "/about-image.png",
+        url: "/og-image.jpg",
         width: 1200,
         height: 630,
         alt: "Contact Aman Kumar — Full Stack Developer",
@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     title: "Contact — Aman Kumar | Hire Full Stack Developer",
     description:
       "Get in touch with Aman Kumar for freelance projects, SaaS development, and web app collaborations.",
-    images: ["/about-image.png"],
+    images: ["/og-image.jpg"],
   },
 };
 

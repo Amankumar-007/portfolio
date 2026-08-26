@@ -36,7 +36,7 @@ export const StructuredData = () => {
         "telephone": "+91 79067 53589",
         "image": {
             "@type": "ImageObject",
-            "url": "https://amankumarr.in/about-image.png",
+            "url": "https://amankumarr.in/og-image.jpg",
             "width": 1200,
             "height": 630
         },

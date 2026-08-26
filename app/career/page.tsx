@@ -15,7 +15,7 @@ export const metadata: Metadata = {
     url: "https://amankumarr.in/career",
     images: [
       {
-        url: "/about-image.png",
+        url: "/og-image.jpg",
         width: 1200,
         height: 630,
         alt: "Aman Kumar — Career Journey",
@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     title: "Career Journey — Aman Kumar | Full Stack Engineer Path",
     description:
       "Follow Aman Kumar's career journey as a Full Stack and SaaS developer.",
-    images: ["/about-image.png"],
+    images: ["/og-image.jpg"],
   },
 };
 

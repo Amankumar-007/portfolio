@@ -17,7 +17,7 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "/about-image.png",
+        url: "/og-image.jpg",
         width: 1200,
         height: 630,
         alt: "Aman Kumar — Full Stack Engineer & AI Developer",
@@ -29,7 +29,7 @@ export const metadata: Metadata = {
     title: "Aman Kumar | Full Stack Engineer & AI Developer",
     description:
       "2+ years shipping production SaaS. React, Next.js, Node.js, TypeScript, AWS, LLM APIs. Building SnippetsX, TomatoAI, Awasdhara.",
-    images: ["/about-image.png"],
+    images: ["/og-image.jpg"],
   },
 };
 

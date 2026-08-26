@@ -15,7 +15,7 @@ export const metadata: Metadata = {
     url: "https://amankumarr.in/case-study",
     images: [
       {
-        url: "/about-image.png",
+        url: "/og-image.jpg",
         width: 1200,
         height: 630,
         alt: "Aman Kumar — Case Studies & Work History",
@@ -26,7 +26,7 @@ export const metadata: Metadata = {
     title: "Case Studies — Aman Kumar | Full Stack Engineer Work History",
     description:
       "Explore Aman Kumar's full-stack case studies: e-commerce, AI, SaaS, and high-performance interfaces.",
-    images: ["/about-image.png"],
+    images: ["/og-image.jpg"],
   },
 };
 

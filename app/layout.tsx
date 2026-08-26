@@ -92,11 +92,18 @@ export const metadata: Metadata = {
     siteName: "Aman Kumar — Full Stack Engineer Portfolio",
     images: [
       {
-        url: "/about-image.png",
+        url: "/og-image.jpg",
         width: 1200,
         height: 630,
         alt: "Aman Kumar — Full Stack Engineer & AI Developer Portfolio",
-        type: "image/png",
+        type: "image/jpeg",
+      },
+      {
+        url: "/og-square.jpg",
+        width: 600,
+        height: 600,
+        alt: "Aman Kumar — Full Stack Engineer",
+        type: "image/jpeg",
       },
     ],
   },
@@ -105,7 +112,7 @@ export const metadata: Metadata = {
     title: "Aman Kumar | Full Stack Engineer & AI Developer",
     description:
       "2+ years building production SaaS. React, Next.js, Node.js, TypeScript, MongoDB, PostgreSQL, AWS, LLM APIs. SnippetsX, TomatoAI, Awasdhara.",
-    images: [{ url: "/about-image.png", alt: "Aman Kumar Portfolio" }],
+    images: [{ url: "/og-image.jpg", alt: "Aman Kumar Portfolio" }],
     creator: "@AmanCodex",
     site: "@AmanCodex",
   },
@@ -154,6 +161,15 @@ export default function RootLayout({
         <meta name="geo.region" content="IN" />
         <meta name="geo.placename" content="India" />
 
+        {/* WhatsApp & Open Graph fallbacks */}
+        <meta property="og:image" content="https://amankumarr.in/og-image.jpg" />
+        <meta property="og:image:secure_url" content="https://amankumarr.in/og-image.jpg" />
+        <meta property="og:image:type" content="image/jpeg" />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+        <meta itemProp="image" content="https://amankumarr.in/og-image.jpg" />
+        <link rel="image_src" href="https://amankumarr.in/og-image.jpg" />
+
         {/* Preconnect for critical third parties */}
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link
@@ -166,12 +182,12 @@ export default function RootLayout({
         <link rel="dns-prefetch" href="//linkedin.com" />
         <link rel="dns-prefetch" href="//images.pexels.com" />
 
-        {/* Preload the LCP image — critical for Largest Contentful Paint score */}
+        {/* Preload hero portrait image */}
         <link
           rel="preload"
           as="image"
-          href="/about-image.png"
-          type="image/png"
+          href="/about.jpeg"
+          type="image/jpeg"
           fetchPriority="high"
         />
       </head>
