@@ -2,7 +2,7 @@ import React from "react";
 
 export const ProfileCardArc1 = () => (
   <svg
-    className="absolute -top-4 -left-4 w-48 h-48 pointer-events-none z-0"
+    className="absolute -top-3 -left-3 w-52 h-52 pointer-events-none z-20"
     viewBox="0 0 200 200"
     fill="none"
   >
@@ -10,14 +10,15 @@ export const ProfileCardArc1 = () => (
       d="M 10 120 C 30 30, 110 10, 190 15"
       stroke="#F05335"
       strokeWidth="2.5"
-      strokeDasharray="5 5"
+      strokeDasharray="6 6"
+      strokeLinecap="round"
     />
   </svg>
 );
 
 export const ProfileCardArc2 = () => (
   <svg
-    className="absolute bottom-28 -left-6 w-56 h-36 pointer-events-none z-0"
+    className="absolute bottom-28 -left-4 w-56 h-36 pointer-events-none z-20"
     viewBox="0 0 220 140"
     fill="none"
   >
@@ -25,7 +26,8 @@ export const ProfileCardArc2 = () => (
       d="M 0 110 Q 90 105, 125 45"
       stroke="#F05335"
       strokeWidth="2.5"
-      strokeDasharray="5 5"
+      strokeDasharray="6 6"
+      strokeLinecap="round"
     />
   </svg>
 );

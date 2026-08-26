@@ -106,8 +106,8 @@ export const metadata: Metadata = {
     description:
       "2+ years building production SaaS. React, Next.js, Node.js, TypeScript, MongoDB, PostgreSQL, AWS, LLM APIs. SnippetsX, TomatoAI, Awasdhara.",
     images: [{ url: "/about-image.png", alt: "Aman Kumar Portfolio" }],
-    creator: "@amankumarweb",
-    site: "@amankumarweb",
+    creator: "@AmanCodex",
+    site: "@AmanCodex",
   },
   robots: {
     index: true,

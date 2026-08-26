@@ -98,7 +98,7 @@ export default function ContactPageClient() {
                     {[
                       { name: 'LinkedIn', url: 'https://www.linkedin.com/in/amankumarweb/' },
                       { name: 'GitHub', url: 'https://github.com/Amankumar-007' },
-                      { name: 'Twitter', url: 'https://twitter.com' },
+                      { name: 'X (Twitter)', url: 'https://x.com/AmanCodex' },
                       { name: 'Instagram', url: 'https://instagram.com' }
                     ].map((social) => (
                       <a 

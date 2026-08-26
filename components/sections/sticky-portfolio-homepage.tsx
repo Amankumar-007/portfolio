@@ -13,7 +13,6 @@ import {
   Edit3,
   ArrowUpRight,
   Flame,
-  Twitter,
   Send,
   CheckCircle2,
   ArrowRight,
@@ -23,7 +22,6 @@ import {
   Award,
   HelpCircle,
   Code2,
-  Mail,
   Check
 } from "lucide-react";
 import {
@@ -460,9 +458,9 @@ export default function StickyPortfolioHomepage() {
 
               {/* Photo Container */}
               <div className="relative z-10 mb-5 mt-1">
-                <div className="bg-gradient-to-b from-[#E64A19] to-[#D84315] relative rounded-[28px] overflow-hidden aspect-[4/4.2] shadow-lg border border-black/5 flex items-end justify-center">
+                <div className="bg-zinc-100 relative rounded-[28px] overflow-hidden aspect-[4/4.2] shadow-lg border border-black/5 flex items-end justify-center">
                   <Image
-                    src="/about.PNG"
+                    src="/about.jpeg"
                     alt="Aman Kumar"
                     fill
                     sizes="360px"
@@ -492,40 +490,68 @@ export default function StickyPortfolioHomepage() {
                 </p>
 
                 {/* Social Links Row */}
-                <div className="flex items-center justify-center gap-4 text-[#F05335] pt-1">
+                <div className="flex items-center justify-center gap-3 text-zinc-700 pt-1">
                   <a
                     href="https://github.com/Amankumar-007"
                     target="_blank"
                     rel="noreferrer"
-                    className="p-2 rounded-full hover:bg-orange-50 transition-colors"
+                    className="p-2 rounded-full hover:bg-zinc-100 transition-all hover:scale-110 flex items-center justify-center"
                     title="GitHub Profile"
                   >
-                    <Code2 className="w-5 h-5 stroke-[2.2]" />
+                    <Image
+                      src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg"
+                      alt="GitHub"
+                      width={22}
+                      height={22}
+                      unoptimized
+                      className="w-5 h-5 object-contain"
+                    />
                   </a>
                   <a
                     href="https://linkedin.com/in/amankumarweb"
                     target="_blank"
                     rel="noreferrer"
-                    className="p-2 rounded-full hover:bg-orange-50 transition-colors"
+                    className="p-2 rounded-full hover:bg-zinc-100 transition-all hover:scale-110 flex items-center justify-center"
                     title="LinkedIn Profile"
                   >
-                    <Briefcase className="w-5 h-5 stroke-[2.2]" />
+                    <Image
+                      src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linkedin/linkedin-original.svg"
+                      alt="LinkedIn"
+                      width={22}
+                      height={22}
+                      unoptimized
+                      className="w-5 h-5 object-contain"
+                    />
                   </a>
                   <a
                     href="mailto:amanr3388@gmail.com"
-                    className="p-2 rounded-full hover:bg-orange-50 transition-colors"
+                    className="p-2 rounded-full hover:bg-zinc-100 transition-all hover:scale-110 flex items-center justify-center"
                     title="Email Aman"
                   >
-                    <Mail className="w-5 h-5 stroke-[2.2]" />
+                    <Image
+                      src="https://upload.wikimedia.org/wikipedia/commons/7/7e/Gmail_icon_%282020%29.svg"
+                      alt="Email"
+                      width={22}
+                      height={22}
+                      unoptimized
+                      className="w-5 h-5 object-contain"
+                    />
                   </a>
                   <a
-                    href="https://twitter.com/amankumarweb"
+                    href="https://x.com/AmanCodex"
                     target="_blank"
                     rel="noreferrer"
-                    className="p-2 rounded-full hover:bg-orange-50 transition-colors"
-                    title="Twitter"
+                    className="p-2 rounded-full hover:bg-zinc-100 transition-all hover:scale-110 flex items-center justify-center"
+                    title="X (Twitter)"
                   >
-                    <Twitter className="w-5 h-5 stroke-[2.2]" />
+                    <Image
+                      src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/x.svg"
+                      alt="X"
+                      width={20}
+                      height={20}
+                      unoptimized
+                      className="w-5 h-5 object-contain"
+                    />
                   </a>
                 </div>
 

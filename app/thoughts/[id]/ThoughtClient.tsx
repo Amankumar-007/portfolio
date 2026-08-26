@@ -75,7 +75,7 @@ export default function ThoughtClient({
       ? window.location.href
       : `https://amankumarr.in/thoughts/${thought.id}`;
   const shareTwitterUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(
-    `Read "${thought.title}" by @amankumarweb`
+    `Read "${thought.title}" by @AmanCodex`
   )}&url=${encodeURIComponent(articleUrl)}`;
   const shareLinkedInUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(
     articleUrl

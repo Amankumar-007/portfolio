@@ -10,10 +10,6 @@ import {
   Wrench,
   Edit3,
   Flame,
-  Dribbble,
-  Twitter,
-  Instagram,
-  Youtube,
   CheckCircle2,
   BookOpen,
   Newspaper,
@@ -185,19 +181,69 @@ export default function ExperiencePageClient() {
                   A Full Stack Engineer building production SaaS products.
                 </p>
 
-                {/* Orange Outline Social Icons */}
-                <div className="flex items-center justify-center gap-5 text-[#F05335] pt-1">
-                  <a href="https://dribbble.com" target="_blank" rel="noreferrer" className="p-1.5 rounded-full hover:bg-orange-50 transition-colors" title="Dribbble">
-                    <Dribbble className="w-5 h-5 stroke-[2.2]" />
+                {/* Social Links Row */}
+                <div className="flex items-center justify-center gap-3 text-zinc-700 pt-1">
+                  <a
+                    href="https://github.com/Amankumar-007"
+                    target="_blank"
+                    rel="noreferrer"
+                    className="p-2 rounded-full hover:bg-zinc-100 transition-all hover:scale-110 flex items-center justify-center"
+                    title="GitHub Profile"
+                  >
+                    <Image
+                      src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg"
+                      alt="GitHub"
+                      width={22}
+                      height={22}
+                      unoptimized
+                      className="w-5 h-5 object-contain"
+                    />
                   </a>
-                  <a href="https://twitter.com/amankumarweb" target="_blank" rel="noreferrer" className="p-1.5 rounded-full hover:bg-orange-50 transition-colors" title="Twitter">
-                    <Twitter className="w-5 h-5 stroke-[2.2]" />
+                  <a
+                    href="https://linkedin.com/in/amankumarweb"
+                    target="_blank"
+                    rel="noreferrer"
+                    className="p-2 rounded-full hover:bg-zinc-100 transition-all hover:scale-110 flex items-center justify-center"
+                    title="LinkedIn Profile"
+                  >
+                    <Image
+                      src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linkedin/linkedin-original.svg"
+                      alt="LinkedIn"
+                      width={22}
+                      height={22}
+                      unoptimized
+                      className="w-5 h-5 object-contain"
+                    />
                   </a>
-                  <a href="https://instagram.com" target="_blank" rel="noreferrer" className="p-1.5 rounded-full hover:bg-orange-50 transition-colors" title="Instagram">
-                    <Instagram className="w-5 h-5 stroke-[2.2]" />
+                  <a
+                    href="mailto:amanr3388@gmail.com"
+                    className="p-2 rounded-full hover:bg-zinc-100 transition-all hover:scale-110 flex items-center justify-center"
+                    title="Email Aman"
+                  >
+                    <Image
+                      src="https://upload.wikimedia.org/wikipedia/commons/7/7e/Gmail_icon_%282020%29.svg"
+                      alt="Email"
+                      width={22}
+                      height={22}
+                      unoptimized
+                      className="w-5 h-5 object-contain"
+                    />
                   </a>
-                  <a href="https://youtube.com" target="_blank" rel="noreferrer" className="p-1.5 rounded-full hover:bg-orange-50 transition-colors" title="YouTube">
-                    <Youtube className="w-5 h-5 stroke-[2.2]" />
+                  <a
+                    href="https://x.com/AmanCodex"
+                    target="_blank"
+                    rel="noreferrer"
+                    className="p-2 rounded-full hover:bg-zinc-100 transition-all hover:scale-110 flex items-center justify-center"
+                    title="X (Twitter)"
+                  >
+                    <Image
+                      src="https://cdn.jsdelivr.net/npm/simple-icons@v11/icons/x.svg"
+                      alt="X"
+                      width={20}
+                      height={20}
+                      unoptimized
+                      className="w-5 h-5 object-contain"
+                    />
                   </a>
                 </div>
               </div>

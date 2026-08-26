@@ -63,7 +63,7 @@ export const StructuredData = () => {
         "sameAs": [
             "https://github.com/Amankumar-007",
             "https://www.linkedin.com/in/amankumarweb/",
-            "https://twitter.com/amankumarweb"
+            "https://x.com/AmanCodex"
         ],
         "worksFor": {
             "@type": "Organization",

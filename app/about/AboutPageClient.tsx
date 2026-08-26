@@ -137,12 +137,12 @@ export default function AboutPageClient() {
                 className="relative h-[550px] sm:h-[600px] rounded-[3rem] overflow-hidden border-2 border-zinc-800 shadow-[0_25px_60px_rgba(0,0,0,0.95)]"
               >
                 <Image
-                  src="/image.png"
+                  src="/about.jpeg"
                   alt="Aman Kumar — Full Stack Developer"
                   fill
                   sizes="(max-width: 768px) 100vw, 50vw"
-                  className="object-cover grayscale hover:grayscale-0 transition-all duration-1000"
-                  loading="lazy"
+                  className="object-cover hover:scale-105 transition-all duration-700"
+                  priority
                 />
               </div>
             </div>
